@@ -46,7 +46,7 @@ This method pushes the changes in dev:master to fiqci.github.io:newbranch where 
 4. Get this new branch in your local repository: `git fetch mainsite + git pull`
 5. Create a new branch called "dev-changes" which is linked to the new branch you just created:  `git branch dev-changes mainsite/test-changes`
 6. Switch to this branch: `git checkout dev-changes`
-7. Merge your changes with the new branch: `git merge origin/master`
+7. Merge your changes with the new branch: `git merge origin/master -m <msg>`. Add a useful commit message to track what was changed.
 8. Push your changes to the main repo: `git push mainsite dev-changes`
 7. Go to the main repo github page and switch to the new branch you created. Click "Compare and pull request" at the top. Then select "base:master" on the left and "compare: yourbranchname" on the right. Comment what you've changed and assign a reviewer. 
 
