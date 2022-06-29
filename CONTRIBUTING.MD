@@ -30,7 +30,7 @@ This method directly pushes dev:master --> fiqci.github.io:master and requires a
 6. Ensure you have the latest version of the main repo: `git fetch mainsite`
 7. Create a new branch called "dev-changes" which is linked to the main repo **master** branch:  `git branch dev-changes mainsite/master`
 8. Switch to this branch: `git checkout dev-changes`
-9. Merge your changes with the new branch: `git merge origin/master`
+9. Merge your changes with the new branch: `git merge origin/master -m <msg>`. Add a useful commit message to track what was changed.
 10. Push your changes to the main repo **master** branch: `git push mainsite dev-changes:master`
 
 OR
