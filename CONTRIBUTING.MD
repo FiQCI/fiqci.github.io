@@ -6,6 +6,8 @@ You can either edit/add documents through the GitHub Web GUI and **request** a m
 
 First, ensure you have write access to both the [dev](https://github.com/FiQCI/dev) repository and the [main](https://github.com/FiQCI/fiqci.github.io) repository. 
 
+**_NOTE:_**  If the main repo is AHEAD of the dev repo this can be resolved via adding the mainsite remote as below (`git remote add mainsite git@github.com:FiQCI/fiqci.github.io`) then `git fetch mainsite`, `git pull mainsite` then from dev:master `git pull mainsite master` and add a commit message saying you are merging upstream changes. 
+
 
 ## For the impatient
 
