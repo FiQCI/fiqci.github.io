@@ -8,6 +8,8 @@ First, ensure you have write access to both the [dev](https://github.com/FiQCI/d
 
 **_NOTE:_**  If the main repo is AHEAD of the dev repo this can be resolved via adding the mainsite remote as below (`git remote add mainsite git@github.com:FiQCI/fiqci.github.io`) then `git fetch mainsite`, `git pull mainsite` then from dev:master `git pull mainsite master` and add a commit message saying you are merging upstream changes. 
 
+**Always check that the dev repo is up to date with the main repo**
+
 
 ## For the impatient
 
