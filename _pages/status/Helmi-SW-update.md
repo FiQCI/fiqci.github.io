@@ -1,6 +1,6 @@
 ---
 title: 'Helmi Software Update'
-date: 2023-06-06
+date: 2023-10-07
 permalink: /_pages/status/Helmi-SW-update/
 header:
   teaser: /assets/images/about-icon.jpg
@@ -25,7 +25,6 @@ The IQM adapter packages will be updated.
 | cirq-iqm       | 4.1              | >=11.0 < 12.0 |
 
 As a result you will be able to use `qiskit~=0.42.1` and `cirq~=1.1.0` which provide some significant changes. 
-
 
 ## Submitting with Qiskit
 
