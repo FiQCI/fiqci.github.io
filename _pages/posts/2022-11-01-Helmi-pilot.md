@@ -67,3 +67,6 @@ Fill in the form as follows:
   - Note the export restrictions. You have to comply with the restrictions in order to be eligible. Note that it is the duty of the Project Manager (Principal Investigator) to ensure that also project members are compliant with export restrictions.
 10.	Create project: Pressing this will create the project. The project application will be reviewed, and you will be informed about the decision after review of the application.
 
+## Acknowledgement
+
+When publishing the results that utilise Helmi, users should acknowledge the use of Helmi, VTT and FiQCI, preferably in the format: "These [results] have been acquired by VTT's quantum computer Helmi.". Users can use either "Helmi" or "VTT Q5" when referring to the quantum computer.
