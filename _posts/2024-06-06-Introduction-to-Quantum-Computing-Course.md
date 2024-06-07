@@ -1,10 +1,11 @@
 ---
-title: 'Recap of the Two-Day “Introduction to Quantum Computing and FiQCI” course'
+title: 'A recap of the Two-Day “Introduction to Quantum Computing and FiQCI” course'
 date: 2024-06-06
 permalink: /_posts/2024-06-06-Introduction-to-Quantum-Computing-Course-Recap/
 header:
   teaser: /assets/images/vtt-images/VTT_kvanttitietokone_labra-3237.jpg
 published: true
+author: Joonas Nivala
 layout: single
 tags:
   - Helmi
