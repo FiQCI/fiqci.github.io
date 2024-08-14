@@ -149,7 +149,7 @@ All the `print()` statements from the Python file will be written in the output 
     </figure>
 </div>
 
-Eventhough we are expecting the counts result of '00' and '11', it also has a small portion of '00' and '01'. This is because current QPU is noisy.
+Eventhough we are expecting the counts result of '00' and '11', it also has a small portion of '10' and '01'. This is because current QPU is noisy.
 
 Now you have learned how to access to our hybrid environment of quantum computer. Congratulation!
 
@@ -202,7 +202,7 @@ You can use the same Python code from the `example.py` file directly within your
 
 - **Terminal access:** You can also ssh to lumi and send your circuits through your local terminal by [ssh client](https://docs.lumi-supercomputer.eu/firststeps/loggingin/)
 - [Helmi technical details](https://docs.csc.fi/computing/quantum-computing/helmi/helmi-specs/)
-- More example [running on Helmi](https://docs.csc.fi/computing/quantum-computing/helmi/running-on-helmi/)
+- More examples [running on Helmi](https://docs.csc.fi/computing/quantum-computing/helmi/running-on-helmi/)
 
 ## Give feedback
 
