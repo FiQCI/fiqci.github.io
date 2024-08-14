@@ -113,7 +113,12 @@ python example.py
 sbatch script.sh 
 ```
 
-![sbatch output](assets/images/helmi-lumi-web-interface/sbatch.png)
+<div style="text-align: center;">
+    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
+        <img src="/assets/images/helmi-lumi-web-interface/sbatch.png" alt="sbatch output">
+    </figure>
+</div>
+
 
 Check the current status of the submitted job with:
 
@@ -121,15 +126,28 @@ Check the current status of the submitted job with:
 squeue --me
 ```
 
-![squeue output](assets/images/helmi-lumi-web-interface/squeue.png)
+
+<div style="text-align: center;">
+    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
+        <img src="/assets/images/helmi-lumi-web-interface/squeue.png" alt="squeue output">
+    </figure>
+</div>
 
 If you type the command again and see no output, the job has already finished. You can see the output in the file `helmijob.o$your_job_id` and any errors in the file `helmijob.e$your_job_id`.
 
-![workspace](assets/images/helmi-lumi-web-interface/workspace.png)
+<div style="text-align: center;">
+    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
+        <img src="/assets/images/helmi-lumi-web-interface/workspace.png" alt="work space">
+    </figure>
+</div>
 
 All the `print()` statements from the Python file will be written in the output file. When you click on the output file, you will see something like this:
 
-![output](assets/images/helmi-lumi-web-interface/output_print.png)
+<div style="text-align: center;">
+    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
+        <img src="/assets/images/helmi-lumi-web-interface/output_print.png" alt="sbatch output">
+    </figure>
+</div>
 
 Eventhough we are expecting the counts result of '00' and '11', it also has a small portion of '00' and '01'. This is because current QPU is noisy.
 
@@ -143,11 +161,19 @@ Using an Jupyter Notebook, you can interactively develop and test your quantum c
 
 Login into LUMI [web interface](https://www.lumi.csc.fi/public/) then click on `Jupyter` to open an interactive session
 
-![jupyter_start](assets/images/helmi-lumi-web-interface/jupyter_starting.png)
+<div style="text-align: center;">
+    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
+        <img src="/assets/images/helmi-lumi-web-interface/jupyter_starting.png" alt="jupyter start">
+    </figure>
+</div>
 
 Fill in the required fields as shown in the picture below:
 
-![jupyter_request](assets/images/helmi-lumi-web-interface/lumi_jupyter.png.png)
+<div style="text-align: center;">
+    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
+        <img src="/assets/images/helmi-lumi-web-interface/lumi_jupyter.png" alt="jupyter on lumi">
+    </figure>
+</div>
 
 1. Choose the project id that you have assigned for.
 2. Select the partition that connects to Helmi. Currently, only the `q_fiqci` partition is available for this purpose.
@@ -166,7 +192,11 @@ Then click `Launch` to start the Jupyter session.
 
 You can use the same Python code from the `example.py` file directly within your Jupyter Notebook.
 
-![jupyter_code](assets/images/helmi-lumi-web-interface/jupyter_example.png)
+<div style="text-align: center;">
+    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
+        <img src="/assets/images/helmi-lumi-web-interface/jupyter_example.png" alt="jupyter example">
+    </figure>
+</div>
 
 ## Additional resources
 
