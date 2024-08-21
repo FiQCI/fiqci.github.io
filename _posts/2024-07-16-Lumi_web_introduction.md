@@ -9,26 +9,77 @@ author: Huyen Do
 layout: single
 ---
 
-> In this guide: Learn how to access to Helmi quantum computer through LUMI web interface.
-> System requirement: Internet access and a code editor.
-
-You can access to Helmi, a 5-qubit quantum processor unit (QPU), through the LUMI web interface. This setup integrates the power of a supercomputer with quantum computing, creating one of the most powerful hybrid environments for high-performance computing (HPC) and quantum computing (QC) research.
+> **In this guide:** Learn how to access the Helmi quantum computer through the LUMI web interface.  
+> **System requirements:** Internet access and a code editor.
 
 With the LUMI web interface, you can easily submit your quantum circuits to be executed on Helmi, currently the first quantum computer in Finland. Future upgrades will bring new machines with 20 and 54 qubits, providing even greater computational power. This hybrid environment allows researchers to accelerate their computations quickly and efficiently, whether running on a real QPU or simulating quantum circuits with GPU acceleration.
 
-This introduction should give you a clear understanding of the capabilities and potential of using Helmi through the LUMI web interface. In the following sections, we’ll dive deeper into how to get started, including step-by-step instructions on submitting your first quantum circuit.
+This guide will help you get started with using the Helmi quantum computer through the LUMI web interface. You'll learn how to set up and submit quantum circuits to Helmi, whether using Jupyter Notebooks or terminal commands. Follow the step-by-step instructions to configure your environment, run your first quantum circuit, and manage your jobs within the LUMI system.
 
-## Before you begin
+# Before you begin
 
 You must be assigned to a LUMI project before using any of its features. Follow these [instructions](https://docs.csc.fi/accounts/how-to-create-new-project/#how-to-create-finnish-lumi-projects) to apply for and gain access to a LUMI project.
 
-## Using LUMI web interface terminal
+# Using LUMI web interface
 
-After gaining access to your LUMI project, here is how to submit a quantum circuit to the Helmi QPU.
+After gaining access to your LUMI project, here is how to submit a quantum circuit to the Helmi QPU. This guide introduces two main methods for submitting jobs:
 
-### Programming quantum circuit
+1. **Interactive Session using Jupyter Notebook**: This method allows you to develop and test your quantum circuits interactively, providing a flexible and user-friendly environment for iterative experimentation.
 
-Create a python file `example.py` setting up your desired quantum circuit to run on Helmi:
+2. **Built-in Terminal on LUMI Web Interface**: This method offers a command-line approach for submitting quantum circuits, suitable for users who prefer or require terminal-based interaction.
+
+Additionally, you have the option to SSH into LUMI locally. By doing so, you can use the same commands as detailed in the [terminal instructions](#terminal-access) section to submit jobs directly from your local environment.
+
+## Interactive access with Jupyter Notebook
+
+Using an Jupyter Notebook, you can interactively develop and test your quantum circuits, making it easier to iterate and refine your experiments.
+
+### Create a Jupyter session by LUMI web interface
+
+Login into LUMI [web interface](https://www.lumi.csc.fi/public/) then click on `Jupyter` to open an interactive session
+
+<div style="text-align: center;">
+    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
+        <img src="/assets/images/helmi-lumi-web-interface/jupyter_starting.png" alt="jupyter start">
+    </figure>
+</div>
+
+Fill in the required fields as shown in the picture below:
+
+<div style="text-align: center;">
+    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
+        <img src="/assets/images/helmi-lumi-web-interface/lumi_jupyter.png" alt="jupyter on lumi">
+    </figure>
+</div>
+
+1. Choose the project id that you have assigned for.
+2. Select the partition that connects to Helmi. Currently, only the `q_fiqci` partition is available for this purpose.
+3. Add script to configure the quantum software stack environment:
+
+```bash
+module use /appl/local/quantum/modulefiles 
+module load helmi_qiskit 
+# or module load helmi_cirq 
+# if you want to use Cirq instead of Qiskit
+```
+
+Then click `Launch` to start the Jupyter session.
+
+### Example notebook code
+
+Once your Jupyter session is active, you can start writing and testing your quantum circuits directly within the notebook. Below is an example use of code that you can run in your Jupyter Notebook to interact with the Helmi QPU.
+
+<div style="text-align: center;">
+    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
+        <img src="/assets/images/helmi-lumi-web-interface/jupyter_example.png" alt="jupyter example">
+    </figure>
+</div>
+
+## Terminal access
+
+### Programming Quantum Circuit
+
+Start by creating a Python file to set up your desired quantum circuit. To run your quantum circuit on Helmi, you need to connect to the Helmi backend using a specific URL (Helmi Cortex URL). This URL is pre-configured in the LUMI environment, so you just need to fetch it from the environment variables in your Python script. The example in `example.py` below demonstrates how to do this and set up your quantum circuit:
 
 ```python
 import os
@@ -39,6 +90,8 @@ from qiskit.visualization import plot_histogram
 
 
 # Set up the Helmi backend
+## The Helmi Cortex URL is pre-configured in the LUMI environment, so you only need to fetch it from the OS to gain access to Helmi.
+
 HELMI_CORTEX_URL = os.getenv('HELMI_CORTEX_URL')
 if not HELMI_CORTEX_URL:
     raise ValueError("Environment variable HELMI_CORTEX_URL is not set")
@@ -77,7 +130,9 @@ plot_histogram(counts).savefig("histogram.png")
 
 ### Sbatch script to run on LUMI
 
-Create a `script.sh` file with this content:
+To run your Python file on the LUMI system, you'll need to create an sbatch script. This script is necessary for submitting your job to the LUMI job scheduler, which allocates resources and manages the execution of your job.
+
+Create a `script.sh` file with the following content:
 
 ```bash
 #!/bin/bash -l
@@ -107,7 +162,7 @@ If you want to install any additional python package to run your code, you can a
 
 1. Login into LUMI [web interface](https://www.lumi.csc.fi/public/)
 2. Go into your Home directory
-3. Upload `example.py` and `script.sh`
+3. Upload `example.py` and `script.sh` files
 4. Click to open built-in terminal on the web interface.
 5. Send the job using the following command:
 
@@ -121,13 +176,11 @@ sbatch script.sh
     </figure>
 </div>
 
-
 Check the current status of the submitted job with:
 
 ```bash
 squeue --me
 ```
-
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
@@ -155,57 +208,12 @@ Eventhough we are expecting the counts result of '00' and '11', it also has a sm
 
 Now you have learned how to access to our hybrid environment of quantum computer. Congratulation!
 
-## Interactive access with jupyter notebook
-
-Using an Jupyter Notebook, you can interactively develop and test your quantum circuits, making it easier to iterate and refine your experiments.
-
-### Create a Jupyter session by LUMI web interface
-
-Login into LUMI [web interface](https://www.lumi.csc.fi/public/) then click on `Jupyter` to open an interactive session
-
-<div style="text-align: center;">
-    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/helmi-lumi-web-interface/jupyter_starting.png" alt="jupyter start">
-    </figure>
-</div>
-
-Fill in the required fields as shown in the picture below:
-
-<div style="text-align: center;">
-    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/helmi-lumi-web-interface/lumi_jupyter.png" alt="jupyter on lumi">
-    </figure>
-</div>
-
-1. Choose the project id that you have assigned for.
-2. Select the partition that connects to Helmi. Currently, only the `q_fiqci` partition is available for this purpose.
-3. Add script to configure the quantum software stack environment:
-
-```bash
-module use /appl/local/quantum/modulefiles 
-module load helmi_qiskit 
-# or module load helmi_cirq 
-# if you want to use Cirq instead of Qiskit
-```
-
-Then click `Launch` to start the Jupyter session.
-
-### Example notebook code
-
-You can use the same Python code from the `example.py` file directly within your Jupyter Notebook.
-
-<div style="text-align: center;">
-    <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/helmi-lumi-web-interface/jupyter_example.png" alt="jupyter example">
-    </figure>
-</div>
-
-## Additional resources
+# Additional resources
 
 - **Terminal access:** You can also ssh to lumi and send your circuits through your local terminal by [ssh client](https://docs.lumi-supercomputer.eu/firststeps/loggingin/)
 - [Helmi technical details](https://docs.csc.fi/computing/quantum-computing/helmi/helmi-specs/)
 - More examples [running on Helmi](https://docs.csc.fi/computing/quantum-computing/helmi/running-on-helmi/)
 
-## Give feedback
+# Give feedback
 
 Feedback is greatly appreciated! You can send feedback directly to [fiqci-feedback@postit.csc.fi](mailto:fiqci-feedback@postit.csc.fi).
