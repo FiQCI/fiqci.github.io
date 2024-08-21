@@ -128,7 +128,7 @@ The results from the Helmi QPU indicate that the overall accuracy is below 50%, 
 
 ## Notebooks
 
-The Jupyter Notebook with more information about the algorithm and the codes to run encoded circuit for Grover's Search can be found [here](link). This can be executed directly on the FiQCI infrastructure.
+The Jupyter Notebook with more information about the algorithm and the codes to run encoded circuit for Grover's Search can be found [here](https://github.com/huyenemma/blogpost/blob/main/Grover_Search_error_detecting.ipynb). This can be executed directly on the FiQCI infrastructure.
 
 ## Conclusion
 
