@@ -12,7 +12,7 @@ layout: single
 > **In this guide:** Learn how to access the Helmi quantum computer through the LUMI web interface.  
 > **System requirements:** Internet access and a code editor.
 
-With the LUMI web interface, you can easily submit your quantum circuits to be executed on Helmi, currently the first quantum computer in Finland. Future upgrades will bring new machines with 20 and 54 qubits, providing even greater computational power. This hybrid environment allows researchers to accelerate their computations quickly and efficiently, whether running on a real QPU or simulating quantum circuits with GPU acceleration.
+With the LUMI web interface, you can easily submit your quantum circuits to be executed on Helmi, currently the first quantum computer in Finland. Future upgrades will bring new machines with 20 and 50 qubits, providing even greater computational power. This hybrid environment allows researchers to accelerate their computations quickly and efficiently, whether running on a real QPU or simulating quantum circuits with GPU acceleration.
 
 This guide will help you get started with using the Helmi quantum computer through the LUMI web interface. You'll learn how to set up and submit quantum circuits to Helmi, whether using Jupyter Notebooks or terminal commands. Follow the step-by-step instructions to configure your environment, run your first quantum circuit, and manage your jobs within the LUMI system.
 
@@ -156,7 +156,7 @@ module load helmi_qiskit # Load the module to use qiskit on Helmi
 python example.py
 ```
 
-If you want to install any additional python package to run your code, you can add `pip install $package_name` to `script.sh`.
+If you want to install any additional python package to run your code, you can add `pip install --user $package_name` to `script.sh`.
 
 ### Sending the script and check the status
 
