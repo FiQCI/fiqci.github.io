@@ -156,7 +156,7 @@ module load helmi_qiskit # Load the module to use qiskit on Helmi
 python example.py
 ```
 
-If you want to install any additional python package to run your code, you can add `pip install $package_name` to `script.sh`.
+If you want to install any additional python package to run your code, you can add `pip install --user $package_name` to `script.sh`.
 
 ### Sending the script and check the status
 
