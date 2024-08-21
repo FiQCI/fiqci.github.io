@@ -3,7 +3,7 @@ title: 'Getting started with Helmi through LUMI web interface'
 date: 2024-06-19
 permalink: _posts/2024-07-16-Lumi_web_introduction/
 header:
-  #teaser: /assets/images/
+  teaser: /assets/images/helmi-lumi-web-interface/thumbnail.png
 published: true
 author: Huyen Do
 layout: single
