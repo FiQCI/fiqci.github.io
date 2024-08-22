@@ -1,9 +1,9 @@
 ---
 title: 'Quantum circuit-knitting On FiQCI'
-date: 2024-08-22
-permalink: /_posts/2024-08-22-Circuit_Knitting_FiQCI/
+date: 2024-08-23
+permalink: /_posts/2024-08-23-Circuit_Knitting_FiQCI/
 header:
-  teaser: /assets/images\QCut_logo.jpg
+  teaser: /assets/images/QCut-logo.jpg
 published: true
 author: Joonas Nivala
 layout: single
