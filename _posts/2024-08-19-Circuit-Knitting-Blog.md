@@ -84,8 +84,6 @@ and the operations $O_i$ and $\rho_i$ can be given as <a href="#references">[4]<
 | $ O_7 = Z $ | $ \rho_7 = \ket 0\bra 0 $     | $ c_7 = +1/2 $ |
 | $ O_8 = Z $ | $ \rho_8 = \ket 1\bra 1 $     | $ c_8 = -1/2 $ |
 
-
-
 *An important point about notation*: $ \rho_i $ are a density matrices corresponding to a state to be prepared and $ O_i $ are basis measurements, sets of operations transforming the state from one basis to another and measuring it. The identity basis here means that measurement will always yield the zero state $ \ket{0} $.
 
 The QPD contains two types of operations. Basis measurements and state initializations. The basis measurements are inserted at the cut location and the state initializations to the beginning of the new qubit wire. For example, let's say we have a three-qubit circuit with a Hadamard and two cnots that we want to cut from between the cnots to get two two-qubit subcircuits.
@@ -93,7 +91,6 @@ The QPD contains two types of operations. Basis measurements and state initializ
 <a id="examplecircuit"></a>
 
 ![](/assets/images/Circuit-Knitting-Blog/wire-cut-example.png)
-
 
 The subcircuits will then be
 
@@ -131,7 +128,6 @@ circuit.measure_all()
 
 circuit.draw("mpl")
 ```
-
 ![](/assets/images/Circuit-Knitting-Blog/initial-circuit.png)
 
 ### Insert cut operations
@@ -154,9 +150,7 @@ After this, we can use QCut to separate the cut_circuit from the cut location an
 
 ![](/assets/images/Circuit-Knitting-Blog/cut-circuit-sub1.png) ![](/assets/images/Circuit-Knitting-Blog/cut-circuit-sub2.png)
 
-
 ![](/assets/images/Circuit-Knitting-Blog/results-bar-plot.png)
-
 
 As we can see since the subcircuits use fewer qubits, have fewer gates, and are therefore less deep, they are less erroneous than the full circuit. This explains why the reconstructed expectation values are closer to the ideal ones than the ones obtained by running the full circuit.
 
@@ -194,13 +188,11 @@ When running with the IQMFakeAdonis backend that models the noise of the Helmi q
 
 ![](/assets/images/Circuit-Knitting-Blog/qaoa-QCut-sim-results.png)
 
-
 One can see that the ideal solution states [4, 5, 6, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 22, 25, 26, 27] have the highest probabilities to be measured. The ideal solution states were calculated with the openQAOA python package.
 
 ![](/assets/images/Circuit-Knitting-Blog/qaoa-result-states-reconstruct.png)
 
 So even though the results are erroneous, with QCut they are of sufficient quality to accurately solve the problem. 
-
 
 ## Results and Outlook
 
