@@ -111,7 +111,6 @@ Note that the above description will give the Pauli Z-observable expectation val
 
 ## Circuit Knitting on real hardware
 
-
 QCut has been designed to be compatible with the Finnish Quantum-Computing Infrastructure (FiQCI) and supports for example the 5-qubit Helmi quantum computer.
 
 Here we demonstrate how to use QCut with FiQCI on the <a href="#examplecircuit">example circuit</a> discussed earlier. For those interested, detailed steps can be found in a jupyter notebook at the end of this blog and more in-depth documentation is available on <a href="https://github.com/JooNiv/QCut">Github</a>.
@@ -167,7 +166,6 @@ Circuit knitting is a rather new tool. Potential applications for a distributed 
 
 ## QAOA max-cut with QCut
 
-
 QAOA is a quantum approximation algorithm for solving combinatorial problems by optimizing some circuit parameters to obtain a minimum value for a problem-specific cost function <a href="#references">[6]</a>. The objective of the Max_Cut problem is to find a way to partition a graph into two separate subgraphs by cutting as many vertices as possible <a href="#references">[7]</a>. It has applications for example in machine learning, circuit design and statistical physics <a href="#references">[8] [9]</a>.
 
 Now let's say we have a simple graph that we wish to solve the Max-Cut problem for using a QAOA.
@@ -212,7 +210,6 @@ Results for wire-cutting, and circuit knitting in general, are very encouraging 
 However, it is good to note that circuit-knitting has an exponential overhead in the number of circuits needed, that scales with the number of cuts made. How useful circuit-knitting will be, and for which types of problems it is suitable, time will tell. Currently, the runtime overhead that comes from the additional circuits needed for circuit knitting is amplified by the limited availability of quantum computers, which prevents full parallelization of the problem over several QPUs. With the possibility to send each, or a few, subcircuits to separate QPUs would significantly reduce the overall wall-time for solving a given problem, even if the total QPU time would remain the same. 
 
 ## Notebooks
-
 
 The notebooks used can be accessed <a href="https://github.com/CSCfi/Quantum/tree/main/Wire-Cutting">here</a>.
 
