@@ -1,7 +1,7 @@
 ---
 title: 'Getting started with Helmi through LUMI web interface'
-date: 2024-06-19
-permalink: _posts/2024-07-16-Lumi_web_introduction/
+date: 2024-08-23
+permalink: _posts/2024-08-23-Lumi_web_introduction/
 header:
   teaser: /assets/images/helmi-lumi-web-interface/thumbnail.png
 published: true
@@ -22,7 +22,7 @@ You must be assigned to a LUMI project before using any of its features. Follow 
 
 # Using LUMI web interface
 
-After gaining access to your LUMI project, here is how to submit a quantum circuit to the Helmi QPU. This guide introduces two main methods for submitting jobs:
+Once you have access to your LUMI project, you can begin submitting quantum circuits to the Helmi QPU. This guide covers two primary methods for job submission using the LUMI web interface:
 
 1. **Interactive Session using Jupyter Notebook**: This method allows you to develop and test your quantum circuits interactively, providing a flexible and user-friendly environment for iterative experimentation.
 
@@ -67,7 +67,7 @@ Then click `Launch` to start the Jupyter session.
 
 ### Example notebook code
 
-Once your Jupyter session is active, you can start writing and testing your quantum circuits directly within the notebook. Below is an example use of code that you can run in your Jupyter Notebook to interact with the Helmi QPU.
+Once your Jupyter session is active, you can start writing and testing your quantum circuits directly within the notebook. Below is [an example](https://github.com/FiQCI/fiqci-examples/blob/main/qiskit/bell_state.ipynb) use of code that you can run in your Jupyter Notebook to interact with the Helmi QPU. 
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
@@ -153,6 +153,9 @@ module load helmi_qiskit # Load the module to use qiskit on Helmi
 
 # module load helmi_cirq # Load the module to use cirq on Helmi
 
+# Save the job ID to a file for later reference
+echo $SLURM_JOB_ID >> job_id.txt
+
 python example.py
 ```
 
@@ -204,7 +207,7 @@ All the `print()` statements from the Python file will be written in the output 
     </figure>
 </div>
 
-Eventhough we are expecting the counts result of '00' and '11', it also has a small portion of '10' and '01'. This is because current QPU is noisy.
+Even though we are expecting the counts result of '00' and '11', it also has a small portion of '10' and '01'. This is because current QPU is noisy.
 
 Now you have learned how to access to our hybrid environment of quantum computer. Congratulation!
 
