@@ -67,7 +67,7 @@ Then click `Launch` to start the Jupyter session.
 
 ### Example notebook code
 
-Once your Jupyter session is active, you can start writing and testing your quantum circuits directly within the notebook. Below is [an example](https://github.com/FiQCI/fiqci-examples/blob/main/qiskit/bell_state.ipynb) use of code that you can run in your Jupyter Notebook to interact with the Helmi QPU. 
+Once your Jupyter session is active, you can start writing and testing your quantum circuits directly within the notebook. Here is [an example](https://github.com/FiQCI/fiqci-examples/blob/main/qiskit/bell_state.ipynb) use of code that you can run in your Jupyter Notebook to interact with the Helmi QPU. 
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
