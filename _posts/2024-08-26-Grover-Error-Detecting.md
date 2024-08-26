@@ -59,7 +59,7 @@ In summary, the [[4,2,2]] code uses 4 physical qubits to protect 2 logical qubit
 
 Syndromes provide information about possible errors in a quantum system and are typically obtained from the measurement outcomes of ancilla qubits (extra qubits added specifically to capture the syndrome outcome) [[9]](#references). In this quantum error detection (QED) code, the syndromes are represented by the operators $XXXX$ and $ZZZZ$, which indicate the presence of bit-flip and phase-flip errors, respectively [[6]](#references).
 
-In this implementation, the Grover search circuit is encoded using fault-tolerant gates. Fault-tolerant gates are specifically designed to prevent errors from propagating through the quantum circuit, making the entire computation more robust. See [this jupyternotebook](https://github.com/CSCfi/Quantum/blob/main/Grover-Search-on-Helmi/Grover_Search_error_detecting.ipynb) to know more about the implementation construction.
+In this implementation, the Grover search circuit is encoded using fault-tolerant gates. Fault-tolerant gates are specifically designed to prevent errors from propagating through the quantum circuit, making the entire computation more robust. See [this Jupyter Notebook](https://github.com/CSCfi/Quantum/blob/main/Grover-Search-on-Helmi/Grover_Search_error_detecting.ipynb) to know more about the implementation construction.
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
@@ -72,7 +72,7 @@ In this implementation, the Grover search circuit is encoded using fault-toleran
     </figure>
 </div>
 
-To validate the correctness of the encoded circuit, we ran the algorithm on an ideal simulator (no errors). The results confirmed a 100% accuracy for all oracle-marked states, demonstrating the effectiveness of the encoded fault-tolerant implementation.
+To validate the correctness of the encoded circuit, we ran the algorithm on an ideal simulator, which models a perfect quantum system with no errors or noises. The results confirmed a 100% accuracy for all oracle-marked states, demonstrating the effectiveness of the encoded fault-tolerant implementation.
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
