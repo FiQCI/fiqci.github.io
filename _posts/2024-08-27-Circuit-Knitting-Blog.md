@@ -1,7 +1,7 @@
 ---
 title: 'Quantum circuit-knitting On FiQCI'
-date: 2024-08-23
-permalink: /_posts/2024-08-23-Circuit_Knitting_FiQCI/
+date: 2024-08-27
+permalink: /_posts/2024-08-27-Circuit_Knitting_FiQCI/
 header:
   teaser: /assets/images/QCut-logo.jpg
 published: true
@@ -102,7 +102,7 @@ Now to be able to estimate the original circuit's expectation values we need to 
 
 First, it is important to notice that in our circuits we now have two kinds of measurements. The normal end-of-circuit observable measurements on the qubits we want to consider for the expectation values, and the basis measurements on the extra qubits added by wire-cuts. While the end-of-circuit measurement results are used for expectation values, the basis measurement results are used for determining coefficients for the results of each subcircuit group. 
 
-Now, once all the subcircuit groups have been run and the results collected, we can apply classical post-processing to the results. First, we choose a random circuit group result according to the QPD weights. Since for wire-cuts, the weights are all equal we just pick a random result. Then we map the measured qubit state to its eigenvalue by applying $ f:\{0,1\}^N \rightarrow [-1,1]^N $ [1] <a href="#references">[4]</a>. This means that for example, if we have 4 qubits and the states of individual qubits are [0, 1, 1, 0], we transform it to [-1, 1, 1, -1]. Next, we want to apply $ sgn(c_i)\cdot sf(\boldsymbol{y}) $ <a href="#references">[4]</a>, where $ \boldsymbol{y} $ are the results of the end-of-circuit measurements, *s* the coefficient given by multiplying all the basis measurement results, and $ sgn(c_i) $ is the sign of the product of coefficients of this circuit group from the identity channel <a href="#qdplist">QPD</a>. Once this has been repeated for a large enough number of times (enough samples have been collected) we can calculate the expectation value by taking the mean of the samples and multiplying it by $ (-1)^{n+1}\cdot 4^{2n} $ <a href="#references">[4] [1]</a>, where *n* is the number of cuts. 
+Now, once all the subcircuit groups have been run and the results collected, we can apply classical post-processing to the results. First, we choose a random circuit group result according to the QPD weights. Since for wire-cuts, the weights are all equal we just pick a random result. Then we map the measured qubit state to its eigenvalue by applying $ f:\{0,1\}^N \rightarrow [-1,1]^N $ <a href="#references">[1]</a> <a href="#references">[4]</a>. This means that for example, if we have 4 qubits and the states of individual qubits are [0, 1, 1, 0], we transform it to [-1, 1, 1, -1]. Next, we want to apply $ sgn(c_i)\cdot sf(\boldsymbol{y}) $ <a href="#references">[4]</a>, where $ \boldsymbol{y} $ are the results of the end-of-circuit measurements, *s* the coefficient given by multiplying all the basis measurement results, and $ sgn(c_i) $ is the sign of the product of coefficients of this circuit group from the identity channel <a href="#qdplist">QPD</a>. Once this has been repeated for a large enough number of times (enough samples have been collected) we can calculate the expectation value by taking the mean of the samples and multiplying it by $ (-1)^{n+1}\cdot 4^{2n} $ <a href="#references">[4]</a> <a href="#references">[1]</a>, where *n* is the number of cuts. 
 
 Note that the above description will give the Pauli Z-observable expectation value for each qubit. If one doesn't need the expectation value for each qubit those results can simply be ignored in the calculation. For multi-qubit expectation values after applying *f* the eigenvalue of a multi-qubit state is given by the product of the eigenvalues for each qubit. After which, an additional multiplication by $ (-1)^{m+1} $ where *m* is the number of qubits in the expectation value, is needed.
 
@@ -156,11 +156,11 @@ As we can see since the subcircuits use fewer qubits, have fewer gates, and are 
 
 ## Possible applications
 
-Circuit knitting is a rather new tool. Potential applications for a distributed quantum computing framework utilising circuit knitting are for example VQAs, <a href="#references">[1] [2]</a> where one is interested in some expectation values of the system and where the circuit can be partitioned with just a few cuts. Thus, the applications depend more on the specific problem than the algorithm used, since many algorithms can have an easily cuttable form for *certain* problems. QAOA for the Max-Cut problem serves as a good example since for a QAOA it is easy to construct a graph that can be separated by just cutting one or two vertices <a href="#references">[3] [5]</a>. Here we will demonstrate solving this problem with wire-cutting on QCut and on a simulator and finally compare the results obtained to ideal ones.
+Circuit knitting is a rather new tool. Potential applications for a distributed quantum computing framework utilising circuit knitting are for example VQAs, <a href="#references">[1]</a> <a href="#references">[2]</a> where one is interested in some expectation values of the system and where the circuit can be partitioned with just a few cuts. Thus, the applications depend more on the specific problem than the algorithm used, since many algorithms can have an easily cuttable form for *certain* problems. QAOA for the Max-Cut problem serves as a good example since for a QAOA it is easy to construct a graph that can be separated by just cutting one or two vertices <a href="#references">[3]</a> <a href="#references">[5]</a>. Here we will demonstrate solving this problem with wire-cutting on QCut and on a simulator and finally compare the results obtained to ideal ones.
 
 ## QAOA max-cut with QCut
 
-QAOA is a quantum approximation algorithm for solving combinatorial problems by optimizing some circuit parameters to obtain a minimum value for a problem-specific cost function <a href="#references">[6]</a>. The objective of the Max_Cut problem is to find a way to partition a graph into two separate subgraphs by cutting as many vertices as possible <a href="#references">[7]</a>. It has applications for example in machine learning, circuit design and statistical physics <a href="#references">[8] [9]</a>.
+QAOA is a quantum approximation algorithm for solving combinatorial problems by optimizing some circuit parameters to obtain a minimum value for a problem-specific cost function <a href="#references">[6]</a>. The objective of the Max_Cut problem is to find a way to partition a graph into two separate subgraphs by cutting as many vertices as possible <a href="#references">[7]</a>. It has applications for example in machine learning, circuit design and statistical physics <a href="#references">[8]</a> <a href="#references">[9]</a>.
 
 Now let's say we have a simple graph that we wish to solve the Max-Cut problem for using a QAOA.
 
@@ -212,7 +212,7 @@ For more examples on wire-cutting with QCut check it out on <a href="https://git
 
 2. G. Gentinetta, F. Metz, and G. Carleo, “Overhead-constrained circuit knitting for variational quantum dynamics,” Quantum, vol. 8, p. 1296, Mar. 2024, doi: 10.22331/q-2024-03-21-1296. Available: [https://quantum-journal.org/papers/q-2024-03-21-1296](https://quantum-journal.org/papers/q-2024-03-21-1296). [Accessed: Aug. 14, 2024]
 
-3. M. Bechtold et al., “Investigating the effect of circuit cutting in QAOA for the MaxCut problem on NISQ devices,” Quantum Sci. Technol., vol. 8, no. 4, p. 045022, Oct. 2023, doi: 10.1088/2058-9565/acf59c. Available: [https://iopscience.iop.org/article/10.1088/2058-9565/acf59c](https://iopscience.iop.org/article/10.1088/2058-9565/acf59c). [Accessed: Apr. 12, 2024]
+3. M. Bechtold et al., “Investigating the effect of circuit cutting in QAOA for the MaxCut problem on NISQ devices,” Quantum Sci. Technol., vol. 8, no. 4, p. 045022, Oct. 2023, doi: 10.1088/2058-9565/acf59c. Available: [https://iopscience.iop.org/article/10.1088/2058-9565/acf59c](https://iopscience.iop.org/article/10.1088/2058-9565/acf59c). [Accessed: Aug. 14, 2024]
 
 4. H. Harada, K. Wada, and N. Yamamoto, “Doubly optimal parallel wire cutting without ancilla qubits.” arXiv, Nov. 07, 2023. doi: 10.48550/arXiv.2303.07340. Available: [http://arxiv.org/abs/2303.07340](http://arxiv.org/abs/2303.07340). [Accessed: Aug. 14, 2024]
 
