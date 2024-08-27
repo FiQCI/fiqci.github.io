@@ -150,7 +150,9 @@ cut_circuit.draw("mpl")
 
 After this, we can use QCut to separate the cut_circuit from the cut location and generate all the needed experiment circuits by inserting operations from the QPD. Once we have the experiment circuits we can then execute them and estimate the expectation values of the original circuit using QCut. Here we have calculated the expectation values using the Helmi quantum computer both with and without QCut. Additionally, the expectation values have also been calculated with an ideal simulator. The separated subcircuits before inserting gates from QPD and the final results can be seen below.
 
-![subcircuit produced by QCut](/assets/images/Circuit-Knitting-Blog/cut-circuit-sub1.png) ![subcircuit produced by QCut](/assets/images/Circuit-Knitting-Blog/cut-circuit-sub2.png)
+![subcircuit produced by QCut](/assets/images/Circuit-Knitting-Blog/cut-circuit-sub1.png) 
+
+![subcircuit produced by QCut](/assets/images/Circuit-Knitting-Blog/cut-circuit-sub2.png)
 
 ![bar plot of expectation values](/assets/images/Circuit-Knitting-Blog/results-bar-plot.png)
 
