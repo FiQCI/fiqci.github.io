@@ -94,7 +94,9 @@ The QPD contains two types of operations. Basis measurements and state initializ
 
 The subcircuits will then be
 
-![example of a subcircuit produced by a wire cut](/assets/images/Circuit-Knitting-Blog/wire-cut-example-sub1.png) ![example of a subcircuit produced by a wire cut](/assets/images/Circuit-Knitting-Blog/wire-cut-example-sub2.png)
+![example of a subcircuit produced by a wire cut](/assets/images/Circuit-Knitting-Blog/wire-cut-example-sub1.png) 
+
+![example of a subcircuit produced by a wire cut](/assets/images/Circuit-Knitting-Blog/wire-cut-example-sub2.png)
 
 Now to be able to estimate the original circuit's expectation values we need to insert operations from the <a href="#qdplist">QPD</a>, creating a total of 8 subcircuit pairs (one for each row in the <a href="#qdplist">QPD</a> ). In a more general setting, the total number of subcircuit groups of size *k* is given by $ 8^n $, where *n* is the number of cuts made and *k* is the number of parts the circuit is cut to. In addition to the number of circuits, also the number of samples needed scales exponentially with the number of cuts. Thus, the time complexity scales exponentially with the number of cuts. The sampling overhead can be represented in the big-O notation as O($\gamma^{2n}$) <a href="#references">[4]</a>, where $ \gamma $ is the sum of the absolute values of the coefficients of the QPD (4 for wire-cutting). If more than one cut is made the operations for each circuit are given by the cartesian product of the QPD with itself repeated for each cut. After running all of the subcircuits on a simulator or a quantum computer we can use classical post-processing to reconstruct the expectation values.
 
