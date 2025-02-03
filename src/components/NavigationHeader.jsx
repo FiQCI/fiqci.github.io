@@ -31,7 +31,7 @@ const NavButton = ({ text, href }) => {
     );
 };
 
-const NavSearchButton = ({ text }) => {
+const NavSearchButton = ({ text, href }) => {
 
     return (
         <div>
@@ -39,6 +39,7 @@ const NavSearchButton = ({ text }) => {
                 className='w-min'
                 text
                 style={style}
+                onClick={() => (window.location.href = href)}
             >
                 <p className="text-black py-2">{text}</p>
                 <CIcon style={style} path={mdiMagnify} />
@@ -73,7 +74,7 @@ export const NavigationHeader = () => {
                     <NavButton text="Blogs and instructions" href="/pages/publications" />
                     <NavButton text="Status" href="/pages/status" />
                     <NavButton text="Events" href="/pages/events" />
-                    <NavSearchButton text="Search" />
+                    <NavSearchButton text="Search" href="/pages/search"/>
                 </div>
                 
                 <div className='flex lg:hidden h-max'>
@@ -88,7 +89,7 @@ export const NavigationHeader = () => {
                     <NavButton text="Blogs and instructions" href="/pages/publications" />
                     <NavButton text="Status" href="/pages/status" />
                     <NavButton text="Events" href="/pages/events" />
-                    <NavSearchButton text="Search" />
+                    <NavSearchButton text="Search" href="/pages/search"/>
                 </div>
             }
         </div>
