@@ -91,8 +91,7 @@ export const NavigationHeader = () => {
                     <NavSearchButton text="Search" />
                 </div>
             }
-        </div>
-        
+        </div>        
 
     );
 };

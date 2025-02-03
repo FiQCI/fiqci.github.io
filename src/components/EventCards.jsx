@@ -6,7 +6,7 @@ import { mdiArrowRight, mdiOpenInNew } from '@mdi/js';
 
 const EventCardComponent = props => {
     return (
-<CCard className="flex flex-auto flex-col border border-gray-200 rounded-none shadow-md hover:shadow-lg p-0 m-0"> {/* Adjusted card width */}
+        <CCard className="flex flex-auto flex-col border border-gray-200 rounded-none shadow-md hover:shadow-lg p-0 m-0"> {/* Adjusted card width */}
             <CCardContent className="flex flex-col border-none m-0">
                 <div className='my-3'>
                     <a
