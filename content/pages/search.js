@@ -2,9 +2,9 @@
 window.addEventListener('DOMContentLoaded', function () {
   // Initialize Lunr.js search index
   var idx = lunr(function () {
-    this.ref('url'); // The unique identifier for each document
-    this.field('title'); // The title field will be searchable
-    this.field('content'); // The content field will be searchable
+    this.ref('url');
+    this.field('title');
+    this.field('content');
     this.field('type');
     this.field('tags');
 
@@ -16,7 +16,6 @@ window.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Search function
   function search(query) {
     var results = idx.search(query); // Get search results
 
@@ -31,7 +30,7 @@ window.addEventListener('DOMContentLoaded', function () {
       if (item) {
         var title = item.title;
         var url = item.url;
-        var excerpt = item.content.substring(0, 200) + '...'; // Show a snippet of the content
+        var excerpt = item.content.substring(0, 200) + '...';
 
         var listItem = document.createElement('li');
         listItem.innerHTML = `<strong><a href="${url}">${title}</a></strong><br><span>${excerpt}</span>`;
@@ -39,7 +38,6 @@ window.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    // Handle case where no results are found
     if (results.length === 0) {
       var noResultsItem = document.createElement('li');
       noResultsItem.textContent = 'No results found.';
@@ -52,13 +50,13 @@ window.addEventListener('DOMContentLoaded', function () {
   searchForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var query = document.getElementById('search-box').value;
-    search(query); // Perform the search when the form is submitted
+    search(query);
   });
 
-  // Optional: Search on input change (instant search)
+  // Search on input change
   var searchBox = document.getElementById('search-box');
   searchBox.addEventListener('input', function () {
     var query = searchBox.value;
-    search(query); // Perform the search as the user types
+    search(query);
   });
 });

@@ -2,7 +2,6 @@
 layout: page
 title: Search Results
 ---
-<!-- List where search results will be rendered -->
 
 <div class="header-search">
   <form class="header-search-form border-2 border-black" action="/" method="get">
@@ -13,7 +12,6 @@ title: Search Results
 <ul id="search-results"></ul>
 
 <script>
-  // Template to generate the JSON to search
   window.store = {
     {% for post in site.publications %}
       "{{ post.url | slugify }}": {
@@ -53,5 +51,5 @@ title: Search Results
 
 <!-- Import lunr.js from unpkg.com -->
 <script src="https://unpkg.com/lunr/lunr.js"></script>
-<!-- Custom search script which we will create below -->
+
 <script src="./search.js"></script>
