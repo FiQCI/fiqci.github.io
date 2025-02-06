@@ -10,5 +10,13 @@ collections:
   publications:
     output: true
     sort_by: date
+
   events:
     output: true
+
+defaults:
+  - scope:
+      path: "pages"  # Applies to all pages inside "pages/"
+      type: "pages"
+    values:
+      permalink: "/:basename/"
