@@ -30,7 +30,7 @@ filters:
       value: false
     - name: "Onsite"
       value: true
-  Theme: "Course"
+  Theme: "course"
 ---
 25-26 November: Two-day introductory course on quantum computers and the basic quantum algorithms that control them.
 
