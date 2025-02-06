@@ -32,7 +32,7 @@ const EventCardComponent = props => {
 
 
 
-export const EventCard = () => {
+const EventCard = () => {
     return (
         <div className="mx-auto px-0 py-6">
             <div className="flex items-center justify-between mb-6">
@@ -56,3 +56,5 @@ export const EventCard = () => {
         </div>
     );
 };
+
+export { EventCard, EventCardComponent }

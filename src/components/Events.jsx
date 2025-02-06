@@ -1,28 +1,9 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
-import { CCard, CIcon, CCardContent, CPagination, CCheckbox, CSelect, CButton } from '@cscfi/csc-ui-react';
-import { mdiOpenInNew } from '@mdi/js';
+import { CPagination, CCheckbox, CSelect, CButton, CModal, CCard, CCardTitle, CCardContent, CCardActions } from '@cscfi/csc-ui-react';
+import { EventCardComponent } from './EventCards';
+import { mdiFilter } from '@mdi/js';
 
-const EventCardComponent = props => (
-    <CCard className="flex flex-auto flex-col border border-gray-200 rounded-none shadow-md hover:shadow-lg p-0 m-0">
-        <CCardContent className="flex flex-col border-none m-0">
-            <div className='my-3'>
-                <a href={props.url} className="text-md text-black-500 hover:underline font-bold">
-                    <div className='flex justify-between'>
-                        {props.title}
-                        <CIcon className="text-lg" path={mdiOpenInNew} />
-                    </div>
-                </a>
-                <p className="text-sm text-gray-500 pb-2 pt-1">
-                    {props.content.split(":")[0]}
-                </p>
-                <p>
-                    {props.content.split(":")[1].slice(0, 90) + "..."}
-                </p>
-            </div>
-        </CCardContent>
-    </CCard>
-);
 
 const SplitEvents = () => {
     let res = { "upcoming": [], "past": [] };
@@ -31,6 +12,100 @@ const SplitEvents = () => {
     });
     return res;
 };
+
+const EventFilters = ({ filters, handleFilterChange }) => {
+
+    const handleChangeTheme = useCallback(
+        (selectedTheme) => {
+            handleFilterChange({ ...filters, Theme: selectedTheme.detail || '' });
+        },
+        [filters, handleFilterChange]
+    );
+
+    const handleCheckboxChange = useCallback(
+        (category, option) => {
+            handleFilterChange({
+                ...filters,
+                [category]: {
+                    ...filters[category],
+                    [option]: !filters[category][option],
+                },
+            });
+        },
+        [filters, handleFilterChange]
+    );
+
+    return (
+        <div className='md:py-0 lg:col-span-1 lg:py-10 flex flex-col gap-2'>
+            {Object.entries(filters).slice(0, -1).map(([category, options]) => (
+                <div key={category}>
+                    <p className="font-semibold">{category}</p>
+                    {Object.keys(options).map((option) => (
+                        <CCheckbox
+                            key={option}
+                            hide-details={true}
+                            checked={filters[category][option]}
+                            onChangeValue={() => handleCheckboxChange(category, option)}
+                        >
+                            <p className="text-sm">{option}</p>
+                        </CCheckbox>
+                    ))}
+                </div>
+            ))}
+
+            <div>
+                <p className="font-semibold">Theme</p>
+                <CSelect
+                    className='py-2'
+                    clearable={true}
+                    hide-details={false}
+                    value={filters.Theme}
+                    items={[
+                        { name: 'Lecture', value: 'lecture' },
+                        { name: 'Showcase', value: 'showcase' },
+                        { name: 'Seminar', value: 'seminar' },
+                        { name: 'Course', value: 'course' },
+                    ]}
+                    placeholder={'Choose a theme'}
+                    onChangeValue={handleChangeTheme}
+                >
+
+                </CSelect>
+            </div>
+
+        </div>
+    )
+}
+
+const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange }) => {
+
+    return (
+        <CModal
+            className='grid lg:hidden'
+            value={isModalOpen}
+            dismissable={true}
+            onChangeValue={(event) =>
+                setIsModalOpen(event.detail)
+            }
+        >
+            <CCard>
+                <CCardTitle>Filters</CCardTitle>
+
+                <CCardContent>
+                    <p>Filters:</p>
+                    <EventFilters filters={filters} handleFilterChange={handleFilterChange} />
+                </CCardContent>
+
+                <CCardActions justify="end">
+                    <CButton onClick={() => setIsModalOpen(false)} text>
+                        Close
+                    </CButton>
+                </CCardActions>
+            </CCard>
+        </CModal>
+    )
+}
+
 
 export const Events = () => {
     const events_dict = SplitEvents();
@@ -49,26 +124,30 @@ export const Events = () => {
         pageSizes: [5, 10, 15, 25, 50],
     });
 
+    const [filteredEvents, setFilteredEvents] = useState({})
     const [filteredEventsPast, setFilteredEventsPast] = useState([]);
     const [filteredEventsUpcoming, setFilteredEventsUpcoming] = useState([]);
 
 
     useEffect(() => {
-        handleChangePast()
-        handleChangeUpcoming()
+        setFilteredEvents(events_dict)
+        const start = (optionsPast.currentPage - 1) * optionsPast.itemsPerPage;
+        const end = start + optionsPast.itemsPerPage;
+        setFilteredEventsPast([...events_dict.past].reverse().slice(start, end));
+        setFilteredEventsUpcoming([...events_dict.upcoming].reverse().slice(start, end));
 
     }, []);
 
     const handleChangePast = () => {
         const start = (optionsPast.currentPage - 1) * optionsPast.itemsPerPage;
         const end = start + optionsPast.itemsPerPage;
-        setFilteredEventsPast(events_dict.past.reverse().slice(start, end));
+        setFilteredEventsPast([...filteredEvents.past].reverse().slice(start, end));
     }
 
     const handleChangeUpcoming = () => {
         const start = (optionsUpcoming.currentPage - 1) * optionsUpcoming.itemsPerPage;
         const end = start + optionsUpcoming.itemsPerPage;
-        setFilteredEventsUpcoming(events_dict.upcoming.reverse().slice(start, end));
+        setFilteredEventsUpcoming([...filteredEvents.upcoming].reverse().slice(start, end));
     }
 
     const [filters, setFilters] = useState({
@@ -91,26 +170,48 @@ export const Events = () => {
         Theme: "",
     });
 
+    useEffect(() => {
+        const applyFilters = (event) => {
+            if (filters.Theme && event?.filters?.Theme !== filters.Theme) return false;
+            for (const category in filters) {
+                if (category === "Theme") continue;
+                for (const option in filters[category]) {
+                    if (filters[category][option] && !event?.filters?.[category]?.[option]) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        };
+        const filtered = {
+            "past": events_dict["past"].filter(applyFilters),
+            "upcoming": events_dict["upcoming"].filter(applyFilters)
+        }
+        const start = (optionsUpcoming.currentPage - 1) * optionsUpcoming.itemsPerPage;
+        const end = start + optionsUpcoming.itemsPerPage;
 
-    const handleChangeTheme = (selectedTheme) => {
-        setFilters((prevFilters) => ({
-            ...prevFilters,
-            Theme: selectedTheme.detail || "",
+        setFilteredEvents(filtered)
+        setFilteredEventsPast([...filtered.past].reverse().slice(start, end));
+        setFilteredEventsUpcoming([...filtered.upcoming].reverse().slice(start, end));
+        setOptionsUpcoming((prevOptions) => ({
+            ...prevOptions,
+            itemCount: filtered.upcoming.length,
         }));
-        console.log(selectedTheme.detail || "");
-        console.log(filters);
-    };
-    
+        setOptionsPast((prevOptions) => ({
+            ...prevOptions,
+            itemCount: filtered.past.length,
+        }));
+    }, [filters]);
 
-    const handleCheckboxChange = (category, option) => {
-        setFilters((prevFilters) => ({
-            ...prevFilters,
-            [category]: {
-                ...prevFilters[category],
-                [option]: !prevFilters[category][option],
-            },
-        }));
+    const handleFilterChange = (newFilters) => {
+        setFilters(newFilters)
+    }
+
+    const onOpenDialog = () => {
+        setIsModalOpen(true);
     };
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className='flex flex-col items-top'>
@@ -124,53 +225,22 @@ export const Events = () => {
                 </div>
             </div>
             <div className='grid grid-cols-5 gap-8 mx-[100px]'>
-                <div className='col-span-1 py-10 flex flex-col gap-2'>
-                    {Object.entries(filters).slice(0,-1).map(([category, options]) => (
-                        <div key={category}>
-                            <p className="font-semibold">{category}</p>
-                            {Object.keys(options).map((option) => (
-                                <CCheckbox
-                                    key={option}
-                                    hide-details={true}
-                                    checked={filters[category][option]}
-                                    onChangeValue={() => handleCheckboxChange(category, option)}
-                                >
-                                    <p className="text-sm">{option}</p>
-                                </CCheckbox>
-                            ))}
-                        </div>
-                    ))}
-
-                    <div>
-                    <p className="font-semibold">Theme</p>
-                        <CSelect
-                            className='py-2'
-                            clearable={true}
-                            hide-details={false}
-                            value={filters.Theme}
-                            items={[
-                                { name: 'Lecture', value: 'lecture' },
-                                { name: 'Showcase', value: 'showcase' },
-                                { name: 'Seminar', value: 'seminar' },
-                                { name: 'Course', value: 'course' },
-                            ]}
-                            placeholder={'Choose a theme'}
-                            onChangeValue={handleChangeTheme}
-                        >
-
-                        </CSelect>
-                    </div>
-
+                <div className='hidden lg:flex'>
+                    <EventFilters filters={filters} handleFilterChange={handleFilterChange} />
                 </div>
-                <div className='py-10 col-span-4'>
+
+                <div className='md:py-0 lg:py-10 col-span-4'>
                     <div className="flex items-center justify-between mb-0">
                         <h2 className="text-3xl font-bold">Upcoming events</h2>
+                        <CCardActions className='grid lg:hidden pt-2 px-0 pb-0'>
+                            <CButton onClick={() => onOpenDialog()}>Filters</CButton>
+                        </CCardActions>
                     </div>
                     <div className="mx-auto">
-                    {events_dict.upcoming.length !== 0 ? (
+                        {filteredEventsUpcoming.length !== 0 ? (
                             <>
                                 <div className="grid grid-cols-1 py-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {events_dict.upcoming.map((event) => (
+                                    {filteredEventsUpcoming.map((event) => (
                                         <EventCardComponent key={event.id} {...event} />
                                     ))}
                                 </div>
@@ -205,12 +275,17 @@ export const Events = () => {
                                 />
                             </>
                         ) : (
-                            <p>No past events.</p>
+                            <p className='pt-6 pb-8'>No past events.</p>
                         )}
                     </div>
 
                 </div>
             </div>
+            <FilterModal
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+                filters={filters}
+                handleFilterChange={handleFilterChange} />
         </div>
     );
 };
