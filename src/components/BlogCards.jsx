@@ -26,7 +26,7 @@ const BlogCardComponent = props => {
 
 
 
-export const BlogCard = () => {
+const BlogCard = () => {
     return (
         <div className="mx-auto px-0 py-6">
             <div className="flex items-center justify-between mb-6">
@@ -50,3 +50,5 @@ export const BlogCard = () => {
         </div>
     );
 };
+
+export { BlogCard, BlogCardComponent }
