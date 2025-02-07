@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
 import {
     CPagination, CCheckbox, CSelect, CButton, CModal, CCard,
@@ -73,10 +73,10 @@ const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
             clearable
             value={selectedTheme}
             items={[
-                { name: 'Lecture', value: 'lecture' },
-                { name: 'Showcase', value: 'showcase' },
-                { name: 'Seminar', value: 'seminar' },
-                { name: 'Course', value: 'course' },
+                { name: 'Hybrid QC+HPC computing', value: 'hybrid QC+HPC computing' },
+                { name: 'Programming', value: 'programming' },
+                { name: 'Webinar/Lecture', value: 'webinar/lecture' },
+                { name: 'Course/Workshop', value: 'course/workshop' },
             ]}
             placeholder='Choose a theme'
             onChangeValue={handleChangeTheme}
@@ -85,26 +85,31 @@ const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
 );
 
 //Modal filter for mobile
-const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange }) => (
-    <CModal
-        value={isModalOpen}
-        dismissable
-        onChangeValue={event => setIsModalOpen(event.detail)}
-    >
-        <CCard>
-            <CCardTitle>Filters</CCardTitle>
-            <CCardContent>
-                <EventFilters
-                    filters={filters}
-                    handleFilterChange={handleFilterChange}
-                />
-            </CCardContent>
-            <CCardActions justify='end'>
-                <CButton onClick={() => setIsModalOpen(false)} text>Close</CButton>
-            </CCardActions>
-        </CCard>
-    </CModal>
-);
+const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange }) => {
+
+    return (
+        <CModal
+            key={isModalOpen ? 'open' : 'closed'}
+            style={{ "overflow": "scroll" }} className='overflow-scroll'
+            value={isModalOpen}
+            dismissable
+            onChangeValue={event => setIsModalOpen(event.detail)}
+        >
+            <CCard style={{ "overflow": "scroll" }} className='overflow-scroll max-h-[80vh]'>
+                <CCardTitle>Filters</CCardTitle>
+                <CCardContent>
+                    <EventFilters
+                        filters={filters}
+                        handleFilterChange={handleFilterChange}
+                    />
+                </CCardContent>
+                <CCardActions justify='end'>
+                    <CButton onClick={() => setIsModalOpen(false)} text>Close</CButton>
+                </CCardActions>
+            </CCard>
+        </CModal>
+    )
+};
 
 //List events in a grid with pagination
 const EventsList = ({ title, events, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => (
@@ -186,16 +191,40 @@ export const Events = () => {
 
     const [filteredEvents, setFilteredEvents] = useState(events_dict);
 
-    useEffect(() => { //set filteredEvents everytime filters changes
-        const applyFilters = event => { //filter function
-            //if theme exists and is not equal to one in event file false
-            if (filters.Theme && event?.filters?.Theme !== filters.Theme) return false;
-            return Object.entries(filters).every(([category, options]) => //.every returns true is condition holds for all elements
-                category === "Theme" || Object.entries(options) //true if category is Theme or...
-                    .every(([option, checked]) => //...for every category values match
-                        !checked || event?.filters?.[category]?.[option])
-            );
+    useEffect(() => {
+        if (isModalOpen) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'visible';
+        }
+        // Always clean up on unmount
+        return () => {
+          document.body.style.overflow = 'visible';
         };
+      }, [isModalOpen]);
+
+    useEffect(() => { //set filteredEvents everytime filters changes
+        const applyFilters = (event) => {
+            // First, check the Theme filter separately:
+            if (filters.Theme && event?.filters?.Theme !== filters.Theme) {
+              return false;
+            }
+        
+            // For every other filter category...
+            return Object.entries(filters).every(([category, options]) => {
+              // Skip the "Theme" category here
+              if (category === "Theme") return true;
+        
+              // Create an array of only the options that are checked (active)
+              const activeOptions = Object.entries(options).filter(([_, checked]) => checked);
+        
+              // If no options are active in this category, do not filter out the event:
+              if (activeOptions.length === 0) return true;
+        
+              // Otherwise, require that at least one active option is true in the event:
+              return activeOptions.some(([option]) => event?.filters?.[category]?.[option]);
+            });
+          };
 
         //apply filter
         const filtered = {
@@ -203,7 +232,7 @@ export const Events = () => {
             upcoming: events_dict.upcoming.filter(applyFilters)
         };
         setFilteredEvents(filtered);
-        
+
         //also update item count in pagination options
         setOptionsUpcoming(prev => ({ ...prev, itemCount: filtered.upcoming.length }));
         setOptionsPast(prev => ({ ...prev, itemCount: filtered.past.length }));
@@ -217,12 +246,18 @@ export const Events = () => {
         setOptions((prev) => ({ ...prev, currentPage: event.detail }));
     };
 
+    const handleFilterChange = (newFilters) => {
+        setFilters(newFilters);
+        setOptionsUpcoming(prev => ({ ...prev, currentPage: 1 }));
+        setOptionsPast(prev => ({ ...prev, currentPage: 1 }));
+    };
+
     return (
         <div className='flex flex-col items-top'>
             <EventsBanner />
             <div className='md:flex lg:grid grid-cols-5 gap-8 mx-[100px]'>
                 <div className='hidden lg:flex py-10'>
-                    <EventFilters filters={filters} handleFilterChange={setFilters} />
+                    <EventFilters filters={filters} handleFilterChange={handleFilterChange} />
                 </div>
                 <div className='md:py-0 lg:py-10 col-span-4'>
                     <EventsList
@@ -244,7 +279,7 @@ export const Events = () => {
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
                 filters={filters}
-                handleFilterChange={setFilters} />
+                handleFilterChange={handleFilterChange} />
         </div>
     );
 };
