@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
 import {
     CPagination, CCheckbox, CSelect, CButton, CModal, CCard,
@@ -166,6 +166,7 @@ const EventsBanner = () => {
 //Full events component
 export const Events = () => {
     const events_dict = SplitEvents(); //get events
+    //console.log(events_dict)
     const [isModalOpen, setIsModalOpen] = useState(false); //modal control
     const [filters, setFilters] = useState({
         "Availability": { "Open to anyone": false, "Registration needed": false },
@@ -197,38 +198,38 @@ export const Events = () => {
 
     useEffect(() => {
         if (isModalOpen) {
-          document.body.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
         } else {
-          document.body.style.overflow = 'visible';
+            document.body.style.overflow = 'visible';
         }
         // Always clean up on unmount
         return () => {
-          document.body.style.overflow = 'visible';
+            document.body.style.overflow = 'visible';
         };
-      }, [isModalOpen]);
+    }, [isModalOpen]);
 
     useEffect(() => { //set filteredEvents everytime filters changes
         const applyFilters = (event) => {
             // First, check the Theme filter separately:
             if (filters.Theme && event?.filters?.Theme !== filters.Theme) {
-              return false;
+                return false;
             }
-        
+
             // For every other filter category...
             return Object.entries(filters).every(([category, options]) => {
-              // Skip the "Theme" category here
-              if (category === "Theme") return true;
-        
-              // Create an array of only the options that are checked (active)
-              const activeOptions = Object.entries(options).filter(([_, checked]) => checked);
-        
-              // If no options are active in this category, do not filter out the event:
-              if (activeOptions.length === 0) return true;
-        
-              // Otherwise, require that at least one active option is true in the event:
-              return activeOptions.some(([option]) => event?.filters?.[category]?.[option]);
+                // Skip the "Theme" category here
+                if (category === "Theme") return true;
+
+                // Create an array of only the options that are checked (active)
+                const activeOptions = Object.entries(options).filter(([_, checked]) => checked);
+
+                // If no options are active in this category, do not filter out the event:
+                if (activeOptions.length === 0) return true;
+
+                // Otherwise, require that at least one active option is true in the event:
+                return activeOptions.some(([option]) => event?.filters?.[category]?.[option]);
             });
-          };
+        };
 
         //apply filter
         const filtered = {
@@ -246,8 +247,9 @@ export const Events = () => {
         setIsModalOpen(true);
     };
 
-    const handlePageChange = (setOptions) => (event) => { //pagination control, rerenders events
-        setOptions((prev) => ({ ...prev, currentPage: event.detail }));
+    const handlePageChange = (setOptions) => (event) => {
+        // event.detail should be the new page number.
+        setOptions(prev => ({ ...prev, currentPage: event.detail.currentPage }));
     };
 
     const handleFilterChange = (newFilters) => {
@@ -275,7 +277,7 @@ export const Events = () => {
                         title='Past events'
                         events={[...filteredEvents.past].reverse()}
                         paginationOptions={optionsPast}
-                        handlePageChange={handlePageChange(setOptionsUpcoming)}
+                        handlePageChange={handlePageChange(setOptionsPast)}
                     />
                 </div>
             </div>
