@@ -50,7 +50,7 @@ const EventFilters = ({ filters, handleFilterChange }) => {
 //Checkbox filters
 const FilterCategory = ({ category, options, handleCheckboxChange }) => (
     <div>
-        <p className='font-semibold'>{category}</p>
+        <h3 className='font-bold'>{category}</h3>
         {Object.keys(options).map(option => ( //generate a chekcbox for each filter category
             <CCheckbox
                 key={option}
@@ -67,7 +67,7 @@ const FilterCategory = ({ category, options, handleCheckboxChange }) => (
 //Theme filter
 const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
     <div>
-        <p className='font-semibold'>Theme</p>
+        <p className='font-bold'>Theme</p>
         <CSelect
             className='py-2'
             clearable
@@ -114,7 +114,7 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
 //List events in a grid with pagination
 const EventsList = ({ title, events, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => (
     <div>
-        <div className='mt-2 flex flex-row justify-between'>
+        <div className='flex flex-row justify-between'>
             <h2 className='text-3xl font-bold'>{title}</h2>
             {showFilters && //to not show the button on every EventsList instance
                 <CButton
@@ -127,7 +127,7 @@ const EventsList = ({ title, events, paginationOptions, handlePageChange, showFi
         </div>
         {events.length ? (
             <>
-                <div className='grid grid-cols-1 py-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                <div className='grid grid-cols-1 py-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6'>
                     {events.slice((paginationOptions.currentPage - 1) *
                         paginationOptions.itemsPerPage, (paginationOptions.currentPage - 1) *
                         paginationOptions.itemsPerPage + paginationOptions.itemsPerPage)
@@ -152,8 +152,8 @@ const EventsList = ({ title, events, paginationOptions, handlePageChange, showFi
 const EventsBanner = () => {
     return (
         <div className='min-w-[375px] h-auto flex flex-col justify-center'>
-            <div className='bg-cyan-800 w-full h-[250px] flex flex-row items-center'>
-                <div className='mx-[100px]'>
+            <div className='justify-start landscape:justify-start sm:justify-start md:justify-start bg-cyan-800 w-full h-[250px] flex flex-row items-center'>
+                <div className='mx-8 lg:mx-[100px]'>
                     <div className='bg-slate-800 w-fit font-bold text-white leading-tight'>
                         <h1 className='text-7xl px-2 pb-5'>Events</h1>
                     </div>
@@ -190,6 +190,10 @@ export const Events = () => {
     }); //pagination control for upcoming events
 
     const [filteredEvents, setFilteredEvents] = useState(events_dict);
+
+    useEffect(() => {
+        document.body.classList.add("min-w-fit")
+    })
 
     useEffect(() => {
         if (isModalOpen) {
@@ -255,11 +259,11 @@ export const Events = () => {
     return (
         <div className='flex flex-col items-top'>
             <EventsBanner />
-            <div className='md:flex lg:grid grid-cols-5 gap-8 mx-[100px]'>
-                <div className='hidden lg:flex py-10'>
+            <div className='mt-8 mx-8 lg:mx-[100px] flex lg:grid grid-cols-5 gap-8'>
+                <div className='py-2 hidden lg:flex'>
                     <EventFilters filters={filters} handleFilterChange={handleFilterChange} />
                 </div>
-                <div className='md:py-0 lg:py-10 col-span-4'>
+                <div className='md:py-0 col-span-4'>
                     <EventsList
                         title='Upcoming events'
                         events={[...filteredEvents.upcoming].reverse()}
