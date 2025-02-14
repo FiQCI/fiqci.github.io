@@ -10,7 +10,21 @@
     "title": "{{ blog.title }}",
     "url": "{{ blog.url | relative_url }}",
     "date": "{{ blog.date | date: '%-d.%-m.%Y' }}",
-    "teaser": "{{blog.header.teaser | relative_url}}" 
+    "teaser": "{{blog.header.teaser | relative_url}}",
+    "filters": {
+      {%- for category in blog.filters %}
+        {%- if category[0] == "Theme" -%}
+          "Theme": "{{ category[1] }}"
+        {%- else -%}
+          "{{ category[0] }}": {
+            {%- for option in category[1] %}
+              "{{ option.name }}": {{ option.value | jsonify }}{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor %}
+          }
+        {%- endif -%}
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor %}
+    } 
   }{%- unless forloop.last == true -%},{%- endunless -%}
 {% endfor %}
 ]
@@ -39,7 +53,7 @@
         {%- endif -%}
         {%- unless forloop.last -%},{%- endunless -%}
       {%- endfor %}
-      }
+    }
   }{%- unless forloop.last -%},{%- endunless -%}
 {% endfor %}
 ]
