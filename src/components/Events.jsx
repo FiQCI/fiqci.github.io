@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
 import {
     CPagination, CCheckbox, CSelect, CButton, CModal, CCard,
@@ -53,6 +53,7 @@ const FilterCategory = ({ category, options, handleCheckboxChange }) => (
         <h3 className='font-bold'>{category}</h3>
         {Object.keys(options).map(option => ( //generate a chekcbox for each filter category
             <CCheckbox
+                hide-details={true}
                 key={option}
                 checked={options[option]}
                 onChangeValue={() => handleCheckboxChange(category, option)}
@@ -69,6 +70,7 @@ const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
     <div>
         <p className='font-bold'>Theme</p>
         <CSelect
+            hideDetails={true}
             className='py-2'
             clearable
             value={selectedTheme}
@@ -90,12 +92,13 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
     return (
         <CModal
             key={isModalOpen ? 'open' : 'closed'}
-            style={{ "overflow": "scroll" }} className='overflow-scroll'
+            style={{ 'overflow': 'scroll' }}
+            className='overflow-scroll'
             value={isModalOpen}
             dismissable
             onChangeValue={event => setIsModalOpen(event.detail)}
         >
-            <CCard style={{ "overflow": "scroll" }} className='overflow-scroll max-h-[80vh]'>
+            <CCard style={{ 'overflow': 'scroll' }} className='overflow-scroll max-h-[80vh]'>
                 <CCardTitle>Filters</CCardTitle>
                 <CCardContent>
                     <EventFilters
@@ -108,7 +111,7 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
                 </CCardActions>
             </CCard>
         </CModal>
-    )
+    );
 };
 
 //List events in a grid with pagination
@@ -128,12 +131,12 @@ const EventsList = ({ title, events, paginationOptions, handlePageChange, showFi
         {events.length ? (
             <>
                 <div className='grid grid-cols-1 py-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6'>
-                    {events.slice((paginationOptions.currentPage - 1) *
-                        paginationOptions.itemsPerPage, (paginationOptions.currentPage - 1) *
-                        paginationOptions.itemsPerPage + paginationOptions.itemsPerPage)
-                        .map(event =>
-                            <EventCardComponent key={event.id} {...event} />
-                        )}
+                    {events.slice(
+                        (paginationOptions.currentPage - 1) * paginationOptions.itemsPerPage,
+                        (paginationOptions.currentPage - 1) * paginationOptions.itemsPerPage + paginationOptions.itemsPerPage
+                    ).map(event => (
+                        <EventCardComponent key={event.id} {...event} />
+                    ))}
                 </div>
                 <CPagination
                     value={paginationOptions}
@@ -151,22 +154,21 @@ const EventsList = ({ title, events, paginationOptions, handlePageChange, showFi
 //Banner at top of page
 const EventsBanner = () => {
     return (
-        <div className='min-w-[375px] h-auto flex flex-col justify-center'>
-            <div className='justify-start landscape:justify-start sm:justify-start md:justify-start bg-cyan-800 w-full h-[250px] flex flex-row items-center'>
-                <div className='mx-8 lg:mx-[100px]'>
-                    <div className='bg-slate-800 w-fit font-bold text-white leading-tight'>
-                        <h1 className='text-7xl px-2 pb-5'>Events</h1>
-                    </div>
+    <div className='min-w-[375px] h-auto flex flex-col justify-center'>
+        <div className='justify-start sm:justify-start md:justify-start bg-cyan-800 w-full h-[250px] flex flex-row items-center'>
+            <div className='mx-8 lg:mx-[100px]'>
+                <div className='bg-slate-800 w-fit font-bold text-white leading-tight'>
+                    <h1 className='text-7xl px-2 pb-5'>Events</h1>
                 </div>
             </div>
         </div>
+    </div>
     )
-}
+};
 
 //Full events component
 export const Events = () => {
     const events_dict = SplitEvents(); //get events
-    //console.log(events_dict)
     const [isModalOpen, setIsModalOpen] = useState(false); //modal control
     const [filters, setFilters] = useState({
         "Availability": { "Open to anyone": false, "Registration needed": false },
@@ -193,16 +195,11 @@ export const Events = () => {
     const [filteredEvents, setFilteredEvents] = useState(events_dict);
 
     useEffect(() => {
-        document.body.classList.add("min-w-fit")
-    })
+        document.body.classList.add("min-w-fit");
+    }, []);
 
     useEffect(() => {
-        if (isModalOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'visible';
-        }
-        // Always clean up on unmount
+        document.body.style.overflow = isModalOpen ? 'hidden' : 'visible';
         return () => {
             document.body.style.overflow = 'visible';
         };
@@ -214,7 +211,7 @@ export const Events = () => {
             if (filters.Theme && event?.filters?.Theme !== filters.Theme) {
                 return false;
             }
-
+            
             // For every other filter category...
             return Object.entries(filters).every(([category, options]) => {
                 // Skip the "Theme" category here
@@ -248,7 +245,7 @@ export const Events = () => {
     };
 
     const handlePageChange = (setOptions) => (event) => {
-        // event.detail should be the new page number.
+        // event.detail.currentPage should be the new page number.
         setOptions(prev => ({ ...prev, currentPage: event.detail.currentPage }));
     };
 
@@ -262,7 +259,7 @@ export const Events = () => {
         <div className='flex flex-col items-top'>
             <EventsBanner />
             <div className='mt-8 mx-8 lg:mx-[100px] flex lg:grid grid-cols-5 gap-8'>
-                <div className='py-2 hidden lg:flex'>
+                <div className='hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
                     <EventFilters filters={filters} handleFilterChange={handleFilterChange} />
                 </div>
                 <div className='md:py-0 col-span-4'>
@@ -271,7 +268,8 @@ export const Events = () => {
                         events={[...filteredEvents.upcoming].reverse()}
                         paginationOptions={optionsUpcoming}
                         handlePageChange={handlePageChange(setOptionsUpcoming)}
-                        showFilters={true} onOpenDialog={onOpenDialog}
+                        showFilters={true}
+                        onOpenDialog={onOpenDialog}
                     />
                     <EventsList
                         title='Past events'
@@ -285,7 +283,8 @@ export const Events = () => {
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
                 filters={filters}
-                handleFilterChange={handleFilterChange} />
+                handleFilterChange={handleFilterChange}
+            />
         </div>
     );
 };
