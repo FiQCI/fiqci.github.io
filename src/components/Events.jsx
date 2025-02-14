@@ -155,9 +155,9 @@ const EventsList = ({ title, events, paginationOptions, handlePageChange, showFi
 const EventsBanner = () => {
     return (
     <div className='min-w-[375px] h-auto flex flex-col justify-center'>
-        <div className='justify-start sm:justify-start md:justify-start bg-cyan-800 w-full h-[250px] flex flex-row items-center'>
+        <div className='justify-start sm:justify-start md:justify-start bg-lumi w-full h-[250px] flex flex-row items-center'>
             <div className='mx-8 lg:mx-[100px]'>
-                <div className='bg-slate-800 w-fit font-bold text-white leading-tight'>
+                <div className='bg-dark-blue w-fit font-bold text-white leading-tight'>
                     <h1 className='text-7xl px-2 pb-5'>Events</h1>
                 </div>
             </div>
@@ -211,7 +211,7 @@ export const Events = () => {
             if (filters.Theme && event?.filters?.Theme !== filters.Theme) {
                 return false;
             }
-            
+
             // For every other filter category...
             return Object.entries(filters).every(([category, options]) => {
                 // Skip the "Theme" category here

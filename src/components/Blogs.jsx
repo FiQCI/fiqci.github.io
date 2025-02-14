@@ -138,9 +138,9 @@ const BlogsList = ({ title, blogs, paginationOptions, handlePageChange, showFilt
 //Banner at top of page
 const BlogsBanner = () => (
     <div className='min-w-[375px] h-auto flex flex-col justify-center'>
-        <div className='justify-start sm:justify-start md:justify-start bg-cyan-800 w-full h-[250px] flex flex-row items-center'>
+        <div className='justify-start sm:justify-start md:justify-start bg-lumi w-full h-[250px] flex flex-row items-center'>
             <div className='mx-8 lg:mx-[100px]'>
-                <div className='bg-slate-800 w-fit flex flex-row justify-center font-bold text-white leading-tight'>
+                <div className='bg-dark-blue w-fit flex flex-row justify-center font-bold text-white leading-tight'>
                     <h1 className='text-4xl px-10 py-10'>Blogs and instructions</h1>
                 </div>
             </div>
