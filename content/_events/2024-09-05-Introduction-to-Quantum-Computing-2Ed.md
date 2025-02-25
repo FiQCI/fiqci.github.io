@@ -8,6 +8,29 @@ header:
 tags:
   - Helmi
   - LUMI
+
+filters:
+  Availability:
+    - name: "Open to anyone"
+      value: false
+    - name: "Registration needed"
+      value: true
+  Skill level:
+    - name: "Advanced"
+      value: false
+    - name: "Beginner"
+      value: true
+  Pricing:
+    - name: "Free of charge"
+      value: false
+  Type:
+    - name: "Online"
+      value: false
+    - name: "Hybrid"
+      value: false
+    - name: "Onsite"
+      value: true
+  Theme: "course/workshop"
 ---
 25-26 November: Two-day introductory course on quantum computers and the basic quantum algorithms that control them.
 
