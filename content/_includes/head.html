@@ -9,6 +9,8 @@
   {%- include external/mathjax.html -%}
 
   <script type="text/javascript" src="{{ "site.js" | relative_url }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ "store.js" | relative_url }}" charset="utf-8"></script>
+
   {% assign react_source_files = include.react_source_files %}
   {% unless layout.react_source_files == empty %}
     {% for src in layout.react_source_files %}

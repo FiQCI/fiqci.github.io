@@ -98,7 +98,7 @@ export const NavigationHeader = () => {
           <NavButton text="Blogs and instructions" href="/publications" />
           <NavButton text="Status" href="/status" />
           <NavButton text="Events" href="/events" />
-          <NavSearchButton text="Search" />
+          <NavSearchButton text="Search" href="/search" />
         </div>
 
         {/* Mobile menu toggle */}
@@ -116,7 +116,7 @@ export const NavigationHeader = () => {
           <NavButton text="Blogs and instructions" href="/publications" />
           <NavButton text="Status" href="/status" />
           <NavButton text="Events" href="/events" />
-          <NavSearchButton text="Search" />
+          <NavSearchButton text="Search" href="/search"/>
         </div>
       )}
     </div>
