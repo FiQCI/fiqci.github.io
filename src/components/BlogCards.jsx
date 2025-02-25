@@ -34,7 +34,7 @@ export const BlogCard = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-              { SITE.blogs.slice(-5).reverse().map(blog => <BlogCardComponent {...blog} />) }
+              { SITE.publications.slice(-5).reverse().map(blog => <BlogCardComponent {...blog} />) }
             </div>
             <div className="mt-4">
             <a

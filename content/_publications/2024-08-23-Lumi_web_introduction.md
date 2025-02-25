@@ -7,6 +7,7 @@ header:
 published: true
 author: Huyen Do
 layout: post
+type: 'Instruction'
 ---
 
 > **In this guide:** Learn how to access the Helmi quantum computer through the LUMI web interface.  

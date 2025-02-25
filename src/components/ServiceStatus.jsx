@@ -6,6 +6,7 @@ import { StatusIndicator } from './StatusIndicator'
 
 export const ServiceStatus = () => {
   const status = useStatus('https://fiqci-backend-fiqci-workspace.2.rahtiapp.fi/healthcheck')
+  console.log(status)
 
   return (
     <>
@@ -19,8 +20,8 @@ export const ServiceStatus = () => {
         </thead>
         <tbody>
           <tr>
-            <td>LUMI-Helmi</td>
-            <td><StatusIndicator isUp={status} /></td>
+            <td className='border text-center'>LUMI-Helmi</td>
+            <td className='border'><StatusIndicator isUp={status} /></td>
           </tr>
         </tbody>
       </table>
