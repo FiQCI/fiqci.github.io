@@ -12,8 +12,9 @@ base_react_sources:
 
   <body class="flex flex-col min-h-screen">
 
-    {%- include react/root.html id='navigation-header' -%}
-
+    <div class="sticky top-0 bg-white z-40">
+      {%- include react/root.html id='navigation-header' -%}
+    </div>
     <main class="block flex-[1_0]" aria-label="Content">
         {{ content }}
     </main>
