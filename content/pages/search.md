@@ -9,7 +9,14 @@ title: Search Results
   </form>
 </div>
 
-<ul id="search-results"></ul>
+<h1>General</h1>
+<ul id="search-results-general"></ul>
+
+<h1>Blogs</h1>
+<ul id="search-results-blogs"></ul>
+
+<h1>Events</h1>
+<ul id="search-results-events"></ul>
 
 <script>
   window.store = {

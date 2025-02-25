@@ -16,12 +16,25 @@ window.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  function clear() {
+    var resultsListGeneral = document.getElementById('search-results-general');
+    var resultsListBlogs = document.getElementById('search-results-blogs');
+    var resultsListEvents = document.getElementById('search-results-events')
+    resultsListGeneral.innerHTML = '';
+    resultsListBlogs.innerHTML = '';
+    resultsListEvents.innerHTML = '';
+  }
+
   function search(query) {
     var results = idx.search(query); // Get search results
 
     // Clear previous results
-    var resultsList = document.getElementById('search-results');
-    resultsList.innerHTML = '';
+    var resultsListGeneral = document.getElementById('search-results-general');
+    var resultsListBlogs = document.getElementById('search-results-blogs');
+    var resultsListEvents = document.getElementById('search-results-events')
+    resultsListGeneral.innerHTML = '';
+    resultsListBlogs.innerHTML = '';
+    resultsListEvents.innerHTML = '';
 
     // Display results
     results.forEach(function (result) {
@@ -34,14 +47,25 @@ window.addEventListener('DOMContentLoaded', function () {
 
         var listItem = document.createElement('li');
         listItem.innerHTML = `<strong><a href="${url}">${title}</a></strong><br><span>${excerpt}</span>`;
-        resultsList.appendChild(listItem);
+        if (normalizedRef.includes("pages")) {
+          resultsListGeneral.appendChild(listItem);
+        }
+        else if (normalizedRef.includes("publications")) {
+          resultsListBlogs.appendChild(listItem);
+        }
+        else {
+          resultsListEvents.appendChild(listItem);
+        }
+        
       }
     });
 
     if (results.length === 0) {
       var noResultsItem = document.createElement('li');
       noResultsItem.textContent = 'No results found.';
-      resultsList.appendChild(noResultsItem);
+      resultsListGeneral.appendChild(noResultsItem);
+      resultsListBlogs.appendChild(noResultsItem);
+      resultsListEvents.appendChild(noResultsItem);
     }
   }
 
@@ -57,6 +81,11 @@ window.addEventListener('DOMContentLoaded', function () {
   var searchBox = document.getElementById('search-box');
   searchBox.addEventListener('input', function () {
     var query = searchBox.value;
-    search(query);
+    if (query.length != 0){
+      search(query);
+    }
+    else {
+      clear();
+    }
   });
 });
