@@ -11,7 +11,7 @@ export const StatusIndicator = ({ isUp, describe }) => {
       width: 1 + 'em',
       height: 1 + 'em',
       borderRadius: 100 + '%',
-      backgroundColor: indicatorColor(isUp)
+      backgroundColor: indicatorColor(isUp),
     }}
     ></div>
 

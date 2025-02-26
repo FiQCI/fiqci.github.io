@@ -1,16 +1,16 @@
 ---
 ---
 
-{%- capture blogs -%}
+{%- capture publications -%}
 [
-{%- for blog in site.publications %}
+{%- for publication in site.publications %}
   {
     "key": "{{ forloop.index }}",
-    "type": "News",
-    "title": "{{ blog.title }}",
-    "url": "{{ blog.url | relative_url }}",
-    "date": "{{ blog.date | date: '%-d.%-m.%Y' }}",
-    "teaser": "{{blog.header.teaser | relative_url}}" 
+    "type": "{{ publication.type | default: 'News' }}",
+    "title": "{{ publication.title }}",
+    "url": "{{ publication.url | relative_url }}",
+    "date": "{{ publication.date | date: '%-d.%-m.%Y' }}",
+    "teaser": "{{publication.header.teaser | relative_url}}" 
   }{%- unless forloop.last == true -%},{%- endunless -%}
 {% endfor %}
 ]
@@ -46,6 +46,6 @@
 {%- endcapture -%}
 
 const SITE = {
-  blogs: JSON.parse(String.raw`{{- blogs -}}`),
+  publications: JSON.parse(String.raw`{{- publications -}}`),
   events: JSON.parse(String.raw`{{- events -}}`),
 }
