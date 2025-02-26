@@ -54,6 +54,7 @@ const FilterCategory = ({ category, options, handleCheckboxChange }) => (
         {Object.keys(options).map(option => ( //generate a chekcbox for each filter category
             <CCheckbox
                 key={option}
+                hideDetails
                 checked={options[option]}
                 onChangeValue={() => handleCheckboxChange(category, option)}
             >
