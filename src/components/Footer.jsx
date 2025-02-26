@@ -3,11 +3,11 @@ import React from 'react';
 export const Footer = () => {
   return (
     <footer className="bg-gray-100 text-gray-700 text-sm">
-      <div className="md:mx-[50px] lg:mx-[50px] 2xl:mx-[150px] px-6 py-4 flex flex-wrap md:flex-nowrap justify-between items-start space-y-4 md:space-y-0">
+      <div className="px-8 lg:px-[100px] py-4 flex flex-wrap md:flex-nowrap justify-between items-start space-y-4 md:space-y-0">
         <div className='flex content-evenly space-x-8'>
         <div className="w-full md:w-auto">
           <p className="font-semibold">Brought to you by:</p>
-          <div className="flex items-center space-x-3 mt-1">
+          <div className="flex flex-wrap items-center space-x-0 lg:space-x-3 mt-1">
               <img src="/assets/footer-icons/footer-logo-vtt.jpg" alt="VTT" className="h-10" />
               <img src="/assets/footer-icons/footer-logo-aalto.png" alt="Aalto University" className="h-10" />
                <img src="/assets/footer-icons/footer-logo-csc.svg" alt="CSC" className="h-10" />
@@ -16,7 +16,7 @@ export const Footer = () => {
 
         <div className="w-full md:w-auto">
           <p className="font-semibold">Supported by:</p>
-          <div className="flex items-center space-x-3 mt-1">
+          <div className="flex flex-wrap items-center space-x-0 lg:space-x-3 mt-1">
                  <img src="/assets/images/funders/Academy_of_Finland.png" alt="Academy of Finland" className="h-10" />
                   <img src="/assets/images/funders/EU-RRF.jpg" alt="EU Funding" className="h-10" />
           </div>
@@ -32,7 +32,7 @@ export const Footer = () => {
       </div>
 
       <div className="bg-gray-200 py-3">
-        <div className="md:mx-[50px] lg:mx-[50px] 2xl:mx-[150px] px-6 flex flex-col md:flex-row justify-between items-center text-gray-600 space-y-2 md:space-y-0">
+        <div className="mx-8 lg:mx-[100px] flex flex-col md:flex-row justify-between items-center text-gray-600 space-y-2 md:space-y-0">
           <p className="text-center md:text-left">
             © 2024 The FiQCI Consortium. Powered by{" "}
             <a href="https://jekyllrb.com/" className="underline">

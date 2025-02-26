@@ -2,9 +2,9 @@ import React from "react";
 
 export const AboutFiqci = () => {
   return (
-    <div className="text-white bg-[#0D2B53] w-full">
+    <div className="px-8 lg:px-[100px] text-white bg-[#0D2B53] w-full">
 
-            <div className="sm:px-6 md:mx-[50px] lg:mx-[50px] 2xl:mx-[150px]">
+            <div className="">
                 <div className="mx-auto">
                     <div className="flex">
                         <div className="w-64 flex-auto mt-8 pt-6 pr-6">

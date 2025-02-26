@@ -154,8 +154,8 @@ const EventsBanner = () => {
         <div className='min-w-[375px] h-auto flex flex-col justify-center'>
             <div className='justify-start landscape:justify-start sm:justify-start md:justify-start bg-cyan-800 w-full h-[250px] flex flex-row items-center'>
                 <div className='mx-8 lg:mx-[100px]'>
-                    <div className='bg-slate-800 w-fit font-bold text-white leading-tight'>
-                        <h1 className='text-7xl px-2 pb-5'>Events</h1>
+                    <div className='bg-[#0D2B53] w-fit font-bold text-white leading-tight'>
+                        <h1 className='text-5xl px-8 py-6 sm:text-6xl sm:px-10 sm:py-8 md:text-7xl md:px-16 md:py-10'>Events</h1>
                     </div>
                 </div>
             </div>
@@ -259,7 +259,7 @@ export const Events = () => {
     };
 
     return (
-        <div className='flex flex-col items-top'>
+        <div className='flex flex-col items-top mb-2'>
             <EventsBanner />
             <div className='mt-8 mx-8 lg:mx-[100px] flex lg:grid grid-cols-5 gap-8'>
                 <div className='py-2 hidden lg:flex'>
