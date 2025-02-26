@@ -4,19 +4,20 @@ import { CCard, CIcon, CCardContent } from '@cscfi/csc-ui-react';
 import { mdiArrowRight } from '@mdi/js';
 
 const BlogCardComponent = props => {
+    const type = props?.filters?.Type ? Object.entries(props?.filters?.Type)?.filter(field => field[1])[0][0] : "News";
     return (
-<CCard className="flex flex-auto flex-col flex-wrap border border-gray-200 rounded-none shadow-md overflow-hidden hover:shadow-lg p-0 m-0 w-full"> {/* Adjusted card width */}
+        <CCard className="flex flex-auto flex-col flex-wrap border border-gray-200 rounded-none shadow-md overflow-hidden hover:shadow-lg p-0 m-0 w-full"> {/* Adjusted card width */}
             <img src={props.teaser} alt="Logo" className="w-full h-28 scale-125 object-cover m-0 p-0" /> {/* Reduced image height */}
             <CCardContent className="flex flex-col border-none m-0">
                 <div>
                     <a
-                        href={props.url}
+                        href={props.url.split(".")[0]}
                         className="text-md text-black-500 hover:underline font-bold"
                     >
-                        {props.title}
+                        {props.title.length >= 89 ? props.title.slice(0, 90) + "..." : props.title}
                     </a>
                     <p className="text-sm text-gray-500 pb-2 pt-1">
-                        {props.type} | {props.date}
+                        { type } | {props.date}
                     </p>
                 </div>
             </CCardContent>
@@ -26,7 +27,7 @@ const BlogCardComponent = props => {
 
 
 
-export const BlogCard = () => {
+const BlogCard = () => {
     return (
         <div className="mx-8 lg:mx-[100px] py-6">
             <div className="flex items-center justify-between mb-6">
@@ -37,7 +38,7 @@ export const BlogCard = () => {
               { SITE.publications.slice(-5).reverse().map(blog => <BlogCardComponent {...blog} />) }
             </div>
             <div className="mt-4">
-            <a
+                <a
                     href="#"
                     className="text-sky-800 hover:underline font-bold"
                 >
@@ -50,3 +51,5 @@ export const BlogCard = () => {
         </div>
     );
 };
+
+export { BlogCard, BlogCardComponent }
