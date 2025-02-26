@@ -138,10 +138,10 @@ const BlogsList = ({ title, blogs, paginationOptions, handlePageChange, showFilt
 //Banner at top of page
 const BlogsBanner = () => (
     <div className='min-w-[375px] h-auto flex flex-col justify-center'>
-        <div className='justify-start sm:justify-start md:justify-start bg-lumi w-full h-[250px] flex flex-row items-center'>
+        <div className='justify-start sm:justify-start md:justify-start bg-lumi bg-cover bg-center w-full h-[250px] flex flex-row items-center'>
             <div className='mx-8 lg:mx-[100px]'>
-                <div className='bg-dark-blue w-fit flex flex-row justify-center font-bold text-white leading-tight'>
-                    <h1 className='text-4xl px-10 py-10'>Blogs and instructions</h1>
+                <div className='bg-[#0D2B53] min-w-[300px] flex flex-row justify-center font-bold text-white leading-tight'>
+                    <h1 className='text-6xl px-10 py-10'>Blogs and instructions</h1>
                 </div>
             </div>
         </div>
@@ -150,7 +150,7 @@ const BlogsBanner = () => (
 
 //Full blogs component
 export const Blogs = () => {
-    const blogs_dict = SITE.blogs; //get blogs
+    const blogs_dict = SITE.publications; //get blogs
     const [isModalOpen, setIsModalOpen] = useState(false); //modal control
     const [filters, setFilters] = useState({
         "Skill level": { "Advanced": false, "Beginner": false },
@@ -222,7 +222,7 @@ export const Blogs = () => {
     };
 
     return (
-        <div className='flex flex-col items-top'>
+        <div className='flex flex-col items-top mb-2'>
             <BlogsBanner />
             <div className='mt-8 mx-8 lg:mx-[100px] flex lg:grid grid-cols-5 gap-8'>
                 <div className='hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
