@@ -8,7 +8,7 @@ header:
 tags:
   - Helmi
   - LUMI
-
+type: Event
 filters:
   Availability:
     - name: "Open to anyone"

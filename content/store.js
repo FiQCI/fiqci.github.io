@@ -10,7 +10,8 @@
       "content": {{ post.content | strip_html | strip_newlines | jsonify }},
       "url": "{{ post.url | xml_escape }}",
       "tags": [{% for tag in post.tags %}"{{ tag }}"{% unless forloop.last %}, {% endunless %}{% endfor %}],
-      "type": "post"
+      "type": "post",
+      "date": "{{ post.date | date: '%-d.%-m.%Y' }}"
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]
@@ -25,7 +26,8 @@
       "content": {{ event.content | strip_html | strip_newlines | jsonify }},
       "url": "{{ event.url | xml_escape }}",
       "tags": [{% for tag in event.tags %}"{{ tag }}"{% unless forloop.last %}, {% endunless %}{% endfor %}],
-      "type": "event"
+      "type": "Event",
+      "date": "{{ event.date | date: '%-d.%-m.%Y' }}"
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]
