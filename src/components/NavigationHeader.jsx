@@ -93,8 +93,6 @@ export const NavigationHeader = () => {
         {/* Desktop navigation */}
         <div className="lg:flex flex-wrap justify-end hidden">
           <NavButton text="Home" href="/" />
-          <NavButton text="Get access" href="/access" />
-          <NavButton text="About" href="/about" />
           <NavButton text="Blogs and instructions" href="/publications" />
           <NavButton text="Status" href="/status" />
           <NavButton text="Events" href="/events" />
@@ -111,8 +109,6 @@ export const NavigationHeader = () => {
       {isOpen && (
         <div className="lg:hidden mx-1.5 mb-10 top-10 w-full flex flex-col justify-center items-left gap-2">
           <NavButton text="Home" href="/" />
-          <NavButton text="Get access" href="/access" />
-          <NavButton text="About" href="/about" />
           <NavButton text="Blogs and instructions" href="/publications" />
           <NavButton text="Status" href="/status" />
           <NavButton text="Events" href="/events" />
