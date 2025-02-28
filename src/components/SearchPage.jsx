@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import lunr from 'lunr';
 import { mdiMagnify, mdiArrowRight, mdiClose } from '@mdi/js';
-import { CButton, CPagination, CIcon, CCheckbox } from '@cscfi/csc-ui-react';
+import {
+  CButton, CPagination, CIcon, CCheckbox, CModal, CCard,
+  CCardTitle, CCardContent, CCardActions
+} from '@cscfi/csc-ui-react';
+
+import { Breadcrumbs } from './Breadcrumbs';
 
 const style = {
   "--_c-button-font-size": 14,
@@ -131,8 +136,8 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
   return (
     <div className='mb-8'>
       {results[type].length !== 0 &&
-        <div>
-          <div className='flex flex-row'>
+        <div className='border-t-5'>
+          <div className='flex flex-row pt-2'>
             <h1 className='mb-6 mr-3 text-xl font-bold'>{capitalizeFirstLetter(type)}</h1>
             {type !== "general" &&
               <CIcon onClick={() => window.location.href = href} style={styleArrow} className='pt-1 text[#004E84]' path={mdiArrowRight} />
@@ -187,9 +192,32 @@ const Filters = ({ filters, handleCheckboxChange }) => {
   );
 };
 
+const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleCheckboxChange }) => {
+
+  return (
+    <CModal
+      key={isModalOpen ? 'open' : 'closed'}
+      style={{ "overflow": "scroll" }} className='overflow-scroll'
+      value={isModalOpen}
+      dismissable
+      onChangeValue={event => setIsModalOpen(event.detail)}
+    >
+      <CCard style={{ "overflow": "scroll" }} className='overflow-scroll max-h-[80vh]'>
+        <CCardTitle>Filters</CCardTitle>
+        <CCardContent>
+          <Filters filters={filters} handleCheckboxChange={handleCheckboxChange} />
+        </CCardContent>
+        <CCardActions justify='end'>
+          <CButton onClick={() => setIsModalOpen(false)} text>Close</CButton>
+        </CCardActions>
+      </CCard>
+    </CModal>
+  )
+};
 
 export const SearchPage = () => {
 
+  const [isModalOpen, setIsModalOpen] = useState(false); //modal control
   const [results, setResults] = useState({ general: [], blogs: [], events: [] });
   const [filteredResults, setFilteredResults] = useState(results);
   const [filters, setFilters] = useState({
@@ -220,6 +248,22 @@ export const SearchPage = () => {
     currentPage: 1,
     pageSizes: [5, 10, 15, 25, 50]
   });
+
+  useEffect(() => {
+    document.body.classList.add("min-w-fit")
+  })
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'visible';
+    }
+    // Always clean up on unmount
+    return () => {
+      document.body.style.overflow = 'visible';
+    };
+  }, [isModalOpen]);
 
   useEffect(() => {
     setFilteredResults(results)
@@ -277,17 +321,31 @@ export const SearchPage = () => {
     setOptionsEvent(prev => ({ ...prev, itemCount: filtered.events.length }));
   }, [filters, results]);
 
+  const onOpenDialog = () => { //modal control
+    setIsModalOpen(true);
+  };
 
   return (
-    <div className='mt-8 mx-8 lg:mx-[100px] flex lg:grid grid-cols-5 gap-8'>
-      <div className='hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
+    <div className='mx-8 lg:mx-[100px] lg:grid grid-cols-5 gap-0'>
+      <div className='col-span-5 mt-4'>
+        <Breadcrumbs breadcrumbs={{ Home: "/", "Search results": "/search" }} />
+      </div>
+      <div className='mt-24 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
         <Filters filters={filters} handleCheckboxChange={handleCheckboxChange} />
       </div>
 
-      <div className='col-span-3'>
-        <div className='mb-20 border-2 border-black min-h-[45px] flex flex-row items-center text-lg'>
+      <div className='mt-24 col-span-5 lg:col-span-3'>
+        <div className='mb-2 lg:mb-20 border-2 border-black min-h-[45px] flex flex-row items-center text-lg'>
           <SearchBar setResults={setResults} />
         </div>
+        <div>
+            <CButton
+              className='mb-8 flex items-center py-2 max-w-[50px] max-h-[40px] lg:hidden '
+              onClick={() => onOpenDialog()}
+            >
+              Filters
+            </CButton>
+          </div>
         <div>
           <ResultArea paginationOptions={paginationOptionsGen} setOptions={setOptionsGen} results={filteredResults} type={"general"} href={""} />
 
@@ -297,6 +355,11 @@ export const SearchPage = () => {
 
         </div>
       </div>
+      <FilterModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        filters={filters}
+        handleCheckboxChange={handleCheckboxChange} />
     </div>
   );
 };

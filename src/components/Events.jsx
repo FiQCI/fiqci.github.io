@@ -5,6 +5,7 @@ import {
     CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
 import { EventCardComponent } from './EventCards';
+import { Breadcrumbs } from './Breadcrumbs';
 
 //Split events to past and upcoming ones
 const SplitEvents = () => {
@@ -261,11 +262,14 @@ export const Events = () => {
     return (
         <div className='flex flex-col items-top'>
             <EventsBanner />
-            <div className='mt-8 mx-8 lg:mx-[100px] flex lg:grid grid-cols-5 gap-8'>
-                <div className='py-2 hidden lg:flex'>
+            <div className='mx-8 lg:mx-[100px] flex lg:grid grid-cols-5 gap-8'>
+                <div className='col-span-5 mt-4'>
+                    <Breadcrumbs breadcrumbs={{ "Home": "/", "Events": "/events" }} />
+                </div>
+                <div className='mt-8 py-2 hidden lg:flex'>
                     <EventFilters filters={filters} handleFilterChange={handleFilterChange} />
                 </div>
-                <div className='md:py-0 col-span-4'>
+                <div className='mt-8 md:py-0 col-span-4'>
                     <EventsList
                         title='Upcoming events'
                         events={[...filteredEvents.upcoming].reverse()}
