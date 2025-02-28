@@ -1,24 +1,16 @@
 ---
 layout: base
+react_source_files:
+  - blogView.js
 ---
 {% assign constants = site.data.site-constants %}
 <article itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="prose">
-    <h1 itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="text-sm">
-      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {%- assign date_format = constants.date_format | default: "%b %-d, %Y" -%}
-        {{ page.date | date: date_format }}
-      </time>
-      {%- if page.author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
-      {%- endif -%}
-    </p>
-  </header>
+<div id="{{ id }}" data-content="{{ content | escape }}"></div>
 
-  <div class="prose" itemprop="articleBody">
-    {{ content }}
-  </div>
+
+{%- include react/root.html id='blog-view' -%}
+
+
 
 </article>
