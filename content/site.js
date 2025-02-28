@@ -1,16 +1,30 @@
 ---
 ---
 
-{%- capture blogs -%}
+{%- capture publications -%}
 [
-{%- for blog in site.publications %}
+{%- for publication in site.publications %}
   {
     "key": "{{ forloop.index }}",
-    "type": "News",
-    "title": "{{ blog.title }}",
-    "url": "{{ blog.url | relative_url }}",
-    "date": "{{ blog.date | date: '%-d.%-m.%Y' }}",
-    "teaser": "{{blog.header.teaser | relative_url}}" 
+    "type": "{{ publication.type | default: 'News' }}",
+    "title": "{{ publication.title }}",
+    "url": "{{ publication.url | relative_url }}",
+    "date": "{{ publication.date | date: '%-d.%-m.%Y' }}",
+    "teaser": "{{publication.header.teaser | relative_url}}",
+    "filters": {
+      {%- for category in publication.filters %}
+        {%- if category[0] == "Theme" -%}
+          "Theme": "{{ category[1] }}"
+        {%- else -%}
+          "{{ category[0] }}": {
+            {%- for option in category[1] %}
+              "{{ option.name }}": {{ option.value | jsonify }}{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor %}
+          }
+        {%- endif -%}
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor %}
+    } 
   }{%- unless forloop.last == true -%},{%- endunless -%}
 {% endfor %}
 ]
@@ -39,13 +53,13 @@
         {%- endif -%}
         {%- unless forloop.last -%},{%- endunless -%}
       {%- endfor %}
-      }
+    }
   }{%- unless forloop.last -%},{%- endunless -%}
 {% endfor %}
 ]
 {%- endcapture -%}
 
 const SITE = {
-  blogs: JSON.parse(String.raw`{{- blogs -}}`),
+  publications: JSON.parse(String.raw`{{- publications -}}`),
   events: JSON.parse(String.raw`{{- events -}}`),
 }

@@ -5,7 +5,12 @@ module.exports = {
     files: ["./src/**/*.{js,jsx}", "./content/**/*.{md,html}"],
   },
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        // You can choose any key name; here, we use 'hero'
+        'lumi': "url('/assets/images/LUMI.jpg')",
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };
