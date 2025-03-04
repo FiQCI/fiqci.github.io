@@ -10,7 +10,21 @@
     "title": "{{ publication.title }}",
     "url": "{{ publication.url | relative_url }}",
     "date": "{{ publication.date | date: '%-d.%-m.%Y' }}",
-    "teaser": "{{publication.header.teaser | relative_url}}" 
+    "teaser": "{{publication.header.teaser | relative_url}}",
+    "filters": {
+      {%- for category in publication.filters %}
+        {%- if category[0] == "Theme" -%}
+          "Theme": "{{ category[1] }}"
+        {%- else -%}
+          "{{ category[0] }}": {
+            {%- for option in category[1] %}
+              "{{ option.name }}": {{ option.value | jsonify }}{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor %}
+          }
+        {%- endif -%}
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor %}
+    } 
   }{%- unless forloop.last == true -%},{%- endunless -%}
 {% endfor %}
 ]
@@ -39,7 +53,7 @@
         {%- endif -%}
         {%- unless forloop.last -%},{%- endunless -%}
       {%- endfor %}
-      }
+    }
   }{%- unless forloop.last -%},{%- endunless -%}
 {% endfor %}
 ]

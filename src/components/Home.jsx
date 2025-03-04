@@ -35,7 +35,7 @@ const ContentButton = ({ text, href, icon=mdiArrowDown }) => {
 export const Home = () => {
     return (
         <div className='mb-2 sm:mb-0 min-w-[320px] h-auto xl:h-[850px] 2xl:h-[950px]'>
-            <div className='bg-cyan-800 w-full min-h-[400px]'></div>
+            <div className='bg-lumi bg-cover bg-center w-full min-h-[400px]'></div>
 
             <div className='mx-8 lg:mx-0 lg:ml-[100px] h-[350px] sm:h-[300px] md:min-h-[320px] lg:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[300px] flex lg:flex-row lg:justify-start lg:items-start md:flex-col md:items-center lg:h-0 md:h-[25vw] sm: flex-col'>
 

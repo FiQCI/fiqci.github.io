@@ -4,19 +4,9 @@ import {
     CPagination, CCheckbox, CSelect, CButton, CModal, CCard,
     CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
-import { EventCardComponent } from './EventCards';
+import { BlogCardComponent } from './BlogCards';
 
-//Split events to past and upcoming ones
-const SplitEvents = () => {
-    let res = { upcoming: [], past: [] };
-    SITE.events.forEach(event => {
-        (new Date(event.date) >= new Date() ? res.upcoming : res.past).push(event);
-    });
-    return res;
-};
-
-//Display the filter sidebar
-const EventFilters = ({ filters, handleFilterChange }) => {
+const BlogFilters = ({ filters, handleFilterChange }) => {
     const handleCheckboxChange = useCallback((category, option) => {
         handleFilterChange({
             ...filters,
@@ -25,7 +15,7 @@ const EventFilters = ({ filters, handleFilterChange }) => {
     }, [filters, handleFilterChange]);
 
     const handleChangeTheme = useCallback(selectedTheme => {
-        handleFilterChange({ ...filters, Theme: selectedTheme.detail || '' }); //update theme or set to '' of reset
+        handleFilterChange({ ...filters, Theme: selectedTheme.detail || '' }); //update theme or set to ''
     }, [filters, handleFilterChange]);
 
     return (
@@ -46,20 +36,17 @@ const EventFilters = ({ filters, handleFilterChange }) => {
     );
 };
 
-
 //Checkbox filters
 const FilterCategory = ({ category, options, handleCheckboxChange }) => (
     <div>
         <h3 className='font-bold'>{category}</h3>
-        {Object.keys(options).map(option => ( //generate a chekcbox for each filter category
+        {Object.keys(options).map(option => (  //generate a chekcbox for each filter category
             <CCheckbox
-                hide-details={true}
+                hideDetails={true}
                 key={option}
-                hideDetails
                 checked={options[option]}
                 onChangeValue={() => handleCheckboxChange(category, option)}
             >
-
                 <p className='text-sm'>{option}</p>
             </CCheckbox>
         ))}
@@ -78,8 +65,8 @@ const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
             items={[
                 { name: 'Hybrid QC+HPC computing', value: 'hybrid QC+HPC computing' },
                 { name: 'Programming', value: 'programming' },
-                { name: 'Webinar/Lecture', value: 'webinar/lecture' },
-                { name: 'Course/Workshop', value: 'course/workshop' },
+                { name: 'Algorithm', value: 'algorithm' },
+                { name: 'Technical', value: 'Technical' },
             ]}
             placeholder='Choose a theme'
             onChangeValue={handleChangeTheme}
@@ -89,23 +76,19 @@ const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
 
 //Modal filter for mobile
 const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange }) => {
-
     return (
         <CModal
             key={isModalOpen ? 'open' : 'closed'}
-            style={{ 'overflow': 'scroll' }}
+            style={{ overflow: 'scroll' }}
             className='overflow-scroll'
             value={isModalOpen}
             dismissable
             onChangeValue={event => setIsModalOpen(event.detail)}
         >
-            <CCard style={{ 'overflow': 'scroll' }} className='overflow-scroll max-h-[80vh]'>
+            <CCard style={{ overflow: 'scroll' }} className='overflow-scroll max-h-[80vh]'>
                 <CCardTitle>Filters</CCardTitle>
                 <CCardContent>
-                    <EventFilters
-                        filters={filters}
-                        handleFilterChange={handleFilterChange}
-                    />
+                    <BlogFilters filters={filters} handleFilterChange={handleFilterChange} />
                 </CCardContent>
                 <CCardActions justify='end'>
                     <CButton onClick={() => setIsModalOpen(false)} text>Close</CButton>
@@ -115,8 +98,8 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
     );
 };
 
-//List events in a grid with pagination
-const EventsList = ({ title, events, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => (
+//List blogs in a grid with pagination
+const BlogsList = ({ title, blogs, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => (
     <div>
         <div className='flex flex-row justify-between'>
             <h2 className='text-3xl font-bold'>{title}</h2>
@@ -129,14 +112,14 @@ const EventsList = ({ title, events, paginationOptions, handlePageChange, showFi
                 </CButton>
             }
         </div>
-        {events.length ? (
+        {blogs.length ? (
             <>
-                <div className='grid grid-cols-1 py-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6'>
-                    {events.slice(
+                <div className='grid grid-cols-1 py-6 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+                    {blogs.slice(
                         (paginationOptions.currentPage - 1) * paginationOptions.itemsPerPage,
                         (paginationOptions.currentPage - 1) * paginationOptions.itemsPerPage + paginationOptions.itemsPerPage
-                    ).map(event => (
-                        <EventCardComponent key={event.id} {...event} />
+                    ).map(blog => (
+                        <BlogCardComponent key={blog.id} {...blog} />
                     ))}
                 </div>
                 <CPagination
@@ -152,34 +135,24 @@ const EventsList = ({ title, events, paginationOptions, handlePageChange, showFi
     </div>
 );
 
-
-//Full events component
-export const Events = () => {
-    const events_dict = SplitEvents(); //get events
+//Full blogs component
+export const Blogs = () => {
+    const blogs_dict = SITE.publications; //get blogs
     const [isModalOpen, setIsModalOpen] = useState(false); //modal control
     const [filters, setFilters] = useState({
-        "Availability": { "Open to anyone": false, "Registration needed": false },
         "Skill level": { "Advanced": false, "Beginner": false },
-        "Pricing": { "Free of charge": false },
-        "Type": { "Online": false, "Hybrid": false, "Onsite": false },
+        "Type": { "Blog": false, "Instructions": false, "News": false },
         "Theme": "",
     }); //filter state
 
-    const [optionsPast, setOptionsPast] = useState({
-        itemCount: events_dict.past.length,
+    const [options, setOptions] = useState({
+        itemCount: blogs_dict.length,
         itemsPerPage: 8,
         currentPage: 1,
         pageSizes: [5, 10, 15, 25, 50]
-    }); //pagination control for past events
+    }); //pagination control
 
-    const [optionsUpcoming, setOptionsUpcoming] = useState({
-        itemCount: events_dict.upcoming.length,
-        itemsPerPage: 8,
-        currentPage: 1,
-        pageSizes: [5, 10, 15, 25, 50]
-    }); //pagination control for upcoming events
-
-    const [filteredEvents, setFilteredEvents] = useState(events_dict);
+    const [filteredBlogs, setFilteredBlogs] = useState(blogs_dict);
 
     useEffect(() => {
         document.body.classList.add("min-w-fit");
@@ -192,13 +165,11 @@ export const Events = () => {
         };
     }, [isModalOpen]);
 
-    useEffect(() => { //set filteredEvents everytime filters changes
-        const applyFilters = (event) => {
-            // First, check the Theme filter separately:
-            if (filters.Theme && event?.filters?.Theme !== filters.Theme) {
+    useEffect(() => { //set filteredBlogs everytime filters changes
+        const applyFilters = (blog) => {
+            if (filters.Theme && blog?.filters?.Theme !== filters.Theme) {
                 return false;
             }
-
             // For every other filter category...
             return Object.entries(filters).every(([category, options]) => {
                 // Skip the "Theme" category here
@@ -211,57 +182,46 @@ export const Events = () => {
                 if (activeOptions.length === 0) return true;
 
                 // Otherwise, require that at least one active option is true in the event:
-                return activeOptions.some(([option]) => event?.filters?.[category]?.[option]);
+                return activeOptions.some(([option]) => blog?.filters?.[category]?.[option]);
             });
         };
-
+        
         //apply filter
-        const filtered = {
-            past: events_dict.past.filter(applyFilters),
-            upcoming: events_dict.upcoming.filter(applyFilters)
-        };
-        setFilteredEvents(filtered);
+        const filtered = blogs_dict.filter(applyFilters);
+        setFilteredBlogs(filtered);
 
         //also update item count in pagination options
-        setOptionsUpcoming(prev => ({ ...prev, itemCount: filtered.upcoming.length }));
-        setOptionsPast(prev => ({ ...prev, itemCount: filtered.past.length }));
+        setOptions(prev => ({ ...prev, itemCount: filtered.length }));
     }, [filters]);
 
     const onOpenDialog = () => { //modal control
         setIsModalOpen(true);
     };
 
-    const handlePageChange = (setOptions) => (event) => {
-        // event.detail.currentPage should be the new page number.
-        setOptions(prev => ({ ...prev, currentPage: event.detail.currentPage }));
+    const handlePageChange = (setOptions) => (blog) => {
+        // blog.detail.currentPage should be the new page number.
+        setOptions(prev => ({ ...prev, currentPage: blog.detail.currentPage }));
     };
 
     const handleFilterChange = (newFilters) => {
         setFilters(newFilters);
-        setOptionsUpcoming(prev => ({ ...prev, currentPage: 1 }));
-        setOptionsPast(prev => ({ ...prev, currentPage: 1 }));
+        setOptions(prev => ({ ...prev, currentPage: 1 }));
     };
 
     return (
         <div className='flex flex-col items-top mb-2'>
             <div className='mt-8 mx-8 lg:mx-[100px] flex lg:grid grid-cols-5 gap-8'>
                 <div className='hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
-                    <EventFilters filters={filters} handleFilterChange={handleFilterChange} />
+                    <BlogFilters filters={filters} handleFilterChange={handleFilterChange} />
                 </div>
                 <div className='md:py-0 col-span-4'>
-                    <EventsList
-                        title='Upcoming events'
-                        events={[...filteredEvents.upcoming].reverse()}
-                        paginationOptions={optionsUpcoming}
-                        handlePageChange={handlePageChange(setOptionsUpcoming)}
+                    <BlogsList
+                        title='Blogs'
+                        blogs={[...filteredBlogs].reverse()}
+                        paginationOptions={options}
+                        handlePageChange={handlePageChange(setOptions)}
                         showFilters={true}
                         onOpenDialog={onOpenDialog}
-                    />
-                    <EventsList
-                        title='Past events'
-                        events={[...filteredEvents.past].reverse()}
-                        paginationOptions={optionsPast}
-                        handlePageChange={handlePageChange(setOptionsPast)}
                     />
                 </div>
             </div>
