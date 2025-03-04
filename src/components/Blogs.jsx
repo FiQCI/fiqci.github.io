@@ -136,19 +136,6 @@ const BlogsList = ({ title, blogs, paginationOptions, handlePageChange, showFilt
     </div>
 );
 
-//Banner at top of page
-const BlogsBanner = () => (
-    <div className='min-w-[375px] h-auto flex flex-col justify-center'>
-        <div className='justify-start sm:justify-start md:justify-start bg-lumi bg-cover bg-center w-full h-[250px] flex flex-row items-center'>
-            <div className='mx-8 lg:mx-[100px]'>
-                <div className='bg-[#0D2B53] min-w-[300px] flex flex-row justify-center font-bold text-white leading-tight'>
-                    <h1 className='text-6xl px-10 py-10'>Blogs and instructions</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-);
-
 //Full blogs component
 export const Blogs = () => {
     const blogs_dict = SITE.publications; //get blogs
@@ -224,7 +211,6 @@ export const Blogs = () => {
 
     return (
         <div className='flex flex-col items-top mb-2'>
-            <BlogsBanner />
             <div className='mx-8 lg:mx-[100px] flex flex-col lg:grid grid-cols-5 gap-8'>
                 <div className='col-span-5 mt-4'>
                     <Breadcrumbs breadcrumbs={{ "Home": "/", "Blogs and instructions": "/publications" }} />
