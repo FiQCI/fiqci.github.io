@@ -7,6 +7,7 @@ import {
 } from '@cscfi/csc-ui-react';
 
 import { Breadcrumbs } from './Breadcrumbs';
+import { use } from 'react';
 
 const style = {
   "--_c-button-font-size": 14,
@@ -222,6 +223,7 @@ export const SearchPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); //modal control
   const [results, setResults] = useState({ general: [], blogs: [], events: [] });
   const [filteredResults, setFilteredResults] = useState(results);
+  const [searchCount, setSearchCount] = useState(-1);
   const [filters, setFilters] = useState({
     "Blog": false,
     "Event": false,
@@ -321,6 +323,7 @@ export const SearchPage = () => {
     setOptionsGen(prev => ({ ...prev, itemCount: filtered.general.length }));
     setOptionsBlog(prev => ({ ...prev, itemCount: filtered.blogs.length }));
     setOptionsEvent(prev => ({ ...prev, itemCount: filtered.events.length }));
+    setSearchCount(searchCount + 1);
   }, [filters, results]);
 
   const onOpenDialog = () => { //modal control
@@ -349,6 +352,10 @@ export const SearchPage = () => {
           </CButton>
         </div>
         <div>
+          {
+            (Object.keys(filteredResults).every(key => filteredResults[key].length === 0) && searchCount > 0) &&
+            <p>No results found</p>
+          }
           <ResultArea paginationOptions={paginationOptionsGen} setOptions={setOptionsGen} results={filteredResults} type={"general"} href={""} />
 
           <ResultArea paginationOptions={paginationOptionsBlog} setOptions={setOptionsBlog} results={filteredResults} type={"blogs"} href={"/publications"} />
