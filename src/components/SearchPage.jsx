@@ -38,6 +38,7 @@ function searchContent(query, store) {
     this.field('type');
     this.field('tags');
     this.field('date');
+    this.field('link');
 
     ['blogs', 'events', 'pages'].forEach(key => {
       store[key].forEach(doc => {
@@ -64,6 +65,7 @@ function searchContent(query, store) {
         type: item.type,
         tags: item.tags,
         date: item.date,
+        link: item?.link
       };
 
       if (item.type === "page") {
@@ -148,7 +150,7 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
               paginationOptions.itemsPerPage, (paginationOptions.currentPage - 1) *
               paginationOptions.itemsPerPage + paginationOptions.itemsPerPage).map((item, index) => (
                 <li className='pb-6' key={index}>
-                  <strong><a className='text-[#004E84]' href={item.url}>{item.title}</a></strong><br />
+                  <strong><a className='text-[#004E84]' href={type === "events" ? item.link : item.url}>{item.title}</a></strong><br />
                   <div className='flex flex-row'>
                     <p className='font-semibold'>{capitalizeFirstLetter(item.type)}</p>
                     {type !== "general" &&
@@ -339,13 +341,13 @@ export const SearchPage = () => {
           <SearchBar setResults={setResults} />
         </div>
         <div>
-            <CButton
-              className='mb-8 flex items-center py-2 max-w-[50px] max-h-[40px] lg:hidden '
-              onClick={() => onOpenDialog()}
-            >
-              Filters
-            </CButton>
-          </div>
+          <CButton
+            className='mb-8 flex items-center py-2 max-w-[50px] max-h-[40px] lg:hidden '
+            onClick={() => onOpenDialog()}
+          >
+            Filters
+          </CButton>
+        </div>
         <div>
           <ResultArea paginationOptions={paginationOptionsGen} setOptions={setOptionsGen} results={filteredResults} type={"general"} href={""} />
 
