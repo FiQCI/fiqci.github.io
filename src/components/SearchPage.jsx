@@ -7,6 +7,7 @@ import {
 } from '@cscfi/csc-ui-react';
 
 import { Breadcrumbs } from './Breadcrumbs';
+import { use } from 'react';
 
 const style = {
   "--_c-button-font-size": 14,
@@ -38,6 +39,7 @@ function searchContent(query, store) {
     this.field('type');
     this.field('tags');
     this.field('date');
+    this.field('link');
 
     ['blogs', 'events', 'pages'].forEach(key => {
       store[key].forEach(doc => {
@@ -64,6 +66,7 @@ function searchContent(query, store) {
         type: item.type,
         tags: item.tags,
         date: item.date,
+        link: item?.link
       };
 
       if (item.type === "page") {
@@ -148,7 +151,7 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
               paginationOptions.itemsPerPage, (paginationOptions.currentPage - 1) *
               paginationOptions.itemsPerPage + paginationOptions.itemsPerPage).map((item, index) => (
                 <li className='pb-6' key={index}>
-                  <strong><a className='text-[#004E84]' href={item.url}>{item.title}</a></strong><br />
+                  <strong><a className='text-[#004E84]' href={type === "events" ? item.link : item.url}>{item.title}</a></strong><br />
                   <div className='flex flex-row'>
                     <p className='font-semibold'>{capitalizeFirstLetter(item.type)}</p>
                     {type !== "general" &&
@@ -220,6 +223,7 @@ export const SearchPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); //modal control
   const [results, setResults] = useState({ general: [], blogs: [], events: [] });
   const [filteredResults, setFilteredResults] = useState(results);
+  const [searchCount, setSearchCount] = useState(-1);
   const [filters, setFilters] = useState({
     "Blog": false,
     "Event": false,
@@ -319,6 +323,7 @@ export const SearchPage = () => {
     setOptionsGen(prev => ({ ...prev, itemCount: filtered.general.length }));
     setOptionsBlog(prev => ({ ...prev, itemCount: filtered.blogs.length }));
     setOptionsEvent(prev => ({ ...prev, itemCount: filtered.events.length }));
+    setSearchCount(searchCount + 1);
   }, [filters, results]);
 
   const onOpenDialog = () => { //modal control
@@ -339,14 +344,18 @@ export const SearchPage = () => {
           <SearchBar setResults={setResults} />
         </div>
         <div>
-            <CButton
-              className='mb-8 flex items-center py-2 max-w-[50px] max-h-[40px] lg:hidden '
-              onClick={() => onOpenDialog()}
-            >
-              Filters
-            </CButton>
-          </div>
+          <CButton
+            className='mb-8 flex items-center py-2 max-w-[50px] max-h-[40px] lg:hidden '
+            onClick={() => onOpenDialog()}
+          >
+            Filters
+          </CButton>
+        </div>
         <div>
+          {
+            (Object.keys(filteredResults).every(key => filteredResults[key].length === 0) && searchCount > 0) &&
+            <p>No results found</p>
+          }
           <ResultArea paginationOptions={paginationOptionsGen} setOptions={setOptionsGen} results={filteredResults} type={"general"} href={""} />
 
           <ResultArea paginationOptions={paginationOptionsBlog} setOptions={setOptionsBlog} results={filteredResults} type={"blogs"} href={"/publications"} />

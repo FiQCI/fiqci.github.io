@@ -27,7 +27,8 @@
       "url": "{{ event.url | xml_escape }}",
       "tags": [{% for tag in event.tags %}"{{ tag }}"{% unless forloop.last %}, {% endunless %}{% endfor %}],
       "type": "Event",
-      "date": "{{ event.date | date: '%-d.%-m.%Y' }}"
+      "date": "{{ event.date | date: '%-d.%-m.%Y' }}",
+      "link": "{{ event.link | xml_escape }}"
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]
