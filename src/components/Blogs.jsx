@@ -5,6 +5,7 @@ import {
     CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
 import { BlogCardComponent } from './BlogCards';
+import { Breadcrumbs } from './Breadcrumbs';
 
 const BlogFilters = ({ filters, handleFilterChange }) => {
     const handleCheckboxChange = useCallback((category, option) => {
@@ -185,7 +186,7 @@ export const Blogs = () => {
                 return activeOptions.some(([option]) => blog?.filters?.[category]?.[option]);
             });
         };
-        
+
         //apply filter
         const filtered = blogs_dict.filter(applyFilters);
         setFilteredBlogs(filtered);
@@ -210,11 +211,14 @@ export const Blogs = () => {
 
     return (
         <div className='flex flex-col items-top mb-2'>
-            <div className='mt-8 mx-8 lg:mx-[100px] flex lg:grid grid-cols-5 gap-8'>
-                <div className='hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
+            <div className='mx-8 lg:mx-[100px] flex flex-col lg:grid grid-cols-5 gap-8'>
+                <div className='col-span-5 mt-4'>
+                    <Breadcrumbs breadcrumbs={{ "Home": "/", "Blogs and instructions": "/publications" }} />
+                </div>
+                <div className='mt-8 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
                     <BlogFilters filters={filters} handleFilterChange={handleFilterChange} />
                 </div>
-                <div className='md:py-0 col-span-4'>
+                <div className='mt-8 md:py-0 col-span-4'>
                     <BlogsList
                         title='Blogs'
                         blogs={[...filteredBlogs].reverse()}
