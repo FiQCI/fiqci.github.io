@@ -152,18 +152,6 @@ const EventsList = ({ title, events, paginationOptions, handlePageChange, showFi
     </div>
 );
 
-//Banner at top of page
-const EventsBanner = () => (
-    <div className='min-w-[375px] h-auto flex flex-col justify-center'>
-        <div className='justify-start sm:justify-start md:justify-start bg-lumi bg-cover bg-center w-full h-[250px] flex flex-row items-center'>
-            <div className='mx-8 lg:mx-[100px]'>
-                <div className='bg-[#0D2B53] min-w-[400px] flex flex-row justify-center font-bold text-white leading-tight'>
-                    <h1 className='text-6xl px-10 py-10'>Events</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-);
 
 //Full events component
 export const Events = () => {
@@ -256,7 +244,6 @@ export const Events = () => {
 
     return (
         <div className='flex flex-col items-top mb-2'>
-            <EventsBanner />
             <div className='mt-8 mx-8 lg:mx-[100px] flex lg:grid grid-cols-5 gap-8'>
                 <div className='hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
                     <EventFilters filters={filters} handleFilterChange={handleFilterChange} />
