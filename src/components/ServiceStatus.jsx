@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useStatus } from '../hooks/useStatus'
-import { StatusIndicator } from './StatusIndicator'
+// import { StatusIndicator } from './StatusIndicator'
 
 export const ServiceStatus = () => {
   const status = useStatus('https://fiqci-backend-fiqci-workspace.2.rahtiapp.fi/healthcheck')
