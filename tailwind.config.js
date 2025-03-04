@@ -7,8 +7,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        // You can choose any key name; here, we use 'hero'
-        'lumi': "url('/assets/images/LUMI.jpg')",
+        'fiqci': "url('/assets/images/FiQCI-banner.jpg')",
       },
     },
   },
