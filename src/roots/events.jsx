@@ -1,14 +1,15 @@
 import React from 'react'
-import { ServiceStatus } from '../components/ServiceStatus'
+import { Events } from '../components/Events'
 import { Banner } from '../components/Banner'
 import { injectComponent } from '../utils/root'
 
 const component = (
     <>
-      <Banner title='Status' />
-      <ServiceStatus />
+      <Banner title='Events' />
+      <Events />
     </>
   );
-const rootId = 'service-status'
+
+const rootId = 'events'
 
 injectComponent(component, rootId)

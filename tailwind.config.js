@@ -5,7 +5,11 @@ module.exports = {
     files: ["./src/**/*.{js,jsx}", "./content/**/*.{md,html}"],
   },
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'fiqci': "url('/assets/images/FiQCI-banner.jpg')",
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };

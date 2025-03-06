@@ -1,27 +1,26 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
-import { CButton, CIcon, CAccordion, CAccordionItem } from '@cscfi/csc-ui-react';
+import { CButton, CIcon } from '@cscfi/csc-ui-react';
 import { mdiMagnify, mdiMenu } from '@mdi/js';
 
 const style = {
-    "--_c-button-font-size": 12,
-    "--_c-button-min-width": 0,
-    "--_c-button-height": "auto",
-    "--_c-icon-color": "black"
+  "--_c-button-font-size": 12,
+  "--_c-button-min-width": 0,
+  "--_c-button-height": "auto",
+  "--_c-icon-color": "black"
 };
 
 const NavButton = props => {
     const isActive = window.location.pathname === props.href;
 
-    var styleClass = "text-black py-2"
+    let styleClass = "text-black py-2"
     if (isActive) {
         styleClass = styleClass + " underline underline-offset-8 decoration-2"
     }
 
     return (
             <CButton
-            className='w-min'
+            className="w-min"
                 text
                 style={style}
                 onClick={() => (window.location.href = props.href)}
@@ -31,7 +30,7 @@ const NavButton = props => {
     );
 };
 
-const NavSearchButton = ({ text }) => {
+const NavSearchButton = ({ text, href }) => {
 
     return (
         <div>
@@ -39,6 +38,7 @@ const NavSearchButton = ({ text }) => {
                 className='w-min'
                 text
                 style={style}
+                onClick={() => (window.location.href = href)}
             >
                 <p className="text-black py-2">{text}</p>
                 <CIcon style={style} path={mdiMagnify} />
@@ -48,12 +48,35 @@ const NavSearchButton = ({ text }) => {
 };
 
 export const NavigationHeader = () => {
-
     const [isOpen, setIsOpen] = useState(false);
+    const navRef = useRef(null);
+    const toggleMenu = () => setIsOpen((prev) => !prev);
+    const pageButtons = SITE.constants.nav.map(page => <NavButton {...page} />);
 
-    const toggleMenu = () => setIsOpen(!isOpen);
+  // This effect adds event listeners when the menu is open.
+  // It will close the menu if a click or touch happens outside the navbar.
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    if (isOpen) { //stop main content from scrolling when navigation menu open
+      document.body.style.overflow = 'hidden';
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
+    else{
+        document.body.style.overflow = 'visible';
+    }
+    // Clean up the listeners on unmount or when isOpen changes
+    return () => {
+        document.body.style.overflow = 'visible';
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isOpen]);
 
-    const pageButtons = SITE.constants.nav.map(page => <NavButton {...page} />)
 
     return (
         <div className='flex flex-col'>
@@ -84,7 +107,5 @@ export const NavigationHeader = () => {
                 </div>
             }
         </div>
-        
-
-    );
+      );
 };

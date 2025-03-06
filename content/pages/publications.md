@@ -2,6 +2,8 @@
 layout: page
 title: Posts and publications
 subtitle: Blog posts, publications, and other material of interest
+react_source_files:
+  - blogs.js
 ---
 
-{% include post-list.html posts=site.publications %}
+{%- include react/root.html id='blogs' -%}

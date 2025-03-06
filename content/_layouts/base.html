@@ -1,6 +1,7 @@
 ---
 base_react_sources:
   - navigation.js
+  - footer.js
 ---
 <!DOCTYPE html>
   <html lang="{{ page.lang | default: site.lang | default: "en" }}">
@@ -12,14 +13,13 @@ base_react_sources:
 
   <body class="flex flex-col min-h-screen">
 
-    {%- include react/root.html id='navigation-header' -%}
-
+    <div class="sticky top-0 bg-white z-40">
+      {%- include react/root.html id='navigation-header' -%}
+    </div>
     <main class="block flex-[1_0]" aria-label="Content">
         {{ content }}
     </main>
-
-    {%- include footer.html -%}
-
+    {%- include react/root.html id='footer' -%}
   </body>
 
 </html>
