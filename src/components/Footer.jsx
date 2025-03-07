@@ -33,8 +33,8 @@ export const Footer = () => {
 
         <div className="w-full md:w-auto text-left md:text-right">
           <p className="font-semibold">Customer support</p>
-          <a href="mailto:fiqci-feedback@postit.csc.fi" className="text-blue-600 hover:underline">
-            fiqci-feedback@postit.csc.fi
+          <a href={`mailto:${feedbackEmail}`} className="text-blue-600 hover:underline">
+            {feedbackEmail}
           </a>
         </div>
       </div>
