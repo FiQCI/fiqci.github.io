@@ -3,14 +3,13 @@ layout: base
 react_source_files:
   - blogView.js
 ---
+
 {% assign constants = site.data.site-constants %}
+
 <article itemscope itemtype="http://schema.org/BlogPosting">
+  {%- include react/root.html id='blog-view' -%}
 
-<div id="{{ id }}" data-content="{{ content | escape }}"></div>
+  <div id="blog-content" data-content="{{ content | strip_newlines | escape }}"></div>
 
-
-{%- include react/root.html id='blog-view' -%}
-
-
-
+  <div id="blog-title" data-content="{{ page.title | strip_newlines | escape  }}"</div>
 </article>

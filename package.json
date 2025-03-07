@@ -52,6 +52,9 @@
   "dependencies": {
     "@cscfi/csc-ui": "^2.3.0",
     "@cscfi/csc-ui-react": "^2.3.0",
+    "dompurify": "^3.2.4",
+    "front-matter": "^4.0.2",
+    "gray-matter": "^4.0.3",
     "lunr": "^2.3.9"
   },
   "private": "true"
