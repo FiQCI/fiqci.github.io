@@ -30,20 +30,18 @@ const NavButton = props => {
     );
 };
 
-const NavSearchButton = ({ text, href }) => {
+const NavSearchButton = props => {
 
     return (
-        <div>
             <CButton
-                className='w-min'
+                className="w-min"
                 text
                 style={style}
-                onClick={() => (window.location.href = href)}
+                onClick={() => (window.location.href = props.href)}
             >
-                <p className="text-black py-2">{text}</p>
+                <p className="text-black py-2">{props.title}</p>
                 <CIcon style={style} path={mdiMagnify} />
             </CButton>
-        </div>
     );
 };
 
@@ -51,7 +49,12 @@ export const NavigationHeader = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navRef = useRef(null);
     const toggleMenu = () => setIsOpen((prev) => !prev);
-    const pageButtons = SITE.constants.nav.map(page => <NavButton {...page} />);
+
+    const pageButtons = SITE.constants.topNav.map(
+        page => page.title != "Search"
+          && <NavButton {...page} />
+          || <NavSearchButton {...page} />
+    );
 
   // This effect adds event listeners when the menu is open.
   // It will close the menu if a click or touch happens outside the navbar.
@@ -82,7 +85,7 @@ export const NavigationHeader = () => {
         <div className='flex flex-col'>
             <div className="flex mx-5 items-center justify-between py-3">
                 <div className="flex items-center">
-                    <a href='/'>
+                    <a href={ SITE.constants.baseUrl }>
                         <img
                             src={ SITE.constants.logo }
                             alt="Logo"
@@ -93,7 +96,6 @@ export const NavigationHeader = () => {
                 
                 <div className="lg:flex flex-wrap justify-end hidden">
                     { pageButtons }
-                    <NavSearchButton text="Search" />
                 </div>
                 
                 <div className='flex lg:hidden h-max'>
@@ -103,7 +105,6 @@ export const NavigationHeader = () => {
             {isOpen && 
                 <div className='lg:hidden mx-1.5 mb-10 top-10 w-full flex flex-col justify-center items-left gap-2' >
                     { pageButtons }
-                    <NavSearchButton text="Search" />
                 </div>
             }
         </div>

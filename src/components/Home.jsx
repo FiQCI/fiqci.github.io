@@ -34,13 +34,13 @@ const ContentButton = props => {
 export const Home = () => {
     const test_lg = 500;
     const test = 'flex flex-col justify-evenly z-2 bg-orange-200 min-h-[100px] pl-[30px]'
-    const nav = SITE.constants.nav
+    const nav = SITE.constants.cardNav
     const contentButtons = [
-        "Get started",
-        "Blogs and instructions",
-        "About"
-    ].map(title => nav.find(page => page.title === title))
-     .map(page => <ContentButton {...page} />)
+        ["How to get access", mdiArrowDown],
+        ["Blogs and instructions", mdiArrowRight],
+        ["About FiQCI", mdiArrowRight],
+    ].map(([title, icon]) => [nav.find(page => page.title === title), icon])
+     .map(([page, icon]) => <ContentButton {...page} icon={icon} />)
 
     return (
         <div className='mb-2 sm:mb-0 min-w-[320px] h-auto xl:h-[850px] 2xl:h-[950px]'>
