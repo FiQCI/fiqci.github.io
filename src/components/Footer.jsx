@@ -37,11 +37,7 @@ export const Footer = () => {
             © 2024 The FiQCI Consortium. Powered by{" "}
             <a href="https://jekyllrb.com/" className="underline">
               Jekyll
-            </a>{" "}
-            &{" "}
-            <a href="https://mmistakes.github.io/minimal-mistakes/" className="underline">
-              Minimal Mistakes
-            </a>.
+            </a>
           </p>
           <div className="flex space-x-4">
             <a href="/cookies" className="underline">
