@@ -1,6 +1,14 @@
 import React from 'react';
 
 export const Footer = () => {
+  const {
+    feedbackEmail,
+    images: {
+      footerIconsPath,
+      funderLogosPath
+    }
+  } = SITE.constants
+
   return (
     <footer className="bg-gray-100 text-gray-700 text-sm">
       <div className="px-8 lg:px-[100px] py-4 flex flex-wrap md:flex-nowrap justify-between items-start space-y-4 md:space-y-0">
@@ -8,17 +16,17 @@ export const Footer = () => {
         <div className="w-full md:w-auto">
           <p className="font-semibold">Brought to you by:</p>
           <div className="flex flex-wrap items-center space-x-0 lg:space-x-3 mt-1">
-              <img src="/assets/footer-icons/footer-logo-vtt.jpg" alt="VTT" className="h-10" />
-              <img src="/assets/footer-icons/footer-logo-aalto.png" alt="Aalto University" className="h-10" />
-               <img src="/assets/footer-icons/footer-logo-csc.svg" alt="CSC" className="h-10" />
+              <img src={`${footerIconsPath}/footer-logo-vtt.jpg`} alt="VTT" className="h-10" />
+              <img src={`${footerIconsPath}/footer-logo-aalto.png`} alt="Aalto University" className="h-10" />
+               <img src={`${footerIconsPath}/footer-logo-csc.svg`} alt="CSC" className="h-10" />
           </div>
         </div>
 
         <div className="w-full md:w-auto">
           <p className="font-semibold">Supported by:</p>
           <div className="flex flex-wrap items-center space-x-0 lg:space-x-3 mt-1">
-                 <img src="/assets/images/funders/Academy_of_Finland.png" alt="Academy of Finland" className="h-10" />
-                  <img src="/assets/images/funders/EU-RRF.jpg" alt="EU Funding" className="h-10" />
+                 <img src={`${funderLogosPath}/Academy_of_Finland.png`} alt="Academy of Finland" className="h-10" />
+                  <img src={`${funderLogosPath}/EU-RRF.jpg`} alt="EU Funding" className="h-10" />
           </div>
         </div>
         </div>

@@ -87,7 +87,7 @@ export const NavigationHeader = () => {
                 <div className="flex items-center">
                     <a href={ SITE.constants.baseUrl }>
                         <img
-                            src={ SITE.constants.logo }
+                            src={ SITE.constants.images.logo }
                             alt="Logo"
                             className="h-7"
                         />

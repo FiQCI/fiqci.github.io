@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'fiqci': "url('/assets/images/FiQCI-banner.jpg')",
+        'fiqci': "var(--fiqci-banner-image)",
       },
     },
   },

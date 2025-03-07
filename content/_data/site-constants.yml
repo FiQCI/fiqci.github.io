@@ -2,6 +2,8 @@ title: FiQCI
 author: The FiQCI Consortium
 logo: assets/images/FiQCI-logo.png
 favicon: assets/images/favicon.png
+footer-icons: assets/footer-icons
+funder-logos: assets/images/funders
 description: >-
   Web presence of the Finnish Quantum-Computing Infrastructure. We provide state-of-the-art quantum-computing services to Finnish RDI communities.
 excerpt_max_length: 250

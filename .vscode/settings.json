@@ -1,5 +1,5 @@
 {
     "files.associations": {
-        "**/content/**/*.{html,js}": "liquid",
+        "**/content/**/*.{html}": "liquid",
     }
 }

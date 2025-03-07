@@ -1,22 +1,30 @@
 ---
+permalink: site.js
 ---
+
 {%- assign values = site.data.site-constants -%}
 
 {%- capture constants -%}
 {
-  "logo": "{{ values.logo | relative_url }}",
   "baseUrl": "{{ site.baseurl }}",
+  "feedbackEmail": "{{ values.feedback_email }}",
+  "images": {
+    "logo": "{{ values.logo | absolute_url }}",
+    "funderLogosPath": "{{ values.funder-logos | absolute_url }}",
+    "footerIconsPath": "{{ values.footer-icons | absolute_url }}"
+  },
   "topNav": [
     { "title": "Home", "href": "{{ site.baseurl }}", "key": 0 },
-    { "title": "Blogs and instructions", "href": "{{ '/publications' | relative_url }}", "key": 1 },
-    { "title": "Status", "href": "{{ '/status' | relative_url }}", "key": 2 },
-    { "title": "Events", "href": "{{ '/events' | relative_url }}", "key": 3 },
-    { "title": "Search", "href": "{{ '/search' | relative_url }}", "key": 4 }
+    { "title": "Get access", "href": "{{ '/access' | absolute_url }}", "key": 1 },
+    { "title": "Blogs and instructions", "href": "{{ '/publications' | absolute_url }}", "key": 2 },
+    { "title": "Status", "href": "{{ '/status' | absolute_url }}", "key": 3 },
+    { "title": "Events", "href": "{{ '/events' | absolute_url }}", "key": 4 },
+    { "title": "Search", "href": "{{ '/search' | absolute_url }}", "key": 5 }
   ],
   "cardNav": [
-    { "title": "How to get access", "href": "{{ '/access' | relative_url }}", "key": 5 },
-    { "title": "Blogs and instructions", "href": "{{ '/publications' | relative_url }}", "key": 6 },
-    { "title": "About FiQCI", "href": "{{ '/about' | relative_url }}", "key": 7 }
+    { "title": "How to get access", "href": "{{ '/access' | absolute_url }}", "key": 0 },
+    { "title": "Blogs and instructions", "href": "{{ '/publications' | absolute_url }}", "key": 1 },
+    { "title": "About FiQCI", "href": "{{ '/about' | absolute_url }}", "key": 2 }
   ]
 }
 {%- endcapture -%}
@@ -28,9 +36,9 @@
     "key": "{{ forloop.index }}",
     "type": "{{ publication.type | default: 'News' }}",
     "title": "{{ publication.title }}",
-    "url": "{{ publication.url | relative_url }}",
+    "url": "{{ publication.url  }}",
     "date": "{{ publication.date | date: '%-d.%-m.%Y' }}",
-    "teaser": "{{publication.header.teaser | relative_url}}",
+    "teaser": "{{ publication.header.teaser }}",
     "filters": {
       {%- for category in publication.filters %}
         {%- if category[0] == "Theme" -%}
