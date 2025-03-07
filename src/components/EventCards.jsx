@@ -34,7 +34,7 @@ const EventCardComponent = props => {
 
 const EventCard = () => {
     return (
-        <div className="mx-8 lg:mx-[100px] py-6">
+        <div className="min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-8 lg:mx-[100px] py-6">
             <div className="flex items-center justify-between mb-6">
                 <h2 className="text-3xl font-bold">Events</h2>
             </div>

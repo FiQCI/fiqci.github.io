@@ -4,7 +4,7 @@ import { CButton, CIcon } from '@cscfi/csc-ui-react';
 import { mdiMagnify, mdiMenu } from '@mdi/js';
 
 const style = {
-  "--_c-button-font-size": 12,
+  "--_c-button-font-size": 18,
   "--_c-button-min-width": 0,
   "--_c-button-height": "auto",
   "--_c-icon-color": "black"
@@ -12,7 +12,8 @@ const style = {
 
 const NavButton = ({ text, href }) => {
   const isActive = window.location.pathname === href;
-  let styleClass = "text-black py-2";
+  console.log(window.location.pathname)
+  let styleClass = "text-lg text-black py-2";
   if (isActive) {
     styleClass += " underline underline-offset-8 decoration-2";
   }
@@ -30,20 +31,25 @@ const NavButton = ({ text, href }) => {
 };
 
 const NavSearchButton = ({ text, href }) => {
+  const isActive = window.location.pathname === href;
+  let styleClass = "text-lg text-black py-2";
+  if (isActive) {
+    styleClass += " underline underline-offset-8 decoration-2";
+  }
 
-    return (
-        <div>
-            <CButton
-                className='w-min'
-                text
-                style={style}
-                onClick={() => (window.location.href = href)}
-            >
-                <p className="text-black py-2">{text}</p>
-                <CIcon style={style} path={mdiMagnify} />
-            </CButton>
-        </div>
-    );
+  return (
+    <div>
+      <CButton
+        className='w-min'
+        text
+        style={style}
+        onClick={() => (window.location.href = href)}
+      >
+        <p className={styleClass}>{text}</p>
+        <CIcon style={style} path={mdiMagnify} />
+      </CButton>
+    </div>
+  );
 };
 
 export const NavigationHeader = () => {
@@ -61,16 +67,16 @@ export const NavigationHeader = () => {
       }
     }
     if (isOpen) { //stop main content from scrolling when navigation menu open
-        document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("touchstart", handleClickOutside);
     }
-    else{
-        document.body.style.overflow = 'visible';
+    else {
+      document.body.style.overflow = 'visible';
     }
     // Clean up the listeners on unmount or when isOpen changes
     return () => {
-        document.body.style.overflow = 'visible';
+      document.body.style.overflow = 'visible';
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("touchstart", handleClickOutside);
     };
@@ -85,7 +91,7 @@ export const NavigationHeader = () => {
             <img
               src="/assets/images/FiQCI-logo.png"
               alt="Logo"
-              className="h-7"
+              className="h-8 my-4"
             />
           </a>
         </div>
@@ -93,10 +99,10 @@ export const NavigationHeader = () => {
         {/* Desktop navigation */}
         <div className="lg:flex flex-wrap justify-end hidden">
           <NavButton text="Home" href="/" />
-          <NavButton text="Blogs and instructions" href="/publications" />
-          <NavButton text="Status" href="/status" />
-          <NavButton text="Events" href="/events" />
-          <NavSearchButton text="Search" href="/search" />
+          <NavButton text="Blogs and instructions" href="/publications/" />
+          <NavButton text="Status" href="/status/" />
+          <NavButton text="Events" href="/events/" />
+          <NavSearchButton text="Search" href="/search/" />
         </div>
 
         {/* Mobile menu toggle */}
@@ -109,10 +115,10 @@ export const NavigationHeader = () => {
       {isOpen && (
         <div className="lg:hidden mx-1.5 mb-10 top-10 w-full flex flex-col justify-center items-left gap-2">
           <NavButton text="Home" href="/" />
-          <NavButton text="Blogs and instructions" href="/publications" />
-          <NavButton text="Status" href="/status" />
-          <NavButton text="Events" href="/events" />
-          <NavSearchButton text="Search" href="/search"/>
+          <NavButton text="Blogs and instructions" href="/publications/" />
+          <NavButton text="Status" href="/status/" />
+          <NavButton text="Events" href="/events/" />
+          <NavSearchButton text="Search" href="/search/" />
         </div>
       )}
     </div>

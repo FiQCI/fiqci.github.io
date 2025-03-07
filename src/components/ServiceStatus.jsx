@@ -8,7 +8,7 @@ export const ServiceStatus = () => {
   const status = useStatus('https://fiqci-backend-fiqci-workspace.2.rahtiapp.fi/healthcheck')
 
   return (
-    <div className='mx-8 lg:mx-[100px]'>
+    <div className='min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-8 lg:mx-[100px]'>
       <div className='mt-4 mb-10'>
         <Breadcrumbs breadcrumbs={{ Home: "/", "Status": "/status" }} />
       </div>

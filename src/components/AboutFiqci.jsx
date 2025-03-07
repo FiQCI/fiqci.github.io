@@ -2,7 +2,7 @@ import React from "react";
 
 export const AboutFiqci = () => {
   return (
-    <div className="px-8 lg:px-[100px] text-white bg-[#0D2B53] w-full">
+    <div className="min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] px-8 lg:px-[100px] text-white bg-[#0D2B53] w-full">
 
             <div className="">
                 <div className="mx-auto">
