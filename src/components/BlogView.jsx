@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import DOMPurify from 'dompurify'
+import { meta } from '@eslint/js';
 
 const createMarkup = (htmlString) => {
     const safeHTML = DOMPurify.sanitize(htmlString);
@@ -9,7 +10,7 @@ const createMarkup = (htmlString) => {
 export const BlogView = () => {
 
     const [content, setContent] = useState('');
-    const [metadata, setMetadata] = useState({});
+    const [metadata, setMetadata] = useState('');
 
     useEffect(() => {
         // Get content from data attribute
@@ -17,20 +18,25 @@ export const BlogView = () => {
         if (contentDiv) {
             setContent(contentDiv.getAttribute('data-content'));
         }
+        console.log(contentDiv.getAttribute('data-content'))
 
         // Get metadata from JSON script
         const metadataDiv = document.getElementById('blog-title');
         if (metadataDiv) {
             setMetadata(metadataDiv.getAttribute('data-content'));
         }
+        console.log(metadataDiv.getAttribute('data-content'))
     }, []);
-    console.log(metadata)
+
+    console.log(content);
+
     return (
         <div className='flex flex-col items-top mb-2'>
             <div className='mx-8 lg:mx-[100px] flex flex-col lg:grid grid-cols-5 gap-8'>
                 <div className='col-span-5'>
                     
                 </div>
+                <h1>{metadata}</h1>
                 <div dangerouslySetInnerHTML={createMarkup(content)} className='mt-8 md:py-0 col-span-5' />
             </div>
         </div>
