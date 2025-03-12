@@ -29,7 +29,7 @@ const BlogCardComponent = props => {
 
 const BlogCard = () => {
     return (
-        <div className="min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-8 lg:mx-[100px] py-6">
+        <div className="min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-2 sm:mx-8 lg:mx-[100px] py-6">
             <div className="flex items-center justify-between mb-6">
                 <h2 className="text-3xl font-bold">Blogs and instructions</h2>
             </div>
@@ -42,7 +42,7 @@ const BlogCard = () => {
                     href="#"
                     className="text-sky-800 hover:underline font-bold"
                 >
-                    <div className="flex items-center gap-3">
+                    <div className="mx-2 sm:mx-0 flex items-center gap-3">
                         <div className="text-sm">All blogs and instructions</div>
                         <CIcon className="text-lg" path={mdiArrowRight} />
                     </div>

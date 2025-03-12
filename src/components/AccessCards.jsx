@@ -11,12 +11,12 @@ const AccessCardComponent = ({ title, teaser, description, links }) => {
         alt="teaser"
         className="w-full h-60 object-cover"
       />
-      <CCardContent className="px-10 pb-10 flex flex-col border-none p-5 space-y-4">
+      <CCardContent className="m-0 sm:px-10 pb-10 flex flex-col border-none sm:p-5 space-y-4">
         <a href={title} className="text-2xl font-bold hover:underline">
           {title}
         </a>
 
-        <div className="text-xl white-space-pre-line">{description}</div>
+        <div className="text-base sm:text-xl white-space-pre-line">{description}</div>
 
         <div className="flex flex-col space-y-2">
           {links.map((link, index) => (
@@ -33,7 +33,7 @@ const AccessCardComponent = ({ title, teaser, description, links }) => {
 
 export const AccessCard = () => {
   return (
-    <div className="min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-8 lg:mx-[100px] py-6">
+    <div className="w-auto sm:w-auto mx-2 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] sm:mx-8 lg:mx-[100px] py-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-3xl font-bold">Get access</h2>
       </div>
@@ -82,7 +82,7 @@ export const AccessCard = () => {
           }
         />
       </div>
-      <div className="mt-4">
+      <div className="mx-2 sm:mx-0 mt-4">
         <div className="flex items-center gap-3 text-md py-4">Other quantum resources will continuously be added to the FiQCI infrastructure.</div>
         <a
           href="#"
