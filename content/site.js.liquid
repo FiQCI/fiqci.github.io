@@ -25,6 +25,29 @@ permalink: site.js
     { "title": "How to get access", "href": "{{ '/access' | absolute_url }}", "key": 0 },
     { "title": "Blogs and instructions", "href": "{{ '/publications' | absolute_url }}", "key": 1 },
     { "title": "About FiQCI", "href": "{{ '/about' | absolute_url }}", "key": 2 }
+  ],
+  "accessCards": [
+  {%- for card in values.access-cards -%}
+    {
+      "key": "{{ forloop.index }}",
+      "title": "{{ card.title }}",
+      "teaser": "{{ card.teaser | absolute_url }}",
+      "description": "{{ card.description }}",
+      "links": [
+      {%- for link in card.links -%}
+        {
+          "title": "{{ link.title }}",
+          "href": "{{ link.href }}"
+          {%- if link.external -%},
+          "external": true
+          {%- endif -%}
+        }
+      {%- unless forloop.last == true -%},{%- endunless -%}
+      {%- endfor -%}
+      ]
+    }
+  {%- unless forloop.last == true -%},{%- endunless -%}
+  {%- endfor -%}
   ]
 }
 {%- endcapture -%}
