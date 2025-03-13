@@ -4,13 +4,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--{\%- seo -\%}-->
-  <link rel="icon" href="{{ constants.favicon | relative_url }}" />
-  <link rel="stylesheet" href="{{ 'properties.css' | relative_url }}" />
-  <link rel="stylesheet" href="{{ 'main.css' | relative_url }}" />
+  <link rel="icon" href="{{ constants.favicon | absolute_url }}" />
+  <link rel="stylesheet" href="{{ 'properties.css' | absolute_url }}" />
+  <link rel="stylesheet" href="{{ 'main.css' | absolute_url }}" />
   {%- include external/mathjax.html -%}
   {%- include external/font.html -%}
 
-  <script type="text/javascript" src="{{ "site.js" | relative_url }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ "site.js" | absolute_url }}" charset="utf-8"></script>
 
   {% assign react_source_files = include.react_source_files %}
   {% unless layout.react_source_files == empty %}

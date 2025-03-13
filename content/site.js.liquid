@@ -36,9 +36,9 @@ permalink: site.js
     "key": "{{ forloop.index }}",
     "type": "{{ publication.type | default: 'News' }}",
     "title": "{{ publication.title }}",
-    "url": "{{ publication.url  }}",
+    "url": "{{ publication.url | absolute_url }}",
     "date": "{{ publication.date | date: '%-d.%-m.%Y' }}",
-    "teaser": "{{ publication.header.teaser }}",
+    "teaser": "{{ publication.header.teaser | absolute_url }}",
     "filters": {
       {%- for category in publication.filters %}
         {%- if category[0] == "Theme" -%}
@@ -65,7 +65,7 @@ permalink: site.js
     "key": "{{ forloop.index }}",
     "type": "Event",
     "title": "{{ event_post.title }}",
-    "url": "{{ event_post.link | relative_url }}",
+    "url": "{{ event_post.link | uri_escape }}",
     "date": "{{ event_post.date | date: '%-d.%-m.%Y' }}",
     "content": {{ event_post.content | strip_html | strip_newlines | jsonify }},
     "filters": {
