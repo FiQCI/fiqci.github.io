@@ -7,11 +7,13 @@
   "logo": "{{ values.logo | relative_url }}",
   "baseUrl": "{{ site.baseurl }}",
   "topNav": [
-    { "title": "Home", "href": "{{ site.baseurl }}", "key": 0 },
-    { "title": "Blogs and instructions", "href": "{{ '/publications' | relative_url }}", "key": 1 },
+    { "title": "Home", "href": "{{ '/' | relative_url }}", "key": 0 },
+    { "title": "Get access", "href": "{{ '/access' | relative_url }}", "key": 1 },
     { "title": "Status", "href": "{{ '/status' | relative_url }}", "key": 2 },
-    { "title": "Events", "href": "{{ '/events' | relative_url }}", "key": 3 },
-    { "title": "Search", "href": "{{ '/search' | relative_url }}", "key": 4 }
+    { "title": "About FiQCI", "href": "{{ '/about' | relative_url }}", "key": 3 },
+    { "title": "Blogs and instructions", "href": "{{ '/publications' | relative_url }}", "key": 4 },
+    { "title": "Events", "href": "{{ '/events' | relative_url }}", "key": 5 },
+    { "title": "Search", "href": "{{ '/search' | relative_url }}", "key": 6 }
   ],
   "cardNav": [
     { "title": "How to get access", "href": "{{ '/access' | relative_url }}", "key": 5 },
