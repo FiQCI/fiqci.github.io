@@ -52,7 +52,7 @@ export const Home = () => {
      .map(([page, icon]) => <ContentButton {...page} icon={icon} />)
 
     return (
-        <div style={{"margin-bottom":"-200px"}} className='mb-2 sm:mb-0 '>
+        <div style={{"marginBottom":"-200px"}} className='mb-2 sm:mb-0 '>
             <div className='bg-fiqci bg-cover bg-center w-full min-h-[400px]'></div>
 
             <div className='w-auto sm:w-auto mx-2 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] sm:mx-8 lg:mx-0 lg:ml-[100px]  flex lg:flex-row lg:justify-start lg:items-start md:flex-col md:items-center sm: flex-col'>
