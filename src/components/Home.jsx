@@ -10,8 +10,8 @@ const style = {
     "--_c-icon-color": "white"
 };
 
-const ContentButton = ({ text, href, icon=mdiArrowDown }) => {
-    const isActive = window.location.pathname === href;
+const ContentButton = props => {
+    const isActive = window.location.pathname === props.href;
 
     var styleClass = "text-white text-sm sm:text-md py-3 break-words"
     if (isActive) {
@@ -24,25 +24,33 @@ const ContentButton = ({ text, href, icon=mdiArrowDown }) => {
                 className='hidden sm:block w-min ml-0 mt-[10px] md:ml-0 mr-[20px] sm:ml-0 bg-[#0D2B53] hover:bg-blue-600'
                 no-radius
                 size="large"
-                onClick={() => (window.location.href = href)}
+                onClick={() => (window.location.href = props.href)}
             >
-                <p className={styleClass}>{text}</p>
-                <CIcon path={icon}/>
+                <p className={styleClass}>{props.title}</p>
+                <CIcon path={props.icon}/>
             </CButton>
             <CButton
                 className='flex flex-1 sm:hidden w-min ml-0 mt-[10px] mr-2 md:ml-0 bg-[#0D2B53] hover:bg-blue-600'
                 no-radius
                 size="default"
-                onClick={() => (window.location.href = href)}
+                onClick={() => (window.location.href = props.href)}
             >
-                <p className={styleClass}>{text}</p>
-                <CIcon path={icon}/>
+                <p className={styleClass}>{props.title}</p>
+                <CIcon path={props.icon}/>
             </CButton>
         </div>
     );
 };
 
 export const Home = () => {
+    const nav = SITE.constants.cardNav
+    const contentButtons = [
+        ["How to get access", mdiArrowDown],
+        ["Blogs and instructions", mdiArrowRight],
+        ["About FiQCI", mdiArrowRight],
+    ].map(([title, icon]) => [nav.find(page => page.title === title), icon])
+     .map(([page, icon]) => <ContentButton {...page} icon={icon} />)
+
     return (
         <div style={{"margin-bottom":"-200px"}} className='mb-2 sm:mb-0 '>
             <div className='bg-fiqci bg-cover bg-center w-full min-h-[400px]'></div>
@@ -59,14 +67,12 @@ export const Home = () => {
                 </div>
 
                 <div className='-top-[280px] relative sm:relative sm:-top-[280px] md:relative md:w-full lg:top-0 grow gap-[17px] z-2 ml-[0px] lg:w-1/2 flex flex-col justify-start'>
-                    <div className='flex flex-col justify-evenly z-2 bg-orange-500/75 min-h-[100px] px-4 sm:pl-[30px]'>
-                        <p className='text-sm sm:text-base font-bold mr-0  lg:mr-[100px]'>Open call for pilot access to Helmi quantum computer now open!</p>
-                        <a href='' className='w-fit text-sm sm:text-base flex text-grey-950 font-semibold hover:underline' >How to access Helmi, instructions <CIcon path={mdiArrowRight}/> </a>
+                    <div className='flex flex-col justify-evenly z-2 bg-[#FF9B66] min-h-[100px] pl-[30px]'>
+                        <p className='font-bold'>Open call for pilot access to Helmi quantum computer now open!</p>
+                        <a href='' className='w-fit flex text-[#400001] hover:underline' >How to access Helmi, instructions <CIcon path={mdiArrowRight}/> </a>
                     </div>
-                    <div className='mr-0 ml-0 sm:ml-0  lg:mr-[100px] flex ml-0 flex-row flex-shrink flex-wrap sm:flex-row sm:flex-shrink md:flex-row md:flex-wrap md:ml-0 sm:ml-0 lg:flex-row lg:flex-wrap lg:ml-[20px] xl:ml-[20px] xl:flex xl:flex-col '>
-                        <ContentButton text="How to get access" href="/access/" icon={mdiArrowRight}/>
-                        <ContentButton text={`Blogs and instructions`} href="/publications/" icon={mdiArrowRight}/>
-                        <ContentButton text="About FiQCI" href="#about"/>
+                    <div className='flex ml-0 flex-col sm:flex-row sm:flex-wrap md:flex-row md:flex-wrap md:ml-0 sm:ml-0 lg:flex-row lg:flex-wrap lg:ml-[20px] xl:ml-[20px] xl:flex xl:flex-col '>
+                        { contentButtons }
                     </div>
                 </div>
             </div>
