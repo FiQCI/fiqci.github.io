@@ -44,7 +44,7 @@ const EventCard = () => {
             </div>
             <div className="mt-4">
             <a
-                    href="#"
+                    href="/events/"
                     className="text-sky-800 hover:underline font-bold"
                 >
                     <div className="mx-2 sm:mx-0 flex items-center gap-3">

@@ -245,7 +245,7 @@ export const Events = () => {
 
     return (
         <div className='flex flex-col items-top mb-2'>
-            <div className='mx-8 lg:mx-[100px] flex flex-col lg:grid grid-cols-5 gap-8 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
+            <div className='mx-2 sm:mx-8 lg:mx-[100px] flex flex-col lg:grid grid-cols-5 gap-8 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
                 <div className='col-span-5 mt-4'>
                     <Breadcrumbs breadcrumbs={{ "Home": "/", "Events": "/events" }} />
                 </div>

@@ -12,15 +12,14 @@ const style = {
 
 const NavButton = ({ text, href }) => {
   const isActive = window.location.pathname === href;
-  console.log(window.location.pathname)
-  let styleClass = "text-lg text-black py-2";
+  let styleClass = "text-base text-black py-2";
   if (isActive) {
     styleClass += " underline underline-offset-8 decoration-2";
   }
 
   return (
     <CButton
-      className="w-min"
+      className="w-full sm:w-min"
       text
       style={style}
       onClick={() => (window.location.href = href)}
@@ -32,7 +31,7 @@ const NavButton = ({ text, href }) => {
 
 const NavSearchButton = ({ text, href }) => {
   const isActive = window.location.pathname === href;
-  let styleClass = "text-lg text-black py-2";
+  let styleClass = "text-base text-black text-left py-2";
   if (isActive) {
     styleClass += " underline underline-offset-8 decoration-2";
   }
@@ -40,7 +39,7 @@ const NavSearchButton = ({ text, href }) => {
   return (
     <div>
       <CButton
-        className='w-min'
+        className='w-full sm:w-min'
         text
         style={style}
         onClick={() => (window.location.href = href)}
@@ -85,13 +84,13 @@ export const NavigationHeader = () => {
   return (
     // Attach the ref here so clicks inside this container won't close the menu.
     <div ref={navRef} className="flex flex-col">
-      <div className="flex mx-5 items-center justify-between py-3">
+      <div className="flex mx-5 items-center justify-between py-2">
         <div className="flex items-center">
           <a href="/">
             <img
               src="/assets/images/FiQCI-logo.png"
               alt="Logo"
-              className="h-8 my-4"
+              className="h-6 my-4"
             />
           </a>
         </div>
@@ -99,8 +98,10 @@ export const NavigationHeader = () => {
         {/* Desktop navigation */}
         <div className="lg:flex flex-wrap justify-end hidden">
           <NavButton text="Home" href="/" />
-          <NavButton text="Blogs and instructions" href="/publications/" />
+          <NavButton text="Get access" href="/access/" />
+          <NavButton text="About FiQCI" href="/about/" />
           <NavButton text="Status" href="/status/" />
+          <NavButton text="Blogs and instructions" href="/publications/" />
           <NavButton text="Events" href="/events/" />
           <NavSearchButton text="Search" href="/search/" />
         </div>
@@ -113,10 +114,12 @@ export const NavigationHeader = () => {
 
       {/* Mobile navigation menu */}
       {isOpen && (
-        <div className="lg:hidden mx-1.5 mb-10 top-10 w-full flex flex-col justify-center items-left gap-2">
+        <div className="lg:hidden mx-0 sm:mx-1.5 mb-10 top-10 w-full flex flex-col justify-center items-left gap-2">
           <NavButton text="Home" href="/" />
-          <NavButton text="Blogs and instructions" href="/publications/" />
+          <NavButton text="Get access" href="/access/" />
+          <NavButton text="About FiQCI" href="/about/" />
           <NavButton text="Status" href="/status/" />
+          <NavButton text="Blogs and instructions" href="/publications/" />
           <NavButton text="Events" href="/events/" />
           <NavSearchButton text="Search" href="/search/" />
         </div>
