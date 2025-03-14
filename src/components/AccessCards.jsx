@@ -32,6 +32,7 @@ const AccessCardComponent = ({ title, teaser, description, links }) => {
 
 
 export const AccessCard = () => {
+  const accessUrl = SITE.constants.topNav.find(elem => elem.title === "Get access").href
   return (
     <div className="pt-0 max-[393px]:pt-8 min-[394px]:pt-8 w-auto sm:w-auto mx-2 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] sm:mx-8 lg:mx-[100px]">
       <div className="flex items-center justify-between mb-6">
@@ -46,7 +47,7 @@ export const AccessCard = () => {
           links={
             [
               {
-                ref: "/access/#quantum", title: "Quantum computer resources", icon: mdiArrowRight
+                ref: accessUrl+"/#quantum", title: "Quantum computer resources", icon: mdiArrowRight
               }
             ]
           }
@@ -58,7 +59,7 @@ export const AccessCard = () => {
           links={
             [
               {
-                ref: "/access/#super", title: "Supercomputer resources", icon: mdiArrowRight
+                ref: accessUrl+"/#super", title: "Supercomputer resources", icon: mdiArrowRight
               },
             ]
           }
@@ -70,7 +71,7 @@ export const AccessCard = () => {
           links={
             [
               {
-                ref: "/access/#emulation", title: "Emulation resources", icon: mdiArrowRight
+                ref: accessUrl+"/#emulation", title: "Emulation resources", icon: mdiArrowRight
               },
             ]
           }
