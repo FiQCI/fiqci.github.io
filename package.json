@@ -26,6 +26,7 @@
     "jekyll:build": "npm run-script jekyll -- build --config ${npm_package_config_jekyll_configFilename},${npm_package_config_jekyll_webpackConfigFilename}",
     "clean": "npm run-script jekyll -- clean --config ${npm_package_config_jekyll_configFilename},${npm_package_config_jekyll_webpackConfigFilename} && rm ${npm_package_config_jekyll_webpackConfigFilename}",
     "watch": "npx concurrently --kill-others --prefix-colors ${npm_package_config_conc_colors} --passthrough-arguments 'npm:tailwindcss -- {1}' 'npm:webpack -- --mode=development {1}' 'npm:jekyll:serve -- --livereload' -- --watch",
+    "watch-dep": "npx concurrently --kill-others --prefix-colors ${npm_package_config_conc_colors} --passthrough-arguments 'npm:tailwindcss -- {1}' 'npm:webpack -- --mode=development {1}' 'bash -c \"JEKYLL_ENV=production npm run jekyll:serve -- --livereload --baseurl /dev/\"' -- --watch",
     "build": "npm run-script tailwindcss && npm run-script webpack -- --mode=production && npm run-script jekyll:build",
     "start": "npm run-script tailwindcss && npm run-script webpack -- --mode=development && npm run-script jekyll:serve"
   },
@@ -55,7 +56,9 @@
     "dompurify": "^3.2.4",
     "front-matter": "^4.0.2",
     "gray-matter": "^4.0.3",
-    "lunr": "^2.3.9"
+    "katex": "^0.16.21",
+    "lunr": "^2.3.9",
+    "prismjs": "^1.30.0"
   },
   "private": "true"
 }

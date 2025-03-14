@@ -9,7 +9,7 @@ react_source_files:
 <article itemscope itemtype="http://schema.org/BlogPosting">
   {%- include react/root.html id='blog-view' -%}
 
-  <div id="blog-content" data-content="{{ content | strip_newlines | escape }}"></div>
+  <div id="blog-content" data-content="{{ content | escape }}"></div>
 
   <div id="blog-title" data-content="{{ page.title | strip_newlines | escape  }}"</div>
 </article>
