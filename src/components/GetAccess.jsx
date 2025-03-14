@@ -88,7 +88,6 @@ const quantum_resources = [
 export const GetAccess = () => {
 
     useEffect(() => {
-        console.log(window.location.hash);
         if (window.location.hash !== "") {
           const hash = window.location.hash;
           const element = document.getElementById(hash.substring(1));
