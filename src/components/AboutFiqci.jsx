@@ -74,7 +74,7 @@ const TextContent = () => {
 
 export const AboutFiqci = () => {
     return (
-        <div id="about" className="pb-20 lg:px-[100px] text-white bg-[#0D2B53] w-full">
+        <div id="about" className="pb-20 text-white bg-[#0D2B53] w-full">
 
             <div className="mx-2 sm:mx-8 lg:mx-[100px] min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]">
                 <div className="mx-auto">
