@@ -34,6 +34,10 @@ Even with real quantum computers already available, the ability to simulate quan
 
 ## Practical simulation limits
 
+There are several different approaches to simulating quantum algorithms with classical computers. They can, arguably, be divided into two main classes: tensor network simulations and full state-vector simulations. While tensor network simulations have been used to simulate algorithms of thousands of qubits, they come with an inherent limitation: they are only suitable for quantum algorithms with a rather low degree of entanglement between the qubits. Entanglement, the “spooky action at a distance” as Einstein infamously called it, is a pre-requisite for many of the use cases where quantum computing is expected to provide tangible advantage. After all, if a quantum algorithm can be efficiently simulated on a classical computer, there is less need for a quantum computer to begin with.
+
+For exploring algorithms utilising higher levels of entanglement, a “Schrödinger-style” full state-vector simulation becomes necessary. This type of simulation is generally much more resource intensive but offers the advantage of detailed inspection of how the quantum states change and develop during the execution of the algorithm. This is where the need for supercomputers enters, and the topic of this blog.
+
 Simulating quantum circuits is highly resource consuming, especially when the number of qubits grow beyond approximately thirty. Here, we report a simulation of up to **44 qubits** using the full state-vector method of qiskit-aer <a href="#references">[1]</a> using 1024 GPGPUs (General Purpose Graphics Processing Units). For a simulation of this size, powerful supercomputing resources are needed, as the required memory just for storing the quantum state information of the qubits grows exponentially with qubit count:
 
 $$
@@ -255,10 +259,6 @@ Simulation Execution time: 16.12554312
 ```
 
 These results clearly justify the additional effort. 
-
-For instructions on how to carry out simulations using our containers, on LUMI, visit this link:
-
-[Qiskit documentation on CSC](https://docs.csc.fi/apps/qiskit/)
 
 
 **Container information used in tests**
@@ -782,6 +782,13 @@ These three tests together provide a comprehensive assessment of how state-vecto
 ## Summary
 
 As a result of tailoring the supercomputer environment, it is now possible to routinely simulate quantum algorithms utilizing up to 44 qubits on LUMI. As discussed above, this requires that several aspects of the simulation parameters need to be considered, such as total GPU node count and number of "blocking qubits". Quantum software development can now be taken to new heights. We hope that through this tool-set, novel quantum algorithms, showing new ways to achieve quantum advantage will dawn.
+
+## Try it out!
+
+For instructions on how to carry out simulations using our containers, on LUMI, visit this link:
+
+[Qiskit documentation on CSC](https://docs.csc.fi/apps/qiskit/)
+
 
 ## References
 
