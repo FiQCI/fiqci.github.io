@@ -785,9 +785,9 @@ As a result of tailoring the supercomputer environment, it is now possible to ro
 
 ## Try it out!
 
-For instructions on how to carry out simulations using our containers, on LUMI, visit this link:
+For instructions on how to carry out simulations using our containers on LUMI, visit this link:
 
-[Qiskit documentation on CSC](https://docs.csc.fi/apps/qiskit/)
+[Qiskit documentation at CSC Docs](https://docs.csc.fi/apps/qiskit/)
 
 
 ## References
