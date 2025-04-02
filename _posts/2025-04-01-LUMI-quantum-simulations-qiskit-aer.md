@@ -38,7 +38,7 @@ There are several different approaches to simulating quantum algorithms with cla
 
 For exploring algorithms utilising higher levels of entanglement, a “Schrödinger-style” full state-vector simulation becomes necessary. This type of simulation is generally much more resource intensive but offers the advantage of detailed inspection of how the quantum states change and develop during the execution of the algorithm. This is where the need for supercomputers enters, and the topic of this blog.
 
-Simulating quantum circuits is highly resource consuming, especially when the number of qubits grow beyond approximately thirty. Here, we report a simulation of up to **44 qubits** using the full state-vector method of qiskit-aer <a href="#references">[1]</a> using 1024 GPGPUs (General Purpose Graphics Processing Units). For a simulation of this size, powerful supercomputing resources are needed, as the required memory just for storing the quantum state information of the qubits grows exponentially with qubit count:
+Simulating quantum circuits is highly resource consuming, especially when the number of qubits grow beyond approximately thirty. Here, we report a simulation of up to **44 qubits** using the full state-vector method of qiskit-aer <a href="#references">[1]</a> using 4096 GPGPUs (General Purpose Graphics Processing Units) across 1024 nodes. For a simulation of this size, powerful supercomputing resources are needed, as the required memory just for storing the quantum state information of the qubits grows exponentially with qubit count:
 
 $$
 \text{Memory} = \text{precision} \times 2^n
