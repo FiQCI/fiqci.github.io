@@ -1,25 +1,23 @@
 ---
 base_react_sources:
-  - navigation.js
-  - footer.js
+  - base.html.js
 ---
 <!DOCTYPE html>
   <html lang="{{ page.lang | default: site.lang | default: "en" }}">
-    {% assign base_react_sources = layout.base_react_sources %}
-    {% for src in layout.react_source_files %}
-      {% assign base_react_sources = base_react_sources | push: src %}
-    {% endfor %}
+    {%- assign base_react_sources = layout.base_react_sources -%}
+    {%- for src in layout.react_source_files -%}
+      {%- assign base_react_sources = base_react_sources | push: src -%}
+    {%- endfor -%}
     {%- include head.html react_source_files=base_react_sources -%}
 
   <body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 bg-white z-40" id="navigation-header"></header>
 
-    <div class="sticky top-0 bg-white z-40">
-      {%- include react/root.html id='navigation-header' -%}
-    </div>
     <main class="block flex-[1_0]" aria-label="Content">
-        {{ content }}
+      {{ content }}
     </main>
-    {%- include react/root.html id='footer' -%}
+
+    <footer class="bg-gray-100 text-gray-700 text-sm" id="footer"></footer>
   </body>
 
 </html>

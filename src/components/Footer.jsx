@@ -2,6 +2,7 @@ import React from 'react';
 
 export const Footer = () => {
   const {
+    baseUrl,
     feedbackEmail,
     images: {
       footerIconsPath,
@@ -10,7 +11,7 @@ export const Footer = () => {
   } = SITE.constants
 
   return (
-    <footer className="bg-gray-100 text-gray-700 text-sm">
+    <>
       <div className="px-8 lg:px-[100px] py-4 flex flex-wrap md:flex-nowrap justify-between items-start space-y-4 md:space-y-0">
         <div className='flex content-evenly space-x-8'>
         <div className="w-full md:w-auto">
@@ -48,15 +49,15 @@ export const Footer = () => {
             </a>
           </p>
           <div className="flex space-x-4">
-            <a href="/cookies" className="underline">
+            <a href={`${baseUrl}/cookies`} className="underline">
               Cookies
             </a>
-            <a href="/accessibility" className="underline">
+            <a href={`${baseUrl}/accessibility`} className="underline">
               Accessibility statements
             </a>
           </div>
         </div>
       </div>
-    </footer>
+    </>
   );
 };

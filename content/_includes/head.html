@@ -7,23 +7,22 @@
   <link rel="icon" href="{{ constants.favicon | absolute_url }}" />
   <link rel="stylesheet" href="{{ 'properties.css' | absolute_url }}" />
   <link rel="stylesheet" href="{{ 'main.css' | absolute_url }}" />
-  {%- include external/mathjax.html -%}
-  {%- include external/font.html -%}
-
+  {% include external/mathjax.html -%}
+  {% include external/font.html %}
   <script type="text/javascript" src="{{ "site.js" | absolute_url }}" charset="utf-8"></script>
-
-  {% assign react_source_files = include.react_source_files %}
-  {% unless layout.react_source_files == empty %}
-    {% for src in layout.react_source_files %}
-      {% assign react_source_files = react_source_files | push: src %}
-    {% endfor %}
-  {% endunless %}
-  {% unless page.react_source_files == empty %}
-    {% for src in page.react_source_files %}
-      {% assign react_source_files = react_source_files | push: src %}
-    {% endfor %}
-  {% endunless %}
-  {%- unless react_source_files == empty %}
-    {%- include react/sources.html sources=react_source_files -%}
+  {%- assign react_source_files = include.react_source_files -%}
+  {%- unless layout.react_source_files == empty -%}
+    {%- for src in layout.react_source_files -%}
+    {%- assign react_source_files = react_source_files | push: src -%}
+    {%- endfor -%}
   {%- endunless -%}
+  {% unless page.react_source_files == empty %}
+    {%- for src in page.react_source_files -%}
+    {%- assign react_source_files = react_source_files | push: src -%}
+    {%- endfor -%}
+  {% endunless %}
+  {%- unless react_source_files == empty -%}
+    {%- include react/sources.html sources=react_source_files -%}
+  {% endunless %}
+  <div id="matomo-analytics"></div>
 </head>

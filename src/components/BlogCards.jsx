@@ -3,7 +3,7 @@ import '@cscfi/csc-ui-react/css/theme.css';
 import { CCard, CIcon, CCardContent } from '@cscfi/csc-ui-react';
 import { mdiArrowRight } from '@mdi/js';
 
-const BlogCardComponent = props => {
+export const BlogCardComponent = props => {
     const type = props?.filters?.Type ? Object.entries(props?.filters?.Type)?.filter(field => field[1])[0][0] : "News";
     return (
         <CCard className="flex flex-auto flex-col flex-wrap border border-gray-200 rounded-none shadow-md overflow-hidden hover:shadow-lg p-0 m-0 w-full"> {/* Adjusted card width */}
@@ -25,15 +25,9 @@ const BlogCardComponent = props => {
     );
 };
 
-
-
-const BlogCard = () => {
+export const BlogCards = () => {
     return (
-        <div className="mx-8 lg:mx-[100px] py-6">
-            <div className="flex items-center justify-between mb-6">
-                <h2 className="text-3xl font-bold">Blogs and instructions</h2>
-            </div>
-
+        <>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               { SITE.publications.slice(-5).reverse().map(blog => <BlogCardComponent {...blog} />) }
             </div>
@@ -48,8 +42,6 @@ const BlogCard = () => {
                     </div>
                 </a>
             </div>
-        </div>
+        </>
     );
 };
-
-export { BlogCard, BlogCardComponent }

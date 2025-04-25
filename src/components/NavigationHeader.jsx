@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
 import { CButton, CIcon } from '@cscfi/csc-ui-react';
 import { mdiMagnify, mdiMenu } from '@mdi/js';
+import { prependBaseURL } from '../utils/url';
 
 const style = {
   "--_c-button-font-size": 12,
@@ -85,7 +86,7 @@ export const NavigationHeader = () => {
         <div className='flex flex-col'>
             <div className="flex mx-5 items-center justify-between py-3">
                 <div className="flex items-center">
-                    <a href={ SITE.constants.baseUrl }>
+                    <a href={prependBaseURL("/")}>
                         <img
                             src={ SITE.constants.images.logo }
                             alt="Logo"

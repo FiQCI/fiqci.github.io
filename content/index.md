@@ -1,12 +1,11 @@
 ---
 layout: home
 react_source_files:
-  - accessCards.js
-  - blogCards.js
-  - eventCards.js
-  - aboutFiqci.js
-
+  - index.md.js
 ---
-{%- include react/root.html id='access-cards' -%}
-{%- include react/root.html id='blog-cards' -%}
-{%- include react/root.html id='event-cards' -%}
+
+{% include react/section-root.html id='access-cards' heading='Get access' %}
+
+{% include react/section-root.html id='blog-cards' heading='Blogs and instructions' %}
+
+{% include react/section-root.html id='event-cards' heading='Events' %}

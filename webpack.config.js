@@ -1,6 +1,6 @@
+const webpack = require("webpack");
 const path = require("path");
 const fs = require("fs");
-
 const yaml = require("yaml");
 
 
@@ -74,4 +74,16 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        MATOMO_URL: process.env.MATOMO_URL
+          ? "'" + process.env.MATOMO_URL + "'"
+          : undefined,
+        MATOMO_TAG_MANAGER_CONTAINER: process.env.MATOMO_TAG_MANAGER_CONTAINER
+          ? "'" + process.env.MATOMO_TAG_MANAGER_CONTAINER + "'"
+          : undefined
+      }
+    })
+  ]
 };
