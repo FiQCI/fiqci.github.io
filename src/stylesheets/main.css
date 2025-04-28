@@ -13,12 +13,13 @@
     }
 
     #blogView table {
-        @apply w-full border-collapse my-6;
+        @apply w-full overflow-x-auto;
+        @apply ml-0; /* Align table to the left */
     }
 
     #blogView th,
     #blogView td {
-        @apply px-4 py-2 text-left border-b border-gray-200;
+        @apply text-left border-b border-gray-200;
     }
 
     #blogView th {
