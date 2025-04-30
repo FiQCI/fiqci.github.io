@@ -7,7 +7,6 @@ import {
 } from '@cscfi/csc-ui-react';
 
 import { Breadcrumbs } from './Breadcrumbs';
-import { use } from 'react';
 
 const style = {
   "--_c-button-font-size": 14,
@@ -218,7 +217,7 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleCheckboxChang
   )
 };
 
-export const SearchPage = () => {
+export const SiteSearch = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false); //modal control
   const [results, setResults] = useState({ general: [], blogs: [], events: [] });

@@ -4,6 +4,7 @@ import { CButton, CIcon } from '@cscfi/csc-ui-react';
 import { mdiArrowRight, mdiArrowDown, mdiOpenInNew } from '@mdi/js';
 import { prependBaseURL, isExternal, isAnchor } from '../utils/url';
 
+
 const style = {
     "--_c-button-font-size": 16,
     "--_c-button-min-width": 0,

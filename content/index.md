@@ -1,7 +1,7 @@
 ---
+title: Welcome
 layout: home
-react_source_files:
-  - index.md.js
+react: true
 ---
 
 {% include react/section-root.html id='access-cards' heading='Get access' %}

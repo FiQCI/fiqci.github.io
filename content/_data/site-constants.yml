@@ -55,3 +55,4 @@ funder-logos: assets/images/funders
 description: >-
   Web presence of the Finnish Quantum-Computing Infrastructure. We provide state-of-the-art quantum-computing services to Finnish RDI communities.
 excerpt_max_length: 250
+title_separator: " – "

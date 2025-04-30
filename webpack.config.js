@@ -6,22 +6,22 @@ const yaml = require("yaml");
 
 const TAILWINDCSS_INPUT_DIR =
 process.env.npm_package_config_tailwindcss_inputDir;
-const REACT_ROOTS_DIR = process.env.npm_package_config_webpack_reactRootsDir;
+const REACT_PAGES_DIR = process.env.npm_package_config_webpack_reactPagesDir;
 const JEKYLL_SOURCE_DIR = process.env.npm_package_config_jekyll_source;
 const JEKYLL_CONFIG_FNAME =
 process.env.npm_package_config_jekyll_webpackConfigFilename;
 const OUTPUT_DIR = process.env.npm_package_config_webpack_outputDir;
 
 const stylesheetsDirpath = path.resolve(__dirname, TAILWINDCSS_INPUT_DIR);
-const reactRootsDirpath = path.resolve(__dirname, REACT_ROOTS_DIR);
+const reactPageSources = path.resolve(__dirname, REACT_PAGES_DIR);
 const outputDirpath = path.resolve(__dirname, OUTPUT_DIR);
 const jekyllConfigFilepath = path.resolve(__dirname, JEKYLL_CONFIG_FNAME);
 
 const entryFiles = {};
-fs.readdirSync(reactRootsDirpath).forEach((file) => {
+fs.readdirSync(reactPageSources).forEach((file) => {
   if (file.endsWith(".jsx")) {
     const name = path.parse(file).name; // Use the file name (without extension) as the entry name
-    entryFiles[name] = path.resolve(__dirname, REACT_ROOTS_DIR, file);
+    entryFiles[name] = path.resolve(__dirname, REACT_PAGES_DIR, file);
   }
 });
 
