@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
 import { CButton, CIcon } from '@cscfi/csc-ui-react';
 import { mdiMagnify, mdiMenu } from '@mdi/js';
+import { useJsonApi } from '../hooks/useJsonApi'
 import { prependBaseURL } from '../utils/url';
 
 const style = {
@@ -51,11 +52,33 @@ export const NavigationHeader = () => {
     const navRef = useRef(null);
     const toggleMenu = () => setIsOpen((prev) => !prev);
 
-    const pageButtons = SITE.constants.topNav.map(
-        page => page.title != "Search"
-          && <NavButton {...page} />
-          || <NavSearchButton {...page} />
-    );
+    const constants = useJsonApi("api/site/constants.json")
+    const pages = useJsonApi("api/pages.json")
+
+    const navigationButtons = constants.header_nav?.map(
+        (item, index) => {
+            const targetPage = pages.find && pages.find(page => page.path === item.page)
+            const buttonProps = {
+                title: item.title,
+                href: prependBaseURL(targetPage?.url),
+                key: index
+            }
+
+            return item.title !== "Search"
+                ? <NavButton {...buttonProps} />
+                : <NavSearchButton {...buttonProps} />
+        }
+    )
+
+    const headerLogo = constants.logo
+      ? <a href={prependBaseURL("/")}>
+            <img
+                src={prependBaseURL(constants.logo)}
+                alt="Logo"
+                className="h-7"
+            />
+        </a>
+      : <></>
 
   // This effect adds event listeners when the menu is open.
   // It will close the menu if a click or touch happens outside the navbar.
@@ -82,21 +105,16 @@ export const NavigationHeader = () => {
   }, [isOpen]);
 
 
+
     return (
         <div className='flex flex-col'>
             <div className="flex mx-5 items-center justify-between py-3">
                 <div className="flex items-center">
-                    <a href={prependBaseURL("/")}>
-                        <img
-                            src={ SITE.constants.images.logo }
-                            alt="Logo"
-                            className="h-7"
-                        />
-                    </a>
+                    {headerLogo}
                 </div>
                 
                 <div className="lg:flex flex-wrap justify-end hidden">
-                    { pageButtons }
+                    {navigationButtons}
                 </div>
                 
                 <div className='flex lg:hidden h-max'>
@@ -105,7 +123,7 @@ export const NavigationHeader = () => {
             </div>
             {isOpen && 
                 <div className='lg:hidden mx-1.5 mb-10 top-10 w-full flex flex-col justify-center items-left gap-2' >
-                    { pageButtons }
+                    {navigationButtons}
                 </div>
             }
         </div>

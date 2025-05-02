@@ -4,7 +4,7 @@ import { CCard, CIcon, CCardContent } from '@cscfi/csc-ui-react';
 import { mdiArrowRight, mdiOpenInNew } from '@mdi/js';
 import { prependBaseURL, isExternal } from '../utils/url';
 
-import { useConstants } from '../hooks/useConstants';
+import { useJsonApi } from '../hooks/useJsonApi';
 
 const AccessCardComponent = ({ title, href, teaser, description, links }) =>
     <CCard className="flex flex-auto flex-col flex-wrap border border-gray-200 rounded-none shadow-md overflow-hidden hover:shadow-lg p-0 m-0 w-full bg-[#0D2B53] text-white">
@@ -32,8 +32,8 @@ const AccessCardComponent = ({ title, href, teaser, description, links }) =>
 
 
 export const AccessCards = () => {
-    const siteConstants = useConstants("api/site.json")
-    const cards = siteConstants["access-cards"]
+    const constants = useJsonApi("api/site/constants.json")
+    const cards = constants.access_cards
     const accessCardComponents =
         cards?.map(card => (<AccessCardComponent {...card} key={card.title} />))
 

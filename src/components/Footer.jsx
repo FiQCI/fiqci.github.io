@@ -1,14 +1,25 @@
 import React from 'react';
 
+import { useJsonApi } from '../hooks/useJsonApi'
+import { prependBaseURL } from '../utils/url';
+
+
 export const Footer = () => {
-  const {
-    baseUrl,
-    feedbackEmail,
-    images: {
-      footerIconsPath,
-      funderLogosPath
-    }
-  } = SITE.constants
+    const constants = useJsonApi("api/site/constants.json")
+    const feedbackEmail = constants.feedback_email || ""
+    const supporterLogos = constants.footer_icons
+      ? <>
+        <img src={prependBaseURL(`${constants.footer_icons}/footer-logo-vtt.jpg`)} alt="VTT" className="h-10" />
+        <img src={prependBaseURL(`${constants.footer_icons}/footer-logo-aalto.png`)} alt="Aalto University" className="h-10" />
+        <img src={prependBaseURL(`${constants.footer_icons}/footer-logo-csc.svg`)} alt="CSC" className="h-10" />
+      </>
+      : <></>
+    const funderLogos = constants.funder_logos
+      ? <>
+        <img src={prependBaseURL(`${constants.funder_logos}/Academy_of_Finland.png`)} alt="Academy of Finland" className="h-10" />
+        <img src={prependBaseURL(`${constants.funder_logos}/EU-RRF.jpg`)} alt="EU Funding" className="h-10" />
+      </>
+      : <></>
 
   return (
     <>
@@ -17,17 +28,14 @@ export const Footer = () => {
         <div className="w-full md:w-auto">
           <p className="font-semibold">Brought to you by:</p>
           <div className="flex flex-wrap items-center space-x-0 lg:space-x-3 mt-1">
-              <img src={`${footerIconsPath}/footer-logo-vtt.jpg`} alt="VTT" className="h-10" />
-              <img src={`${footerIconsPath}/footer-logo-aalto.png`} alt="Aalto University" className="h-10" />
-               <img src={`${footerIconsPath}/footer-logo-csc.svg`} alt="CSC" className="h-10" />
+            {supporterLogos}
           </div>
         </div>
 
         <div className="w-full md:w-auto">
           <p className="font-semibold">Supported by:</p>
           <div className="flex flex-wrap items-center space-x-0 lg:space-x-3 mt-1">
-                 <img src={`${funderLogosPath}/Academy_of_Finland.png`} alt="Academy of Finland" className="h-10" />
-                  <img src={`${funderLogosPath}/EU-RRF.jpg`} alt="EU Funding" className="h-10" />
+            {funderLogos}
           </div>
         </div>
         </div>
@@ -43,16 +51,16 @@ export const Footer = () => {
       <div className="bg-gray-200 py-3">
         <div className="mx-8 lg:mx-[100px] flex flex-col md:flex-row justify-between items-center text-gray-600 space-y-2 md:space-y-0">
           <p className="text-center md:text-left">
-            © 2024 The FiQCI Consortium. Powered by{" "}
+            {constants.copyright || ""}. Powered by{" "}
             <a href="https://jekyllrb.com/" className="underline">
               Jekyll
-            </a>
+            </a>.
           </p>
           <div className="flex space-x-4">
-            <a href={`${baseUrl}/cookies`} className="underline">
+            <a href={prependBaseURL("/cookies")} className="underline">
               Cookies
             </a>
-            <a href={`${baseUrl}/accessibility`} className="underline">
+            <a href={prependBaseURL("/accessibility")} className="underline">
               Accessibility statements
             </a>
           </div>

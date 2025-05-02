@@ -10,7 +10,6 @@ collections:
   publications:
     output: true
     sort_by: date
-
   events:
     output: true
 
@@ -20,3 +19,7 @@ defaults:
       type: "pages"
     values:
       permalink: "/:basename/"
+  - scope:
+      path: "api"
+    values:
+      permalink: "/:path/:basename.json"

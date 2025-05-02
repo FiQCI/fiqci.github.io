@@ -6,11 +6,11 @@ import { SiteSearch } from '../components/SiteSearch'
 
 import { BaseLayout } from '../components/layouts/base.html'
 
-import { useConstants } from '../hooks/useConstants'
+import { useJsonApi } from '../hooks/useJsonApi'
 
 
 const SearchPage = () => {
-    const siteConstants = useConstants('api/site.json')
+    const siteConstants = useJsonApi('api/site/constants.json')
 
     return <>
         <BaseLayout {...siteConstants} />

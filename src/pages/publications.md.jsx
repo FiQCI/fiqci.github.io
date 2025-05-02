@@ -6,11 +6,11 @@ import { Blogs } from '../components/Blogs'
 
 import { PageLayout } from '../components/layouts/page.html'
 
-import { useConstants } from '../hooks/useConstants'
+import { useJsonApi } from '../hooks/useJsonApi'
 
 
 const BlogsPage = () => {
-    const siteConstants = useConstants('api/site.json')
+    const siteConstants = useJsonApi('api/site/constants.json')
 
     return <>
         <PageLayout {...siteConstants} title="Blogs and publications" />

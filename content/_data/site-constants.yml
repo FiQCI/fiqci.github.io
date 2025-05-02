@@ -1,6 +1,21 @@
 title: FiQCI
 author: The FiQCI Consortium
+copyright: © 2024 The FiQCI Consortium
 feedback_email: fiqci-feedback@postit.csc.fi
+
+header_nav:
+  - title: Home
+    page: index.md
+  - title: Get access
+    page: pages/access.md
+  - title: Blogs and instructions
+    page: pages/publications.md
+  - title: Status
+    page: pages/status.md
+  - title: Events
+    page: pages/events.md
+  - title: Search
+    page: pages/search.md
 
 hero:
   tagline: Making the power of quantum computing accessible
@@ -18,7 +33,7 @@ hero:
     - title: About FiQCI
       href: "#about-fiqci"
 
-access-cards:
+access_cards:
   - title: LUMI
     href: FIXME
     teaser: /assets/images/FiQCI-banner.jpg
@@ -50,8 +65,8 @@ access-cards:
 
 logo: assets/images/FiQCI-logo.png
 favicon: assets/images/favicon.png
-footer-icons: assets/footer-icons
-funder-logos: assets/images/funders
+footer_icons: assets/footer-icons
+funder_logos: assets/images/funders
 description: >-
   Web presence of the Finnish Quantum-Computing Infrastructure. We provide state-of-the-art quantum-computing services to Finnish RDI communities.
 excerpt_max_length: 250

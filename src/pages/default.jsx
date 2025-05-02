@@ -3,11 +3,11 @@ import { createRoot } from 'react-dom/client'
 
 import { BaseLayout } from '../components/layouts/base.html'
 
-import { useConstants } from '../hooks/useConstants'
+import { useJsonApi } from '../hooks/useJsonApi'
 
 
 const DefaultPage = () => {
-    const siteConstants = useConstants('api/site.json')
+    const siteConstants = useJsonApi('api/site/constants.json')
 
     return <>
         <BaseLayout {...siteConstants} />

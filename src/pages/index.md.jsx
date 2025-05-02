@@ -8,17 +8,16 @@ import { EventCards } from '../components/EventCards'
 
 import { HomeLayout } from '../components/layouts/home.html'
 
-import { useConstants } from '../hooks/useConstants'
+import { useJsonApi } from '../hooks/useJsonApi'
 
 
 const HomePage = () => {
-    const siteConstants = useConstants('api/site.json')
-    const accessConstants = siteConstants['access-cards']
+    const siteConstants = useJsonApi('api/site/constants.json')
 
     return <>
         <HomeLayout {...siteConstants} />
         {createPortal(
-            <AccessCards {...accessConstants} />,
+            <AccessCards />,
             document.getElementById('access-cards')
         )}
         {createPortal(

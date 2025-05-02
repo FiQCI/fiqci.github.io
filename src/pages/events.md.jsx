@@ -6,11 +6,11 @@ import { Events } from '../components/Events'
 
 import { PageLayout } from '../components/layouts/page.html'
 
-import { useConstants } from '../hooks/useConstants'
+import { useJsonApi } from '../hooks/useJsonApi'
 
 
 const EventsPage = () => {
-    const siteConstants = useConstants('api/site.json')
+    const siteConstants = useJsonApi('api/site/constants.json')
 
     return <>
         <PageLayout {...siteConstants} title="Events" />
