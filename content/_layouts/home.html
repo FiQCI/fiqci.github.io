@@ -1,15 +1,11 @@
 ---
 layout: base
 react_source_files:
-  - home.js
-  - aboutFiqci.js
+  - home.html.js
 ---
 
-{%- include react/root.html id='home' -%}
+{%- include react/root.html id='hero' -%}
 
-<div>
+{{ content }}
 
-  {{ content }}
-
-</div>
 {%- include react/root.html id='about-fiqci' -%}

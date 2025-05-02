@@ -2,9 +2,9 @@
 layout: base
 ---
 {% assign constants = site.data.site-constants %}
-<article itemscope itemtype="http://schema.org/BlogPosting">
+<article itemscope itemtype="http://schema.org/BlogPosting" class="mx-8 lg:mx-[100px] py-6">
 
-  <header class="prose">
+  <header class="prose m-auto">
     <h1 itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="text-sm">
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
@@ -17,7 +17,7 @@ layout: base
     </p>
   </header>
 
-  <div class="prose" itemprop="articleBody">
+  <div class="prose m-auto" itemprop="articleBody">
     {{ content }}
   </div>
 

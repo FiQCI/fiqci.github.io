@@ -7,7 +7,7 @@
     {%- assign date_format = constants.date_format | default: "%b %-d, %Y" -%}
     <span class="text-sm">{{ post.date | date: date_format }}</span>
     <div class="text-lg">
-      <a class="block font-medium" href="{{ post.url | relative_url }}">
+      <a class="block font-medium" href="{{ post.url | absolute_url }}">
         {{ post.title | escape }}
       </a>
     </div>

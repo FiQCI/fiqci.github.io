@@ -1,9 +1,8 @@
 ---
-layout: page
 title: Status
 subtitle: View the status of the Quantum Connections
-react_source_files:
-  - status.js
+layout: page
+react: true
 ---
 
 {%- include react/root.html id='service-status' -%}

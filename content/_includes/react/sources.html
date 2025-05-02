@@ -1,4 +1,0 @@
-{% assign react_source_files = include.sources | uniq %}
-{%- for src in react_source_files -%}
-<script type="text/javascript" src="{{ src | relative_url }}" charset="utf-8"></script>
-{%- endfor -%}

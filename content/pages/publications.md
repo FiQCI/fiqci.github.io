@@ -1,9 +1,8 @@
 ---
-layout: page
-title: Posts and publications
+title: Blogs and instructions
 subtitle: Blog posts, publications, and other material of interest
-react_source_files:
-  - blogs.js
+layout: page
+react: true
 ---
 
 {%- include react/root.html id='blogs' -%}

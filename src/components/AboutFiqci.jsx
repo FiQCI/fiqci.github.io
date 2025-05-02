@@ -9,7 +9,7 @@ export const AboutFiqci = () => {
                     <div className="flex">
                         <div className="w-64 flex-auto mt-8 pt-6 pr-6">
                         <div className="flex items-center justify-start mb-6 ">
-                                <h2 className="text-3xl font-bold">About Fiqci</h2>
+                                <h2 className="text-3xl font-bold" id="about-fiqci">About FiQCI</h2>
                         </div>
                         <div>
                         <p className="mb-4">

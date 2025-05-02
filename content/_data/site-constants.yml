@@ -1,7 +1,58 @@
 title: FiQCI
 author: The FiQCI Consortium
+feedback_email: fiqci-feedback@postit.csc.fi
+
+hero:
+  tagline: Making the power of quantum computing accessible
+  subtitle: FiQCI – Finnish quantum-computing infrastructure
+  announcement:
+    text: Open call for pilot access to Helmi quantum computer now open!
+    link:
+      title: How to access Helmi, instructions
+      href: FIXME
+  buttons:
+    - title: How to get access
+      href: "#get-access"
+    - title: Blogs and instructions
+      href: /publications
+    - title: About FiQCI
+      href: "#about-fiqci"
+
+access-cards:
+  - title: LUMI
+    href: FIXME
+    teaser: /assets/images/FiQCI-banner.jpg
+    description: |-
+      The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, hosted by CSC in Kajaani, Finland.
+    links:
+      - title: Getting started with Lumi
+        href: https://www.lumi-supercomputer.eu/get-started/
+  - title: Helmi - VTT Q5
+    href: FIXME
+    teaser: /assets/images/vtt-images/VTT_lab-2.jpg
+    description: |-
+      Helmi, the first Finnish quantum computer, co-developed by VTT and IQM Quantum Computers, is operated by VTT in Espoo, Finland. Helmi is based on superconducting technology, and presently provides five qubits. Upgrades to 20, then 50 qubits is planned for the near future.
+    links:
+      - title: How to access Helmi, instructions
+        href: FIXME
+      - title: Read more about Helmi
+        href: FIXME
+  - title: Kvasi
+    href: FIXME
+    teaser: /assets/images/FiQCI-banner.jpg
+    description: |-
+      Kvasi, the Atos Quantum Learning Machine or Qaptiva is a quantum computing simulator with which you can learn to use and develop new quantum algorithms. Kvasi provides a platform for developing and simulating quantum algorithms in both ideal and realistic, noisy conditions. Kvasi is capable of simulating algorithms for quantum computers of 30+ qubits.
+    links:
+      - title: How to access Kvasi, instructions
+        href: FIXME
+      - title: Read more about Kvasi
+        href: FIXME
+
 logo: assets/images/FiQCI-logo.png
 favicon: assets/images/favicon.png
+footer-icons: assets/footer-icons
+funder-logos: assets/images/funders
 description: >-
   Web presence of the Finnish Quantum-Computing Infrastructure. We provide state-of-the-art quantum-computing services to Finnish RDI communities.
 excerpt_max_length: 250
+title_separator: " – "

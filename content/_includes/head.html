@@ -1,27 +1,20 @@
 {% assign constants = site.data.site-constants %}
 <head>
+  <title>{{ page.title }}{{ constants.title_separator }}{{ constants.title }}</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--{\%- seo -\%}-->
-  <link rel="icon" href="{{ constants.favicon | relative_url }}" />
-  <link rel="stylesheet" href="{{ 'main.css' | relative_url }}">
-  {%- include external/mathjax.html -%}
-
-  <script type="text/javascript" src="{{ "site.js" | relative_url }}" charset="utf-8"></script>
-
-  {% assign react_source_files = include.react_source_files %}
-  {% unless layout.react_source_files == empty %}
-    {% for src in layout.react_source_files %}
-      {% assign react_source_files = react_source_files | push: src %}
-    {% endfor %}
-  {% endunless %}
-  {% unless page.react_source_files == empty %}
-    {% for src in page.react_source_files %}
-      {% assign react_source_files = react_source_files | push: src %}
-    {% endfor %}
-  {% endunless %}
-  {%- unless react_source_files == empty %}
-    {%- include react/sources.html sources=react_source_files -%}
-  {%- endunless -%}
+  <link rel="icon" href="{{ constants.favicon | absolute_url }}" />
+  <link rel="stylesheet" href="{{ 'properties.css' | absolute_url }}" />
+  <link rel="stylesheet" href="{{ 'main.css' | absolute_url }}" />
+  {% include external/mathjax.html -%}
+  {% include external/font.html %}
+  <script type="text/javascript" src="{{ "site.js" | absolute_url }}" charset="utf-8"></script>
+  {% if page.react %}
+    {%- assign react_source = page.name | append: ".js" -%}
+  {% else %}
+    {%- assign react_source = "default.js" -%}
+  {% endif %}
+  <script type="text/javascript" src="{{ react_source | absolute_url }}" charset="utf-8"></script>
 </head>
