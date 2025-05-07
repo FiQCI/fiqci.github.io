@@ -46,6 +46,6 @@ export const BlogCards = () => {
                     </div>
                 </a>
             </div>
-        </>
+        </div>
     );
 };

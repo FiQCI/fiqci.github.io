@@ -6,6 +6,8 @@ feedback_email: fiqci-feedback@postit.csc.fi
 header_nav:
   - title: Home
     page: index.md
+  - title: About FiQCI
+    page: pages/about.md
   - title: Get access
     page: pages/access.md
   - title: Blogs and instructions

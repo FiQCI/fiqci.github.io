@@ -52,6 +52,6 @@ export const EventCards = () => {
                     </div>
                 </a>
             </div>
-        </>
+        </div>
     );
 };

@@ -41,7 +41,7 @@ const TextContent = () => {
             </p>
             <p>
                 FiQCI is jointly maintained, operated, and developed by VTT, Aalto
-                University, and CSC – IT Center for Science.
+                University, and CSC - IT Center for Science.
             </p>
 
             <div className="mt-4">
