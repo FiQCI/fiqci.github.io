@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { mdiArrowRight, mdiOpenInNew } from '@mdi/js';
+import { prependBaseURL } from '../utils/url';
+import { useJsonApi } from '../hooks/useJsonApi';
 
 const ResourceCard = ({ resource }) => {
     return (
@@ -9,7 +11,7 @@ const ResourceCard = ({ resource }) => {
             <div className="flex">
                 <img
                     className="aspect-video object-cover sm:aspect-auto sm:w-auto  sm:max-w-[150px]"
-                    src={resource.image}
+                    src={prependBaseURL(resource.image)}
                 />
             </div>
 
@@ -35,7 +37,7 @@ const ResourceList = ({ id, title, resources }) => {
         <div className="pb-8" id={id}>
             <h1 className="text-2xl font-bold pb-8">{title}</h1>
             <div className="flex flex-col gap-8">
-                {resources.map((resource, index) => (
+                {resources?.map((resource, index) => (
                     <ResourceCard key={index} resource={resource} />
                 ))}
             </div>
@@ -43,50 +45,9 @@ const ResourceList = ({ id, title, resources }) => {
     )
 }
 
-const quantum_resources = [
-    {
-        name: "Helmi",
-        desc: `Helmi (VTT Q5), the Finnish quantum computer operated by VTT, co-developed with IQM.
-            Helmi is based on superconducting technology, and presently provides five qubits. Upgrades to
-            20, then 50 qubits is planned for the near future. Helmi is accessible through the
-            LUMI supercomputer environment. The pilot phase for Helmi access is now running!`,
-        image: "/assets/images/vtt-images/VTT_lab-2.jpg",
-        links: [
-            {
-                link: "",
-                teaser: "How to access Helmi, instructions",
-                icon: mdiArrowRight,
-            },
-            {
-                link: "",
-                teaser: "Read more about Helmi (VTT website)",
-                icon: mdiOpenInNew,
-            },
-        ],
-    },
-    {
-        name: "VTT Q50",
-        desc: `Lorem ipsum the Finnish quantum computer operated by VTT, co-developed with IQM.
-        Lorem ipsum is accessible through the LUMI supercomputer environment. The pilot phase for
-        VTT Q50 access is now running!`,
-        image: "/assets/images/vtt-images/VTT_lab-2.jpg",
-        links: [
-            {
-                link: "",
-                teaser: "How to access VTT Q50, instructions",
-                icon: mdiArrowRight,
-            },
-            {
-                link: "",
-                teaser: "Read more about VTT Q50 (VTT website)",
-                icon: mdiOpenInNew,
-            },
-        ],
-    }
-];
-
 export const GetAccess = () => {
-
+    const constants = useJsonApi("api/site/constants.json")
+    const quantum_resources = constants?.quantum_resources
     useEffect(() => {
         if (window.location.hash !== "") {
           const hash = window.location.hash;

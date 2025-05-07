@@ -65,6 +65,36 @@ access_cards:
       - title: Read more about Kvasi
         href: FIXME
 
+quantum_resources:
+  - name: Helmi
+    desc: |-
+      Helmi (VTT Q5), the Finnish quantum computer operated by VTT, co-developed with IQM.
+      Helmi is based on superconducting technology, and presently provides five qubits.
+      Upgrades to 20, then 50 qubits is planned for the near future. Helmi is accessible
+      through the LUMI supercomputer environment. The pilot phase for Helmi access is now running!
+    image: "/assets/images/vtt-images/VTT_lab-2.jpg"
+    links:
+      - link: ""
+        teaser: "How to access Helmi, instructions"
+        icon: mdiArrowRight
+      - link: ""
+        teaser: "Read more about Helmi (VTT website)"
+        icon: mdiOpenInNew
+
+  - name: VTT Q50
+    desc: |-
+      Lorem ipsum the Finnish quantum computer operated by VTT, co-developed with IQM.
+      Lorem ipsum is accessible through the LUMI supercomputer environment. The pilot phase
+      for VTT Q50 access is now running!
+    image: "/assets/images/vtt-images/VTT_lab-2.jpg"
+    links:
+      - link: ""
+        teaser: "How to access VTT Q50, instructions"
+        icon: mdiArrowRight
+      - link: ""
+        teaser: "Read more about VTT Q50 (VTT website)"
+        icon: mdiOpenInNew
+
 logo: assets/images/FiQCI-logo.png
 favicon: assets/images/favicon.png
 footer_icons: assets/footer-icons
