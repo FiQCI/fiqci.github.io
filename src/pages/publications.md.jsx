@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom'
 
 import { Blogs } from '../components/Blogs'
 
-import { PageLayout } from '../components/layouts/page.html'
+import { PageLayout } from '../layouts/page.html'
 
 import { useJsonApi } from '../hooks/useJsonApi'
 

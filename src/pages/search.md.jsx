@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom'
 
 import { SiteSearch } from '../components/SiteSearch'
 
-import { BaseLayout } from '../components/layouts/base.html'
+import { BaseLayout } from '../layouts/base.html'
 
 import { useJsonApi } from '../hooks/useJsonApi'
 

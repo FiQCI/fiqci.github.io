@@ -1,7 +1,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 
-import { BaseLayout } from '../components/layouts/base.html'
+import { BaseLayout } from '../layouts/base.html'
 
 import { useJsonApi } from '../hooks/useJsonApi'
 

@@ -1,10 +1,10 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 
-import { NavigationHeader } from '../NavigationHeader'
-import { Footer } from '../Footer'
+import { NavigationHeader } from '../components/NavigationHeader'
+import { Footer } from '../components/Footer'
 
-import { useMatomo } from '../../hooks/useMatomo'
+import { useMatomo } from '../hooks/useMatomo'
 
 
 const Analytics = () => {
