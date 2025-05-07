@@ -1,7 +1,7 @@
 import React from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
 import { CCard, CIcon, CCardContent } from '@cscfi/csc-ui-react';
-import { mdiArrowRight, mdiKeyLink, mdiOpenInNew } from '@mdi/js';
+import { mdiArrowRight, mdiOpenInNew } from '@mdi/js';
 import { prependBaseURL, isExternal } from '../utils/url';
 
 import { useJsonApi } from '../hooks/useJsonApi';
@@ -41,7 +41,7 @@ export const AccessCards = () => {
         cards?.map(card => (<AccessCardComponent {...card} key={card.title} />))
 
     return <>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-0 sm:gap-6 mb-2 sm:mb-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-0 sm:gap-6 mb-2 sm:mb-0 gap-6">
             {accessCardComponents}
         </div>
         <div className="mt-4">
