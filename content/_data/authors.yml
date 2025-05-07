@@ -1,0 +1,29 @@
+Olli Mukkula:
+  name        : "Olli Mukkula"
+  bio         : "Application Specialist at CSC, Quantum Technologies"
+  avatar      : "/assets/images/authors/Olli_Mukkula.png"
+
+Joonas Nivala:
+  name        : "Joonas Nivala"
+  bio         : "Quantum Computing trainee at CSC, Quantum Technologies"
+  avatar      : "/assets/images/authors/Joonas_Nivala.jpg"
+
+Nikolas Klemola Tango:
+  name        : "Nikolas Klemola Tango"
+  bio         : "Junior Application Specialist at CSC, Quantum Technologies"
+  avatar      : "/assets/images/authors/Nikolas_Klemola_Tango.jpg"
+
+Huyen Do:
+  name        : "Huyen Do"
+  bio         : "Quantum Computing trainee at CSC, Quantum Technologies"
+  avatar      : "/assets/images/authors/Huyen_Do.jpg"
+
+Meeri Makitalo:
+  name        : "Meeri Mäkitalo"
+  bio         : "Quantum Computing trainee at CSC, Quantum Technologies"
+  avatar      : "/assets/images/authors/Meeri_Makitalo.jpg"
+
+Michael Mucciardi:
+  name        : "Michael Mucciardi"
+  bio         : "Senior Systems Specialist at CSC, Quantum Technologies"
+  avatar      : "/assets/images/authors/Michael_Mucciardi.jpg"  

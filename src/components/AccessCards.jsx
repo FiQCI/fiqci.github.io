@@ -1,35 +1,38 @@
 import React from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
 import { CCard, CIcon, CCardContent } from '@cscfi/csc-ui-react';
-import { mdiArrowRight, mdiOpenInNew } from '@mdi/js';
+import { mdiArrowRight, mdiKeyLink, mdiOpenInNew } from '@mdi/js';
 import { prependBaseURL, isExternal } from '../utils/url';
 
 import { useJsonApi } from '../hooks/useJsonApi';
 
-const AccessCardComponent = ({ title, href, teaser, description, links }) =>
-    <CCard className="flex flex-auto flex-col flex-wrap border border-gray-200 rounded-none shadow-md overflow-hidden hover:shadow-lg p-0 m-0 w-full bg-[#0D2B53] text-white">
+const AccessCardComponent = ({ title, href, teaser, description, links }) => {
+    return (
+      <CCard className="flex flex-auto flex-col flex-wrap border border-gray-200 rounded-none shadow-md overflow-hidden hover:shadow-lg p-0 m-0 w-full bg-[#0D2B53] text-white">
         <img
-            src={prependBaseURL(teaser)}
-            alt="teaser"
-            className="w-full h-32 object-cover"
+          src={prependBaseURL(teaser)}
+          alt="teaser"
+          className="w-full h-32 object-cover"
         />
         <CCardContent className="flex flex-col border-none p-5 space-y-4">
-            <a href={prependBaseURL(href)} className="text-lg font-bold hover:underline">
-                {title}
-            </a>
-
-            <div className="text-md">{description}</div>
-
-            <div className="flex flex-col space-y-2">
-                {links.map((link, index) => (
-                    <a key={index} href={prependBaseURL(link.href)} className="text-sm font-bold hover:underline flex items-center gap-1">
-                        {link.title} <CIcon path={isExternal(link.href) ? mdiOpenInNew : mdiArrowRight} />
-                    </a>
-                ))}
-            </div>
+          <a href={prependBaseURL(href)} className="text-lg font-bold hover:underline">
+            {title}
+          </a>
+  
+          <div className="text-md">{description}</div>
+  
+          <div className="flex flex-col space-y-2">
+            {links.map((link, index) => (
+              <a key={index} href={prependBaseURL(link.href)} className="text-sm font-bold hover:underline flex items-center gap-1">
+                {link.title} <CIcon path={isExternal(link.href) ? mdiOpenInNew : mdiArrowRight} />
+              </a>
+            ))}
+          </div>
         </CCardContent>
-    </CCard>
-
+      </CCard>
+    );
+  };
+  
 
 export const AccessCards = () => {
     const constants = useJsonApi("api/site/constants.json")

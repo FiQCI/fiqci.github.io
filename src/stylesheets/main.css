@@ -1,3 +1,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+    #blogView ul {
+        @apply pt-2 pl-5 space-y-2 list-disc list-inside;
+    }
+
+    #blogView ol {
+        @apply pt-2 pl-5 space-y-2 list-decimal;
+    }
+
+    #blogView table {
+        @apply w-full overflow-x-auto;
+        @apply ml-0; /* Align table to the left */
+    }
+
+    #blogView th,
+    #blogView td {
+        @apply text-left border-b border-gray-200;
+    }
+
+    #blogView th {
+        @apply text-sm font-semibold text-gray-700 bg-gray-100;
+    }
+
+    #blogView tbody tr:hover {
+        @apply bg-gray-50;
+    }
+
+    #blogView tbody tr:nth-child(odd) {
+        @apply bg-white;
+    }
+
+    #blogView tbody tr:nth-child(even) {
+        @apply bg-gray-50;
+    }
+
+    #blogView td {
+        @apply text-sm text-gray-700;
+    }
+
+    #blogView thread {
+        @apply inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded-full mt-1;
+    }
+
+    #blogView h1 {
+        @apply text-4xl font-bold text-gray-900 mt-8 mb-4;
+    }
+    
+    #blogView h2 {
+        @apply text-3xl font-semibold text-gray-800 mt-6 mb-3;
+    }
+
+    #blogView h3 {
+        @apply text-2xl font-semibold text-gray-800 mt-4 mb-2;
+    }
+
+    #blogView hr {
+        @apply my-6;
+    }
+
+    #blogView p {
+        @apply mb-3;
+    }
+
+    #blogView a {
+        @apply text-sky-800 font-bold
+    }
+
+    #blogView a:hover {
+        @apply underline
+    }
+}
+.white-space-pre-line {
+    white-space: pre-line;
+}

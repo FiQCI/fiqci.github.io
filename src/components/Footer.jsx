@@ -22,7 +22,7 @@ export const Footer = () => {
       : <></>
 
   return (
-    <>
+    <footer className="bg-gray-100 text-gray-700 text-sm">
       <div className="px-8 lg:px-[100px] py-4 flex flex-wrap md:flex-nowrap justify-between items-start space-y-4 md:space-y-0">
         <div className='flex content-evenly space-x-8'>
         <div className="w-full md:w-auto">
@@ -57,7 +57,7 @@ export const Footer = () => {
             </a>.
           </p>
           <div className="flex space-x-4">
-            <a href={prependBaseURL("/cookies")} className="underline">
+          <a href={prependBaseURL("/cookies")} className="underline">
               Cookies
             </a>
             <a href={prependBaseURL("/accessibility")} className="underline">
@@ -66,6 +66,6 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-    </>
+    </footer>
   );
 };

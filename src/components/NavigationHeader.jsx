@@ -6,7 +6,7 @@ import { useJsonApi } from '../hooks/useJsonApi'
 import { prependBaseURL } from '../utils/url';
 
 const style = {
-  "--_c-button-font-size": 12,
+  "--_c-button-font-size": 18,
   "--_c-button-min-width": 0,
   "--_c-button-height": "auto",
   "--_c-icon-color": "black"
@@ -90,15 +90,16 @@ export const NavigationHeader = () => {
     }
     if (isOpen) { //stop main content from scrolling when navigation menu open
       document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("touchstart", handleClickOutside);
     }
-    else{
-        document.body.style.overflow = 'visible';
+    else {
+      document.body.style.overflow = 'visible';
     }
     // Clean up the listeners on unmount or when isOpen changes
     return () => {
-        document.body.style.overflow = 'visible';
+      document.body.style.overflow = 'visible';
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("touchstart", handleClickOutside);
     };

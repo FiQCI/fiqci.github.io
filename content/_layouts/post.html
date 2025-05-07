@@ -1,24 +1,33 @@
 ---
 layout: base
+react_source_files:
+  - blogView.js
 ---
+
 {% assign constants = site.data.site-constants %}
-<article itemscope itemtype="http://schema.org/BlogPosting" class="mx-8 lg:mx-[100px] py-6">
 
-  <header class="prose m-auto">
-    <h1 itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="text-sm">
-      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {%- assign date_format = constants.date_format | default: "%b %-d, %Y" -%}
-        {{ page.date | date: date_format }}
-      </time>
-      {%- if page.author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
-      {%- endif -%}
-    </p>
-  </header>
+{% assign author_info = site.data.authors[page.author] %}
 
-  <div class="prose m-auto" itemprop="articleBody">
-    {{ content }}
-  </div>
+<article itemscope itemtype="http://schema.org/BlogPosting">
+  {%- include react/root.html id='blog-view' -%}
 
+  <div id="blog-content" data-content="{{ content | escape }}"></div>
+
+  <div
+    id="blog-data"
+    data-content='{
+      "title": {{ page.title | strip_newlines | escape | jsonify }},
+      "tags": {{ page.tags | strip_newlines | escape }},
+      "type": {{ page.type | strip_newlines | escape | jsonify }},
+      "date": {{ page.date | strip_newlines | escape | jsonify }},
+      "theme": {{ page.filters.Theme | strip_newlines | escape | jsonify }},
+      "author": {
+        "name":{{author_info.name | strip_newlines | escape | jsonify}},
+        "bio": {{author_info.bio | strip_newlines | escape | jsonify}},
+        "url": {{author_info.avatar | strip_newlines | escape | jsonify}}
+      }
+    }'
+  ></div>
+
+  
 </article>

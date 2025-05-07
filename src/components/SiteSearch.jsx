@@ -330,7 +330,7 @@ export const SiteSearch = () => {
   };
 
   return (
-    <div className='mx-8 lg:mx-[100px] lg:grid grid-cols-5 gap-0'>
+    <div className='min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-2 sm:mx-8 lg:mx-[100px] lg:grid grid-cols-5 gap-0'>
       <div className='col-span-5 mt-4'>
         <Breadcrumbs breadcrumbs={{ Home: "/", "Search results": "/search" }} />
       </div>
