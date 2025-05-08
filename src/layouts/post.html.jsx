@@ -26,7 +26,6 @@ export const PostLayout = props => {
     const authorData = document.getElementById('author-data')
     const author = JSON.parse(authorData.getAttribute('data-content'));
 
-    console.log(author)
     return <>
         <BaseLayout {...props} />
         {createPortal(
