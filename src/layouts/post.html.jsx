@@ -1,17 +1,17 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 
-import { Banner } from '../Banner'
+import { Banner } from '../components/Banner'
 
-import { Breadcrumbs } from '../Breadcrumbs'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 
-import { ReadNext } from '../ReadNext'
+import { ReadNext } from '../components/ReadNext'
 
-import { BlogTags } from '../BlogTags'
+import { BlogTags } from '../components/BlogTags'
 
-import { Author } from '../Author'
+import { Author } from '../components/Author'
 
-import { ReferencesAccordion } from '../ReferencesAccordion'
+import { ReferencesAccordion } from '../components/ReferencesAccordion'
 
 import { BaseLayout } from './base.html'
 

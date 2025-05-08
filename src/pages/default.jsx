@@ -1,9 +1,8 @@
 import React from 'react'
-import { createPortal } from 'react-dom'
 
 import { createRoot } from 'react-dom/client'
 
-import { PostLayout } from '../components/layouts/post.html'
+import { PostLayout } from '../layouts/post.html'
 
 import { BaseLayout } from '../layouts/base.html'
 

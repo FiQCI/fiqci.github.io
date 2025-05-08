@@ -4,16 +4,16 @@ import { createPortal } from 'react-dom'
 
 import { GetAccess } from '../components/GetAccess'
 
-import { PageLayout } from '../components/layouts/page.html'
+import { PageLayout } from '../layouts/page.html'
 
 import { useJsonApi } from '../hooks/useJsonApi'
 
 
 const AccessPage = () => {
-    const siteConstants = useJsonApi('api/site/constants.json')
+    const themeConstants = useJsonApi('api/theme/constants.json')
 
     return <>
-        <PageLayout {...siteConstants} title="Get Access" />
+        <PageLayout {...themeConstants} title="Get Access" />
         {createPortal(
             <GetAccess />,
             document.getElementById('access')

@@ -46,7 +46,7 @@ const ResourceList = ({ id, title, resources }) => {
 }
 
 export const GetAccess = () => {
-    const constants = useJsonApi("api/site/constants.json")
+    const constants = useJsonApi("api/theme/constants.json")
     const quantum_resources = constants?.quantum_resources
     useEffect(() => {
         if (window.location.hash !== "") {

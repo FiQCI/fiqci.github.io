@@ -4,16 +4,16 @@ import { createPortal } from 'react-dom'
 
 import { AboutPage } from '../components/AboutPage'
 
-import { PageLayout } from '../components/layouts/page.html'
+import { PageLayout } from '../layouts/page.html'
 
 import { useJsonApi } from '../hooks/useJsonApi'
 
 
 const AboutPageView = () => {
-    const siteConstants = useJsonApi('api/site/constants.json')
+    const themeConstants = useJsonApi('api/theme/constants.json')
 
     return <>
-        <PageLayout {...siteConstants} title="About" />
+        <PageLayout {...themeConstants} title="About" />
         {createPortal(
             <AboutPage />,
             document.getElementById('about')
