@@ -9,13 +9,10 @@ import { BaseLayout } from '../components/layouts/base.html'
 
 import { useJsonApi } from '../hooks/useJsonApi'
 
-import { BlogView } from '../components/BlogView'
-
-
 const BlogViewPage = () => {
     const siteConstants = useJsonApi('api/site/constants.json')
 
-    if (!document.getElementById('blog-view')) {
+    if (!document.getElementById('blogView')) {
         return <>
             <BaseLayout {...siteConstants}/>
         </>
@@ -24,7 +21,6 @@ const BlogViewPage = () => {
     return (
         <>
             <PostLayout {...siteConstants} title="Blog" />
-            {createPortal(<BlogView />, document.getElementById('blog-view'))}
         </>
     )
 }

@@ -3,18 +3,55 @@ import { createPortal } from 'react-dom'
 
 import { Banner } from '../Banner'
 
+import { Breadcrumbs } from '../Breadcrumbs'
+
+import { ReadNext } from '../ReadNext'
+
+import { BlogTags } from '../BlogTags'
+
+import { Author } from '../Author'
+
+import { ReferencesAccordion } from '../ReferencesAccordion'
+
 import { BaseLayout } from './base.html'
 
 export const PostLayout = props => {
     const title = props.title_separator
         ? document.title.split(props.title_separator, 1)[0]
         : "Loading..."
+
+    const tagsData = document.getElementById('tags-data')
+    const tags = JSON.parse(tagsData.getAttribute('data-content'));
+
+    const authorData = document.getElementById('author-data')
+    const author = JSON.parse(authorData.getAttribute('data-content'));
+
+    console.log(author)
     return <>
-        moi
         <BaseLayout {...props} />
         {createPortal(
             <Banner title={title} />,
             document.getElementById('banner')
+        )}
+        {createPortal(
+            <Breadcrumbs breadcrumbs={{ "Home": "/", "About FiQCI": "/about/", [title]: "#" }} />,
+            document.getElementById('breadcrumbs')
+        )}
+        {createPortal(
+            <ReadNext title={title} />,
+            document.getElementById('read-next')
+        )}
+        {createPortal(
+            <BlogTags tags={tags} />,
+            document.getElementById('tags')
+        )}
+        {createPortal(
+            <Author author={author} />,
+            document.getElementById('author')
+        )}
+        {createPortal(
+            <ReferencesAccordion />,
+            document.getElementById('references-accordion')
         )}
     </>
 }

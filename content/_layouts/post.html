@@ -1,24 +1,41 @@
 ---
-layout: base
+layout: page
 ---
+
 {% assign constants = site.data.constants %}
-<article itemscope itemtype="http://schema.org/BlogPosting" class="mx-8 lg:mx-[100px] py-6">
+{% assign author_info = site.data.authors[page.author] %}
 
-  <header class="prose m-auto">
-    <h1 itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="text-sm">
-      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {%- assign date_format = constants.date_format | default: "%b %-d, %Y" -%}
-        {{ page.date | date: date_format }}
-      </time>
-      {%- if page.author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
-      {%- endif -%}
-    </p>
-  </header>
-
-  <div class="prose m-auto" itemprop="articleBody">
-    {{ content }}
-  </div>
-
+{%- include react/root.html id='banner' -%}
+<article itemscope itemtype="http://schema.org/BlogPosting">
+ <div id="blogView" class='flex flex-col items-top mb-2'>
+    <div class='2xl:grid 2xl:grid-cols-5 mx-2 sm:mx-8 lg:mx-[100px] flex flex-col gap-8 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
+        <div class='col-span-5 mt-4'>
+            {%- include react/root.html id='breadcrumbs' -%}
+        </div>
+        <div class='col-span-1' id="author-data" data-content='{
+            "name":{{author_info.name | strip_newlines | escape | jsonify}},
+            "bio": {{author_info.bio | strip_newlines | escape | jsonify}},
+            "url": {{author_info.avatar | strip_newlines | escape | jsonify}}
+        }'>
+            {%- include react/root.html id='author' -%}
+        </div>
+        <div class='col-span-3' id="tags-data" data-content="{{ page.tags | strip_newlines | escape }}">
+            {%- include react/root.html id='tags' -%}
+            <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+              {%- assign date_format = constants.date_format | default: "%b %-d, %Y" -%}
+              {{ page.type }} | {{ page.date | date: date_format }}
+            </time>
+            <h1 class='!pt-0 !mt-0 text-4xl font-bold text-gray-900 mt-8 mb-4'>{{page.title}}</h1>
+               <div class="prose inline" itemprop="articleBody">
+                {{ content }}
+              </div>
+              <div class="pt-8" id="references">
+                {%- include react/root.html id='references-accordion' -%}
+              </div>
+        </div>
+        <div class='col-span-5 2xl:col-span-1 2xl:w-full'>
+            {%- include react/root.html id='read-next' -%}
+        </div>
+    </div>
+</div>
 </article>
