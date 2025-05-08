@@ -15,7 +15,7 @@ const AccessPage = () => {
     return <>
         <PageLayout {...themeConstants} title="Get Access" />
         {createPortal(
-            <GetAccess />,
+            <GetAccess {...themeConstants}/>,
             document.getElementById('access')
         )}
     </>
