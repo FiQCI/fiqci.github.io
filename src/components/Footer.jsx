@@ -1,23 +1,20 @@
 import React from 'react';
 
-import { useJsonApi } from '../hooks/useJsonApi'
 import { prependBaseURL } from '../utils/url';
 
 
-export const Footer = () => {
-    const constants = useJsonApi("api/site/constants.json")
-    const feedbackEmail = constants.feedback_email || ""
-    const supporterLogos = constants.footer_icons
+export const Footer = props => {
+    const supporterLogos = props.supporterLogoPath
       ? <>
-        <img src={prependBaseURL(`${constants.footer_icons}/footer-logo-vtt.jpg`)} alt="VTT" className="h-10" />
-        <img src={prependBaseURL(`${constants.footer_icons}/footer-logo-aalto.png`)} alt="Aalto University" className="h-10" />
-        <img src={prependBaseURL(`${constants.footer_icons}/footer-logo-csc.svg`)} alt="CSC" className="h-10" />
+        <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-vtt.jpg`)} alt="VTT" className="h-10" />
+        <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-aalto.png`)} alt="Aalto University" className="h-10" />
+        <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-csc.svg`)} alt="CSC" className="h-10" />
       </>
       : <></>
-    const funderLogos = constants.funder_logos
+    const funderLogos = props.funderLogoPath
       ? <>
-        <img src={prependBaseURL(`${constants.funder_logos}/Academy_of_Finland.png`)} alt="Academy of Finland" className="h-10" />
-        <img src={prependBaseURL(`${constants.funder_logos}/EU-RRF.jpg`)} alt="EU Funding" className="h-10" />
+        <img src={prependBaseURL(`${props.funderLogoPath}/Academy_of_Finland.png`)} alt="Academy of Finland" className="h-10" />
+        <img src={prependBaseURL(`${props.funderLogoPath}/EU-RRF.jpg`)} alt="EU Funding" className="h-10" />
       </>
       : <></>
 
@@ -42,8 +39,8 @@ export const Footer = () => {
 
         <div className="w-full md:w-auto text-left md:text-right">
           <p className="font-semibold">Customer support</p>
-          <a href={`mailto:${feedbackEmail}`} className="text-blue-600 hover:underline">
-            {feedbackEmail}
+          <a href={`mailto:${props.feedbackEmail}`} className="text-blue-600 hover:underline">
+            {props.feedbackEmail}
           </a>
         </div>
       </div>
@@ -51,7 +48,7 @@ export const Footer = () => {
       <div className="bg-gray-200 py-3">
         <div className="mx-8 lg:mx-[100px] flex flex-col md:flex-row justify-between items-center text-gray-600 space-y-2 md:space-y-0">
           <p className="text-center md:text-left">
-            {constants.copyright || ""}. Powered by{" "}
+            {props.copyright}. Powered by{" "}
             <a href="https://jekyllrb.com/" className="underline">
               Jekyll
             </a>.

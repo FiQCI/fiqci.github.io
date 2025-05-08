@@ -1,8 +1,8 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 
-import { Hero } from '../Hero'
-import { AboutFiqci } from '../AboutFiqci'
+import { Hero } from '../components/Hero'
+import { AboutFiqci } from '../components/AboutFiqci'
 
 import { BaseLayout } from './base.html'
 

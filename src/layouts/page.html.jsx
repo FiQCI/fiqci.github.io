@@ -1,7 +1,7 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 
-import { Banner } from '../Banner'
+import { Banner } from '../components/Banner'
 
 import { BaseLayout } from './base.html'
 

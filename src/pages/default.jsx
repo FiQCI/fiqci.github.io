@@ -5,22 +5,22 @@ import { createRoot } from 'react-dom/client'
 
 import { PostLayout } from '../components/layouts/post.html'
 
-import { BaseLayout } from '../components/layouts/base.html'
+import { BaseLayout } from '../layouts/base.html'
 
 import { useJsonApi } from '../hooks/useJsonApi'
 
 const BlogViewPage = () => {
-    const siteConstants = useJsonApi('api/site/constants.json')
+    const themeConstants = useJsonApi('api/theme/constants.json')
 
     if (!document.getElementById('blogView')) {
         return <>
-            <BaseLayout {...siteConstants}/>
+            <BaseLayout {...themeConstants}/>
         </>
     }
 
     return (
         <>
-            <PostLayout {...siteConstants} title="Blog" />
+            <PostLayout {...themeConstants} title="Blog" />
         </>
     )
 }

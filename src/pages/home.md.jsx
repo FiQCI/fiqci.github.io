@@ -6,18 +6,19 @@ import { AccessCards } from '../components/AccessCards'
 import { BlogCards } from '../components/BlogCards'
 import { EventCards } from '../components/EventCards'
 
-import { HomeLayout } from '../components/layouts/home.html'
+import { HomeLayout } from '../layouts/home.html'
 
 import { useJsonApi } from '../hooks/useJsonApi'
 
 
 const HomePage = () => {
-    const siteConstants = useJsonApi('api/site/constants.json')
+    const themeConstants = useJsonApi('api/theme/constants.json')
+    const accessCards = themeConstants.access_cards || []
 
     return <>
-        <HomeLayout {...siteConstants} />
+        <HomeLayout {...themeConstants} />
         {createPortal(
-            <AccessCards />,
+            <AccessCards cards={accessCards} />,
             document.getElementById('access-cards')
         )}
         {createPortal(

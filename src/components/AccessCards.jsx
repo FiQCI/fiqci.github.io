@@ -34,11 +34,9 @@ const AccessCardComponent = ({ title, href, teaser, description, links }) => {
   };
   
 
-export const AccessCards = () => {
-    const constants = useJsonApi("api/site/constants.json")
-    const cards = constants.access_cards
+export const AccessCards = props => {
     const accessCardComponents =
-        cards?.map(card => (<AccessCardComponent {...card} key={card.title} />))
+        props.cards?.map(card => (<AccessCardComponent {...card} key={card.title} />))
 
     return <>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-0 sm:gap-6 mb-2 sm:mb-0 gap-6">

@@ -4,16 +4,16 @@ import { createPortal } from 'react-dom'
 
 import { SiteSearch } from '../components/SiteSearch'
 
-import { BaseLayout } from '../components/layouts/base.html'
+import { BaseLayout } from '../layouts/base.html'
 
 import { useJsonApi } from '../hooks/useJsonApi'
 
 
 const SearchPage = () => {
-    const siteConstants = useJsonApi('api/site/constants.json')
+    const themeConstants = useJsonApi('api/theme/constants.json')
 
     return <>
-        <BaseLayout {...siteConstants} />
+        <BaseLayout {...themeConstants} />
         {createPortal(
             <SiteSearch />,
             document.getElementById('site-search')

@@ -47,15 +47,14 @@ const NavSearchButton = props => {
     );
 };
 
-export const NavigationHeader = () => {
+export const NavigationHeader = props => {
     const [isOpen, setIsOpen] = useState(false);
     const navRef = useRef(null);
     const toggleMenu = () => setIsOpen((prev) => !prev);
 
-    const constants = useJsonApi("api/site/constants.json")
     const pages = useJsonApi("api/pages.json")
 
-    const navigationButtons = constants.header_nav?.map(
+    const navigationButtons = props.nav?.map(
         (item, index) => {
             const targetPage = pages.find && pages.find(page => page.path === item.page)
             const buttonProps = {
@@ -70,10 +69,10 @@ export const NavigationHeader = () => {
         }
     )
 
-    const headerLogo = constants.logo
+    const headerLogo = props.logo
       ? <a href={prependBaseURL("/")}>
             <img
-                src={prependBaseURL(constants.logo)}
+                src={prependBaseURL(props.logo)}
                 alt="Logo"
                 className="h-7"
             />
