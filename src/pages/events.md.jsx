@@ -10,10 +10,10 @@ import { useJsonApi } from '../hooks/useJsonApi'
 
 
 const EventsPage = () => {
-    const siteConstants = useJsonApi('api/site/constants.json')
+    const themeConstants = useJsonApi('api/theme/constants.json')
 
     return <>
-        <PageLayout {...siteConstants} title="Events" />
+        <PageLayout {...themeConstants} title="Events" />
         {createPortal(
             <Events />,
             document.getElementById('events')

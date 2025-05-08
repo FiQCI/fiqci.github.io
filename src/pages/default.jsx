@@ -7,10 +7,10 @@ import { useJsonApi } from '../hooks/useJsonApi'
 
 
 const DefaultPage = () => {
-    const siteConstants = useJsonApi('api/site/constants.json')
+    const themeConstants = useJsonApi('api/theme/constants.json')
 
     return <>
-        <BaseLayout {...siteConstants} />
+        <BaseLayout {...themeConstants} />
     </>
 }
 
