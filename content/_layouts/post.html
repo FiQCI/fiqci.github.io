@@ -1,12 +1,6 @@
 ---
-layout: base
-react_source_files:
-  - blogView.js
+layout: page
 ---
-
-{% assign constants = site.data.site-constants %}
-
-{% assign author_info = site.data.authors[page.author] %}
 
 <article itemscope itemtype="http://schema.org/BlogPosting">
   {%- include react/root.html id='blog-view' -%}
@@ -29,5 +23,4 @@ react_source_files:
     }'
   ></div>
 
-  
 </article>
