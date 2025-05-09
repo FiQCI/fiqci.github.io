@@ -47,6 +47,8 @@ const ResourceList = ({ id, title, resources }) => {
 
 export const GetAccess = props => {
     const quantum_resources = props?.quantum_resources
+    const supercomputer_resources = props?.supercomputer_resources
+    const emulation_resources = props?.emulation_resources
     useEffect(() => {
         if (window.location.hash !== "") {
           const hash = window.location.hash;
@@ -74,9 +76,9 @@ export const GetAccess = props => {
                     <p>Please see status of services from <a className="text-base text-sky-800 underline" href="/status/">Status</a> -page</p>
                     <ResourceList id={"quantum"} title={"Quantum computer resources"} resources={quantum_resources} />
 
-                    <ResourceList id={"super"} title={"Supercomputer resources"} resources={quantum_resources} />
+                    <ResourceList id={"super"} title={"Supercomputer resources"} resources={supercomputer_resources} />
 
-                    <ResourceList id={"emulation"} title={"Emulation resources"} resources={quantum_resources} />
+                    <ResourceList id={"emulation"} title={"Emulation resources"} resources={emulation_resources} />
 
                 </div>
             </div>
