@@ -47,71 +47,39 @@ function searchContent(query, store) {
     this.field('date');
     this.field('link');
 
-    ['blogs', 'events', 'pages'].forEach(key => {
-      store[key].forEach(doc => {
-        this.add(doc);
-      });
-    });
+    Object.values(store).flat().forEach(doc => this.add(doc));
   });
 
   const results = idx.search(queryStr);
 
-  const categorizedResults = {
-    general: [],
-    blogs: [],
-    events: []
+  const categorizedResults = { general: [], blogs: [], events: [] };
+
+  const addResult = (item) => {
+    const resultItem = {
+      title: item.title,
+      url: item.url,
+      excerpt: item.content.substring(0, 200) + '...',
+      type: item.type,
+      tags: item.tags,
+      date: item.date,
+      link: item?.link
+    };
+
+    if (item.type === "page") categorizedResults.general.push(resultItem);
+    else if (item.type === "post") categorizedResults.blogs.push(resultItem);
+    else if (item.type === "Event") categorizedResults.events.push(resultItem);
   };
 
   if (results.length === 0) {
-    for (const key of ['blogs', 'events', 'pages']) {
-      for (const item of store[key]) {
-        if (item.title.toLowerCase().includes(query.toLowerCase())) {
-          const resultItem = {
-            title: item.title,
-            url: item.url,
-            excerpt: item.content.substring(0, 200) + '...',
-            type: item.type,
-            tags: item.tags,
-            date: item.date,
-            link: item?.link
-          };
-
-          if (item.type === "page") {
-            categorizedResults.general.push(resultItem);
-          } else if (item.type === "post") {
-            categorizedResults.blogs.push(resultItem);
-          } else if (item.type === "Event") {
-            categorizedResults.events.push(resultItem);
-          }
-        }
-      }
-    }
+    Object.values(store).flat().forEach(item => {
+      if (item.title.toLowerCase().includes(query.toLowerCase())) addResult(item);
+    });
+  } else {
+    results.forEach(result => {
+      const item = findItemByRef(result.ref, store);
+      if (item) addResult(item);
+    });
   }
-
-
-  results.forEach(result => {
-    const item = findItemByRef(result.ref, store);
-    if (item) {
-      const resultItem = {
-        title: item.title,
-        url: item.url,
-        excerpt: item.content.substring(0, 200) + '...',
-        type: item.type,
-        tags: item.tags,
-        date: item.date,
-        link: item?.link
-      };
-
-      if (item.type === "page") {
-        categorizedResults.general.push(resultItem);
-      } else if (item.type === "post") {
-        categorizedResults.blogs.push(resultItem);
-      } else if (item.type === "Event") {
-        categorizedResults.events.push(resultItem);
-      }
-    }
-  });
-
 
   return categorizedResults;
 }
@@ -166,7 +134,7 @@ const SearchBar = ({ setResults }) => {
 const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
 
   const handlePageChange = (setOptions) => (event) => {
-    // event.detail should be the new page number.
+    // event.detail.currentPage should be the new page number.
     setOptions(prev => ({ ...prev, currentPage: event.detail.currentPage }));
   };
 
@@ -390,6 +358,7 @@ export const SiteSearch = () => {
             (Object.keys(filteredResults).every(key => filteredResults[key].length === 0) && searchCount > 0) &&
             <p>No results found</p>
           }
+
           <ResultArea paginationOptions={paginationOptionsGen} setOptions={setOptionsGen} results={filteredResults} type={"general"} href={""} />
 
           <ResultArea paginationOptions={paginationOptionsBlog} setOptions={setOptionsBlog} results={filteredResults} type={"blogs"} href={"/publications"} />
