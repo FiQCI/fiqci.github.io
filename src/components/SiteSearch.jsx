@@ -8,6 +8,8 @@ import {
 
 import { Breadcrumbs } from './Breadcrumbs';
 
+import { prependBaseURL } from '../utils/url';
+
 const style = {
   "--_c-button-font-size": 14,
   "--_c-button-min-width": 0,
@@ -64,7 +66,7 @@ function searchContent(query, store) {
     for (const key of ['blogs', 'events', 'pages']) {
       for (const item of store[key]) {
         if (item.title.toLowerCase().includes(query.toLowerCase())) {
-          categorizedResults.general.push({
+          const resultItem = {
             title: item.title,
             url: item.url,
             excerpt: item.content.substring(0, 200) + '...',
@@ -72,7 +74,15 @@ function searchContent(query, store) {
             tags: item.tags,
             date: item.date,
             link: item?.link
-          });
+          };
+
+          if (item.type === "page") {
+            categorizedResults.general.push(resultItem);
+          } else if (item.type === "post") {
+            categorizedResults.blogs.push(resultItem);
+          } else if (item.type === "Event") {
+            categorizedResults.events.push(resultItem);
+          }
         }
       }
     }
@@ -175,7 +185,7 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
               paginationOptions.itemsPerPage, (paginationOptions.currentPage - 1) *
               paginationOptions.itemsPerPage + paginationOptions.itemsPerPage).map((item, index) => (
                 <li className='pb-6' key={index}>
-                  <strong><a className='text-[#004E84]' href={type === "events" ? item.link : item.url}>{item.title}</a></strong><br />
+                  <strong><a className='text-[#004E84]' href={type === "events" ? item.link : prependBaseURL(item.url)}>{item.title}</a></strong><br />
                   <div className='flex flex-row'>
                     <p className='font-semibold'>{capitalizeFirstLetter(item.type)}</p>
                     {type !== "general" &&
@@ -224,7 +234,7 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleCheckboxChang
   return (
     <CModal
       key={isModalOpen ? 'open' : 'closed'}
-      
+
       value={isModalOpen}
       dismissable
       onChangeValue={event => setIsModalOpen(event.detail)}
