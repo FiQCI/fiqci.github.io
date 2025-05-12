@@ -42,10 +42,16 @@ permalink: store.js
   {%- assign filtered_pages = filtered_pages | reject: "url", "/api/" -%}
   {%- for page in filtered_pages -%}
     {%- unless page.url contains '.json' or page.url contains '.css' or page.url contains '.js' or page.path contains '/api/' -%}
+    {%- assign base_content = page.content | default: "" -%}
+    {%- if page.url == "/" -%}
+      {%- assign full_content = base_content | append: site.data.constants.hero | append: site.data.contants.access_cards -%}
+    {%- else -%}
+      {%- assign full_content = base_content -%}
+    {%- endif -%}
     {
       "key": "{{ page.url | slugify }}",
       "title": {{ page.title | default: "" | jsonify }},
-      "content": {{ page.content | default: "" | strip_html | strip_newlines | jsonify }},
+      "content": {{ full_content | strip_html | strip_newlines | jsonify }},
       "url": {{ page.url | jsonify }},
       "tags": [],
       "type": "page"
@@ -54,6 +60,7 @@ permalink: store.js
   {%- endfor -%}
 ]
 {%- endcapture -%}
+
 
 
 const STORE = {
