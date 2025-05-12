@@ -193,17 +193,14 @@ export const Events = () => {
         };
     }, [isModalOpen]);
 
-    useEffect(() => { //set filteredEvents everytime filters changes
+    useEffect(() => {
         const applyFilters = (event) => {
-            // First, check the Theme filter separately:
 
             if (filters.Theme && event?.filters?.Theme?.toLowerCase() !== filters.Theme?.toLowerCase()) {
                 return false;
             }
 
-            // For every other filter category...
             return Object.entries(filters).every(([category, options]) => {
-                // Skip the "Theme" category here
                 if (category === "Theme") return true;
 
                 // Create an array of only the options that are checked (active)
