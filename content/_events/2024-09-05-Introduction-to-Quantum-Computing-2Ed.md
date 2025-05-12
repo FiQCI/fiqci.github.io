@@ -10,27 +10,11 @@ tags:
   - LUMI
 type: Event
 filters:
-  Availability:
-    - name: "Open to anyone"
-      value: false
-    - name: "Registration needed"
-      value: true
-  Skill level:
-    - name: "Advanced"
-      value: false
-    - name: "Beginner"
-      value: true
-  Pricing:
-    - name: "Free of charge"
-      value: false
-  Type:
-    - name: "Online"
-      value: false
-    - name: "Hybrid"
-      value: false
-    - name: "Onsite"
-      value: true
-  Theme: "course/workshop"
+  Pricing: Free of charge # Free of charge, or empty if paid
+  Availability: Open to anyone # Open to anyone, Registration needed
+  Skill level: Beginner # Beginner, Advanced
+  Type: Online # Online, Hybrid, Onsite
+  Theme: Course/Workshop # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture
 ---
 25-26 November: Two-day introductory course on quantum computers and the basic quantum algorithms that control them.
 
