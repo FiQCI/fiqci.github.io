@@ -94,8 +94,6 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
     return (
         <CModal
             key={isModalOpen ? 'open' : 'closed'}
-            style={{ 'overflow': 'scroll' }}
-            className='overflow-scroll'
             value={isModalOpen}
             dismissable
             onChangeValue={event => setIsModalOpen(event.detail)}
