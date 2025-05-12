@@ -30,9 +30,12 @@ function normalizeQuery(query) {
   if (query.endsWith('*')) return query;
 
   // Optionally boost exact matches
+  const exactLongMatch = `${'" ' + query + ' "'}^15`
+  const exactLongMatchW = `${'" ' + query + ' "'}*^15`
   const exactMatch = `${query}^10`;   // high boost for exact match
   const wildcardMatch = `${query}*`;  // normal wildcard match
-  return `${exactMatch} ${wildcardMatch}`;
+  //console.log(`${exactMatch} ${wildcardMatch} ${exactLongMatch} ${exactLongMatchW}`)
+  return `${exactLongMatch} ${exactLongMatchW}`;
 }
 
 function searchContent(query, store) {
