@@ -6,7 +6,6 @@ import {
   CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
 
-import { Breadcrumbs } from './Breadcrumbs';
 
 const style = {
   "--_c-button-font-size": 14,

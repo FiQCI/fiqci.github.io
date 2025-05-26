@@ -5,7 +5,6 @@ import {
     CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
 import { EventCardComponent } from './EventCards';
-import { Breadcrumbs } from './Breadcrumbs';
 
 //Split events to past and upcoming ones
 const SplitEvents = () => {

@@ -1,9 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { Breadcrumbs } from "./Breadcrumbs";
-import { mdiArrowRight, mdiOpenInNew } from '@mdi/js';
 import { prependBaseURL } from '../utils/url';
-import { useJsonApi } from '../hooks/useJsonApi';
 
 const ResourceCard = ({ resource }) => {
     return (

@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { useStatus } from '../hooks/useStatus'
-import { Breadcrumbs } from './Breadcrumbs';
 // import { StatusIndicator } from './StatusIndicator'
 
 export const ServiceStatus = () => {
