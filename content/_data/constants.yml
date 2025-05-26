@@ -40,7 +40,9 @@ access_cards:
     href: FIXME
     teaser: /assets/images/FiQCI-banner.jpg
     description: |-
-      The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, hosted by CSC in Kajaani, Finland.
+      The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
+      is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, 
+      hosted by CSC in Kajaani, Finland.
     links:
       - title: Getting started with Lumi
         href: https://www.lumi-supercomputer.eu/get-started/
@@ -48,7 +50,9 @@ access_cards:
     href: FIXME
     teaser: /assets/images/vtt-images/VTT_lab-2.jpg
     description: |-
-      Helmi, the first Finnish quantum computer, co-developed by VTT and IQM Quantum Computers, is operated by VTT in Espoo, Finland. Helmi is based on superconducting technology, and presently provides five qubits. Upgrades to 20, then 50 qubits is planned for the near future.
+      Helmi, the first Finnish quantum computer, co-developed by VTT and IQM Quantum Computers, 
+      is operated by VTT in Espoo, Finland. Helmi is based on superconducting technology, 
+      and presently provides five qubits. Upgrades to 20, then 50 qubits is planned for the near future.
     links:
       - title: How to access Helmi, instructions
         href: FIXME
@@ -58,7 +62,10 @@ access_cards:
     href: FIXME
     teaser: /assets/images/FiQCI-banner.jpg
     description: |-
-      Kvasi, the Atos Quantum Learning Machine or Qaptiva is a quantum computing simulator with which you can learn to use and develop new quantum algorithms. Kvasi provides a platform for developing and simulating quantum algorithms in both ideal and realistic, noisy conditions. Kvasi is capable of simulating algorithms for quantum computers of 30+ qubits.
+      Kvasi, the Atos Quantum Learning Machine or Qaptiva is a quantum computing simulator with which you can learn 
+      to use and develop new quantum algorithms. Kvasi provides a platform for developing and simulating quantum 
+      algorithms in both ideal and realistic, noisy conditions. Kvasi is capable of simulating algorithms for 
+      quantum computers of 30+ qubits.
     links:
       - title: How to access Kvasi, instructions
         href: FIXME
@@ -98,7 +105,9 @@ quantum_resources:
 supercomputer_resources:
   - name: LUMI
     desc: |-
-      The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, hosted by CSC in Kajaani, Finland.
+      The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
+      is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, 
+      hosted by CSC in Kajaani, Finland.
     image: "/assets/images/FiQCI-banner.jpg"
     links:
       - link: ""
@@ -191,6 +200,7 @@ favicon: assets/images/favicon.png
 footer_icons: assets/footer-icons
 funder_logos: assets/images/funders
 description: >-
-  Web presence of the Finnish Quantum-Computing Infrastructure. We provide state-of-the-art quantum-computing services to Finnish RDI communities.
+  Web presence of the Finnish Quantum-Computing Infrastructure. We provide state-of-the-art quantum-computing 
+  services to Finnish RDI communities.
 excerpt_max_length: 250
 title_separator: " – "
