@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom'
 
 import { Banner } from '../components/Banner'
 
+import { Breadcrumbs } from '../components/Breadcrumbs'
+
 import { BaseLayout } from './base.html'
 
 
@@ -15,6 +17,10 @@ export const PageLayout = props => {
         {createPortal(
             <Banner title={title} />,
             document.getElementById('banner')
+        )}
+        {createPortal(
+            <Breadcrumbs breadcrumbs={{ "Home": "/", [title]: "#" }} />,
+            document.getElementById('breadcrumbs')
         )}
     </>
 }
