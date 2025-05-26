@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: base
 ---
 
 {% assign constants = site.data.constants %}
@@ -17,7 +17,13 @@ layout: page
             "bio": {{author_info.bio | strip_newlines | escape | jsonify}},
             "url": {{author_info.avatar | strip_newlines | escape | jsonify}}
         }'>
-            {%- include react/root.html id='author' -%}
+            <div class='flex flex-row gap-2 2xl:flex-row'>
+            <img src={{author_info.url}} alt="Author" class='w-20' />
+            <div class='flex flex-col gap-4'>
+                <p class='font-bold !mb-0'>{{author_info.name}}</p>
+                <p class='max-w-[220px] text-wrap !mt-0 !mb-0'>{{author_info.bio}}</p>
+            </div>
+        </div>
         </div>
         <div class='col-span-3' id="tags-data" data-content="{{ page.tags | strip_newlines | escape }}">
             {%- include react/root.html id='tags' -%}
