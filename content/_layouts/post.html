@@ -12,13 +12,9 @@ layout: base
         <div class='col-span-5 mt-4'>
             {%- include react/root.html id='breadcrumbs' -%}
         </div>
-        <div class='col-span-1' id="author-data" data-content='{
-            "name":{{author_info.name | strip_newlines | escape | jsonify}},
-            "bio": {{author_info.bio | strip_newlines | escape | jsonify}},
-            "url": {{author_info.avatar | strip_newlines | escape | jsonify}}
-        }'>
+        <div class='col-span-1' id="author-data" >
             <div class='flex flex-row gap-2 2xl:flex-row'>
-            <img src={{author_info.url}} alt="Author" class='w-20' />
+            <img src='{{author_info.avatar}}' alt='Author' class='w-20' />
             <div class='flex flex-col gap-4'>
                 <p class='font-bold !mb-0'>{{author_info.name}}</p>
                 <p class='max-w-[220px] text-wrap !mt-0 !mb-0'>{{author_info.bio}}</p>
