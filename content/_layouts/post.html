@@ -1,11 +1,13 @@
 ---
 layout: base
+react: true
 ---
 
 {% assign constants = site.data.constants %}
 {% assign author_info = site.data.authors[page.author] %}
 
 {%- include react/root.html id='banner' -%}
+
 <article itemscope itemtype="http://schema.org/BlogPosting">
  <div id="blogView" class='flex flex-col items-top mb-2'>
     <div class='2xl:grid 2xl:grid-cols-5 mx-2 sm:mx-8 lg:mx-[100px] flex flex-col gap-8 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
