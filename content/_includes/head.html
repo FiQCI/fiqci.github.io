@@ -11,10 +11,10 @@
   {% include external/mathjax.html -%}
   {% include external/font.html %}
   <script type="text/javascript" src="{{ "site.js" | absolute_url }}" charset="utf-8"></script>
-  {% if page.collection == "publications"  %}
-    {%- assign react_source = "post.js" -%}
-  {% elsif page.react %}
+  {% if page.react and (site.pages | where: "name" page.name) %}
     {%- assign react_source = page.name | append: ".js" -%}
+  {% elsif (site.collections | where: "label" page.collection) %}
+    {%- assign react_source = page.layout | append: ".js" %}
   {% else %}
     {%- assign react_source = "default.js" -%}
   {% endif %}
