@@ -12,17 +12,24 @@ const JEKYLL_CONFIG_FNAME =
 process.env.npm_package_config_jekyll_webpackConfigFilename;
 const OUTPUT_DIR = process.env.npm_package_config_webpack_outputDir;
 
+const reactPageSources = REACT_PAGES_DIR.split(",").map((dir) => path.resolve(__dirname, dir.trim()));
 const stylesheetsDirpath = path.resolve(__dirname, TAILWINDCSS_INPUT_DIR);
-const reactPageSources = path.resolve(__dirname, REACT_PAGES_DIR);
 const outputDirpath = path.resolve(__dirname, OUTPUT_DIR);
 const jekyllConfigFilepath = path.resolve(__dirname, JEKYLL_CONFIG_FNAME);
 
+
 const entryFiles = {};
-fs.readdirSync(reactPageSources).forEach((file) => {
-  if (file.endsWith(".jsx")) {
-    const name = path.parse(file).name; // Use the file name (without extension) as the entry name
-    entryFiles[name] = path.resolve(__dirname, REACT_PAGES_DIR, file);
-  }
+
+reactPageSources.forEach((dir) => {
+  const absReactDir = path.resolve(__dirname, dir);
+  if (!fs.existsSync(absReactDir)) return;
+
+  fs.readdirSync(absReactDir).forEach((file) => {
+    if (file.endsWith(".jsx")) {
+      const name = path.parse(file).name; // Use the file name (without extension) as the entry name
+      entryFiles[name] = path.resolve(__dirname, absReactDir, file);
+    }
+  });
 });
 
 const cssFilenames = fs
