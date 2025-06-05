@@ -27,7 +27,7 @@ react: true
             {%- include react/root.html id='tags' -%}
             <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
               {%- assign date_format = constants.date_format | default: "%b %-d, %Y" -%}
-              {{ page.type }} | {{ page.date | date: date_format }}
+              {{ page.filters.Type }} | {{ page.date | date: date_format }}
             </time>
             <h1 class='!pt-0 !mt-0 text-4xl font-bold text-gray-900 mt-8 mb-4'>{{page.title}}</h1>
                <div class="prose inline" itemprop="articleBody">
