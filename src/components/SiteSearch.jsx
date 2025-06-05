@@ -28,13 +28,12 @@ function normalizeQuery(query) {
   if (!query.trim()) return ''; // empty or whitespace-only
   if (query.endsWith('*')) return query;
 
-  // Optionally boost exact matches
-  const exactLongMatch = `${'" ' + query + ' "'}^15`
-  const exactLongMatchW = `${'" ' + query + ' "'}*^15`
+  // Boost exact matches
+  //const exactLongMatch = `${'" ' + query + ' "'}^15`
+  //const exactLongMatchW = `${'" ' + query + ' "'}*^15`
   const exactMatch = `${query}^10`;   // high boost for exact match
   const wildcardMatch = `${query}*`;  // normal wildcard match
-  //console.log(`${exactMatch} ${wildcardMatch} ${exactLongMatch} ${exactLongMatchW}`)
-  return `${exactLongMatch} ${exactLongMatchW}`;
+  return `${exactMatch} ${wildcardMatch}`;
 }
 
 function searchContent(query, store) {
@@ -162,7 +161,9 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
                       <p> &nbsp;&nbsp; | &nbsp;&nbsp;{item?.date}</p>
                     }
                   </div>
-                  <span>{item.excerpt}</span>
+                  {type !== "general" && 
+                    <span>{item.excerpt}</span>
+                  }
                 </li>
               ))}
           </ul>
