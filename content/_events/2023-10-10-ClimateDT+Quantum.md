@@ -8,6 +8,12 @@ header:
 tags:
   - Helmi
   - LUMI
+filters:
+  Pricing: Free of charge # Free of charge, or empty if paid
+  Availability: Open to anyone # Open to anyone, Registration needed
+  Skill level: Beginner # Beginner, Advanced
+  Type: Hybrid # Online, Hybrid, Onsite
+  Theme: Webinar/Lecture # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture
 ---
 10 Oct: Basic ideas behind digital twins of the Earth and quantum computing, 
 and discussion on the possibility of a common future of the two.

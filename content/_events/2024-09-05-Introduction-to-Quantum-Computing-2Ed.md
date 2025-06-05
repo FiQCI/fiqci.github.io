@@ -8,7 +8,6 @@ header:
 tags:
   - Helmi
   - LUMI
-type: Event
 filters:
   Pricing: Free of charge # Free of charge, or empty if paid
   Availability: Open to anyone # Open to anyone, Registration needed

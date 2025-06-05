@@ -9,6 +9,10 @@ layout: post
 tags:
   - Helmi
   - maintenance
+filters:
+  Skill level: Beginner # Beginner, Advanced
+  Type: News # Blog, Instructions, News
+  Theme: Technical # Technical, Algorithm, Programming, Hybrid QC+HPC computing
 ---
 
 *Helmi software was updated! Here is a list of changes!*

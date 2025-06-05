@@ -7,7 +7,10 @@ header:
 published: true
 author: Huyen Do
 layout: post
-type: 'Instruction'
+filters:
+  Skill level: Beginner # Beginner, Advanced
+  Type: Instructions # Blog, Instructions, News
+  Theme: Programming # Technical, Algorithm, Programming, Hybrid QC+HPC computing
 ---
 
 > **In this guide:** Learn how to access the Helmi quantum computer through the LUMI web interface.  

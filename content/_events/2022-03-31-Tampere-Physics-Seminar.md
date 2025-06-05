@@ -3,8 +3,15 @@ title: 'Accelerating computational modelling with quantum computers'
 date: 2022-03-31
 published: true
 link: https://homepages.tuni.fi/tapio.rantala/opetus/files/FYS.250-Fysiikan.seminaari/schedule.21-22.txt
-image: /assets/images/pennylane-lumi.png
+header:
+  teaser: /assets/images/pennylane-lumi.png
 tags:
   - Helmi
+filters:
+  Pricing: Free of charge # Free of charge, or empty if paid
+  Availability: Open to anyone # Open to anyone, Registration needed
+  Skill level: Advanced # Beginner, Advanced
+  Type: Onsite # Online, Hybrid, Onsite
+  Theme: Webinar/Lecture # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture
 ---
 31 Mar: Tampere University Physics Seminar series presentation.

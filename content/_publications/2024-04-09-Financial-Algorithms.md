@@ -10,6 +10,10 @@ layout: post
 tags:
   - Helmi
   - Leena
+filters:
+  Skill level: Advanced # Beginner, Advanced
+  Type: Blog # Blog, Instructions, News
+  Theme: Algorithm # Technical, Algorithm, Programming, Hybrid QC+HPC computing
 ---
 
 *With the availability of real, functioning quantum computers, quantum algorithms have transitioned from theory to practice and skyrocketed interest in practical applications. Finance is one of the many fields where quantum algorithms can improve speed and accuracy. Here, we demonstrate a prototype calculation on the Helmi quantum computer through the Finnish Quantum-Computing Infrastructure FiQCI.*

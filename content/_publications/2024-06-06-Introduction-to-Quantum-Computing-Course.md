@@ -9,6 +9,10 @@ author: Joonas Nivala
 layout: post
 tags:
   - Helmi
+filters:
+  Skill level: Beginner # Beginner, Advanced
+  Type: News # Blog, Instructions, News
+  Theme:  # Technical, Algorithm, Programming, Hybrid QC+HPC computing
 ---
 
 

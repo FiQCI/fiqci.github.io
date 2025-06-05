@@ -9,6 +9,10 @@ layout: post
 tags:
   - Helmi
   - maintenance
+filters:
+  Skill level: Beginner # Beginner, Advanced
+  Type: News # Blog, Instructions, News
+  Theme: Technical # Technical, Algorithm, Programming, Hybrid QC+HPC computing
 ---
 
 *New versions of qiskit-iqm and cirq-iqm for Helmi are available! Here is a list of changes*
