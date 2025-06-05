@@ -43,11 +43,7 @@ permalink: store.js
   {%- for page in filtered_pages -%}
     {%- unless page.url contains '.json' or page.url contains '.css' or page.url contains '.js' or page.path contains '/api/' -%}
     {%- assign base_content = page.content | default: "" -%}
-    {%- if page.url == "/" -%}
-      {%- assign full_content = base_content | append: site.data.constants.hero | append: site.data.contants.access_cards -%}
-    {%- else -%}
-      {%- assign full_content = base_content -%}
-    {%- endif -%}
+    {%- assign full_content = base_content | append: site.data.constants[page.url] -%}
     {
       "key": "{{ page.url | slugify }}",
       "title": {{ page.title | default: "" | jsonify }},
