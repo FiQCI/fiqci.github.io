@@ -93,8 +93,6 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
     return (
         <CModal
             key={isModalOpen ? 'open' : 'closed'}
-            style={{ 'overflow': 'scroll' }}
-            className='overflow-scroll'
             value={isModalOpen}
             dismissable
             onChangeValue={event => setIsModalOpen(event.detail)}
@@ -192,26 +190,26 @@ export const Events = () => {
         };
     }, [isModalOpen]);
 
-    useEffect(() => { //set filteredEvents everytime filters changes
+    useEffect(() => {
         const applyFilters = (event) => {
-            // First, check the Theme filter separately:
-            if (filters.Theme && event?.filters?.Theme !== filters.Theme) {
+
+            if (filters.Theme && event?.filters?.Theme?.toLowerCase() !== filters.Theme?.toLowerCase()) {
                 return false;
             }
 
-            // For every other filter category...
             return Object.entries(filters).every(([category, options]) => {
-                // Skip the "Theme" category here
                 if (category === "Theme") return true;
 
                 // Create an array of only the options that are checked (active)
-                const activeOptions = Object.entries(options).filter(([_, checked]) => checked);
+                const activeOptions = Object.entries(options)
+                    .filter(([_, checked]) => checked)
+                    .map(([option, _]) => option);
 
                 // If no options are active in this category, do not filter out the event:
                 if (activeOptions.length === 0) return true;
 
-                // Otherwise, require that at least one active option is true in the event:
-                return activeOptions.some(([option]) => event?.filters?.[category]?.[option]);
+                // Otherwise, check if the category value of the event is in the active options array:
+                return activeOptions.includes(event?.filters?.[category])
             });
         };
 
