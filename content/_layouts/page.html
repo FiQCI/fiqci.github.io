@@ -4,10 +4,12 @@ layout: base
 
 {%- include react/root.html id='banner' -%}
 
-<article class="">
-
-  <div>
+<div class='flex flex-col items-top mb-2'>
+  <div class='mx-2 sm:mx-8 lg:mx-[100px] flex flex-col min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
+    <div class='col-span-2 mt-4 mb-4'>
+      {%- include react/root.html id='breadcrumbs' -%}
+    </div>
+        
     {{ content }}
   </div>
-
-</article>
+</div>

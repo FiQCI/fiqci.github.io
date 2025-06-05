@@ -28,6 +28,9 @@ jobs:
         run: npm run-script tailwindcss -- --minify
 
       - name: Build React components using Webpack
+        env:
+          MATOMO_URL: mwa-acf.2.rahtiapp.fi
+          MATOMO_TAG_MANAGER_CONTAINER: jyLY2YKH
         run: npm run-script webpack -- --mode=production
 
       - name: Build site using Jekyll

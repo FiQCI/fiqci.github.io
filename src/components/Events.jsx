@@ -5,7 +5,6 @@ import {
     CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
 import { EventCardComponent } from './EventCards';
-import { Breadcrumbs } from './Breadcrumbs';
 
 //Split events to past and upcoming ones
 const SplitEvents = () => {
@@ -244,30 +243,26 @@ export const Events = () => {
     };
 
     return (
-        <div className='flex flex-col items-top mb-2'>
-            <div className='mx-2 sm:mx-8 lg:mx-[100px] flex flex-col lg:grid grid-cols-5 gap-8 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
-                <div className='col-span-5 mt-4'>
-                    <Breadcrumbs breadcrumbs={{ "Home": "/", "Events": "/events" }} />
-                </div>
-                <div className='mt-8 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
-                    <EventFilters filters={filters} handleFilterChange={handleFilterChange} />
-                </div>
-                <div className='mt-8 md:py-0 col-span-4'>
-                    <EventsList
-                        title='Upcoming events'
-                        events={[...filteredEvents.upcoming].reverse()}
-                        paginationOptions={optionsUpcoming}
-                        handlePageChange={handlePageChange(setOptionsUpcoming)}
-                        showFilters={true}
-                        onOpenDialog={onOpenDialog}
-                    />
-                    <EventsList
-                        title='Past events'
-                        events={[...filteredEvents.past].reverse()}
-                        paginationOptions={optionsPast}
-                        handlePageChange={handlePageChange(setOptionsPast)}
-                    />
-                </div>
+
+        <div className='lg:grid grid-cols-5 gap-8'>
+            <div className='mt-8 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
+                <EventFilters filters={filters} handleFilterChange={handleFilterChange} />
+            </div>
+            <div className='mt-8 md:py-0 col-span-4'>
+                <EventsList
+                    title='Upcoming events'
+                    events={[...filteredEvents.upcoming].reverse()}
+                    paginationOptions={optionsUpcoming}
+                    handlePageChange={handlePageChange(setOptionsUpcoming)}
+                    showFilters={true}
+                    onOpenDialog={onOpenDialog}
+                />
+                <EventsList
+                    title='Past events'
+                    events={[...filteredEvents.past].reverse()}
+                    paginationOptions={optionsPast}
+                    handlePageChange={handlePageChange(setOptionsPast)}
+                />
             </div>
             <FilterModal
                 isModalOpen={isModalOpen}
@@ -276,5 +271,7 @@ export const Events = () => {
                 handleFilterChange={handleFilterChange}
             />
         </div>
+
+
     );
 };

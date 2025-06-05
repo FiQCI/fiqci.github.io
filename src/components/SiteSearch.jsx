@@ -6,7 +6,6 @@ import {
   CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
 
-import { Breadcrumbs } from './Breadcrumbs';
 
 import { prependBaseURL } from '../utils/url';
 
@@ -337,9 +336,6 @@ export const SiteSearch = () => {
 
   return (
     <div className='min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-2 sm:mx-8 lg:mx-[100px] lg:grid grid-cols-5 gap-0'>
-      <div className='col-span-5 mt-4'>
-        <Breadcrumbs breadcrumbs={{ Home: "/", "Search results": "/search" }} />
-      </div>
       <div className='mt-24 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
         <Filters filters={filters} handleCheckboxChange={handleCheckboxChange} />
       </div>

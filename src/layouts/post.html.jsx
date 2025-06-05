@@ -9,8 +9,6 @@ import { ReadNext } from '../components/ReadNext'
 
 import { BlogTags } from '../components/BlogTags'
 
-import { Author } from '../components/Author'
-
 import { ReferencesAccordion } from '../components/ReferencesAccordion'
 
 import { BaseLayout } from './base.html'
@@ -43,10 +41,6 @@ export const PostLayout = props => {
         {createPortal(
             <BlogTags tags={tags} />,
             document.getElementById('tags')
-        )}
-        {createPortal(
-            <Author author={author} />,
-            document.getElementById('author')
         )}
         {createPortal(
             <ReferencesAccordion />,
