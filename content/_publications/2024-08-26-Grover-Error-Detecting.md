@@ -151,7 +151,3 @@ The results demonstrate that encoding Grover’s Search Algorithm with the [[4, 
 9. S. J. Devitt, W. J. Munro, and K. Nemoto, "Quantum error correction for beginners," Rep. Prog. Phys., vol. 76, no. 7, p. 076001, Jun. 2013, doi: 10.1088/0034-4885/76/7/076001. Available: <https://arxiv.org/pdf/0905.2794>
 10. Z. Cai, R. Babbush, S. C. Benjamin, S. Endo, W. J. Huggins, Y. Li, J. R. McClean, and T. E. O’Brien, "Quantum error mitigation," Rev. Mod. Phys., vol. 95, no. 4, p. 045005, Dec. 2023, doi: 10.1103/revmodphys.95.045005. Available: <https://arxiv.org/pdf/2210.00921>
 
-## Give feedback
-
-Feedback is greatly appreciated! You can send feedback directly to [fiqci-feedback@postit.csc.fi](mailto:fiqci-feedback@postit.csc.fi).
-

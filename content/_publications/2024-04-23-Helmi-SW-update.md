@@ -62,8 +62,3 @@ module use /appl/local/quantum/modulefiles
 module load helmi_cirq
 ```
 You need to set the provider(the interface that connects to Helmi) and backend. The `helmi_cirq` module automatically sets the `HELMI_CORTEX_URL` which is the endpoint to reach Helmi. To run jobs, specify the `HELMI_CORTEX_URL` and set the provider to `IQMSampler`. Jobs can then be submitted using a batch script with `sbatch` or interactively with `srun`. [More details here](https://docs.csc.fi/computing/quantum-computing/helmi/running-on-helmi/). 
-
-
-## Give feedback!
-
-Feedback is greatly appreciated! You can send feedback directly to [fiqci-feedback@postit.csc.fi](mailto:fiqci-feedback@postit.csc.fi).

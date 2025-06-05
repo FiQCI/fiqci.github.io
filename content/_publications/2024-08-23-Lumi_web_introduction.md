@@ -220,7 +220,3 @@ Now you have learned how to access to our hybrid environment of quantum computer
 - **Terminal access:** You can also ssh to lumi and send your circuits through your local terminal by [ssh client](https://docs.lumi-supercomputer.eu/firststeps/loggingin/)
 - [Helmi technical details](https://docs.csc.fi/computing/quantum-computing/helmi/helmi-specs/)
 - More examples [running on Helmi](https://docs.csc.fi/computing/quantum-computing/helmi/running-on-helmi/)
-
-# Give feedback
-
-Feedback is greatly appreciated! You can send feedback directly to [fiqci-feedback@postit.csc.fi](mailto:fiqci-feedback@postit.csc.fi).

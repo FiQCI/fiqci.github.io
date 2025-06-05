@@ -55,8 +55,3 @@ You need to set the provider(the interface that connects to Helmi) and backend. 
 
 ## Using External Libraries
 The update comes with a pre-made Python environment which is loaded with the `helmi_qiskit` or `helmi_cirq` modules. If you wish to install extra Python libraries you can do so with the `python -m pip install --user package` command. You can also create a custom Python environment by loading the `helmi_standard` module and using a [container wrapper](https://docs.lumi-supercomputer.eu/software/installing/container-wrapper/). If you wish to use your own environment the correct server url is: `https://qc.vtt.fi/cocos` which is only accessible through the `q_fiqci` partition. 
-
-
-## Give feedback!
-
-Feedback is greatly appreciated! You can send feedback directly to [fiqci-feedback@postit.csc.fi](mailto:fiqci-feedback@postit.csc.fi).

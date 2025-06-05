@@ -232,7 +232,3 @@ For more examples on wire-cutting with QCut check it out on <a href="https://git
 8. Y. Y. Boykov and M.-P. Jolly, “Interactive graph cuts for optimal boundary \& region segmentation of objects in N-D images,” in Proceedings Eighth IEEE International Conference on Computer Vision. ICCV 2001, Vancouver, BC, Canada: IEEE Comput. Soc, 2001, pp. 105–112. doi: 10.1109/ICCV.2001.937505. Available: [http://ieeexplore.ieee.org/document/937505](http://ieeexplore.ieee.org/document/937505). [Accessed: Aug. 14, 2024]
 
 9. F. Barahona, M. Grötschel, M. Jünger, and G. Reinelt, “An Application of Combinatorial Optimization to Statistical Physics and Circuit Layout Design,” Operations Research, vol. 36, no. 3, pp. 493–513, Jun. 1988, doi: 10.1287/opre.36.3.493. Available: [https://pubsonline.informs.org/doi/10.1287/opre.36.3](https://pubsonline.informs.org/doi/10.1287/opre.36.3).493. [Accessed: Aug. 14, 2024]
-
-## Give feedback!
-
-Feedback is greatly appreciated! You can send feedback directly to [fiqci-feedback@postit.csc.fi](mailto:fiqci-feedback@postit.csc.fi).

@@ -380,7 +380,3 @@ They can be executed directly on the FiQCI infrastructure.
 11. [S. Pramanik et al., A Quantum-Classical Hybrid Method for Image Classification and Segmentation, Dec. 2021.](http://arxiv.org/abs/2109.14431)
 
 12. [Adjusted_rand_score, scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score)
-
-## Give feedback!
-
-Feedback is greatly appreciated! You can send feedback directly to [fiqci-feedback@postit.csc.fi](mailto:fiqci-feedback@postit.csc.fi).
