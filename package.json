@@ -8,7 +8,7 @@
     },
     "webpack": {
       "outputDir": "./dist",
-      "reactPagesDir": "./src/pages"
+      "reactPagesDir": "./src/pages, ./src/views"
     },
     "tailwindcss": {
       "inputDir": "./src/stylesheets"
@@ -52,7 +52,12 @@
   "dependencies": {
     "@cscfi/csc-ui": "^2.3.0",
     "@cscfi/csc-ui-react": "^2.3.0",
-    "lunr": "^2.3.9"
+    "dompurify": "^3.2.4",
+    "front-matter": "^4.0.2",
+    "gray-matter": "^4.0.3",
+    "katex": "^0.16.21",
+    "lunr": "^2.3.9",
+    "prismjs": "^1.30.0"
   },
   "private": "true"
 }

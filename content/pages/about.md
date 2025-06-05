@@ -2,55 +2,40 @@
 layout: page
 title: About
 subtitle: The FiQCI consortium maintains, operates, and develops the infrastructure
+react: true
 ---
 
-## In Brief
+{% assign about_data = site.data.constants.about %}
 
-The Finnish Quantum-Computing Infrastructure (FiQCI) was established in 2020, when it became part of the Finnish Research Infrastructure (FIRI) roadmap of significant national research infrastructures within the Finnish research infrastructure ecosystem, maintained by the Research Council of Finland.
+<div class="lg:grid lg:grid-cols-2 gap-8">
+  <h1 class="text-3xl font-bold col-span-2">About FiQCI</h1>
+  <div class="col-span-1 lg:mr-10">
+    <p>{{ about_data.desc }}</p>
+    <br>
+    <p>{{ about_data.mission }}</p>
+    <br>
+    <p>{{ about_data.maintain }}</p>
+  </div>
+  <div class="col-span-1 lg:ml-10">
+    <h2 class="text-xl font-bold pb-2">Scientific and Technical Advisory Group</h2>
+    <p>{{ about_data.advisory-group.desc }}</p>
+    <ul class="pt-2 pl-5 space-y-2 list-disc list-inside">
+      {% for member in about_data.advisory-group.people %}
+      <li>{{ member.name }}, {{ member.institution }}, {{ member.country }}</li>
+      {% endfor %}
+    </ul>
 
-The mission of FiQCI is to provide state-of-the-art quantum-computing services such as computing time and training to the Finnish RDI communities. This includes providing a hybrid high-performance computing and quantum computing (HPC+QC) platform for developing, testing, and exploiting quantum-accelerated computational workflows. Through FiQCI, Finnish researchers have access to one of the most powerful hybrid HPC+nQC resources in the world, available for quantum accelerated research and development. The infrastructure also aims to offer possibilities to carry out experiments in quantum physics.
+    <h2 class="text-xl font-bold pt-4 pb-2">Management</h2>
+    <ul class="pt-0 pl-5 space-y-2 list-disc list-inside">
+      {% for mgr in about_data.advisory-group.management.people %}
+      <li>{{ mgr.name }}, {{ mgr.institution }}, {{ mgr.title }}</li>
+      {% endfor %}
+    </ul>
 
-FiQCI is jointly maintained, operated, and developed by **VTT**, **Aalto University**, and **CSC – IT Center for Science**.
-
-## Components
-
-### LUMI supercomputer
-
-The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, hosted by CSC in Kajaani, Finland. For more information, see [https://www.lumi-supercomputer.eu/](https://www.lumi-supercomputer.eu/)
-
-### Helmi quantum computer
-
-Helmi, the first Finnish quantum computer, co-developed by VTT and IQM Quantum Computers, is operated by VTT in Espoo, Finland. Helmi is based on superconducting technology, and presently provides five qubits. Upgrades to 20, then 50 qubits is planned for the near future.
-
-### Kvasi quantum computer simulator
-
-Kvasi, the Atos Quantum Learning Machine or Qaptiva is a quantum computing simulator with which you can learn to use and develop new quantum algorithms. Kvasi provides a platform for developing and simulating quantum algorithms in both ideal and realistic, noisy conditions. Kvasi is capable of simulating algorithms for quantum computers of 30+ qubits. For more information, see [https://research.csc.fi/-/kvasi](https://research.csc.fi/-/kvasi)
-
-### Other resources
-
-Other quantum resources will continuously be added to the FiQCI infrastructure.
-
-## Scientific and Technical Advisory Group 
-
-The Scientific and Technical Advisory Group (STAG) provides input for the operation of the infrastructure. The current (2023) members of the STAG are:
-
-* Dr. Valeria Bartsch, Fraunhofer Institute for Industrial Mathematics, Germany
-* Dr. Alba Cervera Lierta, Barcelona Supercomputing Center, Spain
-* Prof. Tommi Mikkonen, University of Jyväskylä, Finland
-* Prof. Martin Schulz, Technical University of Munich, Germany
-* Prof. Göran Wendin, Chalmers University of Technology, Sweden
-
-## Management
-
-* Prof. Mika Prunnila, VTT, FiQCI director
-* Dr. Mikael Johansson, CSC, FiQCI vice-director
-* Prof. Tapio Ala-Nissilä, Aalto University, FiQCI vice-director
-
-## Acknowledgement
-
-When publishing the results that utilise the FiQCI infrastructure, users should acknowledge the use of FiQCI, preferably in the format: "These [results] have been acquired using the Finnish Quantum-Computing Infrastructure (https://fiqci.fi)". [Additionally, users should also acknowledge using Helmi if applicable](./posts/2022-11-01-Helmi-pilot.md#acknowledgement). 
-
-
-## Supported by
-
-TODO
+    <h2 class="text-xl font-bold pt-4 pb-2">Acknowledgement</h2>
+    <p>{{ about_data.advisory-group.acknowledgement.desc }} "Finnish Quantum-Computing Infrastructure (https://fiqci.fi)".
+    <a class="underline" href="{{ about_data.advisory-group.acknowledgement.helmi-link-url }}">
+      {{ about_data.advisory-group.acknowledgement.helmi-link-text }}
+    </a></p>
+  </div>
+</div>

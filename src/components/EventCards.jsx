@@ -33,21 +33,22 @@ export const EventCardComponent = props => {
 
 export const EventCards = () => {
     return (
-        <>
+        <div className="min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]">
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               { SITE.events.slice(-4).reverse().map(event => <EventCardComponent {...event} />) }
             </div>
             <div className="mt-4">
             <a
-                    href="#"
+                    href="/events/"
                     className="text-sky-800 hover:underline font-bold"
-                    >
-                    <div className="flex items-center gap-3">
+                >
+                    <div className="mx-2 sm:mx-0 flex items-center gap-3">
                         <div className="text-sm">All events</div>
                         <CIcon className="text-lg" path={mdiArrowRight} />
                     </div>
                 </a>
             </div>
-        </>
+        </div>
     );
 };

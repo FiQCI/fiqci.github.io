@@ -6,6 +6,8 @@ feedback_email: fiqci-feedback@postit.csc.fi
 header_nav:
   - title: Home
     page: pages/home.md
+  - title: About FiQCI
+    page: pages/about.md
   - title: Get access
     page: pages/access.md
   - title: Blogs and instructions
@@ -38,7 +40,9 @@ access_cards:
     href: FIXME
     teaser: /assets/images/FiQCI-banner.jpg
     description: |-
-      The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, hosted by CSC in Kajaani, Finland.
+      The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
+      is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, 
+      hosted by CSC in Kajaani, Finland.
     links:
       - title: Getting started with Lumi
         href: https://www.lumi-supercomputer.eu/get-started/
@@ -46,7 +50,9 @@ access_cards:
     href: FIXME
     teaser: /assets/images/vtt-images/VTT_lab-2.jpg
     description: |-
-      Helmi, the first Finnish quantum computer, co-developed by VTT and IQM Quantum Computers, is operated by VTT in Espoo, Finland. Helmi is based on superconducting technology, and presently provides five qubits. Upgrades to 20, then 50 qubits is planned for the near future.
+      Helmi, the first Finnish quantum computer, co-developed by VTT and IQM Quantum Computers, 
+      is operated by VTT in Espoo, Finland. Helmi is based on superconducting technology, 
+      and presently provides five qubits. Upgrades to 20, then 50 qubits is planned for the near future.
     links:
       - title: How to access Helmi, instructions
         href: FIXME
@@ -56,18 +62,145 @@ access_cards:
     href: FIXME
     teaser: /assets/images/FiQCI-banner.jpg
     description: |-
-      Kvasi, the Atos Quantum Learning Machine or Qaptiva is a quantum computing simulator with which you can learn to use and develop new quantum algorithms. Kvasi provides a platform for developing and simulating quantum algorithms in both ideal and realistic, noisy conditions. Kvasi is capable of simulating algorithms for quantum computers of 30+ qubits.
+      Kvasi, the Atos Quantum Learning Machine or Qaptiva is a quantum computing simulator with which you can learn 
+      to use and develop new quantum algorithms. Kvasi provides a platform for developing and simulating quantum 
+      algorithms in both ideal and realistic, noisy conditions. Kvasi is capable of simulating algorithms for 
+      quantum computers of 30+ qubits.
     links:
       - title: How to access Kvasi, instructions
         href: FIXME
       - title: Read more about Kvasi
         href: FIXME
 
+quantum_resources:
+  - name: Helmi
+    desc: |-
+      Helmi (VTT Q5), the Finnish quantum computer operated by VTT, co-developed with IQM.
+      Helmi is based on superconducting technology, and presently provides five qubits.
+      Upgrades to 20, then 50 qubits is planned for the near future. Helmi is accessible
+      through the LUMI supercomputer environment. The pilot phase for Helmi access is now running!
+    image: "/assets/images/vtt-images/VTT_lab-2.jpg"
+    links:
+      - link: ""
+        teaser: "How to access Helmi, instructions"
+        icon: mdiArrowRight
+      - link: ""
+        teaser: "Read more about Helmi (VTT website)"
+        icon: mdiOpenInNew
+
+  - name: VTT Q50
+    desc: |-
+      Lorem ipsum the Finnish quantum computer operated by VTT, co-developed with IQM.
+      Lorem ipsum is accessible through the LUMI supercomputer environment. The pilot phase
+      for VTT Q50 access is now running!
+    image: "/assets/images/vtt-images/VTT_lab-2.jpg"
+    links:
+      - link: ""
+        teaser: "How to access VTT Q50, instructions"
+        icon: mdiArrowRight
+      - link: ""
+        teaser: "Read more about VTT Q50 (VTT website)"
+        icon: mdiOpenInNew
+
+supercomputer_resources:
+  - name: LUMI
+    desc: |-
+      The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
+      is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, 
+      hosted by CSC in Kajaani, Finland.
+    image: "/assets/images/FiQCI-banner.jpg"
+    links:
+      - link: ""
+        teaser: "How to access Lumi"
+        icon: mdiArrowRight
+      - link: ""
+        teaser: "Read more about LUMI (LUMI website)"
+        icon: mdiOpenInNew
+
+emulation_resources:
+  - name: Quantum emuation with LUMI
+    desc: |-
+      With the LUMI supercomputer it is possible to emulate quantum computer with upto 40+ qubits.
+    image: "/assets/images/FiQCI-banner.jpg"
+    links:
+      - link: ""
+        teaser: "Quantum emulation dosumentation"
+        icon: mdiArrowRight
+
+about:
+  desc: |-
+    The Finnish Quantum-Computing Infrastructure (FiQCI) was established in 2020, when it became
+    part of the Finnish Research Infrastructure (FIRI) roadmap of significant national research
+    infrastructures within the Finnish research infrastructure ecosystem, maintained by the
+    Research Council of Finland.
+  
+  mission: |-
+    The mission of FiQCI is to provide state-of-the-art quantum-computing services such as
+    computing time and training to the Finnish RDI communities. This includes providing a
+    hybrid high-performance computing and quantum computing (HPC+QC) platform for developing,
+    testing, and exploiting quantum-accelerated computational workflows. Through FiQCI, Finnish
+    researchers have access to one of the most powerful hybrid HPC+nQC resources in the world,
+    available for quantum accelerated research and development. The infrastructure also aims to
+    offer possibilities to carry out experiments in quantum physics.
+
+  maintain: |-
+    FiQCI is jointly maintained, operated, and developed by VTT, Aalto University, and
+    CSC - IT Center for Science.
+  
+  advisory-group:
+    desc: |-
+      The Scientific and Technical Advisory Group (STAG) provides input for the operation
+      of the infrastructure. The current (2023) members of the STAG are:
+    people:
+      - name: Dr. Valeria Bartsch
+        institution: Fraunhofer Institute for Industrial Mathematics
+        country: Germany
+
+      - name: Dr. Alba Cervera Lierta
+        institution: Barcelona Supercomputing Center
+        country: Spain
+
+      - name: Prof. Tommi Mikkonen
+        institution: University of Jyväskylä
+        country: Finland
+
+      - name: Prof. Martin Schulz
+        institution: Technical University of Munich
+        country: Germany
+
+      - name: Prof. Göran Wendin
+        institution: Chalmers University of Technology
+        country: Sweden
+    
+    management:
+      people:
+        - name: Prof. Mika Prunnila
+          institution: VTT
+          title: FiQCI director
+
+        - name: Dr. Mikael Johansson
+          institution: CSC
+          title: FiQCI vice-director
+
+        - name: Prof. Tapio Ala-Nissilä
+          institution: Aalto University
+          title: FiQCI vice-director
+    
+    acknowledgement:
+      desc: |-
+        When publishing the results that utilise the FiQCI infrastructure, users should acknowledge
+        the use of FiQCI, preferably in the format: "These results have been acquired using the
+        Finnish Quantum-Computing Infrastructure
+      
+      helmi-link-url: /publications/2022-11-01-Helmi_pilot
+      helmi-link-text: Additionally, users should also acknowledge using Helmi if applicable
+
 logo: assets/images/FiQCI-logo.png
 favicon: assets/images/favicon.png
 footer_icons: assets/footer-icons
 funder_logos: assets/images/funders
 description: >-
-  Web presence of the Finnish Quantum-Computing Infrastructure. We provide state-of-the-art quantum-computing services to Finnish RDI communities.
+  Web presence of the Finnish Quantum-Computing Infrastructure. We provide state-of-the-art quantum-computing 
+  services to Finnish RDI communities.
 excerpt_max_length: 250
 title_separator: " – "

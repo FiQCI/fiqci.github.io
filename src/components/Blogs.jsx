@@ -5,7 +5,6 @@ import {
     CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
 import { BlogCardComponent } from './BlogCards';
-import { Breadcrumbs } from './Breadcrumbs';
 
 const BlogFilters = ({ filters, handleFilterChange }) => {
     const handleCheckboxChange = useCallback((category, option) => {
@@ -210,24 +209,19 @@ export const Blogs = () => {
     };
 
     return (
-        <div className='flex flex-col items-top mb-2'>
-            <div className='mx-8 lg:mx-[100px] flex flex-col lg:grid grid-cols-5 gap-8'>
-                <div className='col-span-5 mt-4'>
-                    <Breadcrumbs breadcrumbs={{ "Home": "/", "Blogs and instructions": "/publications" }} />
-                </div>
-                <div className='mt-8 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
-                    <BlogFilters filters={filters} handleFilterChange={handleFilterChange} />
-                </div>
-                <div className='mt-8 md:py-0 col-span-4'>
-                    <BlogsList
-                        title='Blogs'
-                        blogs={[...filteredBlogs].reverse()}
-                        paginationOptions={options}
-                        handlePageChange={handlePageChange(setOptions)}
-                        showFilters={true}
-                        onOpenDialog={onOpenDialog}
-                    />
-                </div>
+        <div className='lg:grid grid-cols-5 gap-8'>
+            <div className='mt-8 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
+                <BlogFilters filters={filters} handleFilterChange={handleFilterChange} />
+            </div>
+            <div className='mt-8 md:py-0 col-span-4'>
+                <BlogsList
+                    title='Blogs'
+                    blogs={[...filteredBlogs].reverse()}
+                    paginationOptions={options}
+                    handlePageChange={handlePageChange(setOptions)}
+                    showFilters={true}
+                    onOpenDialog={onOpenDialog}
+                />
             </div>
             <FilterModal
                 isModalOpen={isModalOpen}

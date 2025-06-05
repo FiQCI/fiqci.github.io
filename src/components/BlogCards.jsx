@@ -7,7 +7,7 @@ export const BlogCardComponent = props => {
     const type = props?.filters?.Type ? Object.entries(props?.filters?.Type)?.filter(field => field[1])[0][0] : "News";
     return (
         <CCard className="flex flex-auto flex-col flex-wrap border border-gray-200 rounded-none shadow-md overflow-hidden hover:shadow-lg p-0 m-0 w-full"> {/* Adjusted card width */}
-            <img src={props.teaser} alt="Logo" className="w-full h-28 scale-125 object-cover m-0 p-0" /> {/* Reduced image height */}
+            <img src={props.teaser} alt="Logo" className="w-full h-28 scale-125 object-cover m-0 p-0" />
             <CCardContent className="flex flex-col border-none m-0">
                 <div>
                     <a
@@ -27,21 +27,22 @@ export const BlogCardComponent = props => {
 
 export const BlogCards = () => {
     return (
-        <>
+        <div className="min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]">
+            
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               { SITE.publications.slice(-5).reverse().map(blog => <BlogCardComponent {...blog} />) }
             </div>
             <div className="mt-4">
                 <a
-                    href="#"
+                    href="/publications/"
                     className="text-sky-800 hover:underline font-bold"
                 >
-                    <div className="flex items-center gap-3">
+                    <div className="mx-2 sm:mx-0 flex items-center gap-3">
                         <div className="text-sm">All blogs and instructions</div>
                         <CIcon className="text-lg" path={mdiArrowRight} />
                     </div>
                 </a>
             </div>
-        </>
+        </div>
     );
 };

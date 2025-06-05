@@ -1,21 +1,22 @@
 import React from 'react'
-
 import { createRoot } from 'react-dom/client'
+import { createPortal } from 'react-dom'
 
-import { BaseLayout } from '../layouts/base.html'
+import { PageLayout } from '../layouts/page.html'
 
 import { useJsonApi } from '../hooks/useJsonApi'
 
-const DefaultPage = () => {
+
+const AboutPageView = () => {
     const themeConstants = useJsonApi('api/theme/constants.json')
 
     return <>
-        <BaseLayout {...themeConstants} />
+        <PageLayout {...themeConstants} title="About" />
     </>
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     const root = createRoot(document.getElementById('react-root'))
 
-    root.render(<DefaultPage />)
+    root.render(<AboutPageView />)
 })

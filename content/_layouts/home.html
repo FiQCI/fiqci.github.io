@@ -2,8 +2,116 @@
 layout: base
 ---
 
+{% assign about_data = site.data.constants.about %}
+
 {%- include react/root.html id='hero' -%}
 
 {{ content }}
 
-{%- include react/root.html id='about-fiqci' -%}
+<div id="about" class="pb-20 text-white bg-[#0D2B53] w-full">
+    <div class="mx-2 sm:mx-8 lg:mx-[100px] min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]">
+        <div class="mx-auto">
+            <div class="hidden md:flex">
+                <div class="flex-auto mt-8 pt-12 mr-0 lg:mr-32 md:mr-20">
+                    <div class="mb-6 ">
+                        <h2 id="about-fiqci" class="text-3xl font-bold">FiQCI mission</h2>
+                    </div>
+                    <div class="pb-4">
+                        <p class="mb-4">
+                            {{ about_data.mission }}
+                        </p>
+                        <p>
+                            {{ about_data.maintain }}
+                        </p>
+
+                        <div class="mt-4">
+                            <a
+                                href="/about/"
+                                class="text-sky-200 hover:underline font-bold"
+                            >
+                                <div class="sm:mx-0 flex items-center gap-3">
+                                    <div class="text-sm">Read more about FiQCI</div>
+                                    <CIcon class="text-lg" path={mdiArrowRight} />
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="mt-4">
+                            <a
+                                href="/access/"
+                                class="text-sky-200 hover:underline font-bold"
+                            >
+                                <div class="sm:mx-0 flex items-center gap-3">
+                                    <div class="text-sm">How to get access</div>
+                                    <CIcon class="text-lg" path={mdiArrowRight} />
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full pb-4 md:pb-0 md:min-w-64">
+                    <section class="bg-[#0066CC] text-white text-left font-bold text-lg py-8 px-2 sm:px-8">
+                        <p class="mb-4">
+                            Through FiQCI, Finnish researchers have access to one of the most
+                            powerful hybrid HPC+nQC resources in the world.
+                        </p>
+                        <p class="mb-0">
+                            Available for quantum-accelerated research and development.
+                        </p>
+                    </section>
+                </div>
+            </div>
+
+            <div class="flex md:hidden">
+                <div class="flex-auto mt-8 pt-12">
+                    <div class="mb-6 ">
+                        <h2 id="about-fiqci" class="text-3xl font-bold">FiQCI mission</h2>
+                    </div>
+                    <div class="w-full pb-4 md:pb-0 md:min-w-64">
+                        <section class="bg-[#0066CC] text-white text-left font-bold text-lg py-8 px-2 sm:px-8">
+                            <p class="mb-4">
+                                Through FiQCI, Finnish researchers have access to one of the most
+                                powerful hybrid HPC+nQC resources in the world.
+                            </p>
+                            <p class="mb-0">
+                                Available for quantum-accelerated research and development.
+                            </p>
+                        </section>
+                    </div>
+                    <div class="pb-4">
+                        <p class="mb-4">
+                            {{ about_data.mission }}
+                        </p>
+                        <p>
+                            {{ about_data.maintain }}
+                        </p>
+
+                        <div class="mt-4">
+                            <a
+                                href="/about/"
+                                class="text-sky-200 hover:underline font-bold"
+                            >
+                                <div class="sm:mx-0 flex items-center gap-3">
+                                    <div class="text-sm">Read more about FiQCI</div>
+                                    <CIcon class="text-lg" path={mdiArrowRight} />
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="mt-4">
+                            <a
+                                href="/access/"
+                                class="text-sky-200 hover:underline font-bold"
+                            >
+                                <div class="sm:mx-0 flex items-center gap-3">
+                                    <div class="text-sm">How to get access</div>
+                                    <CIcon class="text-lg" path={mdiArrowRight} />
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

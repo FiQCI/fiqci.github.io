@@ -6,7 +6,6 @@ import {
   CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
 
-import { Breadcrumbs } from './Breadcrumbs';
 
 const style = {
   "--_c-button-font-size": 14,
@@ -22,21 +21,26 @@ const styleArrow = {
   "--_c-icon-color": "#004E84"
 };
 
-function searchContent(query, store) {
-  if (query.endsWith('*')) {
-    query = query;
-  }
+function normalizeQuery(query) {
+  query = query.toLowerCase()
+  if (!query.trim()) return ''; // empty or whitespace-only
+  if (query.endsWith('*')) return query;
 
-  else {
-    query = query + '*';
-  };
+  // Optionally boost exact matches
+  const exactMatch = `${query}^10`;   // high boost for exact match
+  const wildcardMatch = `${query}*`;  // normal wildcard match
+  return `${exactMatch} ${wildcardMatch}`;
+}
+
+function searchContent(query, store) {
+  const queryStr = normalizeQuery(query);
 
   const idx = lunr(function () {
     this.ref('key');
-    this.field('title');
-    this.field('content');
-    this.field('type');
-    this.field('tags');
+    this.field('title', { boost: 10 });
+    this.field('content', { boost: 2 });
+    this.field('type', { boost: 5 });
+    this.field('tags', { boost: 5 });
     this.field('date');
     this.field('link');
 
@@ -47,13 +51,32 @@ function searchContent(query, store) {
     });
   });
 
-  const results = idx.search(query);
+  const results = idx.search(queryStr);
 
   const categorizedResults = {
     general: [],
     blogs: [],
     events: []
   };
+
+  if (results.length === 0) {
+    for (const key of ['blogs', 'events', 'pages']) {
+      for (const item of store[key]) {
+        if (item.title.toLowerCase().includes(query.toLowerCase())) {
+          categorizedResults.general.push({
+            title: item.title,
+            url: item.url,
+            excerpt: item.content.substring(0, 200) + '...',
+            type: item.type,
+            tags: item.tags,
+            date: item.date,
+            link: item?.link
+          });
+        }
+      }
+    }
+  }
+
 
   results.forEach(result => {
     const item = findItemByRef(result.ref, store);
@@ -77,6 +100,7 @@ function searchContent(query, store) {
       }
     }
   });
+
 
   return categorizedResults;
 }
@@ -199,7 +223,7 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleCheckboxChang
   return (
     <CModal
       key={isModalOpen ? 'open' : 'closed'}
-      style={{ "overflow": "scroll" }} className='overflow-scroll'
+      
       value={isModalOpen}
       dismissable
       onChangeValue={event => setIsModalOpen(event.detail)}
@@ -330,10 +354,7 @@ export const SiteSearch = () => {
   };
 
   return (
-    <div className='mx-8 lg:mx-[100px] lg:grid grid-cols-5 gap-0'>
-      <div className='col-span-5 mt-4'>
-        <Breadcrumbs breadcrumbs={{ Home: "/", "Search results": "/search" }} />
-      </div>
+    <div className='min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-2 sm:mx-8 lg:mx-[100px] lg:grid grid-cols-5 gap-0'>
       <div className='mt-24 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
         <Filters filters={filters} handleCheckboxChange={handleCheckboxChange} />
       </div>
