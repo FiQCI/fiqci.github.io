@@ -1,17 +1,12 @@
 import React from 'react'
 
 import { useStatus } from '../hooks/useStatus'
-import { Breadcrumbs } from './Breadcrumbs';
 // import { StatusIndicator } from './StatusIndicator'
 
 export const ServiceStatus = () => {
   const status = useStatus('https://fiqci-backend-fiqci-workspace.2.rahtiapp.fi/healthcheck')
 
   return (
-    <div className='min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-8 lg:mx-[100px]'>
-      <div className='mt-4 mb-10'>
-        <Breadcrumbs breadcrumbs={{ Home: "/", "Status": "/status" }} />
-      </div>
       <div className="py-4 w-full grid justify-items-center">
 
         <p className="text-black text-center pb-3">
@@ -59,7 +54,6 @@ export const ServiceStatus = () => {
           </h3>
         </div>
       </div>
-    </div>
 
   );
 };

@@ -1,23 +1,27 @@
 ---
-layout: page
+layout: base
+react: true
 ---
 
 {% assign constants = site.data.constants %}
 {% assign author_info = site.data.authors[page.author] %}
 
 {%- include react/root.html id='banner' -%}
+
 <article itemscope itemtype="http://schema.org/BlogPosting">
  <div id="blogView" class='flex flex-col items-top mb-2'>
     <div class='2xl:grid 2xl:grid-cols-5 mx-2 sm:mx-8 lg:mx-[100px] flex flex-col gap-8 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
         <div class='col-span-5 mt-4'>
             {%- include react/root.html id='breadcrumbs' -%}
         </div>
-        <div class='col-span-1' id="author-data" data-content='{
-            "name":{{author_info.name | strip_newlines | escape | jsonify}},
-            "bio": {{author_info.bio | strip_newlines | escape | jsonify}},
-            "url": {{author_info.avatar | strip_newlines | escape | jsonify}}
-        }'>
-            {%- include react/root.html id='author' -%}
+        <div class='col-span-1' id="author-data" >
+            <div class='flex flex-row gap-2 2xl:flex-row'>
+            <img src='{{author_info.avatar}}' alt='Author' class='w-20' />
+            <div class='flex flex-col gap-4'>
+                <p class='font-bold !mb-0'>{{author_info.name}}</p>
+                <p class='max-w-[220px] text-wrap !mt-0 !mb-0'>{{author_info.bio}}</p>
+            </div>
+        </div>
         </div>
         <div class='col-span-3' id="tags-data" data-content="{{ page.tags | strip_newlines | escape }}">
             {%- include react/root.html id='tags' -%}

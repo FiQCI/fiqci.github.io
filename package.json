@@ -8,7 +8,7 @@
     },
     "webpack": {
       "outputDir": "./dist",
-      "reactPagesDir": "./src/pages"
+      "reactPagesDir": "./src/pages, ./src/views"
     },
     "tailwindcss": {
       "inputDir": "./src/stylesheets"

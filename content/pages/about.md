@@ -5,6 +5,37 @@ subtitle: The FiQCI consortium maintains, operates, and develops the infrastruct
 react: true
 ---
 
-{%- include react/root.html id='about' -%}
+{% assign about_data = site.data.constants.about %}
 
+<div class="lg:grid lg:grid-cols-2 gap-8">
+  <h1 class="text-3xl font-bold col-span-2">About FiQCI</h1>
+  <div class="col-span-1 lg:mr-10">
+    <p>{{ about_data.desc }}</p>
+    <br>
+    <p>{{ about_data.mission }}</p>
+    <br>
+    <p>{{ about_data.maintain }}</p>
+  </div>
+  <div class="col-span-1 lg:ml-10">
+    <h2 class="text-xl font-bold pb-2">Scientific and Technical Advisory Group</h2>
+    <p>{{ about_data.advisory-group.desc }}</p>
+    <ul class="pt-2 pl-5 space-y-2 list-disc list-inside">
+      {% for member in about_data.advisory-group.people %}
+      <li>{{ member.name }}, {{ member.institution }}, {{ member.country }}</li>
+      {% endfor %}
+    </ul>
 
+    <h2 class="text-xl font-bold pt-4 pb-2">Management</h2>
+    <ul class="pt-0 pl-5 space-y-2 list-disc list-inside">
+      {% for mgr in about_data.advisory-group.management.people %}
+      <li>{{ mgr.name }}, {{ mgr.institution }}, {{ mgr.title }}</li>
+      {% endfor %}
+    </ul>
+
+    <h2 class="text-xl font-bold pt-4 pb-2">Acknowledgement</h2>
+    <p>{{ about_data.advisory-group.acknowledgement.desc }} "Finnish Quantum-Computing Infrastructure (https://fiqci.fi)".
+    <a class="underline" href="{{ about_data.advisory-group.acknowledgement.helmi-link-url }}">
+      {{ about_data.advisory-group.acknowledgement.helmi-link-text }}
+    </a></p>
+  </div>
+</div>

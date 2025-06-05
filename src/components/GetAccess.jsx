@@ -1,9 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { Breadcrumbs } from "./Breadcrumbs";
-import { mdiArrowRight, mdiOpenInNew } from '@mdi/js';
 import { prependBaseURL } from '../utils/url';
-import { useJsonApi } from '../hooks/useJsonApi';
 
 const ResourceCard = ({ resource }) => {
     return (
@@ -51,36 +48,32 @@ export const GetAccess = props => {
     const emulation_resources = props?.emulation_resources
     useEffect(() => {
         if (window.location.hash !== "") {
-          const hash = window.location.hash;
-          const element = document.getElementById(hash.substring(1));
-          if (element) {
-            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = elementPosition - 100;
-            
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-          }
+            const hash = window.location.hash;
+            const element = document.getElementById(hash.substring(1));
+            if (element) {
+                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - 100;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
         }
-      }, []);
+    }, []);
 
     return (
-        <div className='flex flex-col items-top mb-2'>
-            <div className='lg:grid lg:grid-cols-5 mx-2 sm:mx-8 lg:mx-[100px] flex flex-col gap-8 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
-                <div className='col-span-5 mt-4'>
-                    <Breadcrumbs breadcrumbs={{ "Home": "/", "Get Access": "/access/" }} />
-                </div>
-                <div className="col-span-1"></div>
-                <div className="col-span-3 flex flex-col gap-8 pb-20">
-                    <p>Please see status of services from <a className="text-base text-sky-800 underline" href="/status/">Status</a> -page</p>
-                    <ResourceList id={"quantum"} title={"Quantum computer resources"} resources={quantum_resources} />
 
-                    <ResourceList id={"super"} title={"Supercomputer resources"} resources={supercomputer_resources} />
+        <div className="lg:grid lg:grid-cols-5 gap-8">
+            <div className="col-span-1"></div>
+            <div className="col-span-3 flex flex-col gap-8 pb-20">
+                <p>Please see status of services from <a className="text-base text-sky-800 underline" href="/status/">Status</a> -page</p>
+                <ResourceList id={"quantum"} title={"Quantum computer resources"} resources={quantum_resources} />
 
-                    <ResourceList id={"emulation"} title={"Emulation resources"} resources={emulation_resources} />
+                <ResourceList id={"super"} title={"Supercomputer resources"} resources={supercomputer_resources} />
 
-                </div>
+                <ResourceList id={"emulation"} title={"Emulation resources"} resources={emulation_resources} />
+
             </div>
         </div>
     );

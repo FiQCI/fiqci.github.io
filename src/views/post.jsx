@@ -2,20 +2,21 @@ import React from 'react'
 
 import { createRoot } from 'react-dom/client'
 
-import { BaseLayout } from '../layouts/base.html'
+import { PostLayout } from '../layouts/post.html'
 
 import { useJsonApi } from '../hooks/useJsonApi'
 
-const DefaultPage = () => {
+const BlogViewPage = () => {
     const themeConstants = useJsonApi('api/theme/constants.json')
-
-    return <>
-        <BaseLayout {...themeConstants} />
-    </>
+    return (
+        <>
+            <PostLayout {...themeConstants} title="Blog" />
+        </>
+    )
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     const root = createRoot(document.getElementById('react-root'))
 
-    root.render(<DefaultPage />)
+    root.render(<BlogViewPage />)
 })
