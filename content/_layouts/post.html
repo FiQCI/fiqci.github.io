@@ -33,6 +33,12 @@ react: true
                <div class="prose inline" itemprop="articleBody">
                 {{ content }}
               </div>
+              </br>
+              <div>
+                <h2 class="text-[1.5em] font-[700]" >Give feedback!</h2>
+                </br>
+                <p class="text-gray-600" >Feedback is greatly appreciated! You can send feedback directly to <a href=mailto:{{ constants.feedback_email }}> {{ constants.feedback_email }} </a>.</p>
+              </div>
               <div class="pt-8" id="references">
                 {%- include react/root.html id='references-accordion' -%}
               </div>
