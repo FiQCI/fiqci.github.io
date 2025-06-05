@@ -357,29 +357,29 @@ They can be executed directly on the FiQCI infrastructure.
 
 ## References
 
-[1] [Y. Dang, N. Jiang, H. Hu, Z. Ji, and W. Zhang, Image Classification Based on Quantum KNN Algorithm, May 2018.](http://arxiv.org/abs/1805.06260)
+1. [Y. Dang, N. Jiang, H. Hu, Z. Ji, and W. Zhang, Image Classification Based on Quantum KNN Algorithm, May 2018.](http://arxiv.org/abs/1805.06260)
 
-[2] [J. M. Zollner, P. Walther, and M. Werner, “Satellite Image Representations for Quantum Classifiers," Datenbank-Spektrum, Mar. 2024.](https://doi.org/10.1007/s13222-024-00464-7)
+2. [J. M. Zollner, P. Walther, and M. Werner, “Satellite Image Representations for Quantum Classifiers," Datenbank-Spektrum, Mar. 2024.](https://doi.org/10.1007/s13222-024-00464-7)
 
-[3] [D. Kopczyk, Quantum machine learning for data scientists, Apr. 2018.](http://arxiv.org/abs/1804.10068)
+3. [D. Kopczyk, Quantum machine learning for data scientists, Apr. 2018.](http://arxiv.org/abs/1804.10068)
 
-[4] [S. Y. Chang, B. L. Saux, S. Vallecorsa, and M. Grossi, “Quantum Convolutional Circuits for Earth Observation Image Classification,” in IGARSS 2022 - 2022 IEEE International Geoscience and Remote Sensing Symposium, IEEE, Jul. 2022, pp. 4907–4910.](https://ieeexplore.ieee.org/document/9883992/)
+4. [S. Y. Chang, B. L. Saux, S. Vallecorsa, and M. Grossi, “Quantum Convolutional Circuits for Earth Observation Image Classification,” in IGARSS 2022 - 2022 IEEE International Geoscience and Remote Sensing Symposium, IEEE, Jul. 2022, pp. 4907–4910.](https://ieeexplore.ieee.org/document/9883992/)
 
-[5] [S. U. Khan, A. J. Awan, and G. Vall-Llosera, K-Means Clustering on Noisy Intermediate Scale Quantum Computers, Sep. 2019.](http://arxiv.org/abs/1909.12183)
+5. [S. U. Khan, A. J. Awan, and G. Vall-Llosera, K-Means Clustering on Noisy Intermediate Scale Quantum Computers, Sep. 2019.](http://arxiv.org/abs/1909.12183)
 
-[6] [P. Helber, B. Bischke, A. Dengel, and D. Borth, EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification, Jul. 2018.](https://zenodo.org/records/7711810)
+6. [P. Helber, B. Bischke, A. Dengel, and D. Borth, EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification, Jul. 2018.](https://zenodo.org/records/7711810)
 
-[7] [S. Otgonbaatar and M. Datcu, “Classification of Remote Sensing Images With Parameterized Quantum Gates, IEEE Geoscience and Remote Sensing Letters, 2022.](https://ieeexplore.ieee.org/document/9531639)
+7. [S. Otgonbaatar and M. Datcu, “Classification of Remote Sensing Images With Parameterized Quantum Gates, IEEE Geoscience and Remote Sensing Letters, 2022.](https://ieeexplore.ieee.org/document/9531639)
 
-[8] [S. Lloyd, M. Schuld, A. Ijaz, J. Izaac, and N. Killoran, Quantum embeddings for machine learning, Feb. 2020.](http://arxiv.org/abs/2001.03622)
+8. [S. Lloyd, M. Schuld, A. Ijaz, J. Izaac, and N. Killoran, Quantum embeddings for machine learning, Feb. 2020.](http://arxiv.org/abs/2001.03622)
 
-[9] [M. Schuld and N. Killoran, “Quantum machine learning in feature Hilbert spaces,” Physical Review Letters Feb. 2019.](http://arxiv.org/abs/1803.07128)
+9. [M. Schuld and N. Killoran, “Quantum machine learning in feature Hilbert spaces,” Physical Review Letters Feb. 2019.](http://arxiv.org/abs/1803.07128)
 
-[10] [E. Aïmeur, G. Brassard, and S. Gambs, “Machine Learning in a Quantum World,” in Advances in Artificial Intelligence, Springer Berlin Heidelberg, 2006, pp. 431–442.](http://link.springer.com/10.1007/11766247_37)
+10. [E. Aïmeur, G. Brassard, and S. Gambs, “Machine Learning in a Quantum World,” in Advances in Artificial Intelligence, Springer Berlin Heidelberg, 2006, pp. 431–442.](http://link.springer.com/10.1007/11766247_37)
 
-[11] [S. Pramanik et al., A Quantum-Classical Hybrid Method for Image Classification and Segmentation, Dec. 2021.](http://arxiv.org/abs/2109.14431)
+11. [S. Pramanik et al., A Quantum-Classical Hybrid Method for Image Classification and Segmentation, Dec. 2021.](http://arxiv.org/abs/2109.14431)
 
-[12] [Adjusted_rand_score, scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score)
+12. [Adjusted_rand_score, scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html#sklearn.metrics.adjusted_rand_score)
 
 ## Give feedback!
 
