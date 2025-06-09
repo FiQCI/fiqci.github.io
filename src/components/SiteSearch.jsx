@@ -69,6 +69,7 @@ function searchContent(query, store) {
     if (item.type.toLowerCase() === "page") categorizedResults.general.push(resultItem);
     else if (item.type.toLowerCase() === "post") categorizedResults.blogs.push(resultItem);
     else if (item.type.toLowerCase() === "event") categorizedResults.events.push(resultItem);
+    else categorizedResults.general.push(resultItem); // default to general
   };
 
   if (results.length === 0) {
