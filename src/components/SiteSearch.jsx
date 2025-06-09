@@ -63,7 +63,7 @@ function searchContent(query, store) {
       type: item.type,
       tags: item.tags,
       date: item.date,
-      link: item?.link
+      link: item.link
     };
 
     if (item.type === "page") categorizedResults.general.push(resultItem);
