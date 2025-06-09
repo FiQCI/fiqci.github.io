@@ -59,7 +59,7 @@ function searchContent(query, store) {
     const resultItem = {
       title: item.title,
       url: item.url,
-      excerpt: item.content.substring(0, 200) + '...',
+      excerpt: item.content ? item.content.substring(0, 200).trim() + '...' : '',
       type: item.type,
       tags: item.tags,
       date: item.date,
