@@ -60,7 +60,7 @@ function searchContent(query, store) {
       title: item.title,
       url: item.url,
       excerpt: item.content ? item.content.substring(0, 200).trim() + '...' : '',
-      type: item.type,
+      type: item.type.toLowerCase(),
       tags: item.tags,
       date: item.date,
       link: item.link
@@ -69,10 +69,10 @@ function searchContent(query, store) {
     const typeMap = {
       page: 'general',
       post: 'blogs',
-      Event: 'events'
+      event: 'events'
     };
 
-    const category = typeMap[item.type];
+    const category = typeMap[resultItem.type];
     if (category) {
       categorizedResults[category].push(resultItem);
     }
@@ -321,9 +321,9 @@ export const SiteSearch = () => {
       return activeFilters.some(filter => {
         const filterLower = filter.toLowerCase();
 
-        if (filterLower === "blog" && item.type.toLowerCase() === "post") return true;
-        if (filterLower === "event" && item.type.toLowerCase() === "event") return true;
-        if (filterLower === "general information" && item.type.toLowerCase() === "page") return true;
+        if (filterLower === "blog" && item.type === "post") return true;
+        if (filterLower === "event" && item.type === "event") return true;
+        if (filterLower === "general information" && item.type === "page") return true;
 
         return false;
       });
