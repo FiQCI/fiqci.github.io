@@ -28,7 +28,7 @@ header_nav:
   - title: Search
     page: pages/search.md
 
-#Following are constanst per page. Can be accessed with page.url
+#Following are constants per page. Can be accessed with page.url
 "/":
   hero:
       tagline: Making the power of quantum computing accessible
