@@ -66,10 +66,19 @@ function searchContent(query, store) {
       link: item.link
     };
 
-    if (item.type.toLowerCase() === "page") categorizedResults.general.push(resultItem);
-    else if (item.type.toLowerCase() === "post") categorizedResults.blogs.push(resultItem);
-    else if (item.type.toLowerCase() === "event") categorizedResults.events.push(resultItem);
-    else categorizedResults.general.push(resultItem); // default to general
+    const typeMap = {
+      page: 'general',
+      post: 'blogs',
+      Event: 'events'
+    };
+
+    const category = typeMap[item.type];
+    if (category) {
+      categorizedResults[category].push(resultItem);
+    }
+    else {
+      categorizedResults['general'].push(resultItem)
+    }
   };
 
   if (results.length === 0) {
@@ -162,7 +171,7 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
                       <p> &nbsp;&nbsp; | &nbsp;&nbsp;{item?.date}</p>
                     }
                   </div>
-                  {type !== "general" && 
+                  {type !== "general" &&
                     <span>{item.excerpt}</span>
                   }
                 </li>
