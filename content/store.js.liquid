@@ -42,8 +42,7 @@ permalink: store.js
   {%- assign filtered_pages = filtered_pages | reject: "url", "/api/" -%}
   {%- for page in filtered_pages -%}
     {%- unless page.url contains '.json' or page.url contains '.css' or page.url contains '.js' or page.path contains '/api/' -%}
-    {%- assign base_content = page.content | default: "" -%}
-    {%- assign full_content = base_content | append: site.data.constants[page.url] -%}
+    {%- assign full_content = page.content | default: "" | append: site.data.constants[page.url] -%}
     {
       "key": "{{ page.url | slugify }}",
       "title": {{ page.title | default: "" | jsonify }},
