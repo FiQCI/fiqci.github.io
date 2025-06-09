@@ -66,9 +66,9 @@ function searchContent(query, store) {
       link: item.link
     };
 
-    if (item.type === "page") categorizedResults.general.push(resultItem);
-    else if (item.type === "post") categorizedResults.blogs.push(resultItem);
-    else if (item.type === "Event") categorizedResults.events.push(resultItem);
+    if (item.type.toLowerCase() === "page") categorizedResults.general.push(resultItem);
+    else if (item.type.toLowerCase() === "post") categorizedResults.blogs.push(resultItem);
+    else if (item.type.toLowerCase() === "event") categorizedResults.events.push(resultItem);
   };
 
   if (results.length === 0) {
