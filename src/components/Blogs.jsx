@@ -6,6 +6,24 @@ import {
 } from '@cscfi/csc-ui-react';
 import { BlogCardComponent } from './BlogCards';
 
+const filterStyles = {
+    "--_c-checkbox-color": " #004E84",
+    "--_c-checkbox-background-color-hover": " #CCE6F1",
+    "--_c-checkbox-color-active": " #004E84",
+}
+    
+const dropdownStyles = {
+   "--c-select-active-color": " #004E84",
+   "--c-select-background-color": "rgba(204, 230, 241, 0)",
+   "--c-select-inactive-color": " #004E84",
+   "--c-select-option-background-color": " #004E84",
+   "--c-select-option-background-color-hover": "rgb(132, 9, 0)",
+   "--c-select-option-text-color": " #001C39",
+   "--c-select-placeholder-color": " #001C39",
+   "--c-select-text-color": " #001C39",
+};
+
+
 const BlogFilters = ({ filters, handleFilterChange }) => {
     const handleCheckboxChange = useCallback((category, option) => {
         handleFilterChange({
@@ -80,12 +98,12 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
         <CModal
             key={isModalOpen ? 'open' : 'closed'}
             style={{ overflow: 'scroll' }}
-            className='overflow-scroll'
+            className='!overflow-hidden'
             value={isModalOpen}
             dismissable
             onChangeValue={event => setIsModalOpen(event.detail)}
         >
-            <CCard style={{ overflow: 'scroll' }} className='overflow-scroll max-h-[80vh]'>
+            <CCard style={{ overflow: 'scroll' }} className='overflow-scroll lg:!overflow-hidden max-h-[80vh]'>
                 <CCardTitle>Filters</CCardTitle>
                 <CCardContent>
                     <BlogFilters filters={filters} handleFilterChange={handleFilterChange} />
@@ -101,8 +119,7 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
 //List blogs in a grid with pagination
 const BlogsList = ({ title, blogs, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => (
     <div>
-        <div className='flex flex-row justify-between'>
-            <h2 className=''>{title}</h2>
+        <div className='flex flex-row justify-end'>
             {showFilters && //to not show the button on every EventsList instance
                 <CButton
                     className='flex items-center py-2 lg:hidden'
