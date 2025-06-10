@@ -14,10 +14,10 @@ const ResourceCard = ({ resource }) => {
 
             <div className="flex flex-col flex-grow pl-0 sm:pl-4">
                 <h3 className="text-xl font-bold text-on-white">{resource.name}</h3>
-                <p className="text-sm text-on-white text-gray-600">{resource.desc.trim()}</p>
+                <p className="text-[16px] text-on-white text-gray-600">{resource.desc.trim()}</p>
                 <div className="mt-2 space-y-2">
                     {resource.links.map((link, index) => (
-                        <a key={index} href={link.link} className="text-blue-500 flex items-center gap-2">
+                        <a key={index} href={link.link} className="text-[14px] font-bold text-sky-800 flex items-center gap-2">
                             {link.teaser}
                         </a>
                     ))}
