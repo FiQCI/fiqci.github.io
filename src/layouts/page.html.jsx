@@ -6,6 +6,7 @@ import { Banner } from '../components/Banner'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 
 import { BaseLayout } from './base.html'
+import { prependBaseURL } from '../utils/url'
 
 
 export const PageLayout = props => {
@@ -19,7 +20,7 @@ export const PageLayout = props => {
             document.getElementById('banner')
         )}
         {createPortal(
-            <Breadcrumbs breadcrumbs={{ "Home": "/", [title]: "#" }} />,
+            <Breadcrumbs breadcrumbs={{ "Home": prependBaseURL("/"), [title]: "#" }} />,
             document.getElementById('breadcrumbs')
         )}
     </>

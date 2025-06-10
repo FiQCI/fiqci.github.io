@@ -12,6 +12,7 @@ import { BlogTags } from '../components/BlogTags'
 import { ReferencesAccordion } from '../components/ReferencesAccordion'
 
 import { BaseLayout } from './base.html'
+import { prependBaseURL } from '../utils/url'
 
 export const PostLayout = props => {
     const title = props.title_separator
@@ -31,7 +32,7 @@ export const PostLayout = props => {
             document.getElementById('banner')
         )}
         {createPortal(
-            <Breadcrumbs breadcrumbs={{ "Home": "/", "About FiQCI": "/about/", [title]: "#" }} />,
+            <Breadcrumbs breadcrumbs={{ "Home": prependBaseURL("/"), "Blogs and instructions": prependBaseURL("/publications/"), [title]: "#" }} />,
             document.getElementById('breadcrumbs')
         )}
         {createPortal(
