@@ -64,7 +64,7 @@ export const Hero = props => {
         : <></>
 
     return (
-        <div className='mb-[-300px] sm:mb-[-300px] md:mb-[-300px] lg:mb-[-200px] xl:mb-[-250px]'>
+        <div className='mb-[-300px] sm:mb-[-250px] md:mb-[-250px] lg:mb-[-200px] xl:mb-[-250px]'>
             <div className='bg-fiqci bg-cover bg-center w-full min-h-[400px]'></div>
 
             <div className='w-auto sm:w-auto mx-2 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] sm:mx-8 lg:mx-0 lg:ml-[100px]  flex lg:flex-row lg:justify-start lg:items-start md:flex-col md:items-center sm: flex-col'>
