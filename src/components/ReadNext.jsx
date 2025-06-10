@@ -35,7 +35,7 @@ export const ReadNext = ({ title }) => {
                     >
                         <div className="flex items-center gap-3">
                             <p>See all</p>
-                            <CIcon className="mb-[11px]" path={mdiArrowRight} />
+                            <CIcon className="" path={mdiArrowRight} />
                         </div>
                     </a>
                 </div>
