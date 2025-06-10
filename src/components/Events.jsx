@@ -257,6 +257,7 @@ export const Events = () => {
                     showFilters={true}
                     onOpenDialog={onOpenDialog}
                 />
+                <div className="h-[80px]" />
                 <EventsList
                     title='Past events'
                     events={[...filteredEvents.past].reverse()}
