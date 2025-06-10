@@ -28,7 +28,7 @@ const ContentButton = props => {
     return (
         <div>
             <CButton
-                className='hidden sm:block w-min ml-0 mt-[10px] md:ml-0 mr-[20px] sm:ml-0 bg-[#0D2B53] hover:bg-blue-600'
+                className='hidden mb-[6px] sm:block w-min ml-0 mt-[10px] md:ml-0 mr-[16px] sm:ml-0 bg-[#0D2B53] hover:bg-blue-600'
                 no-radius
                 size="large"
                 onClick={() => (window.location.href = prependBaseURL(props.href))}
@@ -37,7 +37,7 @@ const ContentButton = props => {
                 <CIcon path={getIconPath(props.href)}/>
             </CButton>
             <CButton
-                className='flex flex-1 sm:hidden w-min ml-0 mt-[10px] mr-2 md:ml-0 bg-[#0D2B53] hover:bg-blue-600'
+                className='flex flex-1 mb-[6px] sm:hidden w-min ml-0 mt-[10px] mr-0 md:ml-0 bg-[#0D2B53] hover:bg-blue-600'
                 no-radius
                 size="default"
                 onClick={() => (window.location.href = prependBaseURL(props.href))}
@@ -50,7 +50,7 @@ const ContentButton = props => {
 };
 
 const Announcement = props =>
-    <div className='flex flex-col justify-evenly z-2 bg-[#FF9B66] min-h-[100px] px-4 md:pl-[30px]'>
+    <div className='flex flex-col justify-evenly py-[10px] pr-[40px] z-2 bg-[#FF9B66] min-h-[100px] px-4 md:pl-[28px]'>
         <p className='font-bold'>{props.text}</p>
         <a href={props.link.href} className='w-fit flex text-[#400001] hover:underline' >{props.link.title} <CIcon path={mdiArrowRight} /></a>
     </div>
@@ -80,7 +80,7 @@ export const Hero = props => {
 
                 <div className='-top-[350px] relative sm:relative sm:-top-[280px] md:relative md:w-full lg:top-0 grow gap-[17px] z-2 ml-[0px] lg:w-1/2 flex flex-col justify-start'>
                     {announcementComponent}
-                    <div className='flex ml-0 flex-col sm:flex-row sm:flex-wrap md:flex-row md:flex-wrap md:ml-0 sm:ml-0 lg:flex-row lg:flex-wrap lg:ml-[20px] xl:ml-[20px] xl:flex xl:flex-col '>
+                    <div className='flex ml-0 flex-col sm:flex-row sm:flex-wrap md:flex-row md:flex-wrap md:ml-0 sm:ml-0 lg:flex-row lg:flex-wrap lg:ml-[28px] xl:ml-[28px] xl:flex xl:flex-col '>
                         { contentButtons }
                     </div>
                 </div>
