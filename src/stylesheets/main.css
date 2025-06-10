@@ -9,3 +9,8 @@
 .border-on-white {
     border-color: #001C39;
 }
+
+h2 {
+    font-size: 28px!important;
+    @apply font-bold
+}

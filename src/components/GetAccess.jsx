@@ -13,7 +13,7 @@ const ResourceCard = ({ resource }) => {
             </div>
 
             <div className="flex flex-col flex-grow pl-0 sm:pl-4">
-                <h2 className="text-lg text-on-white font-bold">{resource.name}</h2>
+                <h3 className="text-xl font-bold text-on-white">{resource.name}</h3>
                 <p className="text-sm text-on-white text-gray-600">{resource.desc.trim()}</p>
                 <div className="mt-2 space-y-2">
                     {resource.links.map((link, index) => (
@@ -32,7 +32,7 @@ const ResourceCard = ({ resource }) => {
 const ResourceList = ({ id, title, resources }) => {
     return (
         <div className="pb-8" id={id}>
-            <h1 className="text-2xl text-on-white font-bold pb-8">{title}</h1>
+            <h2 className="text-on-white pb-8">{title}</h2>
             <div className="flex flex-col gap-8">
                 {resources?.map((resource, index) => (
                     <ResourceCard key={index} resource={resource} />

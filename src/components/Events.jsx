@@ -119,7 +119,7 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
 const EventsList = ({ title, events, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => (
     <div>
         <div className='flex flex-row justify-between'>
-            <h2 className='text-3xl font-bold'>{title}</h2>
+            <h2 className=''>{title}</h2>
             {showFilters && //to not show the button on every EventsList instance
                 <CButton
                     className='flex items-center py-2 lg:hidden'

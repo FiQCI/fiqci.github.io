@@ -48,7 +48,7 @@ export const ServiceStatus = () => {
         <hr className="border-t-1 border-gray-200 w-5/6 py-4" />
 
         <div className="w-full">
-          <h2 className='text-3xl py-2 sm:text-2xl sm:py-2 md:text-3xl md:py-2 font-bold'>Upcoming Service breaks</h2>
+          <h2 className='py-2 sm:py-2 md:py-2'>Upcoming Service breaks</h2>
           <h3 className='text-2xl py-2 sm:text-1xl sm:py-2 md:text-1xl md:py-2'>
             You can view general LUMI Service breaks <a href="https://www.lumi-supercomputer.eu/lumi-service-status/" className="underline">here</a>.
           </h3>
