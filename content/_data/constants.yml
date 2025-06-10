@@ -36,41 +36,34 @@ hero:
       href: "#about-fiqci"
 
 access_cards:
-  - title: LUMI
-    href: FIXME
+  - title: Quantum computers
+    href: /access#quantum-computers
     teaser: /assets/images/FiQCI-banner.jpg
     description: |-
-      The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
-      is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, 
-      hosted by CSC in Kajaani, Finland.
+      The Finnish quantum-computing infrastructure (FiQCI) provides access to quantum computers
+      through the LUMI supercomputer environment. Currently there are two quantum computers
+      available for use: VTT Q5 (Helmi), and VTT Q50
     links:
-      - title: Getting started with Lumi
-        href: https://www.lumi-supercomputer.eu/get-started/
-  - title: Helmi - VTT Q5
-    href: FIXME
+      - title: Quantum computer resources
+        href: /access#quantum-computers
+  - title: Supercomputers
+    href: /access#supercomputers
     teaser: /assets/images/vtt-images/VTT_lab-2.jpg
     description: |-
-      Helmi, the first Finnish quantum computer, co-developed by VTT and IQM Quantum Computers, 
-      is operated by VTT in Espoo, Finland. Helmi is based on superconducting technology, 
-      and presently provides five qubits. Upgrades to 20, then 50 qubits is planned for the near future.
+      The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
+      is the pan-European EuroHPC LUMI supercomputer.
     links:
-      - title: How to access Helmi, instructions
-        href: FIXME
-      - title: Read more about Helmi
-        href: FIXME
-  - title: Kvasi
-    href: FIXME
+      - title: Supercomputer resources
+        href: /access#supercomputers
+  - title: Emulation resources
+    href: /access#emulation-resources
     teaser: /assets/images/FiQCI-banner.jpg
     description: |-
-      Kvasi, the Atos Quantum Learning Machine or Qaptiva is a quantum computing simulator with which you can learn 
-      to use and develop new quantum algorithms. Kvasi provides a platform for developing and simulating quantum 
-      algorithms in both ideal and realistic, noisy conditions. Kvasi is capable of simulating algorithms for 
-      quantum computers of 30+ qubits.
+      With the LUMI supercomputer it is possible to emulate quantum computers with up to 40+ qubits.
+      This allows for testing and development of quantum algorithms without the need for actual quantum hardware.
     links:
-      - title: How to access Kvasi, instructions
-        href: FIXME
-      - title: Read more about Kvasi
-        href: FIXME
+      - title: Emulation resources
+        href: /access#emulation-resources
 
 quantum_resources:
   - name: Helmi

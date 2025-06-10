@@ -12,18 +12,16 @@ const AccessCardComponent = ({ title, href, teaser, description, links }) => {
         <img
           src={prependBaseURL(teaser)}
           alt="teaser"
-          className="w-full h-32 object-cover"
+          className="w-full h-[227px] object-cover"
         />
-        <CCardContent className="flex flex-col border-none p-5 space-y-4">
-          <a href={prependBaseURL(href)} className="text-lg font-bold hover:underline">
-            {title}
-          </a>
+        <CCardContent className="flex flex-col border-none px-10 pb-10 pt-6">
+          <h3 className='text-[22px] font-bold' >{title}</h3>
   
           <div className="text-md">{description}</div>
   
           <div className="flex flex-col space-y-2">
             {links.map((link, index) => (
-              <a key={index} href={prependBaseURL(link.href)} className="text-sm font-bold hover:underline flex items-center gap-1">
+              <a key={index} href={prependBaseURL(link.href)} className="text-sky-200 hover:underline font-semibold flex items-center gap-1">
                 {link.title} <CIcon path={isExternal(link.href) ? mdiOpenInNew : mdiArrowRight} />
               </a>
             ))}
