@@ -36,3 +36,17 @@ h2 {
     height: 24px;
     fill: currentColor;
 }
+
+
+:root {
+    --c-primary-100: #CCE6F1 !important;
+    --c-primary-200: #CCE6F1 !important;
+    --c-primary-300: #CCE6F1 !important;
+    --c-primary-400: #004E84 !important;
+    --c-primary-500: #004E84 !important;
+    --c-primary-600: #004E84 !important;
+    --c-primary-700: #004E84 !important;
+    --c-primary-800: #004E84 !important;
+    --c-primary-900: #001C39 !important;
+    --c-primary-rgb: 0, 78, 132 !important;
+}
