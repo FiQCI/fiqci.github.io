@@ -7,14 +7,14 @@ export const ServiceStatus = () => {
   const status = useStatus('https://fiqci-backend-fiqci-workspace.2.rahtiapp.fi/healthcheck')
 
   return (
-      <div className="py-4 w-full grid justify-items-center">
+      <div className="py-4 w-full grid justify-items-center text-on-white">
 
-        <p className="text-black text-center pb-3">
+        <p className="text-center pb-3">
           View the status of the Quantum Connections
         </p>
         <hr className="border-t-1 border-gray-200 w-full py-6" />
         <div className='w-full bg-sky-200 p-3 rounded-md inline-block'>
-          <p className="text-black">
+          <p className="">
             Helmi is accessible through the LUMI environment daily.
           </p>
         </div>

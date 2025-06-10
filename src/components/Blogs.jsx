@@ -19,7 +19,7 @@ const BlogFilters = ({ filters, handleFilterChange }) => {
     }, [filters, handleFilterChange]);
 
     return (
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-2 text-on-white'>
             {Object.entries(filters).slice(0, -1).map(([category, options]) => ( //slice(0,-1) to exclude Theme
                 <FilterCategory
                     key={category}
@@ -209,7 +209,7 @@ export const Blogs = () => {
     };
 
     return (
-        <div className='lg:grid grid-cols-5 gap-8'>
+        <div className='lg:grid grid-cols-5 gap-8 text-on-white'>
             <div className='mt-8 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
                 <BlogFilters filters={filters} handleFilterChange={handleFilterChange} />
             </div>

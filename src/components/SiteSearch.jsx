@@ -141,11 +141,11 @@ const SearchBar = ({ setResults }) => {
 
   return (
     <div className='flex flex-row w-full'>
-      <CIcon className='mx-3 self-center' style={style} path={mdiMagnify} />
+      <CIcon className='mx-3 self-center text-on-white' path={mdiMagnify} />
       <form onSubmit={handleSubmit} className='pb-[1px] w-full mr-3'>
         <input onChange={handleSearchBar} className="w-full focus:outline-none" placeholder="Search..." type="text" id="search-box" name="query" value={query} />
       </form>
-      <CIcon className='mx-3 self-center' onClick={() => setQuery("")} style={style} path={mdiClose} />
+      <CIcon className='mx-3 self-center text-on-white' onClick={() => setQuery("")} path={mdiClose} />
       <CButton onClick={handleSubmit} className='mr-3' style={style} ghost>Search</CButton>
     </div>
   )
@@ -160,7 +160,7 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
   };
 
   return (
-    <div className='mb-8'>
+    <div className='mb-8 text-on-white'>
       {results[type].length !== 0 &&
         <div className='border-t-5'>
           <div className='flex flex-row pt-2'>
@@ -199,7 +199,7 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
 
 const Filters = ({ filters, handleCheckboxChange }) => {
   return (
-    <div>
+    <div className='text-on-white'>
       <p className='font-semibold'>Results type</p>
       <div className='-ml-[10px] flex flex-col'>
         {Object.keys(filters).map(option => (
@@ -354,13 +354,13 @@ export const SiteSearch = () => {
   };
 
   return (
-    <div className='min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-2 sm:mx-8 lg:mx-[100px] lg:grid grid-cols-5 gap-0'>
+    <div className='text-on-white min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-2 sm:mx-8 lg:mx-[100px] lg:grid grid-cols-5 gap-0'>
       <div className='mt-24 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
         <Filters filters={filters} handleCheckboxChange={handleCheckboxChange} />
       </div>
 
       <div className='mt-24 col-span-5 lg:col-span-3'>
-        <div className='mb-2 lg:mb-20 border-2 border-black min-h-[45px] flex flex-row items-center text-lg'>
+        <div className='mb-2 lg:mb-20 border-2 border-on-white min-h-[45px] flex flex-row items-center text-lg'>
           <SearchBar setResults={setResults} />
         </div>
         <div>

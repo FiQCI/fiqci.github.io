@@ -11,7 +11,7 @@ export const Breadcrumbs = ({ breadcrumbs }) => {
         return (
           <span key={label} className="truncate">
             {isLast ? (
-              <p className="font-semibold text-sm sm:text-base">{label}</p>
+              <p className="font-semibold text-sm text-on-white sm:text-base">{label}</p>
             ) : (
               <a className="text-[#004E84] text-sm sm:text-base" href={href}>
                 <p className="inline-block">{label} &gt;</p>

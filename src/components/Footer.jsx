@@ -23,14 +23,14 @@ export const Footer = props => {
       <div className="px-8 lg:px-[100px] py-4 flex flex-wrap md:flex-nowrap justify-between items-start space-y-4 md:space-y-0">
         <div className='flex content-evenly space-x-8'>
         <div className="w-full md:w-auto">
-          <p className="font-semibold">Brought to you by:</p>
+          <p className="font-semibold text-on-white" >Brought to you by:</p>
           <div className="flex flex-wrap items-center space-x-0 lg:space-x-3 mt-1">
             {supporterLogos}
           </div>
         </div>
 
         <div className="w-full md:w-auto">
-          <p className="font-semibold">Supported by:</p>
+          <p className="font-semibold text-on-white">Supported by:</p>
           <div className="flex flex-wrap items-center space-x-0 lg:space-x-3 mt-1">
             {funderLogos}
           </div>
@@ -38,7 +38,7 @@ export const Footer = props => {
         </div>
 
         <div className="w-full md:w-auto text-left md:text-right">
-          <p className="font-semibold">Customer support</p>
+          <p className="font-semibold text-on-white">Customer support</p>
           <a href={`mailto:${props.feedbackEmail}`} className="text-blue-600 hover:underline">
             {props.feedbackEmail}
           </a>

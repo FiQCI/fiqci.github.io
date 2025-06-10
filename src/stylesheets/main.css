@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.text-on-white {
+    color: #001C39;
+}
+
+.border-on-white {
+    border-color: #001C39;
+}

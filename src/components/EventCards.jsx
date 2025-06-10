@@ -10,9 +10,9 @@ export const EventCardComponent = props => {
                 <div className='my-3'>
                     <a
                         href={props.url}
-                        className="text-md text-black-500 hover:underline font-bold"
+                        className="text-md text-on-white hover:underline font-bold"
                     >
-                        <div className='flex justify-between'>
+                        <div className='flex justify-between text-on-white'>
                             {props.title}
                             <CIcon className="text-lg" path={mdiOpenInNew} />
                         </div>

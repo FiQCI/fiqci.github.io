@@ -13,8 +13,8 @@ const ResourceCard = ({ resource }) => {
             </div>
 
             <div className="flex flex-col flex-grow pl-0 sm:pl-4">
-                <h2 className="text-lg font-bold">{resource.name}</h2>
-                <p className="text-sm text-gray-600">{resource.desc.trim()}</p>
+                <h2 className="text-lg text-on-white font-bold">{resource.name}</h2>
+                <p className="text-sm text-on-white text-gray-600">{resource.desc.trim()}</p>
                 <div className="mt-2 space-y-2">
                     {resource.links.map((link, index) => (
                         <a key={index} href={link.link} className="text-blue-500 flex items-center gap-2">
@@ -32,7 +32,7 @@ const ResourceCard = ({ resource }) => {
 const ResourceList = ({ id, title, resources }) => {
     return (
         <div className="pb-8" id={id}>
-            <h1 className="text-2xl font-bold pb-8">{title}</h1>
+            <h1 className="text-2xl text-on-white font-bold pb-8">{title}</h1>
             <div className="flex flex-col gap-8">
                 {resources?.map((resource, index) => (
                     <ResourceCard key={index} resource={resource} />
@@ -67,7 +67,7 @@ export const GetAccess = props => {
         <div className="lg:grid lg:grid-cols-5 gap-8">
             <div className="col-span-1"></div>
             <div className="col-span-3 flex flex-col gap-8 pb-20">
-                <p>Please see status of services from <a className="text-base text-sky-800 underline" href="/status/">Status</a> -page</p>
+                <p className="text-on-white">Please see status of services from <a className="text-base text-sky-800 underline" href="/status/">Status</a> -page</p>
                 <ResourceList id={"quantum"} title={"Quantum computer resources"} resources={quantum_resources} />
 
                 <ResourceList id={"super"} title={"Supercomputer resources"} resources={supercomputer_resources} />

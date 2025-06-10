@@ -15,7 +15,7 @@ const style = {
 const NavButton = props => {
     const isActive = window.location.pathname === props.href;
 
-    let styleClass = "text-black py-2"
+    let styleClass = "text-on-white py-2"
     if (isActive) {
         styleClass = styleClass + " underline underline-offset-8 decoration-2"
     }
@@ -41,8 +41,8 @@ const NavSearchButton = props => {
             style={style}
             onClick={() => (window.location.href = props.href)}
         >
-            <p className="text-black py-2">{props.title}</p>
-            <CIcon style={style} path={mdiMagnify} />
+            <p className="text-on-white py-2">{props.title}</p>
+            <CIcon className='text-on-white' path={mdiMagnify} />
         </CButton>
     );
 };
@@ -122,7 +122,7 @@ export const NavigationHeader = props => {
                 </div>
 
                 <div className='flex lg:hidden h-max'>
-                    <CIcon onClick={toggleMenu} size={40} path={mdiMenu} />
+                    <CIcon className='text-on-white' onClick={toggleMenu} size={40} path={mdiMenu} />
                 </div>
             </div>
             <div

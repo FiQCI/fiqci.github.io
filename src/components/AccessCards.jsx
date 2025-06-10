@@ -43,7 +43,7 @@ export const AccessCards = props => {
             {accessCardComponents}
         </div>
         <div className="mt-4">
-            <div className="flex items-center gap-3 text-md py-4">Other quantum resources will continuously be added to the FiQCI infrastructure.</div>
+            <div className="flex items-center gap-3 text-md text-on-white py-4">Other quantum resources will continuously be added to the FiQCI infrastructure.</div>
             <a
                 href="#"
                 className="text-sky-800 hover:underline font-bold"
