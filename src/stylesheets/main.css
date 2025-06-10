@@ -52,14 +52,14 @@ h2 {
 }
 
 #blogView h1,
-#blogView h2,
-#blogView h3,
-#blogView h4,
-#blogView p,
-#blogView strong,
-#blogView table,
-#blogView th,
-#blogView td {
+h2,
+h3,
+h4,
+p,
+strong,
+table,
+th,
+td {
     color: #001C39;
 }
 
