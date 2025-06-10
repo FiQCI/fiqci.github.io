@@ -50,3 +50,29 @@ h2 {
     --c-primary-900: #001C39 !important;
     --c-primary-rgb: 0, 78, 132 !important;
 }
+
+#blogView h1,
+#blogView h2,
+#blogView h3,
+#blogView h4,
+#blogView p,
+#blogView strong,
+#blogView table,
+#blogView th,
+#blogView td {
+    color: #001C39;
+}
+
+#blogView a {
+    text-decoration: none;
+    @apply text-sky-600;
+}
+
+#blogView a:hover {
+    @apply text-sky-800;
+    text-decoration: underline;
+}
+
+#read-next a {
+    color: #001C39 !important;
+}
