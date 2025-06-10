@@ -15,7 +15,7 @@ const AccessCardComponent = ({ title, href, teaser, description, links }) => {
           className="w-full h-[227px] object-cover"
         />
         <CCardContent className="flex flex-col border-none px-10 pb-10 pt-6">
-          <h3 className='text-[22px] font-bold' >{title}</h3>
+          <h3 className='text-[22px] font-bold mr-10'>{title}</h3>
   
           <div className="text-md">{description}</div>
   
@@ -37,7 +37,7 @@ export const AccessCards = props => {
         props.cards?.map(card => (<AccessCardComponent {...card} key={card.title} />))
 
     return <>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 mb-2 sm:mb-0 gap-[32px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 mb-2 sm:mb-0 gap-[32px]">
             {accessCardComponents}
         </div>
         <div className="mt-4">
