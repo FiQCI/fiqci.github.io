@@ -22,9 +22,6 @@ export const PostLayout = props => {
     const tagsData = document.getElementById('tags-data')
     const tags = JSON.parse(tagsData.getAttribute('data-content'));
 
-    const authorData = document.getElementById('author-data')
-    const author = JSON.parse(authorData.getAttribute('data-content'));
-
     return <>
         <BaseLayout {...props} />
         {createPortal(
