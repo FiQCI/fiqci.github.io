@@ -27,7 +27,7 @@ export const PostLayout = props => {
     return <>
         <BaseLayout {...props} />
         {createPortal(
-            <Banner title={title} />,
+            <Banner title={"Blogs and instructions"} />,
             document.getElementById('banner')
         )}
         {createPortal(
