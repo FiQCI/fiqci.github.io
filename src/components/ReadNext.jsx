@@ -15,15 +15,15 @@ export const ReadNext = ({ title }) => {
                     </div>
                 </div>
             </div>
-            <div className='hidden lg:block bg-[#E5F2F8] px-10 py-5 ml-0'>
-                <h3 className='!mb-10 !font-bold'>Read next:</h3>
+            <div className='hidden lg:block bg-[#E5F2F8] px-10 p-10 ml-0'>
+                <h3 className='!mb-10 text-[24px] !font-bold'>Read next:</h3>
                 {SITE.publications.filter((blog) => blog.title !== title).slice(-5).map((blog, index) => (
                     <div key={index}>
                         <div className='flex flex-col gap-2 mb-4'>
                             <a href={blog.url.split(".")[0]} className='text-sm text-black-500 hover:underline font-bold'>
                                 <h4 className='text-lg !text-sky-800 !font-bold'>{blog.title.length >= 89 ? blog.title.slice(0, 90) + "..." : blog.title}</h4>
                             </a>
-                            <p className='text-gray-500'>{blog.date}</p>
+                            <p className='text-gray-500'>{blog.type} | {blog.date}</p>
                         </div>
                     </div>
                 ))}
@@ -34,8 +34,8 @@ export const ReadNext = ({ title }) => {
                         className="text-sky-800 hover:underline font-bold"
                     >
                         <div className="flex items-center gap-3">
-                            <p>See all</p>
-                            <CIcon className="" path={mdiArrowRight} />
+                            <p className='text-lg !text-sky-800' >See all</p>
+                            <CIcon className="text-sky-800" path={mdiArrowRight} />
                         </div>
                     </a>
                 </div>
