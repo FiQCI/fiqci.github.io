@@ -200,17 +200,18 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
 const Filters = ({ filters, handleCheckboxChange }) => {
   return (
     <div className='text-on-white'>
-      <p className='font-semibold'>Results type</p>
+      <p className='font-semibold mb-[16px]'>Results type</p>
       <div className='-ml-[10px] flex flex-col'>
         {Object.keys(filters).map(option => (
           <CCheckbox
             className='flex flex-col'
+            hide-details={true}
             hideDetails
             key={option}
             checked={filters[option]}
             onChangeValue={() => handleCheckboxChange(option)}
           >
-            <p className='text-xs mt-[4px]'>{option}</p>
+            <p className='text-sm'>{option}</p>
           </CCheckbox>
         ))}
       </div>

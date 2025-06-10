@@ -29,7 +29,7 @@ const EventFilters = ({ filters, handleFilterChange }) => {
     }, [filters, handleFilterChange]);
 
     return (
-        <div className='flex flex-col gap-2 text-on-white'>
+        <div className='flex flex-col gap-[24px] text-on-white'>
             {Object.entries(filters).slice(0, -1).map(([category, options]) => ( //slice(0,-1) to exclude Theme
                 <FilterCategory
                     key={category}
@@ -50,7 +50,7 @@ const EventFilters = ({ filters, handleFilterChange }) => {
 //Checkbox filters
 const FilterCategory = ({ category, options, handleCheckboxChange }) => (
     <div>
-        <h3 className='font-bold'>{category}</h3>
+        <h3 className='font-bold mb-[16px]'>{category}</h3>
         {Object.keys(options).map(option => ( //generate a chekcbox for each filter category
             <CCheckbox
                 hide-details={true}
@@ -69,7 +69,7 @@ const FilterCategory = ({ category, options, handleCheckboxChange }) => (
 //Theme filter
 const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
     <div>
-        <p className='font-bold'>Theme</p>
+        <p className='font-bold mb-[16px]'>Theme</p>
         <CSelect
             hideDetails={true}
             className='py-2'
