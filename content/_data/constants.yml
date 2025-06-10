@@ -126,7 +126,7 @@ emulation_resources:
     image: "/assets/images/FiQCI-banner.jpg"
     links:
       - link: ""
-        teaser: "Quantum emulation dosumentation"
+        teaser: "Quantum emulation documentation"
         icon: mdiArrowRight
 
 about:
