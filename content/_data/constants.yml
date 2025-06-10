@@ -29,7 +29,7 @@ hero:
       href: FIXME
   buttons:
     - title: How to get access
-      href: "#get-access"
+      href: /access
     - title: Blogs and instructions
       href: /publications
     - title: About FiQCI
