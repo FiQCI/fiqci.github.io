@@ -112,12 +112,15 @@ export const NavigationHeader = props => {
 
     return (
         <div className='flex flex-col'>
-            <div ref={topBarRef} className="flex mx-5 items-center justify-between py-3">
+            <div
+                ref={topBarRef}
+                className="flex mx-5 items-center justify-between py-3 navigation-header-topbar"
+            >
                 <div className="flex items-center">
                     {headerLogo}
                 </div>
 
-                <div className="lg:flex flex-wrap justify-end hidden">
+                <div className="lg:flex flex-wrap justify-end hidden navigation-header-buttons">
                     {navigationButtons}
                 </div>
 
@@ -127,7 +130,7 @@ export const NavigationHeader = props => {
             </div>
             <div
                 ref={navRef}
-                className={`lg:hidden mx-1.5 mb-10 top-10 w-full flex flex-col justify-center items-left gap-2 transition-all duration-200 ${isOpen ? "block" : "hidden"
+                className={`lg:hidden mx-1.5 mb-10 top-10 w-full flex flex-col justify-center items-left gap-2 navigation-header-mobile ${isOpen ? "block" : "hidden"
                     }`}
             >
                 {navigationButtons}

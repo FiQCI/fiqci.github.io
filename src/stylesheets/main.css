@@ -14,3 +14,17 @@ h2 {
     font-size: 28px!important;
     @apply font-bold
 }
+
+@media (min-width: 1440px) {
+  .navigation-header-topbar {
+    height: 75px !important;
+    min-height: 75px !important;
+    max-height: 75px !important;
+  }
+  .navigation-header-buttons .c-button {
+    font-size: 16px !important;
+  }
+  .navigation-header-buttons {
+    gap: 24px !important;
+  }
+}
