@@ -2,7 +2,7 @@ import React from 'react';
 import { CAccordion, CAccordionItem, CIcon } from '@cscfi/csc-ui-react';
 import { mdiArrowRight } from '@mdi/js';
 import { BlogCardComponent } from './BlogCards';
-
+import { prependBaseURL } from '../utils/url';
 
 export const ReadNext = ({ title }) => {
     return (
@@ -11,7 +11,7 @@ export const ReadNext = ({ title }) => {
                 <div className='w-full'>
                     <h2 className='text-on-white pt-8 pb-4'>Read next</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-10">
-                        {SITE.publications.filter((blog) => blog.title !== title).slice(-5).reverse().map(blog => <BlogCardComponent {...blog} />)}
+                        {SITE.publications.filter((blog) => blog.title !== title).slice(-6).reverse().map(blog => <BlogCardComponent {...blog} />)}
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@ export const ReadNext = ({ title }) => {
 
                 <div className="mt-4 flex justify-end">
                     <a
-                        href="#"
+                        href={prependBaseURL("/publications/")}
                         className="text-sky-800 hover:underline font-bold"
                     >
                         <div className="flex items-center gap-3">
