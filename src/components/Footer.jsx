@@ -20,20 +20,20 @@ export const Footer = (props) => {
 
     return (
         <footer className="bg-gray-100 text-gray-700 text-sm">
-            <div className='mx-2 sm:mx-8 lg:mx-[100px] mx-2 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
+            <div className='mx-2 sm:mx-8 lg:mx-[100px] min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
                 <div className="py-4 flex flex-wrap md:flex-nowrap justify-between items-start space-y-4 md:space-y-0">
                     <div className='flex content-evenly space-x-8'>
                         <div className="w-full md:w-auto py-6 mr-8">
                             <p className="font-semibold text-[16px] pb-4">Brought to you by:</p>
                             <div className="flex flex-wrap items-center space-x-0 lg:space-x-3 mt-1">
-                                {funderLogos}
+                                {supporterLogos}
                             </div>
                         </div>
 
                         <div className="w-full md:w-auto py-6">
-                            <p className="font-semibold text-[16px]] pb-4">Supported by:</p>
+                            <p className="font-semibold text-[16px] pb-4">Supported by:</p>
                             <div className="flex flex-wrap items-center space-x-0 lg:space-x-3 mt-1">
-                                {supporterLogos}
+                                {funderLogos}
                             </div>
                         </div>
                     </div>
