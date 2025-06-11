@@ -1,59 +1,62 @@
 import React from 'react'
 
 import { useStatus } from '../hooks/useStatus'
+import { CCard, CCardTitle, CCardContent, CStatus } from '@cscfi/csc-ui-react';
 // import { StatusIndicator } from './StatusIndicator'
 
-export const ServiceStatus = () => {
-  const status = useStatus('https://fiqci-backend-fiqci-workspace.2.rahtiapp.fi/healthcheck')
-
+const StatusCard = (props) => {
   return (
-      <div className="py-4 w-full grid justify-items-center text-on-white">
+    <CCard className='border-[0.2px] border-gray-100 rounded-none shadow-md hover:shadow-xl col-span-1 h-[236px]'>
+      <CCardTitle className='font-bold text-on-white text-[18px]'>
+        <p>{props.name}</p>
+      </CCardTitle>
+      <CCardContent className='text-on-white'>
+        <div className="flex flex-col justify-start text-[14px]">
+          <p className=""><strong>Qubits:</strong> {props.qubits}</p>
+          <p className=""><strong>Basis gates:</strong> {props.basis}</p>
+        </div>
 
-        <p className="text-center pb-3">
-          View the status of the Quantum Connections
+        <div className='flex flex-col gap-2 text-[14px]'>
+          <strong>Service status:</strong>
+          {status === "available" ? (
+            <div className='text-center text-[#204303] bg-[#B9DC9C] border-[0.5px] border-[#204303] rounded-[100px] w-[88px] h-[25px]'>
+              <p className='font-bold text-[14px]'>Online</p>
+            </div>
+          ) : (
+            <div className='text-center text-[#7E0707] bg-[#F8CECE] border-[0.5px] border-[#7E0707] rounded-[100px] w-[88px] h-[25px]'>
+              <p className='font-bold text-[14px]'>Offline</p>
+            </div>
+          )}
+        </div>
+      </CCardContent>
+    </CCard>
+  )
+}
+
+export const ServiceStatus = (props) => {
+  const status = useStatus('https://fiqci-backend-fiqci-workspace.2.rahtiapp.fi/healthcheck')
+  const qcs = props["quantum-computers"] || [];
+  console.log(props["quantum-computers"])
+  return (
+    <div className="flex gap-6 flex-col sm:flex-col items-stretch text-on-white">
+
+      <p className='text-[16px] pt-[24px]'>
+        Here you can find the status of the Quantum Computers connected to LUMI.
+      </p>
+      <p className='text-[16px]'>
+        Additonally you can view upcoming LUMI service breaks <a href="https://www.lumi-supercomputer.eu/lumi-service-status/" className="underline text-sky-800">here</a>.
+      </p>
+      <div className='w-full bg-sky-200 p-3 rounded-md inline-block'>
+        <p className='text-[16px]'>
+          Quantum computers are accessible through the LUMI environment daily.
         </p>
-        <hr className="border-t-1 border-gray-200 w-full py-6" />
-        <div className='w-full bg-sky-200 p-3 rounded-md inline-block'>
-          <p className="">
-            Helmi is accessible through the LUMI environment daily.
-          </p>
-        </div>
-
-        <div className="mt-6">
-          <table className="mx-auto border-collapse border border-gray-400">
-            <thead>
-              <tr className="bg-gray-300">
-                <th className="border border-gray-400 px-4 py-2">Service</th>
-                <th className="border border-gray-400 px-4 py-2">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border border-gray-300 px-4 py-2">LUMI-Helmi</td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {status === "available" ? (
-                    <span className="text-green-500 text-lg">🟢</span>
-                  ) : (
-                    <span className="text-red-500 text-lg">🔴</span>
-                  )}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div className="py-6">
-            <h1 className="text-sm">🟢 - Service is available</h1>
-            <h1 className="text-sm">🔴 - Service is down</h1>
-          </div>
-        </div>
-        <hr className="border-t-1 border-gray-200 w-5/6 py-4" />
-
-        <div className="w-full">
-          <h2 className='py-2 sm:py-2 md:py-2'>Upcoming Service breaks</h2>
-          <h3 className='text-2xl py-2 sm:text-1xl sm:py-2 md:text-1xl md:py-2'>
-            You can view general LUMI Service breaks <a href="https://www.lumi-supercomputer.eu/lumi-service-status/" className="underline">here</a>.
-          </h3>
-        </div>
       </div>
+      <div className='pt-[24px] pb-[60px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 w-full gap-[24px]'>
+        {qcs.map((qc, index) => (
+          <StatusCard key={index} {...qc} />
+        ))}
+      </div>
+    </div>
 
   );
 };

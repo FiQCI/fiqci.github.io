@@ -206,3 +206,14 @@ description: >-
   services to Finnish RDI communities.
 excerpt_max_length: 250
 title_separator: " – "
+
+quantum-computers:
+  - name: VTT Q5 (Helmi)
+    qubits: 5
+    basis: "PRX, CZ"
+    status_url: FIXME
+
+  - name: VTT Q50
+    qubits: 50
+    basis: "PRX, CZ"
+    status_url: FIXME
