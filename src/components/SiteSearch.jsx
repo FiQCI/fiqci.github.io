@@ -5,6 +5,7 @@ import {
   CButton, CPagination, CIcon, CCheckbox, CModal, CCard,
   CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
+import { prependBaseURL } from '../utils/url';
 
 
 const style = {
@@ -166,7 +167,10 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
           <div className='flex flex-row pt-2'>
             <h1 className='mb-6 mr-3 text-xl font-bold'>{capitalizeFirstLetter(type)}</h1>
             {type !== "general" &&
-              <CIcon onClick={() => window.location.href = href} style={styleArrow} className='pt-1 text[#004E84]' path={mdiArrowRight} />
+              <a href={href} >
+                <CIcon style={styleArrow} className='pt-1 text[#004E84]' path={mdiArrowRight} />
+
+              </a>
             }
           </div>
           <ul>
@@ -174,7 +178,7 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
               paginationOptions.itemsPerPage, (paginationOptions.currentPage - 1) *
               paginationOptions.itemsPerPage + paginationOptions.itemsPerPage).map((item, index) => (
                 <li className='pb-6' key={index}>
-                  <strong><a className='text-[#004E84]' href={type === "events" ? item.link : item.url}>{item.title}</a></strong><br />
+                  <strong><a className='text-[#004E84] hover:underline' href={type === "events" ? item.link : prependBaseURL(item.url)}>{item.title}</a></strong><br />
                   <div className='flex flex-row'>
                     <p className='font-semibold'>{capitalizeFirstLetter(item.type)}</p>
                     {type !== "general" &&
@@ -224,7 +228,7 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleCheckboxChang
   return (
     <CModal
       key={isModalOpen ? 'open' : 'closed'}
-      
+
       value={isModalOpen}
       dismissable
       onChangeValue={event => setIsModalOpen(event.detail)}
@@ -379,9 +383,9 @@ export const SiteSearch = () => {
           }
           <ResultArea paginationOptions={paginationOptionsGen} setOptions={setOptionsGen} results={filteredResults} type={"general"} href={""} />
 
-          <ResultArea paginationOptions={paginationOptionsBlog} setOptions={setOptionsBlog} results={filteredResults} type={"blogs"} href={"/publications"} />
+          <ResultArea paginationOptions={paginationOptionsBlog} setOptions={setOptionsBlog} results={filteredResults} type={"blogs"} href={prependBaseURL("/publications")} />
 
-          <ResultArea paginationOptions={paginationOptionsEvent} setOptions={setOptionsEvent} results={filteredResults} type={"events"} href={"/events"} />
+          <ResultArea paginationOptions={paginationOptionsEvent} setOptions={setOptionsEvent} results={filteredResults} type={"events"} href={prependBaseURL("/events")} />
 
         </div>
       </div>
