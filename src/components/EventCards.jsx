@@ -2,6 +2,7 @@ import React from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
 import { CCard, CIcon, CCardContent } from '@cscfi/csc-ui-react';
 import { mdiArrowRight, mdiOpenInNew } from '@mdi/js';
+import { prependBaseURL } from '../utils/url';
 
 export const EventCardComponent = props => {
     return (
@@ -40,7 +41,7 @@ export const EventCards = () => {
             </div>
             <div className="mt-4">
             <a
-                    href="/events/"
+                    href={prependBaseURL("/events/")}
                     className="text-sky-800 hover:underline font-bold"
                 >
                     <div className="mx-2 sm:mx-0 flex items-center gap-3">

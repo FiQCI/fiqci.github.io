@@ -2,6 +2,7 @@ import React from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
 import { CCard, CIcon, CCardContent } from '@cscfi/csc-ui-react';
 import { mdiArrowRight } from '@mdi/js';
+import { prependBaseURL } from '../utils/url';
 
 export const BlogCardComponent = props => {
     const type = props?.filters?.Type ? Object.entries(props?.filters?.Type)?.filter(field => field[1])[0][0] : "News";
@@ -34,7 +35,7 @@ export const BlogCards = () => {
             </div>
             <div className="mt-4">
                 <a
-                    href="/publications/"
+                    href={prependBaseURL("/publications/")}
                     className="text-sky-800 hover:underline font-bold"
                 >
                     <div className="mx-2 sm:mx-0 flex items-center gap-3">
