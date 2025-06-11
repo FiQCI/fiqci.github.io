@@ -51,7 +51,7 @@ export const ServiceStatus = (props) => {
           Quantum computers are accessible through the LUMI environment daily.
         </p>
       </div>
-      <div className='pt-[24px] pb-[60px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 w-full gap-[24px]'>
+      <div className='pt-[24px] pb-[60px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 min-[2600px]:grid-cols-4 w-full gap-[24px]'>
         {qcs.map((qc, index) => (
           <StatusCard key={index} {...qc} />
         ))}
