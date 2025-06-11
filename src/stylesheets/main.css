@@ -65,7 +65,7 @@ h2 {
 
 #blogView a {
     text-decoration: none;
-    @apply text-sky-600;
+    @apply text-sky-800;
 }
 
 #blogView a:hover {

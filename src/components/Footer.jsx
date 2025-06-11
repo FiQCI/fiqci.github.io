@@ -40,7 +40,7 @@ export const Footer = (props) => {
 
                     <div className="w-full md:w-auto text-left py-6">
                         <p className="font-semibold text-[16px] pb-4">Customer support</p>
-                        <a href={`mailto:${props.feedbackEmail}`} className="text-base text-blue-600 hover:underline">
+                        <a href={`mailto:${props.feedbackEmail}`} className="text-base text-sky-800 hover:underline">
                             {props.feedbackEmail}
                         </a>
                     </div>

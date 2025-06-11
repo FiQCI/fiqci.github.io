@@ -13,11 +13,11 @@ const ResourceCard = ({ resource }) => {
             </div>
 
             <div className="flex flex-col flex-grow pl-0 sm:pl-4">
-                <h3 className="text-xl font-bold text-on-white">{resource.name}</h3>
-                <p className="text-[16px] text-on-white text-gray-600">{resource.desc.trim()}</p>
+                <h2 className="text-lg font-bold">{resource.name}</h2>
+                <p className="text-sm text-gray-600">{resource.desc.trim()}</p>
                 <div className="mt-2 space-y-2">
                     {resource.links.map((link, index) => (
-                        <a key={index} href={link.link} className="text-[14px] font-bold text-sky-800 flex items-center gap-2">
+                        <a key={index} href={link.link} className="text-sky-800 hover:underline flex items-center gap-2">
                             {link.teaser}
                         </a>
                     ))}
@@ -32,7 +32,7 @@ const ResourceCard = ({ resource }) => {
 const ResourceList = ({ id, title, resources }) => {
     return (
         <div className="pb-8" id={id}>
-            <h2 className="text-on-white pb-8">{title}</h2>
+            <h1 className="text-2xl font-bold pb-8">{title}</h1>
             <div className="flex flex-col gap-8">
                 {resources?.map((resource, index) => (
                     <ResourceCard key={index} resource={resource} />
@@ -67,7 +67,7 @@ export const GetAccess = props => {
         <div className="lg:grid lg:grid-cols-5 gap-8">
             <div className="col-span-1"></div>
             <div className="col-span-3 flex flex-col gap-8 pb-20">
-                <p className="text-on-white">Please see status of services from <a className="text-base text-sky-800 underline" href="/status/">Status</a> -page</p>
+                <p className="pt-[24px]">Please see status of services from <a className="text-base text-sky-800 hover:underline" href={prependBaseURL("/status")}>Status</a> -page</p>
                 <ResourceList id={"quantum"} title={"Quantum computer resources"} resources={quantum_resources} />
 
                 <ResourceList id={"super"} title={"Supercomputer resources"} resources={supercomputer_resources} />
