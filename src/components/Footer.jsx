@@ -47,7 +47,7 @@ export const Footer = (props) => {
                 </div>
             </div>
             <div className="bg-gray-200 py-10">
-                <div className='mx-2 sm:mx-8 lg:mx-[100px] mx-2 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
+                <div className='sm:mx-8 lg:mx-[100px] mx-2 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
                     <div className="flex flex-col md:flex-row justify-between text-base items-center text-gray-600 space-y-2 md:space-y-0">
                         <p className="text-center md:text-left">
                             © 2024 The FiQCI Consortium. Powered by{" "}
