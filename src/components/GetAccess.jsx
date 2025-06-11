@@ -13,7 +13,7 @@ const ResourceCard = ({ resource }) => {
             </div>
 
             <div className="flex flex-col flex-grow pl-0 sm:pl-4">
-                <h2 className="text-lg font-bold">{resource.name}</h2>
+                <h2 className="text-lg font-bold pb-[14px]">{resource.name}</h2>
                 <p className="text-sm text-gray-600">{resource.desc.trim()}</p>
                 <div className="mt-2 space-y-2">
                     {resource.links.map((link, index) => (
