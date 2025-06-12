@@ -46,14 +46,14 @@ header_nav:
         - title: About FiQCI
           href: "#about-fiqci"
 
-      mission:
-        links:
-          about:
-              title: Read more about FiQCI
-              href: /dev/about
-          access:
-              title: How to get access
-              href: /dev/access
+  mission:
+    links:
+      about:
+          title: Read more about FiQCI
+          href: /dev/about
+      access:
+          title: How to get access
+          href: /dev/access
 
   access_cards:
     - title: Quantum computers
