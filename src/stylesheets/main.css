@@ -76,3 +76,7 @@ h2 {
 #read-next a {
     color: #001C39 !important;
 }
+
+#references-accordion a {
+    word-break: break-all;
+}
