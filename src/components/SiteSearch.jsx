@@ -66,11 +66,14 @@ function searchContent(query, store) {
 
     const typeMap = {
       page: 'general',
+      blog: 'blogs',
+      news: 'blogs',
+      instructions: 'blogs',
       post: 'blogs',
       event: 'events'
     };
 
-    const category = typeMap[resultItem.type];
+    const category = typeMap[resultItem.type.toLowerCase()];
     if (category) {
       categorizedResults[category].push(resultItem);
     }
@@ -244,7 +247,7 @@ export const SiteSearch = () => {
   const [filters, setFilters] = useState({
     "Blog": false,
     "Event": false,
-    "Instruction": false,
+    "Instructions": false,
     "News": false,
     "General information": false,
   }); //filter state
@@ -322,12 +325,11 @@ export const SiteSearch = () => {
 
       return activeFilters.some(filter => {
         const filterLower = filter.toLowerCase();
-
-        if (filterLower === "blog" && item.type === "post") return true;
+        if (filterLower === "blog" && item.type === "blog") return true;
         if (filterLower === "event" && item.type === "event") return true;
         if (filterLower === "general information" && item.type === "page") return true;
-        if (filterLower === "instruction" && item.filters?.type?.includes("instruction")) return true;
-        if (filterLower === "news" && item.filters?.type?.includes("news")) return true;
+        if (filterLower === "instructions" && item.type == "instructions") return true;
+        if (filterLower === "news" && item.type == "news") return true;
         //TODO add filter toggles for instructions and news once this is merged with pr 18 and 19
 
         return false;
