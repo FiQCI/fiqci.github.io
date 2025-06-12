@@ -57,7 +57,7 @@ const BlogFilters = ({ filters, handleFilterChange }) => {
 //Checkbox filters
 const FilterCategory = ({ category, options, handleCheckboxChange }) => (
     <div>
-        <h3 className='font-bold mb-[16px]'>{category}</h3>
+        <h3 className='font-bold mb-[10px]'>{category}</h3>
         {Object.keys(options).map(option => (  //generate a chekcbox for each filter category
             <CCheckbox
                 hideDetails={true}
@@ -74,7 +74,7 @@ const FilterCategory = ({ category, options, handleCheckboxChange }) => (
 //Theme filter
 const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
     <div>
-        <p className='font-bold mb-[16px]'>Theme</p>
+        <p className='font-bold mb-[10px]'>Theme</p>
         <CSelect
             hideDetails={true}
             className='py-2'
