@@ -6,7 +6,7 @@ permalink: site.js
 {%- for publication in site.publications %}
   {
     "key": "{{ forloop.index }}",
-    "type": "{{ publication.type | default: 'News' }}",
+    "type": "{{ publication.filters.Type | default: 'Post' }}",
     "title": "{{ publication.title }}",
     "url": "{{ publication.url | absolute_url }}",
     "date": "{{ publication.date | date: '%-d.%-m.%Y' }}",
