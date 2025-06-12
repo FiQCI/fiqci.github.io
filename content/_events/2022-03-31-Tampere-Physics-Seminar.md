@@ -9,7 +9,6 @@ tags:
   - Helmi
 filters:
   Pricing: Free of charge # Free of charge, or empty if paid
-  Availability: Open to anyone # Open to anyone, Registration needed
   Skill level: Advanced # Beginner, Advanced
   Type: Onsite # Online, Hybrid, Onsite
   Theme: Webinar/Lecture # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture

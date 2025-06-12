@@ -9,7 +9,6 @@ tags:
   - Kvasi
 filters:
   Pricing:  # Free of charge, or empty if paid
-  Availability: Registration needed # Open to anyone, Registration needed
   Skill level: Beginner # Beginner, Advanced
   Type: Hybrid # Online, Hybrid, Onsite
   Theme: Course/Workshop # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture

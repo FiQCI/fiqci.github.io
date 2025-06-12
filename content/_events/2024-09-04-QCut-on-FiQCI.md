@@ -10,7 +10,6 @@ tags:
   - LUMI
 filters:
   Pricing: Free of charge # Free of charge, or empty if paid
-  Availability: Registration needed # Open to anyone, Registration needed
   Skill level: Advanced # Beginner, Advanced
   Type: Hybrid # Online, Hybrid, Onsite
   Theme: Webinar/Lecture # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture
