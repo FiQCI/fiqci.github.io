@@ -13,7 +13,7 @@ export const BlogCardComponent = props => {
                 <div>
                     <a
                         href={props.url.split(".")[0]}
-                        className="text-md text-on-white hover:underline font-bold"
+                        className="text-on-white text-on-white hover:underline font-bold"
                     >
                         {props.title.length >= 89 ? props.title.slice(0, 90) + "..." : props.title}
                     </a>
