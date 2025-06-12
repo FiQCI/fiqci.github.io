@@ -36,7 +36,6 @@ const StatusCard = (props) => {
 export const ServiceStatus = (props) => {
   const status = useStatus('https://fiqci-backend-fiqci-workspace.2.rahtiapp.fi/healthcheck')
   const qcs = props["quantum-computers"] || [];
-  console.log(props["quantum-computers"])
   return (
     <div className="flex gap-6 flex-col sm:flex-col items-stretch text-on-white">
 

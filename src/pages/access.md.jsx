@@ -11,7 +11,6 @@ import { useJsonApi } from '../hooks/useJsonApi'
 
 const AccessPage = () => {
     const themeConstants = useJsonApi('api/theme/constants.json')
-    console.log(themeConstants)
     const accessProps = themeConstants["/access/"]
     return <>
         <PageLayout {...themeConstants} title="Get Access" />
