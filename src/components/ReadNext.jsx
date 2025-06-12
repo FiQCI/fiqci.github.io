@@ -5,7 +5,6 @@ import { BlogCardComponent } from './BlogCards';
 import { prependBaseURL } from '../utils/url';
 
 export const ReadNext = ({ title, blogs }) => {
-    console.log(SITE.publications)
     return (
         <>
             <div className='flex lg:hidden'>

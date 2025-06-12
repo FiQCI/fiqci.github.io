@@ -23,7 +23,6 @@ export const PostLayout = props => {
     const tags = JSON.parse(tagsData.getAttribute('data-content'));
 
     const blogs = SITE.publications
-    console.log(blogs)
     const readNextBlogs = blogs.filter((blog) => blog.title !== title).slice(-6).reverse()
 
     return <>
