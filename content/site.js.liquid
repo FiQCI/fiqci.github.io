@@ -13,15 +13,7 @@ permalink: site.js
     "teaser": "{{ publication.header.teaser | absolute_url }}",
     "filters": {
       {%- for category in publication.filters %}
-        {%- if category[0] == "Theme" -%}
-          "Theme": "{{ category[1] }}"
-        {%- else -%}
-          "{{ category[0] }}": {
-            {%- for option in category[1] %}
-              "{{ option.name }}": {{ option.value | jsonify }}{%- unless forloop.last -%},{%- endunless -%}
-            {%- endfor %}
-          }
-        {%- endif -%}
+        "{{ category[0] }}": "{{ category[1] }}"
         {%- unless forloop.last -%},{%- endunless -%}
       {%- endfor %}
     } 
@@ -42,15 +34,7 @@ permalink: site.js
     "content": {{ event_post.content | strip_html | strip_newlines | jsonify }},
     "filters": {
       {%- for category in event_post.filters %}
-        {%- if category[0] == "Theme" -%}
-          "Theme": "{{ category[1] }}"
-        {%- else -%}
-          "{{ category[0] }}": {
-            {%- for option in category[1] %}
-              "{{ option.name }}": {{ option.value | jsonify }}{%- unless forloop.last -%},{%- endunless -%}
-            {%- endfor %}
-          }
-        {%- endif -%}
+        "{{ category[0] }}": "{{ category[1] }}"
         {%- unless forloop.last -%},{%- endunless -%}
       {%- endfor %}
     }
