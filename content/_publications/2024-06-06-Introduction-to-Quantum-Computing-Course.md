@@ -9,6 +9,10 @@ author: Joonas Nivala
 layout: post
 tags:
   - Helmi
+filters:
+  Skill level: Beginner # Beginner, Advanced
+  Type: News # Blog, Instructions, News
+  Theme:  # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 
 
@@ -50,7 +54,3 @@ Thank you once again to everyone who contributed to the success of this course. 
 
 ## Acknowledgements
 The implementation of the course was supported by the Research Council of Finland, the European Union NextGenerationEU programme, and EuroCC2.
-
-## Give feedback!
-
-Feedback is greatly appreciated! You can send feedback directly to [fiqci-feedback@postit.csc.fi](mailto:fiqci-feedback@postit.csc.fi).

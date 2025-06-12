@@ -6,12 +6,12 @@ header:
   teaser: /assets/images/FiQCI-banner.jpg
 published: true
 layout: post
-# gallery:
-#   - url: /assets/images/about-icon.jpg
-#     image_path: /assets/images/about-icon.jpg
-#     title: Before and after comparison
 tags:
   - Helmi
+filters:
+  Skill level: Beginner # Beginner, Advanced
+  Type: News # Blog, Instructions, News
+  Theme: Technical # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 
 <!-- # Open Call for pilot projects for access to the Helmi quantum computer -->

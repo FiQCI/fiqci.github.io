@@ -76,7 +76,7 @@ const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
             clearable
             value={selectedTheme}
             items={[
-                { name: 'Hybrid QC+HPC computing', value: 'hybrid QC+HPC computing' },
+                { name: 'HPC+QC+AI', value: 'HPC+QC+AI' },
                 { name: 'Programming', value: 'programming' },
                 { name: 'Webinar/Lecture', value: 'webinar/lecture' },
                 { name: 'Course/Workshop', value: 'course/workshop' },
@@ -158,7 +158,6 @@ export const Events = () => {
     const events_dict = SplitEvents(); //get events
     const [isModalOpen, setIsModalOpen] = useState(false); //modal control
     const [filters, setFilters] = useState({
-        "Availability": { "Open to anyone": false, "Registration needed": false },
         "Skill level": { "Advanced": false, "Beginner": false },
         "Pricing": { "Free of charge": false },
         "Type": { "Online": false, "Hybrid": false, "Onsite": false },
@@ -192,26 +191,28 @@ export const Events = () => {
         };
     }, [isModalOpen]);
 
-    useEffect(() => { //set filteredEvents everytime filters changes
+    useEffect(() => {
         const applyFilters = (event) => {
-            // First, check the Theme filter separately:
-            if (filters.Theme && event?.filters?.Theme !== filters.Theme) {
+
+            const themeOptions = event.filters?.Theme?.split(',').map(opt => opt.trim().toLowerCase()) || [];
+            if (filters.Theme && !themeOptions.includes(filters.Theme?.toLowerCase())) {
                 return false;
             }
 
-            // For every other filter category...
             return Object.entries(filters).every(([category, options]) => {
-                // Skip the "Theme" category here
                 if (category === "Theme") return true;
 
                 // Create an array of only the options that are checked (active)
-                const activeOptions = Object.entries(options).filter(([_, checked]) => checked);
+                const activeOptions = Object.entries(options)
+                    .filter(([_, checked]) => checked)
+                    .map(([option, _]) => option);
 
                 // If no options are active in this category, do not filter out the event:
                 if (activeOptions.length === 0) return true;
 
-                // Otherwise, require that at least one active option is true in the event:
-                return activeOptions.some(([option]) => event?.filters?.[category]?.[option]);
+                // Otherwise, check if the category value of the event is in the active options array:
+                const eventOptions = event.filters?.[category]?.split(',').map(opt => opt.trim()) || [];
+                return activeOptions.some(opt => eventOptions.includes(opt));
             });
         };
 
