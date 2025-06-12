@@ -211,9 +211,11 @@ header_nav:
     - name: VTT Q5 (Helmi)
       qubits: 5
       basis: "PRX, CZ"
+      topology: "Star"
       status_url: FIXME
 
     - name: VTT Q50
       qubits: 50
       basis: "PRX, CZ"
+      topology: "Square grid"
       status_url: FIXME
