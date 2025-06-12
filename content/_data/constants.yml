@@ -129,7 +129,7 @@ header_nav:
           icon: mdiOpenInNew
 
   emulation_resources:
-    - name: Quantum emuation with LUMI
+    - name: Quantum emualtion with LUMI
       desc: |-
         The LUMI supercomputer enables full emulation and simulation of quantum algorithms of up to 44 qubits.
       image: "/assets/images/FiQCI-banner.jpg"
