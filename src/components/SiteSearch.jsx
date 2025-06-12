@@ -326,6 +326,8 @@ export const SiteSearch = () => {
         if (filterLower === "blog" && item.type === "post") return true;
         if (filterLower === "event" && item.type === "event") return true;
         if (filterLower === "general information" && item.type === "page") return true;
+        if (filterLower === "instruction" && item.filters?.type?.includes("instruction")) return true;
+        if (filterLower === "news" && item.filters?.type?.includes("news")) return true;
         //TODO add filter toggles for instructions and news once this is merged with pr 18 and 19
 
         return false;
