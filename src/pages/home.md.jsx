@@ -13,8 +13,7 @@ import { useJsonApi } from '../hooks/useJsonApi'
 
 const HomePage = () => {
     const themeConstants = useJsonApi('api/theme/constants.json')
-    const accessCards = themeConstants.access_cards || []
-
+    const accessCards = themeConstants["/"]?.access_cards || []
     return <>
         <HomeLayout {...themeConstants} />
         {createPortal(

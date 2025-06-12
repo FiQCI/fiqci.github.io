@@ -7,6 +7,8 @@ import {
 } from '@cscfi/csc-ui-react';
 
 
+import { prependBaseURL } from '../utils/url';
+
 const style = {
   "--_c-button-font-size": 14,
   "--_c-button-min-width": 0,
@@ -26,7 +28,9 @@ function normalizeQuery(query) {
   if (!query.trim()) return ''; // empty or whitespace-only
   if (query.endsWith('*')) return query;
 
-  // Optionally boost exact matches
+  // Boost exact matches
+  //const exactLongMatch = `${'" ' + query + ' "'}^15`
+  //const exactLongMatchW = `${'" ' + query + ' "'}*^15`
   const exactMatch = `${query}^10`;   // high boost for exact match
   const wildcardMatch = `${query}*`;  // normal wildcard match
   return `${exactMatch} ${wildcardMatch}`;
@@ -44,63 +48,49 @@ function searchContent(query, store) {
     this.field('date');
     this.field('link');
 
-    ['blogs', 'events', 'pages'].forEach(key => {
-      store[key].forEach(doc => {
-        this.add(doc);
-      });
-    });
+    Object.values(store).flat().forEach(doc => this.add(doc));
   });
 
   const results = idx.search(queryStr);
 
-  const categorizedResults = {
-    general: [],
-    blogs: [],
-    events: []
+  const categorizedResults = { general: [], blogs: [], events: [] };
+
+  const addResult = (item) => {
+    const resultItem = {
+      title: item.title,
+      url: item.url,
+      excerpt: item.content ? item.content.substring(0, 200).trim() + '...' : '',
+      type: item.type.toLowerCase(),
+      tags: item.tags,
+      date: item.date,
+      link: item.link
+    };
+
+    const typeMap = {
+      page: 'general',
+      post: 'blogs',
+      event: 'events'
+    };
+
+    const category = typeMap[resultItem.type];
+    if (category) {
+      categorizedResults[category].push(resultItem);
+    }
+    else {
+      categorizedResults['general'].push(resultItem)
+    }
   };
 
   if (results.length === 0) {
-    for (const key of ['blogs', 'events', 'pages']) {
-      for (const item of store[key]) {
-        if (item.title.toLowerCase().includes(query.toLowerCase())) {
-          categorizedResults.general.push({
-            title: item.title,
-            url: item.url,
-            excerpt: item.content.substring(0, 200) + '...',
-            type: item.type,
-            tags: item.tags,
-            date: item.date,
-            link: item?.link
-          });
-        }
-      }
-    }
+    Object.values(store).flat().forEach(item => {
+      if (item.title.toLowerCase().includes(query.toLowerCase())) addResult(item);
+    });
+  } else {
+    results.forEach(result => {
+      const item = findItemByRef(result.ref, store);
+      if (item) addResult(item);
+    });
   }
-
-
-  results.forEach(result => {
-    const item = findItemByRef(result.ref, store);
-    if (item) {
-      const resultItem = {
-        title: item.title,
-        url: item.url,
-        excerpt: item.content.substring(0, 200) + '...',
-        type: item.type,
-        tags: item.tags,
-        date: item.date,
-        link: item?.link
-      };
-
-      if (item.type === "page") {
-        categorizedResults.general.push(resultItem);
-      } else if (item.type === "post") {
-        categorizedResults.blogs.push(resultItem);
-      } else if (item.type === "Event") {
-        categorizedResults.events.push(resultItem);
-      }
-    }
-  });
-
 
   return categorizedResults;
 }
@@ -155,7 +145,7 @@ const SearchBar = ({ setResults }) => {
 const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
 
   const handlePageChange = (setOptions) => (event) => {
-    // event.detail should be the new page number.
+    // event.detail.currentPage should be the new page number.
     setOptions(prev => ({ ...prev, currentPage: event.detail.currentPage }));
   };
 
@@ -174,14 +164,16 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
               paginationOptions.itemsPerPage, (paginationOptions.currentPage - 1) *
               paginationOptions.itemsPerPage + paginationOptions.itemsPerPage).map((item, index) => (
                 <li className='pb-6' key={index}>
-                  <strong><a className='text-[#004E84]' href={type === "events" ? item.link : item.url}>{item.title}</a></strong><br />
+                  <strong><a className='text-[#004E84]' href={type === "events" ? item.link : prependBaseURL(item.url)}>{item.title}</a></strong><br />
                   <div className='flex flex-row'>
                     <p className='font-semibold'>{capitalizeFirstLetter(item.type)}</p>
                     {type !== "general" &&
                       <p> &nbsp;&nbsp; | &nbsp;&nbsp;{item?.date}</p>
                     }
                   </div>
-                  <span>{item.excerpt}</span>
+                  {type !== "general" &&
+                    <span>{item.excerpt}</span>
+                  }
                 </li>
               ))}
           </ul>
@@ -223,7 +215,7 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleCheckboxChang
   return (
     <CModal
       key={isModalOpen ? 'open' : 'closed'}
-      
+
       value={isModalOpen}
       dismissable
       onChangeValue={event => setIsModalOpen(event.detail)}
@@ -329,9 +321,10 @@ export const SiteSearch = () => {
       return activeFilters.some(filter => {
         const filterLower = filter.toLowerCase();
 
-        if (filterLower === "blog" && item.type.toLowerCase() === "post") return true;
-        if (filterLower === "event" && item.type.toLowerCase() === "event") return true;
-        if (filterLower === "general information" && item.type.toLowerCase() === "page") return true;
+        if (filterLower === "blog" && item.type === "post") return true;
+        if (filterLower === "event" && item.type === "event") return true;
+        if (filterLower === "general information" && item.type === "page") return true;
+        //TODO add filter toggles for instructions and news once this is merged with pr 18 and 19
 
         return false;
       });
@@ -376,6 +369,7 @@ export const SiteSearch = () => {
             (Object.keys(filteredResults).every(key => filteredResults[key].length === 0) && searchCount > 0) &&
             <p>No results found</p>
           }
+
           <ResultArea paginationOptions={paginationOptionsGen} setOptions={setOptionsGen} results={filteredResults} type={"general"} href={""} />
 
           <ResultArea paginationOptions={paginationOptionsBlog} setOptions={setOptionsBlog} results={filteredResults} type={"blogs"} href={"/publications"} />

@@ -2,6 +2,15 @@ title: FiQCI
 author: The FiQCI Consortium
 copyright: © 2024 The FiQCI Consortium
 feedback_email: fiqci-feedback@postit.csc.fi
+logo: assets/images/FiQCI-logo.png
+favicon: assets/images/favicon.png
+footer_icons: assets/footer-icons
+funder_logos: assets/images/funders
+description: >-
+  Web presence of the Finnish Quantum-Computing Infrastructure. We provide state-of-the-art quantum-computing 
+  services to Finnish RDI communities.
+excerpt_max_length: 250
+title_separator: " – "
 
 header_nav:
   - title: Home
@@ -19,115 +28,118 @@ header_nav:
   - title: Search
     page: pages/search.md
 
-hero:
-  tagline: Making the power of quantum computing accessible
-  subtitle: FiQCI – Finnish quantum-computing infrastructure
-  announcement:
-    text: Open call for pilot access to Helmi quantum computer now open!
-    link:
-      title: How to access Helmi, instructions
-      href: FIXME
-  buttons:
-    - title: How to get access
-      href: "#get-access"
-    - title: Blogs and instructions
-      href: /publications
-    - title: About FiQCI
-      href: "#about-fiqci"
+#Following are constants per page. Can be accessed with page.url
+"/":
+  hero:
+      tagline: Making the power of quantum computing accessible
+      subtitle: FiQCI – Finnish quantum-computing infrastructure
+      announcement:
+        text: Open call for pilot access to Helmi quantum computer now open!
+        link:
+          title: How to access Helmi, instructions
+          href: FIXME
+      buttons:
+        - title: How to get access
+          href: "#get-access"
+        - title: Blogs and instructions
+          href: /publications
+        - title: About FiQCI
+          href: "#about-fiqci"
 
-access_cards:
-  - title: LUMI
-    href: FIXME
-    teaser: /assets/images/FiQCI-banner.jpg
-    description: |-
-      The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
-      is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, 
-      hosted by CSC in Kajaani, Finland.
-    links:
-      - title: Getting started with Lumi
-        href: https://www.lumi-supercomputer.eu/get-started/
-  - title: Helmi - VTT Q5
-    href: FIXME
-    teaser: /assets/images/vtt-images/VTT_lab-2.jpg
-    description: |-
-      Helmi, the first Finnish quantum computer, co-developed by VTT and IQM Quantum Computers, 
-      is operated by VTT in Espoo, Finland. Helmi is based on superconducting technology, 
-      and presently provides five qubits. Upgrades to 20, then 50 qubits is planned for the near future.
-    links:
-      - title: How to access Helmi, instructions
+  access_cards:
+      - title: LUMI
         href: FIXME
-      - title: Read more about Helmi
+        teaser: /assets/images/FiQCI-banner.jpg
+        description: |-
+          The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
+          is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, 
+          hosted by CSC in Kajaani, Finland.
+        links:
+          - title: Getting started with Lumi
+            href: https://www.lumi-supercomputer.eu/get-started/
+      - title: Helmi - VTT Q5
         href: FIXME
-  - title: Kvasi
-    href: FIXME
-    teaser: /assets/images/FiQCI-banner.jpg
-    description: |-
-      Kvasi, the Atos Quantum Learning Machine or Qaptiva is a quantum computing simulator with which you can learn 
-      to use and develop new quantum algorithms. Kvasi provides a platform for developing and simulating quantum 
-      algorithms in both ideal and realistic, noisy conditions. Kvasi is capable of simulating algorithms for 
-      quantum computers of 30+ qubits.
-    links:
-      - title: How to access Kvasi, instructions
+        teaser: /assets/images/vtt-images/VTT_lab-2.jpg
+        description: |-
+          Helmi, the first Finnish quantum computer, co-developed by VTT and IQM Quantum Computers, 
+          is operated by VTT in Espoo, Finland. Helmi is based on superconducting technology, 
+          and presently provides five qubits. Upgrades to 20, then 50 qubits is planned for the near future.
+        links:
+          - title: How to access Helmi, instructions
+            href: FIXME
+          - title: Read more about Helmi
+            href: FIXME
+      - title: Kvasi
         href: FIXME
-      - title: Read more about Kvasi
-        href: FIXME
+        teaser: /assets/images/FiQCI-banner.jpg
+        description: |-
+          Kvasi, the Atos Quantum Learning Machine or Qaptiva is a quantum computing simulator with which you can learn 
+          to use and develop new quantum algorithms. Kvasi provides a platform for developing and simulating quantum 
+          algorithms in both ideal and realistic, noisy conditions. Kvasi is capable of simulating algorithms for 
+          quantum computers of 30+ qubits.
+        links:
+          - title: How to access Kvasi, instructions
+            href: FIXME
+          - title: Read more about Kvasi
+            href: FIXME
 
-quantum_resources:
-  - name: Helmi
-    desc: |-
-      Helmi (VTT Q5), the Finnish quantum computer operated by VTT, co-developed with IQM.
-      Helmi is based on superconducting technology, and presently provides five qubits.
-      Upgrades to 20, then 50 qubits is planned for the near future. Helmi is accessible
-      through the LUMI supercomputer environment. The pilot phase for Helmi access is now running!
-    image: "/assets/images/vtt-images/VTT_lab-2.jpg"
-    links:
-      - link: ""
-        teaser: "How to access Helmi, instructions"
-        icon: mdiArrowRight
-      - link: ""
-        teaser: "Read more about Helmi (VTT website)"
-        icon: mdiOpenInNew
+"/access/":
+  quantum_resources:
+    - name: Helmi
+      desc: |-
+        Helmi (VTT Q5), the Finnish quantum computer operated by VTT, co-developed with IQM.
+        Helmi is based on superconducting technology, and presently provides five qubits.
+        Upgrades to 20, then 50 qubits is planned for the near future. Helmi is accessible
+        through the LUMI supercomputer environment. The pilot phase for Helmi access is now running!
+      image: "/assets/images/vtt-images/VTT_lab-2.jpg"
+      links:
+        - link: FIXME
+          teaser: "How to access Helmi, instructions"
+          icon: mdiArrowRight
+        - link: FIXME
+          teaser: "Read more about Helmi (VTT website)"
+          icon: mdiOpenInNew
 
-  - name: VTT Q50
-    desc: |-
-      Lorem ipsum the Finnish quantum computer operated by VTT, co-developed with IQM.
-      Lorem ipsum is accessible through the LUMI supercomputer environment. The pilot phase
-      for VTT Q50 access is now running!
-    image: "/assets/images/vtt-images/VTT_lab-2.jpg"
-    links:
-      - link: ""
-        teaser: "How to access VTT Q50, instructions"
-        icon: mdiArrowRight
-      - link: ""
-        teaser: "Read more about VTT Q50 (VTT website)"
-        icon: mdiOpenInNew
+    - name: VTT Q50
+      desc: |-
+        Lorem ipsum the Finnish quantum computer operated by VTT, co-developed with IQM.
+        Lorem ipsum is accessible through the LUMI supercomputer environment. The pilot phase
+        for VTT Q50 access is now running!
+      image: "/assets/images/vtt-images/VTT_lab-2.jpg"
+      links:
+        - link: FIXME
+          teaser: "How to access VTT Q50, instructions"
+          icon: mdiArrowRight
+        - link: FIXME
+          teaser: "Read more about VTT Q50 (VTT website)"
+          icon: mdiOpenInNew
 
-supercomputer_resources:
-  - name: LUMI
-    desc: |-
-      The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
-      is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, 
-      hosted by CSC in Kajaani, Finland.
-    image: "/assets/images/FiQCI-banner.jpg"
-    links:
-      - link: ""
-        teaser: "How to access Lumi"
-        icon: mdiArrowRight
-      - link: ""
-        teaser: "Read more about LUMI (LUMI website)"
-        icon: mdiOpenInNew
+  supercomputer_resources:
+    - name: LUMI
+      desc: |-
+        The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
+        is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, 
+        hosted by CSC in Kajaani, Finland.
+      image: "/assets/images/FiQCI-banner.jpg"
+      links:
+        - link: FIXME
+          teaser: "How to access Lumi"
+          icon: mdiArrowRight
+        - link: FIXME
+          teaser: "Read more about LUMI (LUMI website)"
+          icon: mdiOpenInNew
 
-emulation_resources:
-  - name: Quantum emuation with LUMI
-    desc: |-
-      With the LUMI supercomputer it is possible to emulate quantum computer with upto 40+ qubits.
-    image: "/assets/images/FiQCI-banner.jpg"
-    links:
-      - link: ""
-        teaser: "Quantum emulation dosumentation"
-        icon: mdiArrowRight
+  emulation_resources:
+    - name: Quantum emuation with LUMI
+      desc: |-
+        With the LUMI supercomputer it is possible to emulate quantum computer with upto 40+ qubits.
+      image: "/assets/images/FiQCI-banner.jpg"
+      links:
+        - link: FIXME
+          teaser: "Quantum emulation dosumentation"
+          icon: mdiArrowRight
 
-about:
+"/about/":
   desc: |-
     The Finnish Quantum-Computing Infrastructure (FiQCI) was established in 2020, when it became
     part of the Finnish Research Infrastructure (FIRI) roadmap of significant national research
@@ -194,13 +206,3 @@ about:
       
       helmi-link-url: /publications/2022-11-01-Helmi_pilot
       helmi-link-text: Additionally, users should also acknowledge using Helmi if applicable
-
-logo: assets/images/FiQCI-logo.png
-favicon: assets/images/favicon.png
-footer_icons: assets/footer-icons
-funder_logos: assets/images/funders
-description: >-
-  Web presence of the Finnish Quantum-Computing Infrastructure. We provide state-of-the-art quantum-computing 
-  services to Finnish RDI communities.
-excerpt_max_length: 250
-title_separator: " – "

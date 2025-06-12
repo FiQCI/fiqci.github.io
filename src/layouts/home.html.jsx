@@ -7,12 +7,11 @@ import { BaseLayout } from './base.html'
 
 
 export const HomeLayout = props => {
-    const heroConstants = props.hero
-
+    const heroProps = props["/"]?.hero
     return <>
         <BaseLayout {...props} />
         {createPortal(
-            <Hero {...heroConstants} />,
+            <Hero {...heroProps} />,
             document.getElementById('hero')
         )}
     </>
