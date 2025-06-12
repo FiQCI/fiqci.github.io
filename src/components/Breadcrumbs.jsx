@@ -13,8 +13,8 @@ export const Breadcrumbs = ({ breadcrumbs }) => {
             {isLast ? (
               <p className="font-semibold text-[14px] text-on-white">{label}</p>
             ) : (
-              <a className="text-[#004E84] text-[14px]" href={href}>
-                <p className="">{label} &gt;</p>
+              <a className="text-[14px]" href={href}>
+                <p className="!text-[#004E84]">{label} &gt;</p>
               </a>
             )}
           </span>
