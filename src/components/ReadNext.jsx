@@ -4,14 +4,15 @@ import { mdiArrowRight } from '@mdi/js';
 import { BlogCardComponent } from './BlogCards';
 import { prependBaseURL } from '../utils/url';
 
-export const ReadNext = ({ title }) => {
+export const ReadNext = ({ title, blogs }) => {
+    console.log(SITE.publications)
     return (
         <>
             <div className='flex lg:hidden'>
                 <div className='w-full'>
                     <h2 className='text-on-white pt-8 pb-4'>Read next</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-10">
-                        {SITE.publications.filter((blog) => blog.title !== title).slice(-6).reverse().map(blog => <BlogCardComponent {...blog} />)}
+                        {blogs.map(blog => <BlogCardComponent {...blog} />)}
                     </div>
                 </div>
             </div>
