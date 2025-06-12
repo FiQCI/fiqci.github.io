@@ -193,7 +193,8 @@ export const Events = () => {
     useEffect(() => {
         const applyFilters = (event) => {
 
-            if (filters.Theme && event?.filters?.Theme?.toLowerCase() !== filters.Theme?.toLowerCase()) {
+            const themeOptions = event.filters?.Theme?.split(',').map(opt => opt.trim().toLowerCase()) || [];
+            if (filters.Theme && !themeOptions.includes(filters.Theme?.toLowerCase())) {
                 return false;
             }
 
@@ -209,7 +210,8 @@ export const Events = () => {
                 if (activeOptions.length === 0) return true;
 
                 // Otherwise, check if the category value of the event is in the active options array:
-                return activeOptions.includes(event?.filters?.[category])
+                const eventOptions = event.filters?.[category]?.split(',').map(opt => opt.trim()) || [];
+                return activeOptions.some(opt => eventOptions.includes(opt));
             });
         };
 

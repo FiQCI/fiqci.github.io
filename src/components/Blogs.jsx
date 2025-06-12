@@ -166,7 +166,8 @@ export const Blogs = () => {
 
     useEffect(() => {
         const applyFilters = (blog) => {
-            if (filters.Theme && blog?.filters?.Theme?.toLowerCase() !== filters.Theme?.toLowerCase()) {
+            const themeOptions = blog.filters?.Theme?.split(',').map(opt => opt.trim().toLowerCase()) || [];
+            if (filters.Theme && !themeOptions.includes(filters.Theme?.toLowerCase())) {
                 return false;
             }
 
@@ -182,7 +183,8 @@ export const Blogs = () => {
                 if (activeOptions.length === 0) return true;
 
                 // Otherwise, check if the category value of the blog is in the active options array:
-                return activeOptions.includes(blog?.filters?.[category])
+                const blogOptions = blog.filters?.[category]?.split(',').map(opt => opt.trim()) || [];
+                return activeOptions.some(opt => blogOptions.includes(opt));
             });
         };
 
