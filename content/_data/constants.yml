@@ -79,7 +79,7 @@ header_nav:
       href: /access/#emulation
       teaser: /assets/images/FiQCI-banner.jpg
       description: |-
-        With the LUMI supercomputer it is possible to emulate quantum computers with up to 40+ qubits.
+        With the LUMI supercomputer it is possible to emulate quantum computers with up to 44 qubits.
         This allows for testing and development of quantum algorithms without the need for actual quantum hardware.
       links:
         - title: Emulation resources
@@ -89,10 +89,9 @@ header_nav:
   quantum_resources:
     - name: VTT Q5 (Helmi)
       desc: |-
-        Helmi (VTT Q5), the Finnish quantum computer operated by VTT, co-developed with IQM.
-        Helmi is based on superconducting technology, and presently provides five qubits.
-        Upgrades to 20, then 50 qubits is planned for the near future. Helmi is accessible
-        through the LUMI supercomputer environment.
+       The VTT Q5 "Helmi" is the first Finnish quantum computer. Helmi is based on superconducting technology and provides 5 qubits
+       in a star-shape topology. Hybrid HPC+QC access was opened in 2022. Helmi is operated by VTT,
+       and was co-developed with IQM Quantm Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
         - link: ""
@@ -104,9 +103,8 @@ header_nav:
 
     - name: VTT Q50
       desc: |-
-        VTT Q50 is the newest Finnish quantum computer. It is operated by VTT, and was co-developed with IQM.
-        Q50, like Q5, is based on superconducting technology, and presently provides 50 qubits.
-        Q50 is accessible through the LUMI supercomputer environment.
+        VTT Q50 is based on superconducting technology and provides 53 qubits in a square grid topology.
+        Hybrid HPC+QC access was opened in 2025. VTT Q50 is operated by VTT, , and was co-developed with IQM Quantm Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
         - link: ""
@@ -119,9 +117,8 @@ header_nav:
   supercomputer_resources:
     - name: LUMI
       desc: |-
-        The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
-        is the pan-European EuroHPC LUMI supercomputer. LUMI is the fastest and greenest supercomputer in Europe, 
-        hosted by CSC in Kajaani, Finland.
+        Presently the backbone of the classical HPC and AI resources in FiQCI. The pre-exascale EuroHPC LUMI supercomputer
+        serves as the portal for hybrid HPC+QC. LUMI is hosted by CSC in Kajaani, Finland.
       image: "/assets/images/FiQCI-banner.jpg"
       links:
         - link: ""
@@ -134,7 +131,7 @@ header_nav:
   emulation_resources:
     - name: Quantum emuation with LUMI
       desc: |-
-        With the LUMI supercomputer it is possible to emulate quantum computer with upto 40+ qubits.
+        The LUMI supercomputer enables full emulation and simulation of quantum algorithms of up to 44 qubits.
       image: "/assets/images/FiQCI-banner.jpg"
       links:
         - link: ""
