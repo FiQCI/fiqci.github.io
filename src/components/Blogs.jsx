@@ -57,7 +57,7 @@ const BlogFilters = ({ filters, handleFilterChange }) => {
 //Checkbox filters
 const FilterCategory = ({ category, options, handleCheckboxChange }) => (
     <div>
-        <h3 className='font-bold mb-[16px]'>{category}</h3>
+        <h3 className='font-bold mb-[10px]'>{category}</h3>
         {Object.keys(options).map(option => (  //generate a chekcbox for each filter category
             <CCheckbox
                 hideDetails={true}
@@ -74,14 +74,14 @@ const FilterCategory = ({ category, options, handleCheckboxChange }) => (
 //Theme filter
 const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
     <div>
-        <p className='font-bold mb-[16px]'>Theme</p>
+        <p className='font-bold mb-[10px]'>Theme</p>
         <CSelect
             hideDetails={true}
             className='py-2'
             clearable
             value={selectedTheme}
             items={[
-                { name: 'Hybrid QC+HPC computing', value: 'hybrid QC+HPC computing' },
+                { name: 'HPC+QC+AI', value: 'HPC+QC+AI' },
                 { name: 'Programming', value: 'programming' },
                 { name: 'Algorithm', value: 'algorithm' },
                 { name: 'Technical', value: 'Technical' },
@@ -182,24 +182,27 @@ export const Blogs = () => {
         };
     }, [isModalOpen]);
 
-    useEffect(() => { //set filteredBlogs everytime filters changes
+    useEffect(() => {
         const applyFilters = (blog) => {
-            if (filters.Theme && blog?.filters?.Theme !== filters.Theme) {
+            const themeOptions = blog.filters?.Theme?.split(',').map(opt => opt.trim().toLowerCase()) || [];
+            if (filters.Theme && !themeOptions.includes(filters.Theme?.toLowerCase())) {
                 return false;
             }
-            // For every other filter category...
+
             return Object.entries(filters).every(([category, options]) => {
-                // Skip the "Theme" category here
                 if (category === "Theme") return true;
 
                 // Create an array of only the options that are checked (active)
-                const activeOptions = Object.entries(options).filter(([_, checked]) => checked);
+                const activeOptions = Object.entries(options)
+                    .filter(([_, checked]) => checked)
+                    .map(([option, _]) => option);
 
-                // If no options are active in this category, do not filter out the event:
+                // If no options are active in this category, do not filter out the blog:
                 if (activeOptions.length === 0) return true;
 
-                // Otherwise, require that at least one active option is true in the event:
-                return activeOptions.some(([option]) => blog?.filters?.[category]?.[option]);
+                // Otherwise, check if the category value of the blog is in the active options array:
+                const blogOptions = blog.filters?.[category]?.split(',').map(opt => opt.trim()) || [];
+                return activeOptions.some(opt => blogOptions.includes(opt));
             });
         };
 

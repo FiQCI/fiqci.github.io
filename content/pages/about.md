@@ -5,7 +5,7 @@ subtitle: The FiQCI consortium maintains, operates, and develops the infrastruct
 react: true
 ---
 
-{% assign about_data = site.data.constants.about %}
+{% assign about_data = site.data.constants.["/about/"] %}
 
 <div class="mt-[24px] grid grid-cols-1 lg:grid lg:grid-cols-2 gap-8">
   <h1 class="text-3xl text-on-white font-bold col-span-1 lg:col-span-2">About FiQCI</h1>

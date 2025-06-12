@@ -8,6 +8,11 @@ header:
 tags:
   - Helmi
   - LUMI
+filters:
+  Pricing:  # Free of charge, or empty if paid
+  Skill level: Beginner # Beginner, Advanced
+  Type: Online # Online, Hybrid, Onsite
+  Theme: Course/Workshop # Course/Workshop, HPC+QC+AI, Programming, Webinar/Lecture
 ---
 3-4 June: Two-day introductory course on quantum computers and the basic quantum algorithms that control them.
 

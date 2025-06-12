@@ -12,6 +12,10 @@ tags:
   - QEC 
   - Grover Search
   - Algorithm
+filters:
+  Skill level: Beginner # Beginner, Advanced
+  Type: Blog # Blog, Instructions, News
+  Theme: Technical # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 
 Grover's Search Algorithm [[1]](#references), introduced by Lov Grover in 1996, is one of the most important quantum algorithms due to its ability to search an unsorted database significantly faster than any classical algorithms. In classical computing, searching for a specific item among $N$ unsorted elements requires $O(N)$ steps. However, Grover's algorithm can achieve this in just $O(\sqrt{N})$ steps, providing a quadratic speedup. This efficiency is obtained by the unique properties of quantum computing: superposition and entanglement. These properties allow the algorithm to explore multiple possibilities simultaneously, therefore reducing the number of iterations needed to find the target item.
@@ -146,8 +150,4 @@ The results demonstrate that encoding Grover’s Search Algorithm with the [[4, 
 8. A. D. Corcoles et al., "Fault-tolerant quantum error detection," Sci. Adv., vol. 3, no. 7, Jul. 2017. Available: <https://www.science.org/doi/epdf/10.1126/sciadv.1701074>
 9. S. J. Devitt, W. J. Munro, and K. Nemoto, "Quantum error correction for beginners," Rep. Prog. Phys., vol. 76, no. 7, p. 076001, Jun. 2013, doi: 10.1088/0034-4885/76/7/076001. Available: <https://arxiv.org/pdf/0905.2794>
 10. Z. Cai, R. Babbush, S. C. Benjamin, S. Endo, W. J. Huggins, Y. Li, J. R. McClean, and T. E. O’Brien, "Quantum error mitigation," Rev. Mod. Phys., vol. 95, no. 4, p. 045005, Dec. 2023, doi: 10.1103/revmodphys.95.045005. Available: <https://arxiv.org/pdf/2210.00921>
-
-## Give feedback
-
-Feedback is greatly appreciated! You can send feedback directly to [fiqci-feedback@postit.csc.fi](mailto:fiqci-feedback@postit.csc.fi).
 

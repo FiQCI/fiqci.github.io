@@ -5,20 +5,20 @@ import { mdiArrowRight } from '@mdi/js';
 import { prependBaseURL } from '../utils/url';
 
 export const BlogCardComponent = props => {
-    const type = props?.filters?.Type ? Object.entries(props?.filters?.Type)?.filter(field => field[1])[0][0] : "News";
+    const type = props?.filters?.Type;
     return (
         <CCard className="flex flex-auto flex-col flex-wrap border border-gray-200 rounded-none shadow-md overflow-hidden hover:shadow-lg p-0 m-0 w-full"> {/* Adjusted card width */}
             <img src={props.teaser} alt="Logo" className="w-full h-28 scale-125 object-cover m-0 p-0" />
             <CCardContent className="flex flex-col border-none m-0">
                 <div>
-                    <a
-                        href={props.url.split(".")[0]}
-                        className="text-md text-on-white hover:underline font-bold"
-                    >
-                        {props.title.length >= 89 ? props.title.slice(0, 90) + "..." : props.title}
+                    <a href={props.url.split(".")[0]}
+                        className="text-on-white hover:underline font-bold">
+                        <div>
+                            {props.title.length >= 89 ? props.title.slice(0, 90) + "..." : props.title}
+                        </div>
                     </a>
                     <p className="text-sm text-gray-500 pb-2 pt-1">
-                        { type } | {props.date}
+                        {type} | {props.date}
                     </p>
                 </div>
             </CCardContent>

@@ -13,7 +13,10 @@ tags:
   - Quantum computing
   - Circuit knitting
   - Wire-cutting
-
+filters:
+  Skill level: Advanced # Beginner, Advanced
+  Type: Blog # Blog, Instructions, News
+  Theme: HPC+QC+AI # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 *In the noisy intermediate scale quantum (NISQ) era of quantum computing the main factor limiting practical applications is the number of quality qubits available on a single quantum processing unit (QPU). For realising quantum utility, or even advantage on NISQ and future devices it can be useful to take a large quantum algorithm, cut it into smaller pieces and distribute the pieces on separate QPUs for execution in parallel. This would allow circumventing some of the hardware limitations, especially concerning the number of qubits on NISQ devices. Here, we use real hardware of the Finnish Quantum Computing Infrastructure (FiQCI) and simulations to demonstrate such a method, known as quantum circuit knitting.*
 
@@ -229,7 +232,3 @@ For more examples on wire-cutting with QCut check it out on <a href="https://git
 8. Y. Y. Boykov and M.-P. Jolly, “Interactive graph cuts for optimal boundary \& region segmentation of objects in N-D images,” in Proceedings Eighth IEEE International Conference on Computer Vision. ICCV 2001, Vancouver, BC, Canada: IEEE Comput. Soc, 2001, pp. 105–112. doi: 10.1109/ICCV.2001.937505. Available: [http://ieeexplore.ieee.org/document/937505](http://ieeexplore.ieee.org/document/937505). [Accessed: Aug. 14, 2024]
 
 9. F. Barahona, M. Grötschel, M. Jünger, and G. Reinelt, “An Application of Combinatorial Optimization to Statistical Physics and Circuit Layout Design,” Operations Research, vol. 36, no. 3, pp. 493–513, Jun. 1988, doi: 10.1287/opre.36.3.493. Available: [https://pubsonline.informs.org/doi/10.1287/opre.36.3](https://pubsonline.informs.org/doi/10.1287/opre.36.3).493. [Accessed: Aug. 14, 2024]
-
-## Give feedback!
-
-Feedback is greatly appreciated! You can send feedback directly to [fiqci-feedback@postit.csc.fi](mailto:fiqci-feedback@postit.csc.fi).

@@ -11,11 +11,11 @@ import { useJsonApi } from '../hooks/useJsonApi'
 
 const AccessPage = () => {
     const themeConstants = useJsonApi('api/theme/constants.json')
-
+    const accessProps = themeConstants["/access/"]
     return <>
         <PageLayout {...themeConstants} title="Get Access" />
         {createPortal(
-            <GetAccess {...themeConstants}/>,
+            <GetAccess {...accessProps}/>,
             document.getElementById('access')
         )}
     </>

@@ -14,9 +14,10 @@ const StatusCard = (props) => {
         <div className="flex flex-col justify-start text-[14px]">
           <p className=""><strong>Qubits:</strong> {props.qubits}</p>
           <p className=""><strong>Basis gates:</strong> {props.basis}</p>
+          <p className=""><strong>Topology:</strong> {props.topology}</p>
         </div>
 
-        <div className='flex flex-col gap-2 text-[14px]'>
+        <div className='flex flex-col gap-0 text-[14px]'>
           <strong>Service status:</strong>
           {status === "available" ? (
             <div className='text-center text-[#204303] bg-[#B9DC9C] border-[0.5px] border-[#204303] rounded-[100px] w-[88px] h-[25px]'>
@@ -36,7 +37,6 @@ const StatusCard = (props) => {
 export const ServiceStatus = (props) => {
   const status = useStatus('https://fiqci-backend-fiqci-workspace.2.rahtiapp.fi/healthcheck')
   const qcs = props["quantum-computers"] || [];
-  console.log(props["quantum-computers"])
   return (
     <div className="flex gap-6 flex-col sm:flex-col items-stretch text-on-white">
 

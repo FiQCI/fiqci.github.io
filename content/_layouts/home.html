@@ -3,9 +3,9 @@ layout: base
 ---
 
 
-{% assign about_data = site.data.constants.about %}
+{% assign about_data = site.data.constants["/about/"] %}
 
-{% assign mission_data = site.data.constants.mission.links %}
+{% assign mission_data = site.data.constants["/"].mission.links %}
 
 {%- include react/root.html id='hero' -%}
 
