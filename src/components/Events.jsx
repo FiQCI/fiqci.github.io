@@ -156,7 +156,6 @@ export const Events = () => {
     const events_dict = SplitEvents(); //get events
     const [isModalOpen, setIsModalOpen] = useState(false); //modal control
     const [filters, setFilters] = useState({
-        "Availability": { "Open to anyone": false, "Registration needed": false },
         "Skill level": { "Advanced": false, "Beginner": false },
         "Pricing": { "Free of charge": false },
         "Type": { "Online": false, "Hybrid": false, "Onsite": false },

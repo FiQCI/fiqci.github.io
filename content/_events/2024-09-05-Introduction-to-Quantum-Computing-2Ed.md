@@ -11,7 +11,6 @@ tags:
 type: Event
 filters:
   Pricing: Free of charge # Free of charge, or empty if paid
-  Availability: Open to anyone # Open to anyone, Registration needed
   Skill level: Beginner # Beginner, Advanced
   Type: Online # Online, Hybrid, Onsite
   Theme: Course/Workshop # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture
