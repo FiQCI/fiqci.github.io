@@ -11,11 +11,11 @@ export const BlogCardComponent = props => {
             <img src={props.teaser} alt="Logo" className="w-full h-28 scale-125 object-cover m-0 p-0" />
             <CCardContent className="flex flex-col border-none m-0">
                 <div>
-                    <a
-                        href={props.url.split(".")[0]}
-                        className="text-on-white text-on-white hover:underline font-bold"
-                    >
-                        {props.title.length >= 89 ? props.title.slice(0, 90) + "..." : props.title}
+                    <a href={props.url.split(".")[0]}
+                        className="text-on-white hover:underline font-bold">
+                        <div>
+                            {props.title.length >= 89 ? props.title.slice(0, 90) + "..." : props.title}
+                        </div>
                     </a>
                     <p className="text-sm text-gray-500 pb-2 pt-1">
                         {type} | {props.date}
