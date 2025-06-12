@@ -29,7 +29,7 @@ const EventFilters = ({ filters, handleFilterChange }) => {
     }, [filters, handleFilterChange]);
 
     return (
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-[24px] text-on-white'>
             {Object.entries(filters).slice(0, -1).map(([category, options]) => ( //slice(0,-1) to exclude Theme
                 <FilterCategory
                     key={category}
@@ -50,7 +50,7 @@ const EventFilters = ({ filters, handleFilterChange }) => {
 //Checkbox filters
 const FilterCategory = ({ category, options, handleCheckboxChange }) => (
     <div>
-        <h3 className='font-bold'>{category}</h3>
+        <h3 className='font-bold mb-[16px]'>{category}</h3>
         {Object.keys(options).map(option => ( //generate a chekcbox for each filter category
             <CCheckbox
                 hide-details={true}
@@ -69,7 +69,7 @@ const FilterCategory = ({ category, options, handleCheckboxChange }) => (
 //Theme filter
 const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
     <div>
-        <p className='font-bold'>Theme</p>
+        <p className='font-bold mb-[16px]'>Theme</p>
         <CSelect
             hideDetails={true}
             className='py-2'
@@ -93,11 +93,13 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
     return (
         <CModal
             key={isModalOpen ? 'open' : 'closed'}
+            style={{ 'overflow': 'scroll' }}
+            className='!overflow-hidden'
             value={isModalOpen}
             dismissable
             onChangeValue={event => setIsModalOpen(event.detail)}
         >
-            <CCard style={{ 'overflow': 'scroll' }} className='overflow-scroll max-h-[80vh]'>
+            <CCard style={{ 'overflow': 'scroll' }} className='overflow-scroll lg:!overflow-hidden max-h-[80vh]'>
                 <CCardTitle>Filters</CCardTitle>
                 <CCardContent>
                     <EventFilters
@@ -117,7 +119,7 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
 const EventsList = ({ title, events, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => (
     <div>
         <div className='flex flex-row justify-between'>
-            <h2 className='text-3xl font-bold'>{title}</h2>
+            <h2 className=''>{title}</h2>
             {showFilters && //to not show the button on every EventsList instance
                 <CButton
                     className='flex items-center py-2 lg:hidden'
@@ -243,7 +245,7 @@ export const Events = () => {
 
     return (
 
-        <div className='lg:grid grid-cols-5 gap-8'>
+        <div className='lg:grid grid-cols-5 gap-8 text-on-white'>
             <div className='mt-8 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
                 <EventFilters filters={filters} handleFilterChange={handleFilterChange} />
             </div>
@@ -256,6 +258,7 @@ export const Events = () => {
                     showFilters={true}
                     onOpenDialog={onOpenDialog}
                 />
+                <div className="h-[80px]" />
                 <EventsList
                     title='Past events'
                     events={[...filteredEvents.past].reverse()}

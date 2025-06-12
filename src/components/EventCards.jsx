@@ -2,6 +2,7 @@ import React from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
 import { CCard, CIcon, CCardContent } from '@cscfi/csc-ui-react';
 import { mdiArrowRight, mdiOpenInNew } from '@mdi/js';
+import { prependBaseURL } from '../utils/url';
 
 export const EventCardComponent = props => {
     return (
@@ -10,9 +11,9 @@ export const EventCardComponent = props => {
                 <div className='my-3'>
                     <a
                         href={props.url}
-                        className="text-md text-black-500 hover:underline font-bold"
+                        className="text-md text-on-white hover:underline font-bold"
                     >
-                        <div className='flex justify-between'>
+                        <div className='flex justify-between text-on-white'>
                             {props.title}
                             <CIcon className="text-lg" path={mdiOpenInNew} />
                         </div>
@@ -40,7 +41,7 @@ export const EventCards = () => {
             </div>
             <div className="mt-4">
             <a
-                    href="/events/"
+                    href={prependBaseURL("/events/")}
                     className="text-sky-800 hover:underline font-bold"
                 >
                     <div className="mx-2 sm:mx-0 flex items-center gap-3">

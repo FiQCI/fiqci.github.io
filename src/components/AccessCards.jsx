@@ -12,18 +12,16 @@ const AccessCardComponent = ({ title, href, teaser, description, links }) => {
         <img
           src={prependBaseURL(teaser)}
           alt="teaser"
-          className="w-full h-32 object-cover"
+          className="w-full h-[227px] object-cover"
         />
-        <CCardContent className="flex flex-col border-none p-5 space-y-4">
-          <a href={prependBaseURL(href)} className="text-lg font-bold hover:underline">
-            {title}
-          </a>
+        <CCardContent className="flex flex-col border-none px-10 pb-10 pt-6">
+          <h3 className='text-[22px] font-bold mr-10'>{title}</h3>
   
           <div className="text-md">{description}</div>
   
           <div className="flex flex-col space-y-2">
             {links.map((link, index) => (
-              <a key={index} href={prependBaseURL(link.href)} className="text-sm font-bold hover:underline flex items-center gap-1">
+              <a key={index} href={prependBaseURL(link.href)} className="text-sky-200 hover:underline font-semibold flex items-center gap-1">
                 {link.title} <CIcon path={isExternal(link.href) ? mdiOpenInNew : mdiArrowRight} />
               </a>
             ))}
@@ -39,13 +37,13 @@ export const AccessCards = props => {
         props.cards?.map(card => (<AccessCardComponent {...card} key={card.title} />))
 
     return <>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-0 sm:gap-6 mb-2 sm:mb-0 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 mb-2 sm:mb-0 gap-[32px]">
             {accessCardComponents}
         </div>
         <div className="mt-4">
-            <div className="flex items-center gap-3 text-md py-4">Other quantum resources will continuously be added to the FiQCI infrastructure.</div>
+            <div className="flex items-center gap-3 text-md text-on-white py-4">Other quantum resources will continuously be added to the FiQCI infrastructure.</div>
             <a
-                href="#"
+                href={prependBaseURL("/status")}
                 className="text-sky-800 hover:underline font-bold"
             >
                 <div className="flex items-center gap-3">

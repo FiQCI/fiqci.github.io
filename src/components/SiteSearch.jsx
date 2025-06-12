@@ -5,8 +5,6 @@ import {
   CButton, CPagination, CIcon, CCheckbox, CModal, CCard,
   CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
-
-
 import { prependBaseURL } from '../utils/url';
 
 const style = {
@@ -131,11 +129,11 @@ const SearchBar = ({ setResults }) => {
 
   return (
     <div className='flex flex-row w-full'>
-      <CIcon className='mx-3 self-center' style={style} path={mdiMagnify} />
+      <CIcon className='mx-3 self-center text-on-white' path={mdiMagnify} />
       <form onSubmit={handleSubmit} className='pb-[1px] w-full mr-3'>
         <input onChange={handleSearchBar} className="w-full focus:outline-none" placeholder="Search..." type="text" id="search-box" name="query" value={query} />
       </form>
-      <CIcon className='mx-3 self-center' onClick={() => setQuery("")} style={style} path={mdiClose} />
+      <CIcon className='mx-3 self-center text-on-white' onClick={() => setQuery("")} path={mdiClose} />
       <CButton onClick={handleSubmit} className='mr-3' style={style} ghost>Search</CButton>
     </div>
   )
@@ -150,13 +148,16 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
   };
 
   return (
-    <div className='mb-8'>
+    <div className='mb-8 text-on-white'>
       {results[type].length !== 0 &&
         <div className='border-t-5'>
           <div className='flex flex-row pt-2'>
             <h1 className='mb-6 mr-3 text-xl font-bold'>{capitalizeFirstLetter(type)}</h1>
             {type !== "general" &&
-              <CIcon onClick={() => window.location.href = href} style={styleArrow} className='pt-1 text[#004E84]' path={mdiArrowRight} />
+              <a href={href} >
+                <CIcon style={styleArrow} className='pt-1 text[#004E84]' path={mdiArrowRight} />
+
+              </a>
             }
           </div>
           <ul>
@@ -164,7 +165,7 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
               paginationOptions.itemsPerPage, (paginationOptions.currentPage - 1) *
               paginationOptions.itemsPerPage + paginationOptions.itemsPerPage).map((item, index) => (
                 <li className='pb-6' key={index}>
-                  <strong><a className='text-[#004E84]' href={type === "events" ? item.link : prependBaseURL(item.url)}>{item.title}</a></strong><br />
+                  <strong><a className='text-[#004E84] hover:underline' href={type === "events" ? item.link : prependBaseURL(item.url)}>{item.title}</a></strong><br />
                   <div className='flex flex-row'>
                     <p className='font-semibold'>{capitalizeFirstLetter(item.type)}</p>
                     {type !== "general" &&
@@ -191,18 +192,19 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
 
 const Filters = ({ filters, handleCheckboxChange }) => {
   return (
-    <div>
-      <p className='font-semibold'>Results type</p>
+    <div className='text-on-white'>
+      <p className='font-semibold mb-[16px]'>Results type</p>
       <div className='-ml-[10px] flex flex-col'>
         {Object.keys(filters).map(option => (
           <CCheckbox
             className='flex flex-col'
+            hide-details={true}
             hideDetails
             key={option}
             checked={filters[option]}
             onChangeValue={() => handleCheckboxChange(option)}
           >
-            <p className='text-xs mt-[4px]'>{option}</p>
+            <p className='text-sm'>{option}</p>
           </CCheckbox>
         ))}
       </div>
@@ -324,6 +326,8 @@ export const SiteSearch = () => {
         if (filterLower === "blog" && item.type === "post") return true;
         if (filterLower === "event" && item.type === "event") return true;
         if (filterLower === "general information" && item.type === "page") return true;
+        if (filterLower === "instruction" && item.filters?.type?.includes("instruction")) return true;
+        if (filterLower === "news" && item.filters?.type?.includes("news")) return true;
         //TODO add filter toggles for instructions and news once this is merged with pr 18 and 19
 
         return false;
@@ -347,13 +351,13 @@ export const SiteSearch = () => {
   };
 
   return (
-    <div className='min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-2 sm:mx-8 lg:mx-[100px] lg:grid grid-cols-5 gap-0'>
+    <div className='text-on-white min-[2600px]:mx-auto min-[2600px]:max-w-[50vw] mx-2 sm:mx-8 lg:mx-[100px] lg:grid grid-cols-5 gap-0'>
       <div className='mt-24 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
         <Filters filters={filters} handleCheckboxChange={handleCheckboxChange} />
       </div>
 
       <div className='mt-24 col-span-5 lg:col-span-3'>
-        <div className='mb-2 lg:mb-20 border-2 border-black min-h-[45px] flex flex-row items-center text-lg'>
+        <div className='mb-2 lg:mb-20 border-2 border-on-white min-h-[45px] flex flex-row items-center text-lg'>
           <SearchBar setResults={setResults} />
         </div>
         <div>
@@ -372,9 +376,9 @@ export const SiteSearch = () => {
 
           <ResultArea paginationOptions={paginationOptionsGen} setOptions={setOptionsGen} results={filteredResults} type={"general"} href={""} />
 
-          <ResultArea paginationOptions={paginationOptionsBlog} setOptions={setOptionsBlog} results={filteredResults} type={"blogs"} href={"/publications"} />
+          <ResultArea paginationOptions={paginationOptionsBlog} setOptions={setOptionsBlog} results={filteredResults} type={"blogs"} href={prependBaseURL("/publications")} />
 
-          <ResultArea paginationOptions={paginationOptionsEvent} setOptions={setOptionsEvent} results={filteredResults} type={"events"} href={"/events"} />
+          <ResultArea paginationOptions={paginationOptionsEvent} setOptions={setOptionsEvent} results={filteredResults} type={"events"} href={prependBaseURL("/events")} />
 
         </div>
       </div>

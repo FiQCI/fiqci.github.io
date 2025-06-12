@@ -15,7 +15,7 @@ const style = {
 const NavButton = props => {
     const isActive = window.location.pathname === props.href;
 
-    let styleClass = "text-black py-2"
+    let styleClass = "text-on-white py-2"
     if (isActive) {
         styleClass = styleClass + " underline underline-offset-8 decoration-2"
     }
@@ -41,8 +41,8 @@ const NavSearchButton = props => {
             style={style}
             onClick={() => (window.location.href = props.href)}
         >
-            <p className="text-black py-2">{props.title}</p>
-            <CIcon style={style} path={mdiMagnify} />
+            <p className="text-on-white py-2">{props.title}</p>
+            <CIcon className='text-on-white' path={mdiMagnify} />
         </CButton>
     );
 };
@@ -112,22 +112,25 @@ export const NavigationHeader = props => {
 
     return (
         <div className='flex flex-col'>
-            <div ref={topBarRef} className="flex mx-5 items-center justify-between py-3">
+            <div
+                ref={topBarRef}
+                className="flex mx-5 items-center justify-between py-3 navigation-header-topbar"
+            >
                 <div className="flex items-center">
                     {headerLogo}
                 </div>
 
-                <div className="lg:flex flex-wrap justify-end hidden">
+                <div className="lg:flex flex-wrap justify-end hidden navigation-header-buttons">
                     {navigationButtons}
                 </div>
 
                 <div className='flex lg:hidden h-max'>
-                    <CIcon onClick={toggleMenu} size={40} path={mdiMenu} />
+                    <CIcon className='text-on-white' onClick={toggleMenu} size={40} path={mdiMenu} />
                 </div>
             </div>
             <div
                 ref={navRef}
-                className={`lg:hidden mx-1.5 mb-10 top-10 w-full flex flex-col justify-center items-left gap-2 transition-all duration-200 ${isOpen ? "block" : "hidden"
+                className={`lg:hidden mx-1.5 mb-10 top-10 w-full flex flex-col justify-center items-left gap-2 navigation-header-mobile ${isOpen ? "block" : "hidden"
                     }`}
             >
                 {navigationButtons}

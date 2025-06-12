@@ -12,6 +12,7 @@ import { BlogTags } from '../components/BlogTags'
 import { ReferencesAccordion } from '../components/ReferencesAccordion'
 
 import { BaseLayout } from './base.html'
+import { prependBaseURL } from '../utils/url'
 
 export const PostLayout = props => {
     const title = props.title_separator
@@ -21,17 +22,14 @@ export const PostLayout = props => {
     const tagsData = document.getElementById('tags-data')
     const tags = JSON.parse(tagsData.getAttribute('data-content'));
 
-    const authorData = document.getElementById('author-data')
-    const author = JSON.parse(authorData.getAttribute('data-content'));
-
     return <>
         <BaseLayout {...props} />
         {createPortal(
-            <Banner title={title} />,
+            <Banner title={"Blogs and instructions"} />, //TODO use filter.type once merged with the refine filters branch
             document.getElementById('banner')
         )}
         {createPortal(
-            <Breadcrumbs breadcrumbs={{ "Home": "/", "About FiQCI": "/about/", [title]: "#" }} />,
+            <Breadcrumbs breadcrumbs={{ "Home": prependBaseURL("/"), "Blogs and instructions": prependBaseURL("/publications/"), [title]: "#" }} />,
             document.getElementById('breadcrumbs')
         )}
         {createPortal(

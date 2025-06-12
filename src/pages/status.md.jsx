@@ -11,11 +11,11 @@ import { useJsonApi } from '../hooks/useJsonApi'
 
 const StatusPage = () => {
     const themeConstants = useJsonApi('api/theme/constants.json')
-
+    const serviceProps = themeConstants["/status/"]
     return <>
         <PageLayout {...themeConstants} title="Status" />
         {createPortal(
-            <ServiceStatus />,
+            <ServiceStatus {...serviceProps}/>,
             document.getElementById('service-status')
         )}
     </>

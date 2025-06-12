@@ -1,3 +1,78 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.text-on-white {
+    color: #001C39;
+}
+
+.border-on-white {
+    border-color: #001C39;
+}
+
+h2 {
+    font-size: 28px !important;
+    @apply font-bold
+}
+
+@media (min-width: 1440px) {
+    .navigation-header-topbar {
+        height: 75px !important;
+        min-height: 75px !important;
+        max-height: 75px !important;
+    }
+
+    .navigation-header-buttons .c-button {
+        font-size: 16px !important;
+    }
+
+    .navigation-header-buttons {
+        gap: 24px !important;
+    }
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+
+:root {
+    --c-primary-100: #CCE6F1 !important;
+    --c-primary-200: #CCE6F1 !important;
+    --c-primary-300: #CCE6F1 !important;
+    --c-primary-400: #004E84 !important;
+    --c-primary-500: #004E84 !important;
+    --c-primary-600: #004E84 !important;
+    --c-primary-700: #004E84 !important;
+    --c-primary-800: #004E84 !important;
+    --c-primary-900: #001C39 !important;
+    --c-primary-rgb: 0, 78, 132 !important;
+}
+
+#blogView h1,
+#blogView h2,
+#blogView h3,
+#blogView h4,
+#blogView p,
+#blogView strong,
+#blogView table,
+#blogView th,
+#blogView td {
+    color: #001C39;
+}
+
+#blogView a {
+    text-decoration: none;
+    @apply text-sky-800;
+}
+
+#blogView a:hover {
+    @apply text-sky-800;
+    text-decoration: underline;
+}
+
+#read-next a {
+    color: #001C39 !important;
+}
