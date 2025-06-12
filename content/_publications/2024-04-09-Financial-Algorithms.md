@@ -10,6 +10,10 @@ layout: post
 tags:
   - Helmi
   - Leena
+filters:
+  Skill level: Advanced # Beginner, Advanced
+  Type: Blog # Blog, Instructions, News
+  Theme: Algorithm # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 
 *With the availability of real, functioning quantum computers, quantum algorithms have transitioned from theory to practice and skyrocketed interest in practical applications. Finance is one of the many fields where quantum algorithms can improve speed and accuracy. Here, we demonstrate a prototype calculation on the Helmi quantum computer through the Finnish Quantum-Computing Infrastructure FiQCI.*
@@ -109,8 +113,3 @@ Those interested in the codes used for this blog can find the Jupyter notebooks 
 4.	[Amplitude Estimation without Phase Estimation, Y. Suzuki et al., 2020](https://arxiv.org/abs/1904.10246)
 5.	[Improved maximum-likelihood quantum amplitude estimation, A. Callison and D. Browne, 2023](https://arxiv.org/abs/2209.03321)
 6.	[The housing market’s quantum future, O. Salmenkivi et al., 2021](https://www.csc.fi/-/the-housing-market-s-quantum-future)
-
-
-## Give feedback!
-
-Feedback is greatly appreciated! You can send feedback directly to [fiqci-feedback@postit.csc.fi](mailto:fiqci-feedback@postit.csc.fi).
