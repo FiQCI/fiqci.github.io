@@ -76,7 +76,7 @@ const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
             clearable
             value={selectedTheme}
             items={[
-                { name: 'Hybrid QC+HPC computing', value: 'hybrid QC+HPC computing' },
+                { name: 'HPC+QC+AI', value: 'HPC+QC+AI' },
                 { name: 'Programming', value: 'programming' },
                 { name: 'Webinar/Lecture', value: 'webinar/lecture' },
                 { name: 'Course/Workshop', value: 'course/workshop' },

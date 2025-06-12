@@ -12,6 +12,6 @@ filters:
   Pricing: Free of charge # Free of charge, or empty if paid
   Skill level: Beginner # Beginner, Advanced
   Type: Hybrid # Online, Hybrid, Onsite
-  Theme: Webinar/Lecture # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture
+  Theme: Webinar/Lecture # Course/Workshop, HPC+QC+AI, Programming, Webinar/Lecture
 ---
 16 Apr: In Finnish. Prof. Tapio Ala-Nissilän luento Luonnonfilosofian seuran tilaisuudessa.

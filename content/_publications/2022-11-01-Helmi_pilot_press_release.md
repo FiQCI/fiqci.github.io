@@ -11,7 +11,7 @@ tags:
 filters:
   Skill level: Beginner # Beginner, Advanced
   Type: News # Blog, Instructions, News
-  Theme: Technical # Technical, Algorithm, Programming, Hybrid QC+HPC computing
+  Theme: Technical # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 
 <!-- # Finland opens quantum computer for research purposes – the fusion of quantum computing and supercomputing enables completely new science -->

@@ -11,6 +11,6 @@ filters:
   Pricing: Free of charge # Free of charge, or empty if paid
   Skill level: Advanced # Beginner, Advanced
   Type: Onsite # Online, Hybrid, Onsite
-  Theme: Webinar/Lecture # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture
+  Theme: Webinar/Lecture # Course/Workshop, HPC+QC+AI, Programming, Webinar/Lecture
 ---
 31 Mar: Tampere University Physics Seminar series presentation.

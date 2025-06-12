@@ -11,6 +11,6 @@ filters:
   Pricing: Free of charge # Free of charge, or empty if paid
   Skill level: Beginner # Beginner, Advanced
   Type: Onsite # Online, Hybrid, Onsite
-  Theme: Course/Workshop # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture
+  Theme: Course/Workshop # Course/Workshop, HPC+QC+AI, Programming, Webinar/Lecture
 ---
 20 Jan: In Finnish. Ohjelmassa mm.: Millaisia ongelmia kvanttilaskennalla voidaan ratkaista?

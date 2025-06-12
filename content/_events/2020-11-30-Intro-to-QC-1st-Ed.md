@@ -11,6 +11,6 @@ filters:
   Pricing: Free of charge # Free of charge, or empty if paid
   Skill level: Beginner # Beginner, Advanced
   Type: Onsite # Online, Hybrid, Onsite
-  Theme: Course/Workshop # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture
+  Theme: Course/Workshop # Course/Workshop, HPC+QC+AI, Programming, Webinar/Lecture
 ---
 30 Nov-1 Dec: 2-day basic course on quantum computers and the algorithms that control them.

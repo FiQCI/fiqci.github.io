@@ -11,6 +11,6 @@ filters:
   Pricing: Free of charge # Free of charge, or empty if paid
   Skill level: Beginner # Beginner, Advanced
   Type: Hybrid # Online, Hybrid, Onsite
-  Theme: Webinar/Lecture # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture
+  Theme: Webinar/Lecture # Course/Workshop, HPC+QC+AI, Programming, Webinar/Lecture
 ---
 12 May: In Finnish. Miten kubitti voi olla 0 ja 1 samanaikaisesti? Mitä hyötyä siitä on?

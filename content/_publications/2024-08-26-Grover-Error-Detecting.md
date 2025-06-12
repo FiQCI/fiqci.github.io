@@ -15,7 +15,7 @@ tags:
 filters:
   Skill level: Beginner # Beginner, Advanced
   Type: Blog # Blog, Instructions, News
-  Theme: Technical # Technical, Algorithm, Programming, Hybrid QC+HPC computing
+  Theme: Technical # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 
 Grover's Search Algorithm [[1]](#references), introduced by Lov Grover in 1996, is one of the most important quantum algorithms due to its ability to search an unsorted database significantly faster than any classical algorithms. In classical computing, searching for a specific item among $N$ unsorted elements requires $O(N)$ steps. However, Grover's algorithm can achieve this in just $O(\sqrt{N})$ steps, providing a quadratic speedup. This efficiency is obtained by the unique properties of quantum computing: superposition and entanglement. These properties allow the algorithm to explore multiple possibilities simultaneously, therefore reducing the number of iterations needed to find the target item.

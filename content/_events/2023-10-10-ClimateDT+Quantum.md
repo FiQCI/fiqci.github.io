@@ -12,7 +12,7 @@ filters:
   Pricing: Free of charge # Free of charge, or empty if paid
   Skill level: Beginner # Beginner, Advanced
   Type: Hybrid # Online, Hybrid, Onsite
-  Theme: Webinar/Lecture # Course/Workshop, Hybrid QC+HPC computing, Programming, Webinar/Lecture
+  Theme: Webinar/Lecture # Course/Workshop, HPC+QC+AI, Programming, Webinar/Lecture
 ---
 10 Oct: Basic ideas behind digital twins of the Earth and quantum computing, 
 and discussion on the possibility of a common future of the two.

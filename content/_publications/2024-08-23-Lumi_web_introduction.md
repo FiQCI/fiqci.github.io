@@ -10,7 +10,7 @@ layout: post
 filters:
   Skill level: Beginner # Beginner, Advanced
   Type: Instructions # Blog, Instructions, News
-  Theme: Programming # Technical, Algorithm, Programming, Hybrid QC+HPC computing
+  Theme: Programming # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 
 > **In this guide:** Learn how to access the Helmi quantum computer through the LUMI web interface.  
