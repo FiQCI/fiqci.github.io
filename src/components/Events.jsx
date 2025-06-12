@@ -246,7 +246,7 @@ export const Events = () => {
     return (
 
         <div className='lg:grid grid-cols-5 gap-8 text-on-white'>
-            <div className='mt-8 hidden lg:block lg:sticky lg:top-16 lg:self-start z-10'>
+            <div className='mt-8 hidden lg:block lg:sticky lg:top-16 xl:top-20 lg:self-start z-10 scroll-smooth'>
                 <EventFilters filters={filters} handleFilterChange={handleFilterChange} />
             </div>
             <div className='mt-8 md:py-0 col-span-4'>
