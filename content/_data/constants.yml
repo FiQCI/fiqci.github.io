@@ -44,7 +44,7 @@ header_nav:
         - title: Blogs and instructions
           href: /publications
         - title: About FiQCI
-          href: "#about-fiqci"
+          href: "#about"
 
   mission:
     links:
