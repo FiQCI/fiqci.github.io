@@ -351,7 +351,6 @@ export const SiteSearch = () => {
         if (filterLower === "general information" && item.type === "page") return true;
         if (filterLower === "instructions" && item.type == "instructions") return true;
         if (filterLower === "news" && item.type == "news") return true;
-        //TODO add filter toggles for instructions and news once this is merged with pr 18 and 19
 
         return false;
       });
