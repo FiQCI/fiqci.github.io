@@ -8,7 +8,7 @@ react: true
 
 {%- include react/root.html id='banner' -%}
 
-<article class="pb-[60px] itemscope itemtype="http://schema.org/BlogPosting">
+<article class="pb-[60px] itemscope" itemtype="http://schema.org/BlogPosting">
  <div id="blogView" class='flex flex-col items-top mb-2'>
     <div class='lg:grid lg:grid-cols-5 mx-2 sm:mx-8 lg:mx-[100px] flex flex-col gap-8 min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
         <div class='col-span-5 mt-4'>
@@ -43,7 +43,7 @@ react: true
                 {%- include react/root.html id='references-accordion' -%}
               </div>
         </div>
-        <div class='lg:block lg:sticky lg:top-[70px] col-span-5 lg:col-span-2 2xl:col-span-1 xl:w-full xl:max-w-screen max-w-[740px] overflow-y-auto max-h-[90vh] scroll-smooth' style='height:fit-content;'>
+        <div class='lg:block lg:sticky lg:top-[70px] col-span-5 lg:col-span-2 2xl:col-span-1 xl:w-full xl:max-w-screen max-w-[740px] overflow-y-auto h-full xl:max-h-[90vh] scroll-smooth' style='height:fit-content;'>
             {%- include react/root.html id='read-next' -%}
         </div>
     </div>
