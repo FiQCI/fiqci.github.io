@@ -31,7 +31,7 @@ export const PostLayout = props => {
     return <>
         <BaseLayout {...props} />
         {createPortal(
-            <Banner title={type} />, //TODO use filter.type once merged with the refine filters branch
+            <Banner title={type} />,
             document.getElementById('banner')
         )}
         {createPortal(
