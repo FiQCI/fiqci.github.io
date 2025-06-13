@@ -5,6 +5,7 @@ collection: publications
 header:
   teaser: /assets/images/FiQCI-banner.jpg
 published: true
+author: FiQCI
 layout: post
 tags:
   - Helmi

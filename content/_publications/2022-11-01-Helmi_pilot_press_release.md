@@ -3,8 +3,9 @@ title: 'Finland opens quantum computer for research purposes – the fusion of q
 date: 2022-11-01
 collection: publications
 header:
-  # teaser: /assets/images/FiQCI-banner.jpg
+  teaser: /assets/images/FiQCI-banner.jpg
 published: true
+author: FiQCI
 layout: post
 tags:
   - Helmi
