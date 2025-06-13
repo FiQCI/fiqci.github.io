@@ -66,6 +66,7 @@ h2 {
 #blogView a {
     text-decoration: none;
     @apply text-sky-800;
+    word-break: break-word;
 }
 
 #blogView a:hover {
@@ -78,5 +79,31 @@ h2 {
 }
 
 #references-accordion a {
-    word-break: break-all;
+    word-break: break-word;
+}
+
+mjx-container {
+    @apply lg:overflow-x-hidden;
+    @apply max-w-[95%];
+    @apply lg:max-w-full;
+    @apply lg:pt-[2px];
+    @apply pt-0;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+}
+
+#blogView div:has(> table) {
+  overflow-x: auto;
+}
+
+#blogView table {
+    overflow-x: auto;
+}
+
+#blogView .highlight {
+    @apply scroll-smooth;
+}
+
+#tags-data {
+  overflow-x: hidden;
 }
