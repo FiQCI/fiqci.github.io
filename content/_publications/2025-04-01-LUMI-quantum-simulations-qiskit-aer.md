@@ -742,6 +742,7 @@ $$
 
 **Quantum Volume - Weak Scaling execution time result tables**
 
+<div>
 <table>
   <thead>
     <tr>
@@ -770,7 +771,7 @@ $$
     <tr><td>44</td><td>29</td><td>1024</td><td>8</td><td>8192</td><td>256 TB</td><td>492 TB</td><td>286.414</td><td>649.876</td></tr>
   </tbody>
 </table>
-
+</div>
 **Quantum Volume - Weak Scaling execution time results**
 
 <p align="center">
