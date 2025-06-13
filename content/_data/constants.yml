@@ -91,7 +91,7 @@ header_nav:
       desc: |-
        The VTT Q5 "Helmi" is the first Finnish quantum computer. Helmi is based on superconducting technology and provides 5 qubits
        in a star-shape topology. Hybrid HPC+QC access was opened in 2022. Helmi is operated by VTT,
-       and was co-developed with IQM Quantm Computers.
+       and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
         - link: ""
@@ -104,7 +104,7 @@ header_nav:
     - name: VTT Q50
       desc: |-
         VTT Q50 is based on superconducting technology and provides 53 qubits in a square grid topology.
-        Hybrid HPC+QC access was opened in 2025. VTT Q50 is operated by VTT, , and was co-developed with IQM Quantm Computers.
+        Hybrid HPC+QC access was opened in 2025. VTT Q50 is operated by VTT, and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
         - link: ""
@@ -129,7 +129,7 @@ header_nav:
           icon: mdiOpenInNew
 
   emulation_resources:
-    - name: Quantum emualtion with LUMI
+    - name: Quantum emulation with LUMI
       desc: |-
         The LUMI supercomputer enables full emulation and simulation of quantum algorithms of up to 44 qubits.
       image: "/assets/images/FiQCI-banner.jpg"
