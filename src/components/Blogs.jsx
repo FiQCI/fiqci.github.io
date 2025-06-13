@@ -117,7 +117,7 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
 };
 
 //List blogs in a grid with pagination
-const BlogsList = ({ title, blogs, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => {
+const BlogsList = ({ id, title, blogs, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => {
 
     // Scroll to top when pagination changes
     const onPageChange = (event) => {
@@ -133,7 +133,7 @@ const BlogsList = ({ title, blogs, paginationOptions, handlePageChange, showFilt
 
 
     return (
-        <div>
+        <div id={id}>
             <div className='flex flex-row justify-end'>
                 {showFilters &&
                     <CButton
@@ -251,6 +251,7 @@ export const Blogs = () => {
             </div>
             <div className='mt-8 md:py-0 col-span-4'>
                 <BlogsList
+                    id='blogs-list'
                     title='Blogs'
                     blogs={[...filteredBlogs].reverse()}
                     paginationOptions={options}
