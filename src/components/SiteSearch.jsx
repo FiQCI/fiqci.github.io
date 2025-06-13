@@ -143,15 +143,36 @@ const SearchBar = ({ setResults }) => {
 
 }
 
-const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
+const ResultArea = ({ paginationOptions, setOptions, results, type, href, id }) => {
+  // Track last page to prevent scroll on results update
+  const lastPageRef = React.useRef(paginationOptions.currentPage);
 
   const handlePageChange = (setOptions) => (event) => {
-    // event.detail.currentPage should be the new page number.
     setOptions(prev => ({ ...prev, currentPage: event.detail.currentPage }));
   };
 
+  // Only scroll when user triggers page change, not when results update
+  const onPageChange = (setOptions) => (event) => {
+    handlePageChange(setOptions)(event);
+    // Only scroll if the page actually changed
+    if (event.detail.currentPage !== lastPageRef.current) {
+      lastPageRef.current = event.detail.currentPage;
+      const thisElement = document.getElementById(id);
+      if (thisElement) {
+        const yOffset = -80; // Account for navbar
+        const y = thisElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+  };
+
+  React.useEffect(() => {
+    // Keep ref in sync with external page changes (e.g. results update)
+    lastPageRef.current = paginationOptions.currentPage;
+  }, [paginationOptions.currentPage]);
+
   return (
-    <div className='mb-8 text-on-white'>
+    <div id={id} className='mb-8 text-on-white'>
       {results[type].length !== 0 &&
         <div className='border-t-5'>
           <div className='flex flex-row pt-2'>
@@ -184,7 +205,7 @@ const ResultArea = ({ paginationOptions, setOptions, results, type, href }) => {
           <CPagination
             value={paginationOptions}
             hideDetails
-            onChangeValue={handlePageChange(setOptions)}
+            onChangeValue={onPageChange(setOptions)}
             control
           />
         </div>
@@ -376,11 +397,11 @@ export const SiteSearch = () => {
             <p>No results found</p>
           }
 
-          <ResultArea paginationOptions={paginationOptionsGen} setOptions={setOptionsGen} results={filteredResults} type={"general"} href={""} />
+          <ResultArea paginationOptions={paginationOptionsGen} setOptions={setOptionsGen} results={filteredResults} type={"general"} href={""} id="general" />
 
-          <ResultArea paginationOptions={paginationOptionsBlog} setOptions={setOptionsBlog} results={filteredResults} type={"blogs"} href={prependBaseURL("/publications")} />
+          <ResultArea paginationOptions={paginationOptionsBlog} setOptions={setOptionsBlog} results={filteredResults} type={"blogs"} href={prependBaseURL("/publications")} id="blogs" />
 
-          <ResultArea paginationOptions={paginationOptionsEvent} setOptions={setOptionsEvent} results={filteredResults} type={"events"} href={prependBaseURL("/events")} />
+          <ResultArea paginationOptions={paginationOptionsEvent} setOptions={setOptionsEvent} results={filteredResults} type={"events"} href={prependBaseURL("/events")} id="events" />
 
         </div>
       </div>

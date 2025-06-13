@@ -11,16 +11,16 @@ const filterStyles = {
     "--_c-checkbox-background-color-hover": " #CCE6F1",
     "--_c-checkbox-color-active": " #004E84",
 }
-    
+
 const dropdownStyles = {
-   "--c-select-active-color": " #004E84",
-   "--c-select-background-color": "rgba(204, 230, 241, 0)",
-   "--c-select-inactive-color": " #004E84",
-   "--c-select-option-background-color": " #004E84",
-   "--c-select-option-background-color-hover": "rgb(132, 9, 0)",
-   "--c-select-option-text-color": " #001C39",
-   "--c-select-placeholder-color": " #001C39",
-   "--c-select-text-color": " #001C39",
+    "--c-select-active-color": " #004E84",
+    "--c-select-background-color": "rgba(204, 230, 241, 0)",
+    "--c-select-inactive-color": " #004E84",
+    "--c-select-option-background-color": " #004E84",
+    "--c-select-option-background-color-hover": "rgb(132, 9, 0)",
+    "--c-select-option-text-color": " #001C39",
+    "--c-select-placeholder-color": " #001C39",
+    "--c-select-text-color": " #001C39",
 };
 
 
@@ -117,40 +117,56 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
 };
 
 //List blogs in a grid with pagination
-const BlogsList = ({ title, blogs, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => (
-    <div>
-        <div className='flex flex-row justify-end'>
-            {showFilters && //to not show the button on every EventsList instance
-                <CButton
-                    className='flex items-center py-2 lg:hidden'
-                    onClick={() => onOpenDialog()}
-                >
-                    Filters
-                </CButton>
-            }
+const BlogsList = ({ title, blogs, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => {
+
+    // Scroll to top when pagination changes
+    const onPageChange = (event) => {
+        handlePageChange(event);
+        const thisElement = document.getElementById(id);
+        if (thisElement) {
+            const yOffset = -80; // Account for navbar
+            const y = thisElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+
+    };
+
+
+    return (
+        <div>
+            <div className='flex flex-row justify-end'>
+                {showFilters &&
+                    <CButton
+                        className='flex items-center py-2 lg:hidden'
+                        onClick={() => onOpenDialog()}
+                    >
+                        Filters
+                    </CButton>
+                }
+            </div>
+            {blogs.length ? (
+                <>
+                    <div className='grid grid-cols-1 py-6 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+                        {blogs.slice(
+                            (paginationOptions.currentPage - 1) * paginationOptions.itemsPerPage,
+                            (paginationOptions.currentPage - 1) * paginationOptions.itemsPerPage + paginationOptions.itemsPerPage
+                        ).map(blog => (
+                            <BlogCardComponent key={blog.id} {...blog} />
+                        ))}
+                    </div>
+                    <CPagination
+                        value={paginationOptions}
+                        hideDetails
+                        onChangeValue={onPageChange}
+                        control
+                    />
+                </>
+            ) : (
+                <p className='pt-6 pb-8'>No {title.toLowerCase()}.</p>
+            )}
         </div>
-        {blogs.length ? (
-            <>
-                <div className='grid grid-cols-1 py-6 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
-                    {blogs.slice(
-                        (paginationOptions.currentPage - 1) * paginationOptions.itemsPerPage,
-                        (paginationOptions.currentPage - 1) * paginationOptions.itemsPerPage + paginationOptions.itemsPerPage
-                    ).map(blog => (
-                        <BlogCardComponent key={blog.id} {...blog} />
-                    ))}
-                </div>
-                <CPagination
-                    value={paginationOptions}
-                    hideDetails
-                    onChangeValue={handlePageChange}
-                    control
-                />
-            </>
-        ) : (
-            <p className='pt-6 pb-8'>No {title.toLowerCase()}.</p>
-        )}
-    </div>
-);
+    );
+};
 
 //Full blogs component
 export const Blogs = () => {

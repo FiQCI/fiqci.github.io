@@ -116,41 +116,56 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
 };
 
 //List events in a grid with pagination
-const EventsList = ({ title, events, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => (
-    <div>
-        <div className='flex flex-row justify-between'>
-            <h2 className=''>{title}</h2>
-            {showFilters && //to not show the button on every EventsList instance
-                <CButton
-                    className='flex items-center py-2 lg:hidden'
-                    onClick={() => onOpenDialog()}
-                >
-                    Filters
-                </CButton>
-            }
+const EventsList = ({ id, title, events, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => {
+
+    // Scroll to top when pagination changes
+    const onPageChange = (event) => {
+        handlePageChange(event);
+        const thisElement = document.getElementById(id);
+        if (thisElement) {
+            const yOffset = -80; // Account for navbar
+            const y = thisElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+
+    };
+
+    return (
+        <div id={id}>
+            <div className='flex flex-row justify-between'>
+                <h2 className=''>{title}</h2>
+                {showFilters && //to not show the button on every EventsList instance
+                    <CButton
+                        className='flex items-center py-2 lg:hidden'
+                        onClick={() => onOpenDialog()}
+                    >
+                        Filters
+                    </CButton>
+                }
+            </div>
+            {events.length ? (
+                <>
+                    <div className='grid grid-cols-1 py-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6'>
+                        {events.slice(
+                            (paginationOptions.currentPage - 1) * paginationOptions.itemsPerPage,
+                            (paginationOptions.currentPage - 1) * paginationOptions.itemsPerPage + paginationOptions.itemsPerPage
+                        ).map(event => (
+                            <EventCardComponent key={event.id} {...event} />
+                        ))}
+                    </div>
+                    <CPagination
+                        value={paginationOptions}
+                        hideDetails
+                        onChangeValue={onPageChange}
+                        control
+                    />
+                </>
+            ) : (
+                <p className='pt-6 pb-8'>No {title.toLowerCase()}.</p>
+            )}
         </div>
-        {events.length ? (
-            <>
-                <div className='grid grid-cols-1 py-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6'>
-                    {events.slice(
-                        (paginationOptions.currentPage - 1) * paginationOptions.itemsPerPage,
-                        (paginationOptions.currentPage - 1) * paginationOptions.itemsPerPage + paginationOptions.itemsPerPage
-                    ).map(event => (
-                        <EventCardComponent key={event.id} {...event} />
-                    ))}
-                </div>
-                <CPagination
-                    value={paginationOptions}
-                    hideDetails
-                    onChangeValue={handlePageChange}
-                    control
-                />
-            </>
-        ) : (
-            <p className='pt-6 pb-8'>No {title.toLowerCase()}.</p>
-        )}
-    </div>
-);
+    )
+};
 
 
 //Full events component
@@ -251,6 +266,7 @@ export const Events = () => {
             </div>
             <div className='mt-8 md:py-0 col-span-4'>
                 <EventsList
+                    id="upcoming"
                     title='Upcoming events'
                     events={[...filteredEvents.upcoming].reverse()}
                     paginationOptions={optionsUpcoming}
@@ -260,6 +276,7 @@ export const Events = () => {
                 />
                 <div className="h-[80px]" />
                 <EventsList
+                    id="past"
                     title='Past events'
                     events={[...filteredEvents.past].reverse()}
                     paginationOptions={optionsPast}
