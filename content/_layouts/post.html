@@ -16,7 +16,9 @@ react: true
         </div>
         <div class='col-span-1 lg:col-span-3 2xl:col-span-1 text-on-white text-[14px]' id="author-data" >
             <div class='flex flex-row gap-2 2xl:flex-row'>
-            <img src='{{author_info.avatar}}' alt='Author' class='w-20' />
+            {% unless author_info.name == "FiQCI Team" %}
+              <img src='{{author_info.avatar}}' alt='Author' class='w-20' />
+            {% endunless %}
             <div class='flex flex-col gap-4'>
                 <p class='font-bold !mb-0'>{{author_info.name}}</p>
                 <p class='max-w-[220px] text-wrap !mt-0 !mb-0'>{{author_info.bio}}</p>
