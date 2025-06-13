@@ -34,9 +34,9 @@ header_nav:
       tagline: Making the power of quantum computing accessible
       subtitle: FiQCI – Finnish quantum-computing infrastructure
       announcement:
-        text: Access to VTT Q50 for accepted projects now open!
+        text: Access to VTT Q50 for accepted projects opening soon!
         link:
-          title: How to access Q50, instructions
+          title: How to access Q50, instructions (coming soon)
           href: FIXME
       buttons:
         - title: How to get access
