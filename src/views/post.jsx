@@ -8,9 +8,10 @@ import { useJsonApi } from '../hooks/useJsonApi'
 
 const BlogViewPage = () => {
     const themeConstants = useJsonApi('api/theme/constants.json')
+
     return (
         <>
-            <PostLayout {...themeConstants} title="Blog" />
+            <PostLayout {...themeConstants} title="Blogs and Instructions" />
         </>
     )
 }
