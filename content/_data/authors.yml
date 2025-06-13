@@ -27,3 +27,8 @@ Michael Mucciardi:
   name        : "Michael Mucciardi"
   bio         : "Senior Systems Specialist at CSC, Quantum Technologies"
   avatar      : "/assets/images/authors/Michael_Mucciardi.jpg"  
+
+FiQCI:
+  name        : "FiQCI Team"
+  bio         : "The FiQCI team"
+  avatar      : "/assets/images/FiQCI_logo.png"
