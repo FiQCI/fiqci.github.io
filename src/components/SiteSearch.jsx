@@ -111,13 +111,16 @@ function capitalizeFirstLetter(val) {
   return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
 
-const SearchBar = ({ setResults }) => {
-  const [query, setQuery] = useState("");
-
+const SearchBar = ({ setResults, setQuery, query }) => {
   const handleSearchBar = (e) => {
     const input = e.target.value;
     setQuery(input);
   };
+
+  const handleClose = () => {
+    setQuery("");
+    setResults({ general: [], blogs: [], events: [] });
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -136,7 +139,7 @@ const SearchBar = ({ setResults }) => {
       <form onSubmit={handleSubmit} className='pb-[1px] w-full mr-3'>
         <input onChange={handleSearchBar} className="w-full focus:outline-none" placeholder="Search..." type="text" id="search-box" name="query" value={query} />
       </form>
-      <CIcon className='mx-3 self-center text-on-white' onClick={() => setQuery("")} path={mdiClose} />
+      <CIcon className='mx-3 self-center text-on-white' onClick={() => handleClose()} path={mdiClose} />
       <CButton onClick={handleSubmit} className='mr-3' style={style} ghost>Search</CButton>
     </div>
   )
@@ -259,6 +262,26 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleCheckboxChang
   )
 };
 
+function setLocalStorageState(key, value, minutes) {
+  const expires = Date.now() + minutes * 60 * 1000;
+  localStorage.setItem(key, JSON.stringify({ value, expires }));
+}
+
+function getLocalStorageState(key) {
+  const item = localStorage.getItem(key);
+  if (!item) return null;
+  try {
+    const { value, expires } = JSON.parse(item);
+    if (Date.now() > expires) {
+      localStorage.removeItem(key);
+      return null;
+    }
+    return value;
+  } catch {
+    return null;
+  }
+}
+
 export const SiteSearch = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false); //modal control
@@ -294,6 +317,8 @@ export const SiteSearch = () => {
     pageSizes: [5, 10, 15, 25, 50]
   });
 
+  const [query, setQuery] = useState("");
+
   useEffect(() => {
     document.body.classList.add("min-w-fit")
   })
@@ -316,6 +341,24 @@ export const SiteSearch = () => {
     setOptionsBlog(prev => ({ ...prev, itemCount: results.blogs.length }));
     setOptionsEvent(prev => ({ ...prev, itemCount: results.events.length }));
   }, [results]);
+
+  // Try to load from localStorage on mount
+  useEffect(() => {
+    const state = getLocalStorageState('siteSearchState');
+    if (state && state.query !== undefined && state.filters) {
+      setFilters(state.filters);
+      setQuery(state.query);
+      if (state.query && state.query.trim() !== "") {
+        const searchResults = searchContent(state.query, STORE);
+        setResults(searchResults);
+      }
+    }
+  }, []);
+
+  // Save to localStorage on query or filter change
+  useEffect(() => {
+    setLocalStorageState('siteSearchState', { query, filters }, 30);
+  }, [query, filters]);
 
   const handleCheckboxChange = useCallback((option) => {
     handleFilterChange({
@@ -380,7 +423,7 @@ export const SiteSearch = () => {
 
       <div className='mt-24 col-span-5 lg:col-span-3'>
         <div className='mb-2 lg:mb-20 border-2 border-on-white min-h-[45px] flex flex-row items-center text-lg'>
-          <SearchBar setResults={setResults} />
+          <SearchBar setResults={setResults} setQuery={setQuery} query={query} />
         </div>
         <div>
           <CButton
