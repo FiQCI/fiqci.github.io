@@ -173,7 +173,11 @@ Now let's say we have a simple graph that we wish to solve the Max-Cut problem f
 
 ![graph for QAOA Max-Cut problem](/assets/images/Circuit-Knitting-Blog/qaoa-graph.png)
 
-First, we need a problem Hamiltonian for this graph that describes essentially the energy of the system which we here want to minimise. For this graph the Hamiltonian is $ ZZ_{01} + ZZ_{02} + ZZ_{12} + ZZ_{23} + ZZ_{24} + ZZ_{34} $ Here $ ZZ_{ij} $ are RZZ-rotation gates and *i*, and *j* are some qubit indices. You can see that each RZZ-gate here corresponds to a vertex in the graph. Now this Hamiltonian can be converted to a circuit by taking the terms as gates. This gives us the circuit below. Now this Hamiltonian is our cost function and its expectation value is what we want to minimise by finding appropriate parameters for the RZZ-gates. In addition to the cost Hamiltonian, we also need a mixer Hamiltonian that stops us from getting stuck in a suboptimal state. Here the mizer consists of applying RX-gates on each qubit. We will choose initial parameters of $ [-\pi, -\pi] $. Here we will use the scipy.minimize() function using the COBYLA method to minimize the cost function.
+First, we need a problem Hamiltonian for this graph that describes essentially the energy of the system which we here want to minimise. For this graph the Hamiltonian is 
+
+$$ZZ_{01} + ZZ_{02} + ZZ_{12} + ZZ_{23} + ZZ_{24} + ZZ_{34}$$ 
+
+Here $ ZZ_{ij} $ are RZZ-rotation gates and *i*, and *j* are some qubit indices. You can see that each RZZ-gate here corresponds to a vertex in the graph. Now this Hamiltonian can be converted to a circuit by taking the terms as gates. This gives us the circuit below. Now this Hamiltonian is our cost function and its expectation value is what we want to minimise by finding appropriate parameters for the RZZ-gates. In addition to the cost Hamiltonian, we also need a mixer Hamiltonian that stops us from getting stuck in a suboptimal state. Here the mizer consists of applying RX-gates on each qubit. We will choose initial parameters of $ [-\pi, -\pi] $. Here we will use the scipy.minimize() function using the COBYLA method to minimize the cost function.
 
 ![circuit for QAOA Max-Cut problem](/assets/images/Circuit-Knitting-Blog/qaoa-circuit.png)
 
