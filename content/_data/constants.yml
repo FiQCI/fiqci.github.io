@@ -31,29 +31,29 @@ header_nav:
 #Following are constants per page. Can be accessed with page.url
 "/":
   hero:
-      tagline: Making the power of quantum computing accessible
-      subtitle: FiQCI – Finnish quantum-computing infrastructure
-      announcement:
-        text: Access to VTT Q50 for accepted projects opening soon!
-        link:
-          title: How to access Q50, instructions (coming soon)
-          href: FIXME
-      buttons:
-        - title: How to get access
-          href: "/access"
-        - title: Blogs and instructions
-          href: /publications
-        - title: About FiQCI
-          href: "#about"
+    tagline: Making the power of quantum computing accessible
+    subtitle: FiQCI – Finnish quantum-computing infrastructure
+    announcement:
+      text: Access to VTT Q50 for accepted projects opening soon!
+      link:
+        title: How to access Q50, instructions (coming soon)
+        href: FIXME
+    buttons:
+      - title: How to get access
+        href: "/access"
+      - title: Blogs and instructions
+        href: /publications
+      - title: About FiQCI
+        href: "#about"
 
   mission:
     links:
       about:
-          title: Read more about FiQCI
-          href: /dev/about
+        title: Read more about FiQCI
+        href: /dev/about
       access:
-          title: How to get access
-          href: /dev/access
+        title: How to get access
+        href: /dev/access
 
   access_cards:
     - title: Quantum computers
@@ -89,9 +89,9 @@ header_nav:
   quantum_resources:
     - name: VTT Q5 (Helmi)
       desc: |-
-       The VTT Q5 "Helmi" is the first Finnish quantum computer. Helmi is based on superconducting technology and provides 5 qubits
-       in a star-shape topology. Hybrid HPC+QC access was opened in 2022. Helmi is operated by VTT,
-       and was co-developed with IQM Quantum Computers.
+        The VTT Q5 "Helmi" is the first Finnish quantum computer. Helmi is based on superconducting technology and provides 5 qubits
+        in a star-shape topology. Hybrid HPC+QC access was opened in 2022. Helmi is operated by VTT,
+        and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
         - link: ""
@@ -144,7 +144,7 @@ header_nav:
     part of the Finnish Research Infrastructure (FIRI) roadmap of significant national research
     infrastructures within the Finnish research infrastructure ecosystem, maintained by the
     Research Council of Finland.
-  
+
   mission: |-
     The mission of FiQCI is to provide state-of-the-art quantum-computing services such as
     computing time and training to the Finnish RDI communities. This includes providing a
@@ -157,7 +157,7 @@ header_nav:
   maintain: |-
     FiQCI is jointly maintained, operated, and developed by VTT, Aalto University, and
     CSC - IT Center for Science.
-  
+
   advisory-group:
     desc: |-
       The Scientific and Technical Advisory Group (STAG) provides input for the operation
@@ -182,7 +182,7 @@ header_nav:
       - name: Prof. Göran Wendin
         institution: Chalmers University of Technology
         country: Sweden
-    
+
     management:
       people:
         - name: Prof. Mika Prunnila
@@ -196,17 +196,26 @@ header_nav:
         - name: Prof. Tapio Ala-Nissilä
           institution: Aalto University
           title: FiQCI vice-director
-    
+
     acknowledgement:
       desc: |-
         When publishing the results that utilise the FiQCI infrastructure, users should acknowledge
         the use of FiQCI, preferably in the format: "These results have been acquired using the
         Finnish Quantum-Computing Infrastructure
-      
+
       helmi-link-url: /publications/2022-11-01-Helmi_pilot
       helmi-link-text: Additionally, users should also acknowledge using Helmi if applicable
 
 "/status/":
+  info: Here you can find the status of the Quantum Computers connected to LUMI.
+  lumi:
+    desc: Additionally you can view upcoming LUMI service breaks
+    link:
+      title: here
+      href: https://www.lumi-supercomputer.eu/lumi-service-status/
+  alert: 
+    text: The new FiQCI page is under construction. Status information is not yet available.
+    type: error # Alert type can be info, warning, or error
   quantum-computers:
     - name: VTT Q5 (Helmi)
       qubits: 5
