@@ -54,10 +54,10 @@ export const ServiceStatus = (props) => {
     <div className="flex gap-6 flex-col sm:flex-col items-stretch text-on-white">
 
       <p className='text-[16px] pt-[24px]'>
-        Here you can find the status of the Quantum Computers connected to LUMI.
+        { props?.info }
       </p>
       <p className='text-[16px]'>
-        Additonally you can view upcoming LUMI service breaks <a href="https://www.lumi-supercomputer.eu/lumi-service-status/" className="underline text-sky-800">here</a>.
+        { props?.lumi?.desc } <a href={ props?.lumi?.href } className="underline text-sky-800">{ props?.lumi?.title }</a>.
       </p>
       <div className='w-full bg-sky-200 p-3 rounded-md inline-block'>
         <p className='text-[16px]'>
