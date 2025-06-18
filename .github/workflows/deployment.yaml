@@ -1,9 +1,9 @@
 name: Build and deploy site to GitHub Pages
 on:
   push:
-    branches: [ "rewrite/main" ]
+    branches: [ "new-deployment" ]
   pull_request:
-    branches: [ "rewrite/main" ]
+    branches: [ "new-deployment" ]
   workflow_dispatch:
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.2.2
         with:
-          ref: rewrite/main
+          ref: new-deployment
 
       - name: Install Ruby and Node.js using asdf
         uses: asdf-vm/actions/install@v3.0.2
