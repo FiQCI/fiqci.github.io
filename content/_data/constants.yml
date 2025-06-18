@@ -50,10 +50,10 @@ header_nav:
     links:
       about:
           title: Read more about FiQCI
-          href: /dev/about
+          href: /about
       access:
           title: How to get access
-          href: /dev/access
+          href: /access
 
   access_cards:
     - title: Quantum computers
