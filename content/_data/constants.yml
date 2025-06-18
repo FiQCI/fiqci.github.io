@@ -94,21 +94,21 @@ header_nav:
        and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
-        - link: ""
+        - link: "https://qx.vtt.fi/docs/devices/q5.html"
           teaser: "How to access VTT Q5, instructions"
           icon: mdiArrowRight
         - link: ""
           teaser: "Read more about VTT Q5 (VTT website)"
           icon: mdiOpenInNew
 
-    - name: VTT Q50
+    - name: VTT Q50 
       desc: |-
         VTT Q50 is based on superconducting technology and provides 53 qubits in a square grid topology.
         Hybrid HPC+QC access was opened in 2025. VTT Q50 is operated by VTT, and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
-        - link: ""
-          teaser: "How to access VTT Q50, instructions"
+        - link: "https://qx.vtt.fi/docs/devices/q50.html"
+          teaser: "How to access VTT Q50, instructions (coming soon)"
           icon: mdiArrowRight
         - link: ""
           teaser: "Read more about VTT Q50 (VTT website)"
@@ -121,10 +121,10 @@ header_nav:
         serves as the portal for hybrid HPC+QC. LUMI is hosted by CSC in Kajaani, Finland.
       image: "/assets/images/FiQCI-banner.jpg"
       links:
-        - link: ""
+        - link: "https://docs.lumi-supercomputer.eu/"
           teaser: "How to access Lumi"
           icon: mdiArrowRight
-        - link: ""
+        - link: "https://www.lumi-supercomputer.eu/"
           teaser: "Read more about LUMI (LUMI website)"
           icon: mdiOpenInNew
 
@@ -134,7 +134,7 @@ header_nav:
         The LUMI supercomputer enables full emulation and simulation of quantum algorithms of up to 44 qubits.
       image: "/assets/images/FiQCI-banner.jpg"
       links:
-        - link: ""
+        - link: "https://docs.csc.fi/apps/qiskit/"
           teaser: "Quantum emulation documentation"
           icon: mdiArrowRight
 
