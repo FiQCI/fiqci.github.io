@@ -36,7 +36,7 @@ jobs:
       - name: Build site using Jekyll
         env:
           JEKYLL_ENV: production
-        run: npm run-script jekyll:build -- --baseurl ${{ github.event.repository.name }}
+        run: npm run-script jekyll:build
 
       - name: Upload artifact
         id: deployment

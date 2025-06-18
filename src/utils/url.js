@@ -1,7 +1,18 @@
 const prependToPathname = (href, value) => {
     const url = URL.parse(href, window.location.origin)
-    const basepath = URL.parse(value, window.location.origin).pathname
-    const path = basepath.concat(url.pathname)
+    let basepath = URL.parse(value, window.location.origin).pathname
+    let pathname = url.pathname
+
+    // Remove trailing slash from basepath (unless it's just '/')
+    if (basepath.length > 1 && basepath.endsWith('/')) {
+        basepath = basepath.slice(0, -1)
+    }
+    // Remove leading slash from pathname
+    if (pathname.startsWith('/')) {
+        pathname = pathname.slice(1)
+    }
+
+    const path = basepath === '/' ? `/${pathname}` : `${basepath}/${pathname}`
 
     return new URL(path, window.location.origin).pathname
 }
@@ -19,7 +30,7 @@ export const isAnchor = href => {
 }
 
 export const prependBaseURL = href => {
-  if (isExternal(href) || isAnchor(href)) return href
+    if (isExternal(href) || isAnchor(href)) return href
 
-  return prependToPathname(href, SITE.deployment.baseURL)
+    return prependToPathname(href, SITE.deployment.baseURL)
 }
