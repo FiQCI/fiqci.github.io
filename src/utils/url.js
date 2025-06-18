@@ -14,19 +14,29 @@ const prependToPathname = (href, value) => {
 
     const path = basepath === '/' ? `/${pathname}` : `${basepath}/${pathname}`
 
-    return new URL(path, window.location.origin).pathname
+    // Preserve search and hash
+    let fullPath = path
+    if (url.search) fullPath += url.search
+    if (url.hash) fullPath += url.hash
+
+    return fullPath
 }
 
 export const isExternal = href =>
     URL.parse(href, window.location.origin).origin !== window.location.origin
 
 export const isAnchor = href => {
-    if (isExternal(href)) return false
+    if (isExternal(href)) return false;
 
-    const url = URL.parse(href, window.location.origin)
-    const path = prependToPathname(href, SITE.deployment.baseURL)
+    const url = URL.parse(href, window.location.origin);
+    const path = prependToPathname(href, SITE.deployment.baseURL);
 
-    return !!url.hash && window.location.pathname === path
+    // Extract only the pathname part for comparison
+    const temp = document.createElement('a');
+    temp.href = path;
+    const pathnameOnly = temp.pathname;
+
+    return !!url.hash && window.location.pathname === pathnameOnly;
 }
 
 export const prependBaseURL = href => {
