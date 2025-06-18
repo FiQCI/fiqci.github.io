@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { prependBaseURL } from '../utils/url';
 
 const ResourceCard = ({ resource }) => {
@@ -46,21 +45,25 @@ export const GetAccess = props => {
     const quantum_resources = props?.quantum_resources
     const supercomputer_resources = props?.supercomputer_resources
     const emulation_resources = props?.emulation_resources
-    useEffect(() => {
-        if (window.location.hash !== "") {
-            const hash = window.location.hash;
-            const element = document.getElementById(hash.substring(1));
-            if (element) {
-                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = elementPosition - 100;
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+    useEffect(() => {
+        const scrollToHash = () => {
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                const element = document.getElementById(hash);
+                if (element) {
+                    const yOffset = -80; // Account for navbar
+                    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
             }
-        }
-    }, []);
+        };
+        scrollToHash();
+        window.addEventListener('hashchange', scrollToHash);
+        return () => {
+            window.removeEventListener('hashchange', scrollToHash);
+        };
+    }, [quantum_resources, supercomputer_resources, emulation_resources]);
 
     return (
 
