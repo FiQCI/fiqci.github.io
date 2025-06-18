@@ -214,8 +214,8 @@ header_nav:
       title: here
       href: https://www.lumi-supercomputer.eu/lumi-service-status/
   alert:
-    text: The new FiQCI page is under construction. Status information is not yet available.
-    type: error # Alert type can be info, warning, or error
+    text: Note! Access to VTT Q50 through FiQCI is coming soon. Status of the quantum computer can already be seen below.
+    type: warning # Alert type can be info, warning, or error
   quantum-computers:
     - name: VTT Q5 (Helmi)
       qubits: 5

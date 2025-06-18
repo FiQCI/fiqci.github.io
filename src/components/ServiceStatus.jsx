@@ -74,7 +74,7 @@ export const ServiceStatus = (props) => {
       <p className='text-[16px]'>
         { props?.lumi?.desc } <a href={ props?.lumi?.href } className="underline text-sky-800">{ props?.lumi?.title }</a>.
       </p>
-      <div className='w-full bg-sky-200 p-3 rounded-md inline-block'>
+      <div className={`flex flex-row gap-4 w-full p-3 rounded-md ${alertBg} items-start sm:items-center`}>
         <CIcon key={icon} path={icon} />
         <p className='text-[16px]'>
           {props.alert?.type ? props.alert?.text : 'Loading...'}
