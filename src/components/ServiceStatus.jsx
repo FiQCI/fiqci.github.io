@@ -5,6 +5,7 @@ import { CCard, CCardTitle, CCardContent, CStatus } from '@cscfi/csc-ui-react';
 // import { StatusIndicator } from './StatusIndicator'
 
 const StatusCard = (props) => {
+  const isOnline = props.health;
   return (
     <CCard className='border-[0.2px] border-gray-100 rounded-none shadow-md hover:shadow-xl col-span-1 h-[236px]'>
       <CCardTitle className='font-bold text-on-white text-[18px]'>
@@ -19,7 +20,7 @@ const StatusCard = (props) => {
 
         <div className='flex flex-col gap-0 text-[14px]'>
           <strong>Service status:</strong>
-          {status === "available" ? (
+          {isOnline ? (
             <div className='text-center text-[#204303] bg-[#B9DC9C] border-[0.5px] border-[#204303] rounded-[100px] w-[88px] h-[25px]'>
               <p className='font-bold text-[14px]'>Online</p>
             </div>
@@ -35,8 +36,20 @@ const StatusCard = (props) => {
 }
 
 export const ServiceStatus = (props) => {
-  const status = useStatus('https://fiqci-backend-fiqci-workspace.2.rahtiapp.fi/healthcheck')
+  const { status: statusList } = useStatus("https://fiqci-backend.2.rahtiapp.fi/devices/healthcheck");
   const qcs = props["quantum-computers"] || [];
+
+  const devicesWithStatus = (qcs.length === 0 || !Array.isArray(statusList))
+    ? qcs
+    : qcs.map(device => {
+        const deviceStatus = statusList.find(({ name }) => name === device.device_id);
+        return {
+          ...device,
+          health: deviceStatus?.health ?? false,
+        };
+      });
+
+
   return (
     <div className="flex gap-6 flex-col sm:flex-col items-stretch text-on-white">
 
@@ -52,8 +65,8 @@ export const ServiceStatus = (props) => {
         </p>
       </div>
       <div className='pt-[24px] pb-[60px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 min-[2600px]:grid-cols-4 w-full gap-[24px]'>
-        {qcs.map((qc, index) => (
-          <StatusCard key={index} {...qc} />
+        {devicesWithStatus.map((qc, index) => (
+          <StatusCard key={qc.device_id || index} {...qc} />
         ))}
       </div>
     </div>
