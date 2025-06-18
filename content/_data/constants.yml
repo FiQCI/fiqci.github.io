@@ -94,10 +94,10 @@ header_nav:
        and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
-        - link: "https://qx.vtt.fi/docs/devices/q5.html"
+        - link: "https://docs.csc.fi/computing/quantum-computing/helmi/running-on-helmi/"
           teaser: "How to access VTT Q5, instructions"
           icon: mdiArrowRight
-        - link: ""
+        - link: "https://qx.vtt.fi/docs/devices/q5.html"
           teaser: "Read more about VTT Q5 (VTT website)"
           icon: mdiOpenInNew
 
@@ -107,10 +107,10 @@ header_nav:
         Hybrid HPC+QC access was opened in 2025. VTT Q50 is operated by VTT, and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
-        - link: "https://qx.vtt.fi/docs/devices/q50.html"
+        - link: "COMING_SOON"
           teaser: "How to access VTT Q50, instructions (coming soon)"
           icon: mdiArrowRight
-        - link: ""
+        - link: "https://qx.vtt.fi/docs/devices/q50.html"
           teaser: "Read more about VTT Q50 (VTT website)"
           icon: mdiOpenInNew
 
