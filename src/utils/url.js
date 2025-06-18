@@ -21,5 +21,5 @@ export const isAnchor = href => {
 export const prependBaseURL = href => {
   if (isExternal(href) || isAnchor(href)) return href
 
-  return prependToPathname(href, SITE.deployment.baseURL)
+  return href
 }
