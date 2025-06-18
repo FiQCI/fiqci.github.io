@@ -1,7 +1,8 @@
 import React from 'react'
 
 import { useStatus } from '../hooks/useStatus'
-import { CCard, CCardTitle, CCardContent, CStatus } from '@cscfi/csc-ui-react';
+import { CCard, CCardTitle, CCardContent, CIcon } from '@cscfi/csc-ui-react';
+import { mdiAlert, mdiClose, mdiInformation } from '@mdi/js'
 // import { StatusIndicator } from './StatusIndicator'
 
 const StatusCard = (props) => {
@@ -49,6 +50,20 @@ export const ServiceStatus = (props) => {
         };
       });
 
+  // Determine alert color based on props.alert.type
+  const alertType = props.alert?.type?.toLowerCase();
+  let icon = '';
+  let alertBg = ''; 
+  if (alertType === 'warning') {
+    alertBg = 'bg-orange-200';
+    icon = mdiAlert;
+  } else if (alertType === 'error') {
+    alertBg = 'bg-red-200';
+    icon = mdiClose;
+  } else {
+    alertBg = 'bg-sky-200';
+    icon = mdiInformation;
+  }
 
   return (
     <div className="flex gap-6 flex-col sm:flex-col items-stretch text-on-white">
@@ -60,8 +75,9 @@ export const ServiceStatus = (props) => {
         { props?.lumi?.desc } <a href={ props?.lumi?.href } className="underline text-sky-800">{ props?.lumi?.title }</a>.
       </p>
       <div className='w-full bg-sky-200 p-3 rounded-md inline-block'>
+        <CIcon key={icon} path={icon} />
         <p className='text-[16px]'>
-          Quantum computers are accessible through the LUMI environment daily.
+          {props.alert?.type ? props.alert?.text : 'Loading...'}
         </p>
       </div>
       <div className='pt-[24px] pb-[60px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 min-[2600px]:grid-cols-4 w-full gap-[24px]'>
