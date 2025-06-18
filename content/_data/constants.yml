@@ -213,9 +213,11 @@ header_nav:
       basis: "PRX, CZ"
       topology: "Star"
       status_url: FIXME
+      device_id: "Q5"
 
     - name: VTT Q50
       qubits: 50
       basis: "PRX, CZ"
       topology: "Square grid"
       status_url: FIXME
+      device_id: "Q50"

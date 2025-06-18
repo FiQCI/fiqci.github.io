@@ -1,33 +1,25 @@
 import { useEffect, useState } from 'react'
 
-const logResult = result => {
-  const { status: fetchStatus, message: fetchMessage } = result
-  const logStream = fetchStatus === 'Success' ? console.log : console.warn
-  
-  logStream(fetchMessage)
-}
-
-export const useStatus = statusUrl => {
-  const [status, setStatus] = useState(null)
-
+export const useStatus = (statusUrl)  => {
+  const [status, setStatus] = useState([])
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    let ignore = false
-
-    const fetchStatus = async url => {
-      const response = await fetch(url)
-      const result = await response.json()
-
-      if (!ignore) {
-        logResult(result)
-        !!result?.data && setStatus(result.data.status)
+    const fetchStatus = async () => {
+    const url = statusUrl;
+    try {
+        const resp = await fetch (url);
+        const result = await resp.json();
+        const device_status = result.data
+        setStatus(result?.data || []);
+      } catch (err) {
+        console.error(err);
+        setError(err);
       }
     }
 
-    fetchStatus(statusUrl)
+  fetchStatus();
+}, [statusUrl]);
 
-    return () => { ignore = true }
-  }, [statusUrl])
-
-  return status
+  return { status, error };
 }
