@@ -10,7 +10,6 @@ export const useStatus = (statusUrl)  => {
     try {
         const resp = await fetch (url);
         const result = await resp.json();
-        const device_status = result.data
         setStatus(result?.data || []);
       } catch (err) {
         console.error(err);

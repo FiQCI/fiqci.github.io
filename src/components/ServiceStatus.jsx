@@ -1,6 +1,4 @@
 import React from 'react'
-import { useMemo } from 'react';
-
 
 import { useStatus } from '../hooks/useStatus'
 import { CCard, CCardTitle, CCardContent, CStatus } from '@cscfi/csc-ui-react';
