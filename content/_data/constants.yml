@@ -233,3 +233,45 @@ header_nav:
       basis: "PRX, CZ"
       topology: "Square grid"
       device_id: "Q50"
+
+"/cookies/":
+  title: Cookie Policy
+  desc: |-
+    This is the cookie policy for FiQCI, accessible from https://fiqci.fi/cookies/
+
+  general:
+    - When you visit our website, cookies will save information about your stay. Cookies are small text files that are placed on your device.
+      There are two main types of cookies; session cookies and persistent cookies. Session cookies will be removed from your device as soon
+      as you close your browser. Persistent cookies will remain stored until they are deleted or expire.
+
+    - The data collected by the cookies is used to track the trends in our site usage. No personal data is collected.
+      This way, we can improve the usability as well as identify the most interesting areas of our website.
+
+    - Cookies help us get an overview of your visit to our website so we can get an idea of how many visitors we have, which pages are visited,
+      and how long visitors stay on our website. We use this information to improve our website and make it more user-friendly.
+      All data collected is anonymous and cannot be used to identify you as an individual.
+
+  delete:
+    title: How to Delete Cookies
+    desc: |-
+      The cookies can be deleted by clearing your browser's cache and cookies. You can also manage your cookie preferences through
+      your browser settings. You can also simply refuse cookie consent through the cookie consent banner that appears when you first visit our website.
+
+  change:
+    title: How to Change Consent
+    desc: |-
+      If you have already accepted/declined cookies, you can change your preferences at any time by clicking below.
+
+  lifetime:
+    title: Cookie Lifetime
+    desc: |-
+      The length of time a cookie is stored on your devices and browsers varies.The lifetime is calculated according to your last visit
+      to the website. When a cookie expires, it is automatically deleted. All our cookies' lifetimes are specified in our cookie policy.
+
+  cookies:
+    title: Cookies Used
+    types:
+      - name: "Analytics Cookies"
+        desc: |-
+          These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.
+        lifetime: 1 year
