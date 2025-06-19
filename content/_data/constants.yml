@@ -275,3 +275,39 @@ header_nav:
         desc: |-
           These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.
         lifetime: 1 year
+
+"/accessibility/":
+  title: Accessibility Statement
+  desc: |-
+    This is the accessibility statement for FiQCI, accessible from https://fiqci.fi/accessibility/.
+    Updated on 19.6.2025
+
+  general:
+    - The FiQCI website is designed to be accessible to all users.
+      We strive to comply with the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards.
+
+    - If you encounter any accessibility issues while using our website, please contact us at
+  
+  status:
+    title: Compliance Status
+    desc: |-
+      Meets all critical accessibility requirements.
+
+  complaint:
+    title: Reporting Accessibility Issues
+    desc: |-
+      If you notice accessibility problems on the website, start by giving feedback to us, that is,
+      the website administrator. Receiving a response may take 14 days. If you are not satisfied with
+      the response from us or if you do not receive any response within two weeks, you may file a report
+      with the Regional State Administrative Agency for Southern Finland (contact infomation below).
+      The agency website has detailed instructions (in Finnish and Swedish only) on how to file a
+      complaint and how the issue will be processed.
+
+    contact:
+      title: Supervisory Authority Contact Information
+      info:
+        name: Liikenne- ja viestintävirasto Traficom
+        division: Digitaalisen esteettömyyden ja saavutettavuuden valvontayksikkö
+        web: www.saavutettavuusvaatimukset.fi
+        email: saavutettavuus@traficom.fi
+        phone: 029 534 5000
