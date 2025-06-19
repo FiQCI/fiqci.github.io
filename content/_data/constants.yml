@@ -41,7 +41,7 @@ header_nav:
     buttons:
       - title: How to get access
         href: "/access"
-      - title: Blogs and instructions
+      - title: Blogs and Instructions
         href: /publications
       - title: About FiQCI
         href: "#about"
