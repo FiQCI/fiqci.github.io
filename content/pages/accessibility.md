@@ -9,7 +9,7 @@ react: true
 
 <div class="text-on-white my-[24px]">
     <h2 class="mb-4">{{ accessibility_data.title }}</h2>
-    <p class="mb-4"> {{ accessibility_data.general }} <a href="mailto:{{site.data.constants.feedback_email}}" > {{ site.data.constants.feedback_email }}</a> </p>
+    <p class="mb-4"> {{ accessibility_data.general }} <a class="text-sky-800 hover:underline" href="mailto:{{site.data.constants.feedback_email}}" > {{ site.data.constants.feedback_email }}</a> </p>
 
     <h2 class="mb-4">{{ accessibility_data.status.title }}</h2>
     <p class="mb-4"> {{ accessibility_data.status.desc }} </p>
