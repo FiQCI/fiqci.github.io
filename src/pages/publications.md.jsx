@@ -13,7 +13,7 @@ const BlogsPage = () => {
     const themeConstants = useJsonApi('api/theme/constants.json')
 
     return <>
-        <PageLayout {...themeConstants} title="Blogs and publications" />
+        <PageLayout {...themeConstants} title="Blogs and Instructions" />
         {createPortal(
             <Blogs />,
             document.getElementById('blogs')
