@@ -17,9 +17,9 @@ header_nav:
     page: pages/home.md
   - title: About FiQCI
     page: pages/about.md
-  - title: Get access
+  - title: Get Access
     page: pages/access.md
-  - title: Blogs and instructions
+  - title: Blogs and Instructions
     page: pages/publications.md
   - title: Status
     page: pages/status.md
@@ -200,11 +200,16 @@ header_nav:
     acknowledgement:
       desc: |-
         When publishing the results that utilise the FiQCI infrastructure, users should acknowledge
-        the use of FiQCI, preferably in the format: "These results have been acquired using the
-        Finnish Quantum-Computing Infrastructure
+        the use of FiQCI, preferably in the format: "These [results] have been acquired using the
+        Finnish Quantum-Computing Infrastructure (https://fiqci.fi).
+
+        Additionally, users should also acknowledge using FiQCI quantum computers if applicable:
 
       helmi-link-url: /publications/2022-11-01-Helmi_pilot
-      helmi-link-text: Additionally, users should also acknowledge using Helmi if applicable
+      helmi-link-text: VTT Q5 (Helmi)
+
+      q50-link-url: /publications/2025-03-04-Q50-Call-1_2025
+      q50-link-text: VTT Q50
 
 "/status/":
   info: Here you can find the status of the Quantum Computers connected to LUMI.
@@ -221,12 +226,10 @@ header_nav:
       qubits: 5
       basis: "PRX, CZ"
       topology: "Star"
-      status_url: FIXME
       device_id: "Q5"
 
     - name: VTT Q50
-      qubits: 50
+      qubits: 54
       basis: "PRX, CZ"
       topology: "Square grid"
-      status_url: FIXME
       device_id: "Q50"

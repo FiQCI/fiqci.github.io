@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: About FiQCI
 subtitle: The FiQCI consortium maintains, operates, and develops the infrastructure
 react: true
 ---
@@ -33,9 +33,13 @@ react: true
     </ul>
 
     <h2 class="text-on-white pt-4 pb-2">Acknowledgement</h2>
-    <p class="text-on-white">{{ about_data.advisory-group.acknowledgement.desc }} "Finnish Quantum-Computing Infrastructure (https://fiqci.fi)".
-    <a class="underline text-on-white" href="{{ about_data.advisory-group.acknowledgement.helmi-link-url }}">
-      {{ about_data.advisory-group.acknowledgement.helmi-link-text }}
-    </a></p>
+    <p class="text-on-white">{{ about_data.advisory-group.acknowledgement.desc }} 
+    
+      <a class="underline text-on-white" href="{{ about_data.advisory-group.acknowledgement.helmi-link-url }}">
+        {{ about_data.advisory-group.acknowledgement.helmi-link-text }}</a>
+      ,
+      <a class="underline text-on-white" href="{{ about_data.advisory-group.acknowledgement.q50-link-url }}">
+        {{ about_data.advisory-group.acknowledgement.q50-link-text }}</a>
+    </p>
   </div>
 </div>
