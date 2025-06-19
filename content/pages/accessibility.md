@@ -15,7 +15,7 @@ react: true
     <p class="mb-4"> {{ accessibility_data.status.desc }} </p>
 
     <h2 class="mb-4">{{ accessibility_data.complaint.title }}</h2>
-    <p class="mb-4"> {{ accessibility_data.complaint.desc }} </p>
+    <p class="mb-4"> {{ accessibility_data.complaint.desc }} <a class="text-sky-800 hover:underline" target="_blank" href="{{ accessibility_data.complaint.link.href }}"> {{ accessibility_data.complaint.link.title }} </a> </p>
 
     <h2 class="mb-4">{{ accessibility_data.complaint.contact.title }}</h2>
     {% assign contact = accessibility_data.complaint.contact.info %}
@@ -27,9 +27,9 @@ react: true
       {% if contact[key] %}
         <p class="mb-2"><strong>{{ label }}:</strong>
           {% if key == "web" %}
-            <a href="https://{{ contact[key] }}" target="_blank" rel="noopener">{{ contact[key] }}</a>
+            <a class="text-sky-800 hover:underline" href="https://{{ contact[key] }}" target="_blank" rel="noopener">{{ contact[key] }}</a>
           {% elsif key == "email" %}
-            <a href="mailto:{{ contact[key] }}">{{ contact[key] }}</a>
+            <a class="text-sky-800 hover:underline" href="mailto:{{ contact[key] }}">{{ contact[key] }}</a>
           {% else %}
             {{ contact[key] }}
           {% endif %}
