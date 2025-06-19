@@ -72,7 +72,7 @@ export const ServiceStatus = (props) => {
         { props?.info }
       </p>
       <p className='text-[16px]'>
-        { props?.lumi?.desc } <a href={ props?.lumi?.href } className="underline text-sky-800">{ props?.lumi?.title }</a>.
+        { props?.lumi?.desc } <a href={ props?.lumi?.link?.href } className="underline text-sky-800">{ props?.lumi?.link?.title }</a>.
       </p>
       <div className={`flex flex-row gap-4 w-full p-3 rounded-md ${alertBg} items-start sm:items-center`}>
         <CIcon key={icon} path={icon} />
