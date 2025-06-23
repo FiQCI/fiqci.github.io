@@ -1,6 +1,6 @@
 const prependToPathname = (href, value) => {
-    const url = URL(href, window.location.origin)
-    let basepath = URL(value, window.location.origin).pathname
+    const url = new URL(href, window.location.origin)
+    let basepath = new URL(value, window.location.origin).pathname
     let pathname = url.pathname
 
     // Remove trailing slash from basepath (unless it's just '/')
@@ -23,12 +23,12 @@ const prependToPathname = (href, value) => {
 }
 
 export const isExternal = href =>
-    URL(href, window.location.origin).origin !== window.location.origin
+    new URL(href, window.location.origin).origin !== window.location.origin
 
 export const isAnchor = href => {
     if (isExternal(href)) return false;
 
-    const url = URL(href, window.location.origin);
+    const url = new URL(href, window.location.origin);
     const path = prependToPathname(href, SITE.deployment.baseURL);
 
     // Extract only the pathname part for comparison
