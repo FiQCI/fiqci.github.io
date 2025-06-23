@@ -62,13 +62,13 @@ export const CookieModal = props => {
     return (
         <CModal
             key={isModalOpen ? 'open' : 'closed'}
-            style={{ 'overflow': 'scroll' }}
+            style={{ 'overflow': 'auto' }}
             className='!overflow-hidden'
             value={isModalOpen}
             dismissable
             onChangeValue={() => clickOutside()}
         >
-            <CCard style={{ 'overflow': 'scroll' }} className='overflow-scroll max-h-[85vh]'>
+            <CCard style={{ 'overflow': 'auto' }} className='overflow-auto max-h-[85vh]'>
                 <CCardTitle className='text-on-white font-bold' >Cookie consent</CCardTitle>
                 <CCardContent className='p-8'>
                     <h3 className='text-on-white text-[32px]'>{props.title}</h3>
