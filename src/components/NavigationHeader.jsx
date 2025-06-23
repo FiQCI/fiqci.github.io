@@ -120,7 +120,7 @@ export const NavigationHeader = props => {
                     {headerLogo}
                 </div>
 
-                <div className="lg:flex flex-wrap justify-end hidden navigation-header-buttons">
+                <div className="lg:flex justify-end hidden navigation-header-buttons">
                     {navigationButtons}
                 </div>
 
