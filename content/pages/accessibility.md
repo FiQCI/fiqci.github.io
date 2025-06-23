@@ -7,7 +7,9 @@ react: true
 
 {% assign accessibility_data = site.data.constants.["/accessibility/"] %}
 
-<div class="text-on-white my-[24px]">
+<div class="lg:grid lg:grid-cols-5 gap-8">
+    <div class="col-span-1"></div>
+    <div class="col-span-3 flex flex-col text-on-white my-[24px]">
     <h2 class="mb-4">{{ accessibility_data.title }}</h2>
     <p class="mb-4"> {{ accessibility_data.general }} <a class="text-sky-800 hover:underline" href="mailto:{{site.data.constants.feedback_email}}" > {{ site.data.constants.feedback_email }}</a> </p>
 
@@ -36,4 +38,5 @@ react: true
         </p>
       {% endif %}
     {% endfor %}
+  </div>
 </div>
