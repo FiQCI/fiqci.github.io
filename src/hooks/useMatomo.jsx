@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 export const useMatomo = (matomoURL, MTMContainerId) => {
   if ([matomoURL, MTMContainerId].every(elem => typeof elem !== 'undefined')) {
-    const matomoSrc = URL.parse(`/js/container_${MTMContainerId}.js`, `https://${matomoURL}`)
+    const matomoSrc = new URL(`/js/container_${MTMContainerId}.js`, `https://${matomoURL}`)
 
     useEffect(() => {
       var _mtm = window._mtm = window._mtm || [];
