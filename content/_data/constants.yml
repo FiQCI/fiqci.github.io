@@ -195,11 +195,11 @@ cookie_consent:
     management:
       people:
         - name: Dr. Mikael Johansson
-          institution: VTT
+          institution: CSC
           title: FiQCI director
 
         - name: Prof. Mika Prunnila
-          institution: CSC
+          institution: VTT
           title: FiQCI vice-director
 
         - name: Prof. Tapio Ala-Nissilä
