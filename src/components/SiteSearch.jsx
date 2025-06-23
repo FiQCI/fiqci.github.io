@@ -345,9 +345,7 @@ export const SiteSearch = () => {
   // Try to load from localStorage on mount
   useEffect(() => {
     let params = new URLSearchParams(document.location.search);
-    console.log("URL params:", params);
     let initSearch = params.get("search");
-    console.log("Initial search query:", initSearch);
     if (initSearch && initSearch.trim() !== "") {
       setQuery(initSearch);
       const searchResults = searchContent(initSearch, STORE);
