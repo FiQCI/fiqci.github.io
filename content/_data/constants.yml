@@ -71,7 +71,7 @@ cookie_consent:
       description: |-
         The Finnish quantum-computing infrastructure (FiQCI) provides access to quantum computers
         through the LUMI supercomputer environment. Currently there are two quantum computers
-        available for use: VTT Q5 (Helmi), and VTT Q50
+        available for use: VTT Q5 (Helmi), and VTT Q50 (coming soon).
       links:
         - title: Quantum computer resources
           href: /access/#quantum
