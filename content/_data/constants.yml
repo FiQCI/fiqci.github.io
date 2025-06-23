@@ -95,6 +95,14 @@ cookie_consent:
           href: /access/#emulation
 
 "/access/":
+
+  resource_estimator:
+    text: |-
+      For estimating the runtime of a quantum job try out the 
+    link:
+      title: FiQCI QPU resource estimator
+      href: https://fiqci.fi/resource-estimator
+
   quantum_resources:
     - name: VTT Q5 (Helmi)
       desc: |-
