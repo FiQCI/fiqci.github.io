@@ -271,6 +271,10 @@ header_nav:
   cookies:
     title: Cookies Used
     types:
+      - name: "Functional Cookies"
+        desc: |-
+          These cookies are necessary for the website to function properly.
+        lifetime: Session
       - name: "Analytics Cookies"
         desc: |-
           These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.
