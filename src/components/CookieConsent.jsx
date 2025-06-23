@@ -101,7 +101,6 @@ export const CookieModal = props => {
 
 export const CookieModalManual = props => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    console.log(props);
     const closeModal = () => setIsModalOpen(false);
 
     const chapters = props.chapters || [];
