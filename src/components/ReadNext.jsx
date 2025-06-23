@@ -15,7 +15,7 @@ export const ReadNext = ({ title, blogs }) => {
                     </div>
                 </div>
             </div>
-            <div className='hidden lg:block bg-[#E5F2F8] px-10 p-10 ml-0'>
+            <div className='hidden lg:block bg-[#E5F2F8] px-10 p-10 ml-0 lg:!overflow-hidden'>
                 <h3 className='!mb-10 text-[24px] !font-bold'>Read next:</h3>
                 {SITE.publications.filter((blog) => blog.title !== title).slice(-5).map((blog, index) => (
                     <div key={index}>
