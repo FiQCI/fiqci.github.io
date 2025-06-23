@@ -13,7 +13,7 @@ const ResourceCard = ({ resource }) => {
 
             <div className="flex flex-col flex-grow pl-0 sm:pl-4">
                 <h3 className="text-xl font-bold pb-[14px]">{resource.name}</h3>
-                <p className="text-sm text-gray-600">{resource.desc.trim()}</p>
+                <p className="text-sm">{resource.desc.trim()}</p>
                 <div className="mt-2 space-y-2">
                     {resource.links.map((link, index) => (
                         <a key={index} href={link.link} className="text-sky-800 hover:underline flex items-center gap-2">
@@ -67,7 +67,7 @@ export const GetAccess = props => {
 
     return (
 
-        <div className="lg:grid lg:grid-cols-5 gap-8">
+        <div className="lg:grid lg:grid-cols-5 gap-8 text-on-white">
             <div className="col-span-1"></div>
             <div className="col-span-3 flex flex-col gap-8 pb-20">
                 <p className="pt-[24px]">Please see status of services from <a className="text-base text-sky-800 hover:underline" href={prependBaseURL("/status")}>Status</a> -page</p>
