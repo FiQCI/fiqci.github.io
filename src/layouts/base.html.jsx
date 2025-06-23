@@ -62,10 +62,11 @@ export const BaseLayout = props => {
         } else {
             setCookieConsentState(null);
         }
+        console.log(window.location.pathname)
     }, []);
 
     return <>
-        <CookieModal />
+        {window.location.pathname !== '/cookies/' && <CookieModal />}
         {cookieConsentState === true && <Analytics />}
         {createPortal(
             <NavigationHeader {...headerProps} />,
