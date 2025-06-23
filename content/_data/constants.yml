@@ -46,7 +46,7 @@ cookie_consent:
       text: Access to VTT Q50 for accepted projects opening soon!
       link:
         title: How to access Q50, instructions (coming soon)
-        href: FIXME
+        href: #
     buttons:
       - title: How to get access
         href: "/access"
@@ -116,7 +116,7 @@ cookie_consent:
         Hybrid HPC+QC access was opened in 2025. VTT Q50 is operated by VTT, and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
-        - link: "COMING_SOON"
+        - link: "#"
           teaser: "How to access VTT Q50, instructions (coming soon)"
           icon: mdiArrowRight
         - link: "https://qx.vtt.fi/docs/devices/q50.html"
