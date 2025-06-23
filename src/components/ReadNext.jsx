@@ -21,7 +21,7 @@ export const ReadNext = ({ title, blogs }) => {
                     <div key={index}>
                         <div className='flex flex-col gap-2 mb-4'>
                             <a href={blog.url.split(".")[0]} className='text-sm text-black-500 hover:underline font-bold'>
-                                <h4 className='text-lg !text-sky-800 !font-bold'>{blog.title.length >= 89 ? blog.title.slice(0, 90) + "..." : blog.title}</h4>
+                                <h4 className='text-base !text-sky-800 !font-bold'>{blog.title.length >= 89 ? blog.title.slice(0, 90) + "..." : blog.title}</h4>
                             </a>
                             <p className='text-gray-500'>{blog.type} | {blog.date}</p>
                         </div>
@@ -34,7 +34,7 @@ export const ReadNext = ({ title, blogs }) => {
                         className="text-sky-800 hover:underline font-bold"
                     >
                         <div className="flex items-center gap-3">
-                            <p className='text-lg !text-sky-800' >See all</p>
+                            <p className='text-base !text-sky-800' >See all</p>
                             <CIcon className="text-sky-800" path={mdiArrowRight} />
                         </div>
                     </a>
