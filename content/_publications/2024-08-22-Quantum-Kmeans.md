@@ -15,7 +15,7 @@ tags:
 filters:
   Skill level: Advanced # Beginner, Advanced
   Type: Blog # Blog, Instructions, News
-  Theme: Algorithm # Technical, Algorithm, Programming, HPC+QC+AI
+  Theme: Algorithm, HPC+QC+AI, Programming # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 
 Machine learning is used to process and analyze different types of datasets for example to extract information and make predictions about the data. Machine learning algorithms can be used in image processing, filtering, image segmentation, clustering, or signal processing. These algorithms become heavy to run as they consume plenty of computational resources when the complexity and amount of data increases [[1,2]](#references). Working with large amounts of data has become more and more important for multiple industries [[3]](#references). One example is the field of Earth observation, where for example satellite image data needs to be analyzed [[2,4]](#references). The images can contain high amounts of information depending on what is being researched and how.
