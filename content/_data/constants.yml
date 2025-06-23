@@ -28,6 +28,15 @@ header_nav:
   - title: Search
     page: pages/search.md
 
+cookie_consent:
+  title: We Use Cookies
+  chapters:
+    - text: |-
+        We value your privacy. The FiQCI webpage uses functional cookies and anonymous analytics cookies.
+        By clicking "Accept", you consent to the use of these cookies.
+    - text: |-
+        The data collected is non-identifiable and cannot be traced back to you.
+
 #Following are constants per page. Can be accessed with page.url
 "/":
   hero:
@@ -251,6 +260,14 @@ header_nav:
       and how long visitors stay on our website. We use this information to improve our website and make it more user-friendly.
       All data collected is anonymous and cannot be used to identify you as an individual.
 
+    - The FiQCI webpages uses anonymous cookies to collect data about user behavior through Matomo.
+      This information helps us improve our services and provide a better user experience by telling us how users use the site.
+      The data collected is non-identifiable and cannot be traced back to you.
+    
+    - Additionally we use mandatory functional cookies to ensure the website functions properly.
+      These cookies do not collect any information about you and only help the website function.
+      They are only valid for the current session and are deleted when you close your browser.
+
   delete:
     title: How to Delete Cookies
     desc: |-
@@ -291,7 +308,7 @@ header_nav:
       We strive to comply with the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards.
 
     - If you encounter any accessibility issues while using our website, please contact us at
-  
+
   status:
     title: Compliance Status
     desc: |-
