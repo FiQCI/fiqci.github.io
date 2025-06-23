@@ -19,7 +19,7 @@ export const Footer = (props) => {
         : <></>
 
     return (
-        <footer className="bg-gray-100 text-gray-700 text-sm">
+        <div className="bg-gray-100 text-gray-700 text-sm">
             <div className='mx-2 sm:mx-8 lg:mx-[100px] min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]'>
                 <div className="py-4 flex flex-wrap md:flex-nowrap justify-between items-start space-y-4 md:space-y-0">
                     <div className='flex content-evenly space-x-8'>
@@ -66,6 +66,6 @@ export const Footer = (props) => {
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
     );
 };
