@@ -263,7 +263,7 @@ cookie_consent:
     - The FiQCI webpages uses anonymous cookies to collect data about user behavior through Matomo.
       This information helps us improve our services and provide a better user experience by telling us how users use the site.
       The data collected is non-identifiable and cannot be traced back to you.
-    
+
     - Additionally we use mandatory functional cookies to ensure the website functions properly.
       These cookies do not collect any information about you and only help the website function.
       They are only valid for the current session and are deleted when you close your browser.
@@ -306,8 +306,7 @@ cookie_consent:
   general:
     - The FiQCI website is designed to be accessible to all users.
       We strive to comply with the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards.
-
-    - If you encounter any accessibility issues while using our website, please contact us at
+      If you encounter any accessibility issues while using our website, please contact us at
 
   status:
     title: Compliance Status
