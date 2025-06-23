@@ -67,7 +67,6 @@ export const BaseLayout = props => {
     return <>
         <CookieModal />
         {cookieConsentState === true && <Analytics />}
-        {console.log('Cookie consent state:', cookieConsentState === true)}
         {createPortal(
             <NavigationHeader {...headerProps} />,
             document.getElementById('navigation-header')

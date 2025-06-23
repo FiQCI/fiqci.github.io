@@ -26,6 +26,15 @@ export const CookieModal = () => {
     // Unified close handler
     const closeModal = () => setIsModalOpen(false);
 
+    const clickOutside = () => {
+        if (isModalOpen) {
+            closeModal();
+            const expiryDate = new Date();
+            expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+            document.cookie = `cookie_consent=false; path=/; expires=${expiryDate.toUTCString()}`;
+        }
+    }
+
     const handleAcceptCookies = () => {
         closeModal();
         const expiryDate = new Date();
@@ -55,7 +64,7 @@ export const CookieModal = () => {
             className='!overflow-hidden'
             value={isModalOpen}
             dismissable
-            onChangeValue={() => closeModal()}
+            onChangeValue={() => clickOutside()}
         >
             <CCard style={{ 'overflow': 'scroll' }} className='overflow-scroll lg:!overflow-hidden max-h-[80vh]'>
                 <CCardTitle className='text-on-white font-bold' >Cookie consent</CCardTitle>
@@ -87,7 +96,7 @@ export const CookieModal = () => {
     );
 };
 
-export const CookieModalManual = ({text}) => {
+export const CookieModalManual = ({ text }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const closeModal = () => setIsModalOpen(false);
