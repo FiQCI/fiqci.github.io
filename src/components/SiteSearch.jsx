@@ -344,13 +344,24 @@ export const SiteSearch = () => {
 
   // Try to load from localStorage on mount
   useEffect(() => {
-    const state = getLocalStorageState('siteSearchState');
-    if (state && state.query !== undefined && state.filters) {
-      setFilters(state.filters);
-      setQuery(state.query);
-      if (state.query && state.query.trim() !== "") {
-        const searchResults = searchContent(state.query, STORE);
-        setResults(searchResults);
+    let params = new URLSearchParams(document.location.search);
+    console.log("URL params:", params);
+    let initSearch = params.get("search");
+    console.log("Initial search query:", initSearch);
+    if (initSearch && initSearch.trim() !== "") {
+      setQuery(initSearch);
+      const searchResults = searchContent(initSearch, STORE);
+      setResults(searchResults);
+    }
+    else{
+      const state = getLocalStorageState('siteSearchState');
+      if (state && state.query !== undefined && state.filters) {
+        setFilters(state.filters);
+        setQuery(state.query);
+        if (state.query && state.query.trim() !== "") {
+          const searchResults = searchContent(state.query, STORE);
+          setResults(searchResults);
+        }
       }
     }
   }, []);
