@@ -22,7 +22,6 @@ const Analytics = () => {
 export const BaseLayout = props => {
 
     const [cookieConsentState, setCookieConsentState] = useState(null);
-
     const headerProps = {
         logo: props.logo,
         nav: props.header_nav
@@ -62,11 +61,10 @@ export const BaseLayout = props => {
         } else {
             setCookieConsentState(null);
         }
-        console.log(window.location.pathname)
     }, []);
 
     return <>
-        {window.location.pathname !== '/cookies/' && <CookieModal />}
+        {window.location.pathname !== '/cookies/' && <CookieModal { ...props.cookie_consent } />}
         {cookieConsentState === true && <Analytics />}
         {createPortal(
             <NavigationHeader {...headerProps} />,

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 
 import { CModal, CCard, CCardTitle, CCardContent, CButton } from '@cscfi/csc-ui-react'
 
-export const CookieModal = () => {
+export const CookieModal = props => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const chapters = props.chapters || [];
 
     useEffect(() => {
         const cookieConsent = document.cookie
@@ -66,14 +68,15 @@ export const CookieModal = () => {
             dismissable
             onChangeValue={() => clickOutside()}
         >
-            <CCard style={{ 'overflow': 'scroll' }} className='overflow-scroll lg:!overflow-hidden max-h-[80vh]'>
+            <CCard style={{ 'overflow': 'scroll' }} className='overflow-scroll max-h-[85vh]'>
                 <CCardTitle className='text-on-white font-bold' >Cookie consent</CCardTitle>
                 <CCardContent className='p-8'>
-                    <h3 className='text-on-white text-[32px]'>We use cookies</h3>
-                    <p>We value your privacy. The FiQCI webpages uses anonymous cookies to collect data about user behavior through Matomo.
-                        This information helps us improve our services and provide a better user experience by telling us how users use the site.
-                    </p>
-                    <p>The data collected is non-identifiable and cannot be traced back to you.</p>
+                    <h3 className='text-on-white text-[32px]'>{props.title}</h3>
+                    {chapters.map((chapter, index) => (
+                        <div key={index}>
+                            <p className='text-on-white'>{chapter.text}</p>
+                        </div>
+                    ))}
 
                     <a className='text-sky-800 hover:underline' href="/cookies">Cookie policy</a>
                     <div className='flex flex-col md:flex-row justify-around gap-4'>
@@ -96,10 +99,12 @@ export const CookieModal = () => {
     );
 };
 
-export const CookieModalManual = ({ text }) => {
+export const CookieModalManual = props => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    console.log(props);
     const closeModal = () => setIsModalOpen(false);
+
+    const chapters = props.chapters || [];
 
     const handleAcceptCookies = () => {
         closeModal();
@@ -134,15 +139,15 @@ export const CookieModalManual = ({ text }) => {
                 dismissable
                 onChangeValue={() => closeModal()}
             >
-                <CCard style={{ 'overflow': 'scroll' }} className='overflow-scroll lg:!overflow-hidden max-h-[80vh]'>
+                <CCard style={{ 'overflow': 'scroll' }} className='overflow-scroll scroll-smooth max-h-[85vh]'>
                     <CCardTitle className='text-on-white font-bold' >Cookie consent</CCardTitle>
                     <CCardContent className='p-8'>
-                        <h3 className='text-on-white text-[32px]'>We use cookies</h3>
-                        <p>We value your privacy. The FiQCI webpages uses anonymous cookies to collect data about user behavior through Matomo.
-                            This information helps us improve our services and provide a better user experience by telling us how users use the site.
-                        </p>
-                        <p>The data collected is non-identifiable and cannot be traced back to you.</p>
-
+                        <h3 className='text-on-white text-[32px]'>{props.title}</h3>
+                        {chapters.map((chapter, index) => (
+                            <div key={index}>
+                                <p className='text-on-white'>{chapter.text}</p>
+                            </div>
+                        ))}
                         <a className='text-sky-800 hover:underline' href="/cookies">Cookie policy</a>
                         <div className='flex flex-col md:flex-row justify-around gap-4'>
                             <CButton

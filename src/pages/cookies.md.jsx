@@ -11,11 +11,12 @@ import { CookieModal, CookieModalManual } from '../components/CookieConsent'
 
 const CookiesPage = () => {
     const themeConstants = useJsonApi('api/theme/constants.json')
+    const cookieConsentProps = themeConstants.cookie_consent
     return <>
         <PageLayout {...themeConstants} title="Cookie Policy" />
         
         {createPortal(
-            <CookieModalManual />,
+            <CookieModalManual { ...cookieConsentProps } />,
             document.getElementById('open-cookie-modal')
         )}
     </>
