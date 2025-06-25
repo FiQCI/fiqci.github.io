@@ -46,6 +46,8 @@ export const GetAccess = props => {
     const supercomputer_resources = props?.supercomputer_resources
     const emulation_resources = props?.emulation_resources
 
+    const resource_estimator = props?.resource_estimator
+
     useEffect(() => {
         const scrollToHash = () => {
             const hash = window.location.hash.slice(1);
@@ -70,7 +72,12 @@ export const GetAccess = props => {
         <div className="lg:grid lg:grid-cols-5 gap-8 text-on-white">
             <div className="col-span-1"></div>
             <div className="col-span-3 flex flex-col gap-8 pb-20">
-                <p className="pt-[24px]">Please see status of services from <a className="text-base text-sky-800 hover:underline" href={prependBaseURL("/status")}>Status</a> -page</p>
+                <div>
+                    <p className="pt-[24px]">Please see status of services from <a className="text-base text-sky-800 hover:underline" href={prependBaseURL("/status")}>Status</a> -page</p>
+
+                    <p className="pt-4"> {resource_estimator?.text} <a className="text-sky-800 hover:underline" href={resource_estimator?.link.href}>{resource_estimator?.link.title}</a>. </p>
+                </div>
+
                 <ResourceList id={"quantum"} title={"Quantum computer resources"} resources={quantum_resources} />
 
                 <ResourceList id={"super"} title={"Supercomputer resources"} resources={supercomputer_resources} />
