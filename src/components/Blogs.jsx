@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import '@cscfi/csc-ui-react/css/theme.css';
 import {
     CPagination, CCheckbox, CSelect, CButton, CModal, CCard,
@@ -118,17 +118,24 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
 
 //List blogs in a grid with pagination
 const BlogsList = ({ id, title, blogs, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => {
+    const isInitialLoad = useRef(true);
 
     // Scroll to top when pagination changes
     const onPageChange = (event) => {
         handlePageChange(event);
+        
+        // Skip scrolling on initial load
+        if (isInitialLoad.current) {
+            isInitialLoad.current = false;
+            return;
+        }
+        
         const thisElement = document.getElementById(id);
         if (thisElement) {
             const yOffset = -80; // Account for navbar
             const y = thisElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: 'smooth' });
         }
-
     };
 
 
