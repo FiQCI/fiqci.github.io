@@ -120,7 +120,7 @@ cookie_consent:
 
     - name: VTT Q50
       desc: |-
-        VTT Q50 is based on superconducting technology and provides 54 qubits in a square grid topology.
+        VTT Q50 is based on superconducting technology and provides 53 qubits in a square grid topology.
         Hybrid HPC+QC access was opened in 2025. VTT Q50 is operated by VTT, and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
@@ -246,7 +246,7 @@ cookie_consent:
       device_id: "Q5"
 
     - name: VTT Q50
-      qubits: 54
+      qubits: 53
       basis: "PRX, CZ"
       topology: "Square grid"
       device_id: "Q50"
