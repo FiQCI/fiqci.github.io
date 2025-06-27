@@ -45,8 +45,8 @@ cookie_consent:
     announcement:
       text: Access to VTT Q50 for accepted projects opening soon!
       link:
-        title: How to access Q50, instructions (coming soon)
-        href: #
+        title: How to access Q50, instructions
+        href: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
     buttons:
       - title: How to get access
         href: "/access"
@@ -71,7 +71,7 @@ cookie_consent:
       description: |-
         The Finnish quantum-computing infrastructure (FiQCI) provides access to quantum computers
         through the LUMI supercomputer environment. Currently there are two quantum computers
-        available for use: VTT Q5 (Helmi), and VTT Q50 (coming soon).
+        available for use: VTT Q5 (Helmi), and VTT Q50.
       links:
         - title: Quantum computer resources
           href: /access/#quantum
@@ -111,7 +111,7 @@ cookie_consent:
         and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
-        - link: "https://docs.csc.fi/computing/quantum-computing/helmi/running-on-helmi/"
+        - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
           teaser: "How to access VTT Q5, instructions"
           icon: mdiArrowRight
         - link: "https://qx.vtt.fi/docs/devices/q5.html"
@@ -124,8 +124,8 @@ cookie_consent:
         Hybrid HPC+QC access was opened in 2025. VTT Q50 is operated by VTT, and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
-        - link: "#"
-          teaser: "How to access VTT Q50, instructions (coming soon)"
+        - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
+          teaser: "How to access VTT Q50, instructions"
           icon: mdiArrowRight
         - link: "https://qx.vtt.fi/docs/devices/q50.html"
           teaser: "Read more about VTT Q50 (VTT website)"
@@ -236,8 +236,8 @@ cookie_consent:
       title: here
       href: https://www.lumi-supercomputer.eu/lumi-service-status/
   alert:
-    text: Note! Access to VTT Q50 through FiQCI is coming soon. Status of the quantum computer can already be seen below.
-    type: warning # Alert type can be info, warning, or error
+    text: Access to VTT Q50 through FiQCI is now open. Status of the quantum computers can be seen below.
+    type: info # Alert type can be info, warning, or error
   quantum-computers:
     - name: VTT Q5 (Helmi)
       qubits: 5
