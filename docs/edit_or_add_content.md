@@ -444,7 +444,7 @@ Each section contains static text content, link urls, image paths, etc else that
       helmi-link-url: /publications/2022-11-01-Helmi_pilot
       helmi-link-text: VTT Q5 (Helmi)
 
-      q50-link-url: /publications/2025-03-04-Q50-Call-1_2025
+      q50-link-url: /publications/2025-07-03-Q50-Call-2_2025
       q50-link-text: VTT Q50
 ```
 
