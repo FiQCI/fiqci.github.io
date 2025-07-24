@@ -1,5 +1,5 @@
 ---
-title: Blogs and instructions
+title: Blogs and Instructions
 subtitle: Blog posts, publications, and other material of interest
 layout: page
 react: true

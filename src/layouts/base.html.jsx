@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useState } from 'react'
 import { createPortal } from 'react-dom'
 
 import { NavigationHeader } from '../components/NavigationHeader'
@@ -6,6 +7,7 @@ import { Footer } from '../components/Footer'
 
 import { useMatomo } from '../hooks/useMatomo'
 
+import { CookieModal } from '../components/CookieConsent'
 
 const Analytics = () => {
     const url = process.env.MATOMO_URL
@@ -16,7 +18,10 @@ const Analytics = () => {
     return <></>
 }
 
+
 export const BaseLayout = props => {
+
+    const [cookieConsentState, setCookieConsentState] = useState(null);
     const headerProps = {
         logo: props.logo,
         nav: props.header_nav
@@ -28,8 +33,39 @@ export const BaseLayout = props => {
         copyright: props.copyright
     }
 
+    useEffect(() => {
+
+        const cookieConsent = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('cookie_consent='));
+
+        if (!cookieConsent) {
+            setCookieConsentState(null);
+            return;
+        }
+
+        const consentValue = cookieConsent.split('=')[1];
+        if (consentValue === 'true' || consentValue === 'false') {
+            setCookieConsentState(consentValue === 'true');
+            if (consentValue === 'false') {
+                const cookies = document.cookie.split(';');
+                for (const cookie of cookies) {
+                    const eqPos = cookie.indexOf('=');
+                    const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+                    // Only delete cookies for the rahtiapp domain
+                    if (name.endsWith('.rahtiapp.fi')) {
+                        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.rahtiapp.fi`;
+                    }
+                }
+            }
+        } else {
+            setCookieConsentState(null);
+        }
+    }, []);
+
     return <>
-        <Analytics />
+        {window.location.pathname !== '/cookies/' && <CookieModal { ...props.cookie_consent } />}
+        {cookieConsentState === true && <Analytics />}
         {createPortal(
             <NavigationHeader {...headerProps} />,
             document.getElementById('navigation-header')

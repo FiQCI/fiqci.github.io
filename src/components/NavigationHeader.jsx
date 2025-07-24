@@ -6,7 +6,7 @@ import { useJsonApi } from '../hooks/useJsonApi'
 import { prependBaseURL } from '../utils/url';
 
 const style = {
-    "--_c-button-font-size": 18,
+    "--_c-button-font-size": 16,
     "--_c-button-min-width": 0,
     "--_c-button-height": "auto",
     "--_c-icon-color": "black"
@@ -120,7 +120,7 @@ export const NavigationHeader = props => {
                     {headerLogo}
                 </div>
 
-                <div className="lg:flex flex-wrap justify-end hidden navigation-header-buttons">
+                <div className="lg:flex justify-end hidden navigation-header-buttons">
                     {navigationButtons}
                 </div>
 

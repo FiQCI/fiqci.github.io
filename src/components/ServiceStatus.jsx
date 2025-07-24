@@ -37,7 +37,7 @@ const StatusCard = (props) => {
 }
 
 export const ServiceStatus = (props) => {
-  const status = useStatus('https://fiqci-backend-fiqci-workspace.2.rahtiapp.fi/healthcheck')
+  const { status: statusList } = useStatus("https://fiqci-backend.2.rahtiapp.fi/devices/healthcheck");
   const qcs = props["quantum-computers"] || [];
   const [modalOpen, setModalOpen] = useState(false);
   const [modalProps, setModalProps] = useState({});
@@ -72,7 +72,10 @@ export const ServiceStatus = (props) => {
       </p>
       <div className={`flex flex-row gap-4 w-full p-3 rounded-md ${alertBg} items-start sm:items-center`}>
         <CIcon key={icon} path={icon} />
+      <div className={`flex flex-row gap-4 w-full p-3 rounded-md ${alertBg} items-start sm:items-center`}>
+        <CIcon key={icon} path={icon} />
         <p className='text-[16px]'>
+          {props.alert?.type ? props.alert?.text : 'Loading...'}
           {props.alert?.type ? props.alert?.text : 'Loading...'}
         </p>
       </div>

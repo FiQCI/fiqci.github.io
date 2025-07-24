@@ -1,6 +1,23 @@
-# Fork of [FiQCI/fiqci.github.io](https://github.com/FiQCI/fiqci.github.io) repository
+This is the repository for building and maintaining the webpage for the Finnish Quantum-Computing Infrastructure (FiQCI). You can view the main site at https://fiqci.fi.
 
-## Site rewrite
+## Contents
+- [Site rewrite](#site-rewrite)
+  - [Running Locally](#running-locally)
+    - [Tools](#tools)
+      - [Install `asdf` for runtime version management](#install-asdf-for-runtime-version-management)
+        - [Install Ruby and Node.js using `asdf`](#install-ruby-and-nodejs-using-asdf)
+        - [Install the Ruby gems and Node packages](#install-the-ruby-gems-and-node-packages)
+    - [Serve with live reload](#serve-with-live-reload)
+    - [Github Pages](#github-pages)
+  - [Adding and editing content](#adding-and-editing-content)
+
+
+# Site rewrite
+
+The site was recently overhauled. Here you can find documentation on how to add content to the new site and how it works. Old version is available on https://github.com/FiQCI/fiqci.github.io/tree/old-fiqci.
+
+
+## Running Locally
 
 ### Tools
 
@@ -94,3 +111,15 @@ npm install
 The command `npm run watch` starts Tailwind CSS, Webpack and Jekyll concurrently with the source monitored for changes.
 
 The site should now be ready at `http://localhost:4000`.
+
+### Github Pages
+Pushed changes can also be previewed at either http://dev.fiqci.fi/ for the dev site or http://fiqci.fi/ for the main site.
+
+## Adding and editing content
+
+For adding a blog post see: [Adding a blog](docs/blog_post.md)
+
+
+For adding an event see: [Adding an event](docs/event.md)
+
+For editing the general contents of the site see: [Editing content](docs/edit_or_add_content.md)

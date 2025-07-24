@@ -12,6 +12,6 @@ filters:
   Pricing:  # Free of charge, or empty if paid
   Skill level: Beginner # Beginner, Advanced
   Type: Hybrid # Online, Hybrid, Onsite
-  Theme: Course/Workshop # Course/Workshop, HPC+QC+AI, Programming, Webinar/Lecture
+  Theme: Course/Workshop, Programming # Course/Workshop, HPC+QC+AI, Programming, Webinar/Lecture
 ---
 5 July: Quantum computing and FiQCI hands-on introduction at the annual HPC Summer School in Nuuksio, Finland.

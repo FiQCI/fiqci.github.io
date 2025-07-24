@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { prependBaseURL } from '../utils/url';
 
 const ResourceCard = ({ resource }) => {
@@ -14,7 +13,7 @@ const ResourceCard = ({ resource }) => {
 
             <div className="flex flex-col flex-grow pl-0 sm:pl-4">
                 <h3 className="text-xl font-bold pb-[14px]">{resource.name}</h3>
-                <p className="text-sm text-gray-600">{resource.desc.trim()}</p>
+                <p className="text-sm">{resource.desc.trim()}</p>
                 <div className="mt-2 space-y-2">
                     {resource.links.map((link, index) => (
                         <a key={index} href={link.link} className="text-sky-800 hover:underline flex items-center gap-2">
@@ -46,28 +45,39 @@ export const GetAccess = props => {
     const quantum_resources = props?.quantum_resources
     const supercomputer_resources = props?.supercomputer_resources
     const emulation_resources = props?.emulation_resources
-    useEffect(() => {
-        if (window.location.hash !== "") {
-            const hash = window.location.hash;
-            const element = document.getElementById(hash.substring(1));
-            if (element) {
-                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = elementPosition - 100;
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+    const resource_estimator = props?.resource_estimator
+
+    useEffect(() => {
+        const scrollToHash = () => {
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                const element = document.getElementById(hash);
+                if (element) {
+                    const yOffset = -80; // Account for navbar
+                    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
             }
-        }
-    }, []);
+        };
+        scrollToHash();
+        window.addEventListener('hashchange', scrollToHash);
+        return () => {
+            window.removeEventListener('hashchange', scrollToHash);
+        };
+    }, [quantum_resources, supercomputer_resources, emulation_resources]);
 
     return (
 
-        <div className="lg:grid lg:grid-cols-5 gap-8">
+        <div className="lg:grid lg:grid-cols-5 gap-8 text-on-white">
             <div className="col-span-1"></div>
             <div className="col-span-3 flex flex-col gap-8 pb-20">
-                <p className="pt-[24px]">Please see status of services from <a className="text-base text-sky-800 hover:underline" href={prependBaseURL("/status")}>Status</a> -page</p>
+                <div>
+                    <p className="pt-[24px]">Please see status of services from <a className="text-base text-sky-800 hover:underline" href={prependBaseURL("/status")}>Status</a> -page</p>
+
+                    <p className="pt-4"> {resource_estimator?.text} <a className="text-sky-800 hover:underline" href={resource_estimator?.link.href}>{resource_estimator?.link.title}</a>. </p>
+                </div>
+
                 <ResourceList id={"quantum"} title={"Quantum computer resources"} resources={quantum_resources} />
 
                 <ResourceList id={"super"} title={"Supercomputer resources"} resources={supercomputer_resources} />
