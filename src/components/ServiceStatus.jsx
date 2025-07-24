@@ -49,7 +49,7 @@ export const ServiceStatus = (props) => {
   // Determine alert color based on props.alert.type
   const alertType = props.alert?.type?.toLowerCase();
   let icon = '';
-  let alertBg = ''; 
+  let alertBg = '';
   if (alertType === 'warning') {
     alertBg = 'bg-orange-200';
     icon = mdiAlert;
@@ -65,17 +65,14 @@ export const ServiceStatus = (props) => {
     <div className="flex gap-6 flex-col sm:flex-col items-stretch text-on-white">
 
       <p className='text-[16px] pt-[24px]'>
-        { props.info }
+        {props.info}
       </p>
       <p className='text-[16px]'>
         {props.lumi?.desc} <a href={props.lumi?.link?.href} className="hover:underline text-sky-800">{props.lumi?.link?.title}</a>.
       </p>
       <div className={`flex flex-row gap-4 w-full p-3 rounded-md ${alertBg} items-start sm:items-center`}>
         <CIcon key={icon} path={icon} />
-      <div className={`flex flex-row gap-4 w-full p-3 rounded-md ${alertBg} items-start sm:items-center`}>
-        <CIcon key={icon} path={icon} />
         <p className='text-[16px]'>
-          {props.alert?.type ? props.alert?.text : 'Loading...'}
           {props.alert?.type ? props.alert?.text : 'Loading...'}
         </p>
       </div>
@@ -89,5 +86,6 @@ export const ServiceStatus = (props) => {
       )}
     </div>
   );
-};
+}
+
 
