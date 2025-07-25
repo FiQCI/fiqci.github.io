@@ -197,14 +197,12 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
         return { left, top };
     };
 
-    // Center on pivot and build coords
-    const pivot = rawNodes.find(n => n.id === 'QB3');
-    const nodes = rawNodes.map(n => ({ id: n.id, x: n.x - pivot.x, y: n.y - pivot.y }));
-    const coordMap = Object.fromEntries(nodes.map(n => [n.id, n]));
+    // Build coordinate map directly from raw nodes
+    const coordMap = Object.fromEntries(rawNodes.map(n => [n.id, n]));
 
     // Compute dynamic bounds
-    const xs = nodes.map(n => n.x);
-    const ys = nodes.map(n => n.y);
+    const xs = rawNodes.map(n => n.x);
+    const ys = rawNodes.map(n => n.y);
     const minX = Math.min(...xs) - spacing;
     const maxX = Math.max(...xs) + spacing;
     const minY = Math.min(...ys) - spacing;
@@ -283,7 +281,7 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
                         />
                         );
                     })}
-                    {nodes.map(n => {
+                    {rawNodes.map(n => {
                     const hover = hoveredNode === n.id;
                     const nodeColor = getQubitColor(n.id);
                     return (
