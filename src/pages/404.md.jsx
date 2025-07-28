@@ -7,7 +7,6 @@ import { BaseLayout } from '../layouts/base.html'
 import { useJsonApi } from '../hooks/useJsonApi'
 
 const DefaultPage = () => {
-    console.log("moi")
     const themeConstants = useJsonApi('api/theme/constants.json')
     return <>
         <BaseLayout {...themeConstants} />
