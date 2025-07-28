@@ -145,7 +145,9 @@ export const ModalContent = (props) => {
                                 </div>
                             )}
                         </div>
-                        {(activeTab === "layout" || activeTab === "graphical") && <div className='sticky top-4 pr-8'>
+                        {(activeTab === "layout" || activeTab === "graphical") && 
+                            <div className='sticky top-4'>
+                                <div className='overflow-y-auto scroll-smooth max-h-[70vh] pr-4'>
                             <div>
                                 <p className='font-bold mb-[2px]'>Qubit Metric:</p>
                                 <CSelect
@@ -412,7 +414,9 @@ export const ModalContent = (props) => {
                                 })()}
                             </div>
 
-                        </div>}
+                                </div>
+                            </div>
+                        }
                     </div>
                     <CTabs value={activeTab} onChangeValue={(e) => setActiveTab(e.detail)} className='col-span-1 md:col-span-2 lg:col-span-3'>
                         <CTab value="overview">
