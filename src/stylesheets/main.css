@@ -49,6 +49,7 @@ h2 {
     --c-primary-800: #004E84 !important;
     --c-primary-900: #001C39 !important;
     --c-primary-rgb: 0, 78, 132 !important;
+    --c-font-family: 'Inter', sans-serif !important;
 }
 
 #blogView h1,
