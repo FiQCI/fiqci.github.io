@@ -107,8 +107,3 @@ mjx-container {
 #tags-data {
   overflow-x: hidden;
 }
-
-#status-modal dialog {
-    width: 50vw !important;
-    max-width: 50vw !important;
-}
