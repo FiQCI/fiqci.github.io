@@ -309,7 +309,7 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
                                 const metricValue = getCouplerMetricValue(coupleId1) ?? getCouplerMetricValue(coupleId2);
                                 const unit = getCouplerMetricUnit();
                                 const formattedValue = formatMetricValue(metricValue, unit);
-                                const metricInfo = metricValue !== null && couplerMetricFormatted ? `${couplerMetric}: ${formattedValue}` : '';
+                                const metricInfo = metricValue !== null && couplerMetricFormatted ? `${couplerMetricFormatted}: ${formattedValue}` : '';
                                 setHoveredEdge(key);
                                 let uncertainty = null;
                                 const coupleId = getCouplerMetricValue(coupleId1) !== null ? coupleId1 : coupleId2;
@@ -426,7 +426,7 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
 
                         {/* Details with better formatting */}
                         {tooltip.details &&
-                            <div className="flex flex-col sm:flex-row text-slate-300 text-md font-mono leading-relaxed bg-slate-900/50 rounded px-2 py-1.5 border border-slate-700/30">
+                            <div className="flex flex-col text-slate-300 text-md font-mono leading-relaxed bg-slate-900/50 rounded px-2 py-1.5 border border-slate-700/30">
                                 <p className='font-bold'>
                                     {tooltip.details.split(":")[0]}
                                     {tooltip.details !== "Disabled" &&
