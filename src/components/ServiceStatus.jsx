@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useStatus } from '../hooks/useStatus'
+import { mdiInformation, mdiClose, mdiAlert } from '@mdi/js';
 import { CCard, CCardTitle, CCardContent, CIcon } from '@cscfi/csc-ui-react';
-import { mdiAlert, mdiClose, mdiInformation } from '@mdi/js'
-// import { StatusIndicator } from './StatusIndicator'
+import { StatusModal } from './StatusModal';
 
 const StatusCard = (props) => {
   const isOnline = props.health;
+  const { onClick, ...rest } = props
   return (
-    <CCard className='border-[0.2px] border-gray-100 rounded-none shadow-md hover:shadow-xl col-span-1 h-[236px]'>
+    <CCard onClick={onClick} className='border-[0.2px] border-gray-100 rounded-none shadow-md hover:shadow-xl col-span-1 h-[236px]'>
       <CCardTitle className='font-bold text-on-white text-[18px]'>
         <p>{props.name}</p>
       </CCardTitle>
@@ -49,11 +50,17 @@ export const ServiceStatus = (props) => {
           health: deviceStatus?.health ?? false,
         };
       });
-
+  
+      const [modalOpen, setModalOpen] = useState(false);
+  const [modalProps, setModalProps] = useState({});
+  const handleCardClick = (qc) => {
+    setModalProps({ ...qc, devicesWithStatus });
+    setModalOpen(true);
+  };
   // Determine alert color based on props.alert.type
   const alertType = props.alert?.type?.toLowerCase();
   let icon = '';
-  let alertBg = ''; 
+  let alertBg = '';
   if (alertType === 'warning') {
     alertBg = 'bg-orange-200';
     icon = mdiAlert;
@@ -69,10 +76,10 @@ export const ServiceStatus = (props) => {
     <div className="flex gap-6 flex-col sm:flex-col items-stretch text-on-white">
 
       <p className='text-[16px] pt-[24px]'>
-        { props?.info }
+        {props.info}
       </p>
       <p className='text-[16px]'>
-        { props?.lumi?.desc } <a href={ props?.lumi?.link?.href } className="underline text-sky-800">{ props?.lumi?.link?.title }</a>.
+        {props.lumi?.desc} <a href={props.lumi?.link?.href} className="hover:underline text-sky-800">{props.lumi?.link?.title}</a>.
       </p>
       <div className={`flex flex-row gap-4 w-full p-3 rounded-md ${alertBg} items-start sm:items-center`}>
         <CIcon key={icon} path={icon} />
@@ -82,11 +89,15 @@ export const ServiceStatus = (props) => {
       </div>
       <div className='pt-[24px] pb-[60px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 min-[2600px]:grid-cols-4 w-full gap-[24px]'>
         {devicesWithStatus.map((qc, index) => (
-          <StatusCard key={qc.device_id || index} {...qc} />
+          <StatusCard key={qc.device_id || index} {...qc} onClick={() => handleCardClick(qc)} />
         ))}
       </div>
+      {modalOpen && (
+        <StatusModal {...modalProps} isModalOpen={modalOpen} setIsModalOpen={setModalOpen} />
+      )}
+      
     </div>
-
   );
-};
+}
+
 
