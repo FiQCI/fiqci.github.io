@@ -1,7 +1,7 @@
 name: Build and deploy site to GitHub Pages
 on:
   push:
-    branches: [ "rewrite/main" ]
+    branches: [ "master" ]
   workflow_dispatch:
 
 jobs:

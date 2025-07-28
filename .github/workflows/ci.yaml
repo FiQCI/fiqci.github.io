@@ -1,7 +1,7 @@
 name: CI - Build and test
 on:
   pull_request:
-    branches: [ "rewrite/main" ]
+    branches: [ "master" ]
 
 jobs:
   build:
