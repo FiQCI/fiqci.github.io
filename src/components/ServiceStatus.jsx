@@ -57,7 +57,6 @@ export const ServiceStatus = (props) => {
     setModalProps({ ...qc, devicesWithStatus });
     setModalOpen(true);
   };
-  console.log("Devices with status:", devicesWithStatus);
   // Determine alert color based on props.alert.type
   const alertType = props.alert?.type?.toLowerCase();
   let icon = '';
