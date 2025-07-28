@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { getColorForMetricValue } from '../../utils/generateGradient';
 
 export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitMetric, couplerMetric,
-    qubitMetricFormatted, couplerMetricFormatted }) {
+    qubitMetricFormatted, couplerMetricFormatted, thresholdQubit, thresholdCoupler }) {
 
     const [hoveredNode, setHoveredNode] = useState(null);
     const [hoveredEdge, setHoveredEdge] = useState(null);
@@ -113,11 +113,18 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
         const unit = getMetricUnit();
         let worst = stats.worst;
         let best = stats.best;
-
         // Reverse the scale for certain metrics where lower is better
         if ((qubitMetric && qubitMetric.includes("error"))) {
             worst = stats.best;
             best = stats.worst;
+            if (parseFloat(value) > thresholdQubit) {
+                return '#888888'; // Grey if above threshold (higher error is worse)
+            }
+        }
+        else {
+            if (parseFloat(value) < thresholdQubit) {
+                return '#888888'; // Grey if below threshold (lower value is worse)
+            }
         }
 
         return getColorForMetricValue(value, worst, best, stats.average);
@@ -164,7 +171,6 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
         if (value === null) {
             value = getCouplerMetricValue(coupleId2);
         }
-
         if (value === null || value === undefined) {
             return '#888888'; // Grey if no data found
         }
@@ -183,6 +189,15 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
         if ((couplerMetric && couplerMetric.includes("error"))) {
             worst = stats.best;
             best = stats.worst;
+
+            if (parseFloat(value) > thresholdCoupler) {
+                return '#888888'; // Grey if above threshold (higher error is worse)
+            }
+        }
+        else {
+            if (parseFloat(value) < thresholdCoupler) {
+                return '#888888'; // Grey if below threshold (lower value is worse)
+            }
         }
 
         return getColorForMetricValue(value, worst, best, stats.average);

@@ -17,7 +17,8 @@ const edges = [
     ['QB1', 'QB3'],
 ];
 
-export const HelmiLayout = ({ calibrationData, qubitMetric, couplerMetric, qubitMetricFormatted, couplerMetricFormatted }) => {
+export const HelmiLayout = ({ calibrationData, qubitMetric, couplerMetric,
+    qubitMetricFormatted, couplerMetricFormatted, thresholdQubit, thresholdCoupler }) => {
     return (
         <BaseQcLayout
             rawNodes={rawNodes}
@@ -28,6 +29,8 @@ export const HelmiLayout = ({ calibrationData, qubitMetric, couplerMetric, qubit
             couplerMetric={couplerMetric}
             qubitMetricFormatted={qubitMetricFormatted}
             couplerMetricFormatted={couplerMetricFormatted}
+            thresholdQubit={thresholdQubit}
+            thresholdCoupler={thresholdCoupler}
         />
     )
 }

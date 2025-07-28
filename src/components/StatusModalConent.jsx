@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useCalibration } from '../hooks/useCalibration';
 import { HelmiLayout } from './QcLayouts/Helmi';
 import { Q50Layout } from './QcLayouts/Q50';
@@ -14,9 +14,42 @@ export const ModalContent = (props) => {
     const [activeTab, setActiveTab] = useState('overview');
     const [qubitMetric, setQubitMetric] = useState('');
     const [couplerMetric, setCouplerMetric] = useState('');
+    const [thresholdQubit, setThresholdQubit] = useState(0.0);
+    const [thresholdCoupler, setThresholdCoupler] = useState(0.0);
+    const [thresholdCouplerValue, setThresholdCouplerValue] = useState(0.0);
+    const [thresholdQubitValue, setThresholdQubitValue] = useState(0.0);
 
     const calibrationData = calibrationDataAll.metrics
     const lastCalibrated = new Date(calibrationDataAll.quality_metric_set_end_timestamp)
+
+    // Calculate threshold values when dependencies change
+    useEffect(() => {
+        if (qubitMetric && calibrationData && calibrationData[qubitMetric]) {
+            const qubitStats = getMetricStatistics(qubitMetric);
+            if (qubitStats) {
+                const isLowerBetter = qubitMetric.includes("error");
+                const worst = isLowerBetter ? qubitStats.best : qubitStats.worst;
+                const best = isLowerBetter ? qubitStats.worst : qubitStats.best;
+                const range = parseFloat(best) - parseFloat(worst);
+                const thresholdValue = parseFloat(worst) + (thresholdQubit * range);
+                setThresholdQubitValue(thresholdValue);
+            }
+        }
+    }, [qubitMetric, thresholdQubit, calibrationData]);
+
+    useEffect(() => {
+        if (couplerMetric && calibrationData && calibrationData[couplerMetric]) {
+            const couplerStats = getMetricStatistics(couplerMetric);
+            if (couplerStats) {
+                const isLowerBetter = couplerMetric.includes("error");
+                const worst = isLowerBetter ? couplerStats.best : couplerStats.worst;
+                const best = isLowerBetter ? couplerStats.worst : couplerStats.best;
+                const range = parseFloat(best) - parseFloat(worst);
+                const thresholdValue = parseFloat(worst) + (thresholdCoupler * range);
+                setThresholdCouplerValue(thresholdValue);
+            }
+        }
+    }, [couplerMetric, thresholdCoupler, calibrationData]);
 
     const qubitMetricOptions =
         [
@@ -108,7 +141,10 @@ export const ModalContent = (props) => {
                                     value={qubitMetric}
                                     items={qubitMetricOptions}
                                     placeholder='Choose metric'
-                                    onChangeValue={(e) => setQubitMetric(e.detail || '')}
+                                    onChangeValue={(e) => {
+                                        setQubitMetric(e.detail || '');
+                                        setThresholdQubit(0);
+                                    }}
                                 />
                             </div>
 
@@ -120,24 +156,58 @@ export const ModalContent = (props) => {
                                         <div className="flex flex-col items-center w-full">
                                             {qubitStats && (
                                                 <div className="w-full">
-                                                    <div
-                                                        className="w-full h-6 rounded my-2"
-                                                        style={{
-                                                            background: (() => {
-                                                                const isLowerBetter = qubitMetric.includes("error");
-                                                                let worst = isLowerBetter ? qubitStats.best : qubitStats.worst;
-                                                                let best = isLowerBetter ? qubitStats.worst : qubitStats.best;
-                                                                const colors = generateMetricGradient(worst, best, qubitStats.average);
-                                                                const gradientStops = [];
-                                                                for (let i = 0; i <= 10; i++) {
-                                                                    const index = Math.floor((i / 10) * (colors.length - 1));
-                                                                    const percentage = (i / 10) * 100;
-                                                                    gradientStops.push(`${colors[index]} ${percentage}%`);
-                                                                }
-                                                                return `linear-gradient(to right, ${gradientStops.join(', ')})`;
-                                                            })()
-                                                        }}
-                                                    />
+                                                    <div className="relative w-full h-6 rounded my-2" 
+                                                         style={{
+                                                             background: (() => {
+                                                                 const isLowerBetter = qubitMetric.includes("error");
+                                                                 let worst = isLowerBetter ? qubitStats.best : qubitStats.worst;
+                                                                 let best = isLowerBetter ? qubitStats.worst : qubitStats.best;
+                                                                 const colors = generateMetricGradient(worst, best, qubitStats.average);
+                                                                 const gradientStops = [];
+                                                                 for (let i = 0; i <= 10; i++) {
+                                                                     const index = Math.floor((i / 10) * (colors.length - 1));
+                                                                     const percentage = (i / 10) * 100;
+                                                                     gradientStops.push(`${colors[index]} ${percentage}%`);
+                                                                 }
+                                                                 return `linear-gradient(to right, ${gradientStops.join(', ')})`;
+                                                             })()
+                                                         }}>
+                                                        <input
+                                                            type="range"
+                                                            min="0"
+                                                            max="1"
+                                                            step="0.01"
+                                                            value={thresholdQubit}
+                                                            onChange={(e) => setThresholdQubit(parseFloat(e.target.value))}
+                                                            className="absolute top-0 left-0 w-full h-full opacity-70 cursor-pointer slider"
+                                                            style={{
+                                                                background: 'transparent',
+                                                                appearance: 'none',
+                                                                WebkitAppearance: 'none'
+                                                            }}
+                                                        />
+                                                        <style>{`
+                                                            .slider::-webkit-slider-thumb {
+                                                                appearance: none;
+                                                                width: 20px;
+                                                                height: 24px;
+                                                                background: #333;
+                                                                border: 2px solid #fff;
+                                                                border-radius: 50%;
+                                                                cursor: pointer;
+                                                                box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                                                            }
+                                                            .slider::-moz-range-thumb {
+                                                                width: 20px;
+                                                                height: 20px;
+                                                                background: #333;
+                                                                border: 2px solid #fff;
+                                                                border-radius: 50%;
+                                                                cursor: pointer;
+                                                                box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                                                            }
+                                                        `}</style>
+                                                    </div>
                                                     <div className="flex justify-between text-sm mb-1 w-full">
                                                         <span>
                                                             Worst:<br />
@@ -148,8 +218,15 @@ export const ModalContent = (props) => {
                                                             })()}
                                                         </span>
                                                         <span>
-                                                            Mdn:<br />
-                                                            {formatMetricValue(qubitStats.average, qubitStats.unit)}
+                                                            Threshold:<br />
+                                                            {(() => {
+                                                                const isLowerBetter = qubitMetric.includes("error");
+                                                                const worst = isLowerBetter ? qubitStats.best : qubitStats.worst;
+                                                                const best = isLowerBetter ? qubitStats.worst : qubitStats.best;
+                                                                const range = parseFloat(best) - parseFloat(worst);
+                                                                const thresholdValue = parseFloat(worst) + (thresholdQubit * range);
+                                                                return formatMetricValue(thresholdValue, qubitStats.unit);
+                                                            })()}
                                                         </span>
                                                         <span>
                                                             Best:<br />
@@ -176,7 +253,10 @@ export const ModalContent = (props) => {
                                     value={couplerMetric}
                                     items={couplerMetricOptions}
                                     placeholder='Choose metric'
-                                    onChangeValue={(e) => setCouplerMetric(e.detail || '')}
+                                    onChangeValue={(e) => {
+                                        setCouplerMetric(e.detail || '');
+                                        setThresholdCoupler(0);
+                                    }}
                                 />
                             </div>
                             
@@ -189,24 +269,37 @@ export const ModalContent = (props) => {
 
                                             {couplerStats && (
                                                 <div className="w-full">
-                                                    <div
-                                                        className="w-full h-6 rounded my-2"
-                                                        style={{
-                                                            background: (() => {
-                                                                const isLowerBetter = couplerMetric.includes("error");
-                                                                let worst = isLowerBetter ? couplerStats.best : couplerStats.worst;
-                                                                let best = isLowerBetter ? couplerStats.worst : couplerStats.best;
-                                                                const colors = generateMetricGradient(worst, best, couplerStats.average);
-                                                                const gradientStops = [];
-                                                                for (let i = 0; i <= 10; i++) {
-                                                                    const index = Math.floor((i / 10) * (colors.length - 1));
-                                                                    const percentage = (i / 10) * 100;
-                                                                    gradientStops.push(`${colors[index]} ${percentage}%`);
-                                                                }
-                                                                return `linear-gradient(to right, ${gradientStops.join(', ')})`;
-                                                            })()
-                                                        }}
-                                                    />
+                                                    <div className="relative w-full h-6 rounded my-2" 
+                                                         style={{
+                                                             background: (() => {
+                                                                 const isLowerBetter = couplerMetric.includes("error");
+                                                                 let worst = isLowerBetter ? couplerStats.best : couplerStats.worst;
+                                                                 let best = isLowerBetter ? couplerStats.worst : couplerStats.best;
+                                                                 const colors = generateMetricGradient(worst, best, couplerStats.average);
+                                                                 const gradientStops = [];
+                                                                 for (let i = 0; i <= 10; i++) {
+                                                                     const index = Math.floor((i / 10) * (colors.length - 1));
+                                                                     const percentage = (i / 10) * 100;
+                                                                     gradientStops.push(`${colors[index]} ${percentage}%`);
+                                                                 }
+                                                                 return `linear-gradient(to right, ${gradientStops.join(', ')})`;
+                                                             })()
+                                                         }}>
+                                                        <input
+                                                            type="range"
+                                                            min="0"
+                                                            max="1"
+                                                            step="0.01"
+                                                            value={thresholdCoupler}
+                                                            onChange={(e) => setThresholdCoupler(parseFloat(e.target.value))}
+                                                            className="absolute top-0 left-0 w-full h-full opacity-70 cursor-pointer slider"
+                                                            style={{
+                                                                background: 'transparent',
+                                                                appearance: 'none',
+                                                                WebkitAppearance: 'none'
+                                                            }}
+                                                        />
+                                                    </div>
                                                     <div className="flex justify-between text-sm mb-1 w-full">
                                                         <span>
                                                             Worst: <br />
@@ -217,8 +310,15 @@ export const ModalContent = (props) => {
                                                             })()}
                                                         </span>
                                                         <span>
-                                                            Mdn: <br />
-                                                            {formatMetricValue(couplerStats.average, couplerStats.unit)}
+                                                            Threshold: <br />
+                                                            {(() => {
+                                                                const isLowerBetter = couplerMetric.includes("error");
+                                                                const worst = isLowerBetter ? couplerStats.best : couplerStats.worst;
+                                                                const best = isLowerBetter ? couplerStats.worst : couplerStats.best;
+                                                                const range = parseFloat(best) - parseFloat(worst);
+                                                                const thresholdValue = parseFloat(worst) + (thresholdCoupler * range);
+                                                                return formatMetricValue(thresholdValue, couplerStats.unit);
+                                                            })()}
                                                         </span>
                                                         <span>
                                                             Best: <br />
@@ -267,13 +367,18 @@ export const ModalContent = (props) => {
                                             couplerMetric={couplerMetric}
                                             qubitMetricFormatted = {qubitMetricOptions.find(m => m.value === qubitMetric)?.name || qubitMetric}
                                             couplerMetricFormatted = {couplerMetricOptions.find(m => m.value === couplerMetric)?.name || couplerMetric}
-
+                                            thresholdQubit={thresholdQubitValue}
+                                            thresholdCoupler={thresholdCouplerValue}
                                         />
                                     ) : (
                                         <HelmiLayout
                                             calibrationData={calibrationData}
                                             qubitMetric={qubitMetric}
                                             couplerMetric={couplerMetric}
+                                            qubitMetricFormatted={qubitMetricOptions.find(m => m.value === qubitMetric)?.name || qubitMetric}
+                                            couplerMetricFormatted={couplerMetricOptions.find(m => m.value === couplerMetric)?.name || couplerMetric}
+                                            thresholdQubit={thresholdQubitValue}
+                                            thresholdCoupler={thresholdCouplerValue}
                                         />
                                     )}
                                 </div>

@@ -157,7 +157,8 @@ const edges = [
     ['QB2', 'QB1']
 ];
 
-export const Q50Layout = ({ calibrationData, qubitMetric, couplerMetric, qubitMetricFormatted, couplerMetricFormatted }) => {
+export const Q50Layout = ({ calibrationData, qubitMetric, couplerMetric, 
+    qubitMetricFormatted, couplerMetricFormatted, thresholdQubit, thresholdCoupler }) => {
     return (
         <BaseQcLayout
             rawNodes={rawNodes}
@@ -168,6 +169,8 @@ export const Q50Layout = ({ calibrationData, qubitMetric, couplerMetric, qubitMe
             couplerMetric={couplerMetric}
             qubitMetricFormatted={qubitMetricFormatted}
             couplerMetricFormatted={couplerMetricFormatted}
+            thresholdQubit={thresholdQubit}
+            thresholdCoupler={thresholdCoupler}
         />
     )
 }
