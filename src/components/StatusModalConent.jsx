@@ -4,6 +4,7 @@ import { useCalibration } from '../hooks/useCalibration';
 import { HelmiLayout } from './QcLayouts/Helmi';
 import { Q50Layout } from './QcLayouts/Q50';
 import { Overview } from './StatusOverview';
+import { generateMetricGradient } from '../utils/generateGradient';
 import { CCard, CCardTitle, CCardContent, CCardActions, CButton, CTabs, CTab, CTabItems, CTabItem, CSelect } from '@cscfi/csc-ui-react';
 
 
@@ -16,6 +17,61 @@ export const ModalContent = (props) => {
 
     const calibrationData = calibrationDataAll.metrics
     const lastCalibrated = new Date(calibrationDataAll.quality_metric_set_end_timestamp)
+
+    const qubitMetricOptions =
+        [
+            { name: '1->0 Readout Error', value: 'measure_ssro_error_1_to_0' },
+            { name: '0->1 Readout Error', value: 'measure_ssro_error_0_to_1' },
+            { name: 'Readout Fidelity', value: 'measure_ssro_fidelity' },
+            { name: 'T1 Time', value: 't1_time' },
+            { name: 'T2 Time', value: 't2_time' },
+            { name: 'T2 Echo Time', value: 't2_echo_time' },
+            { name: 'PRX Gate Fidelity', value: 'prx_rb_fidelity' },
+        ]
+
+    const couplerMetricOptions = [
+        { name: 'CZ Gate Fidelity', value: 'cz_irb_fidelity' },
+        { name: 'Clifford Gate Fidelity', value: 'clifford_rb_fidelity' },
+    ]
+
+    // Calculate statistics for selected metric
+    const getMetricStatistics = (metric) => {
+        if (!calibrationData || !metric || !calibrationData[metric]) {
+            return null;
+        }
+
+        const values = Object.values(calibrationData[metric])
+            .map(item => item?.value)
+            .filter(value => value !== null && value !== undefined && !isNaN(value));
+
+        if (values.length === 0) return null;
+
+        const sorted = values.sort((a, b) => a - b);
+        const sum = values.reduce((a, b) => a + b, 0);
+
+        return {
+            worst: sorted[0],
+            best: sorted[sorted.length - 1],
+            average: calibrationData[metric].statistics.average,
+            median: calibrationData[metric].statistics.median,
+            unit: Object.values(calibrationData[metric]).find(item => item?.unit)?.unit || ''
+        };
+    };
+
+    // Format metric value for display
+    const formatMetricValue = (value, unit) => {
+        if (value === null || value === undefined) return 'N/A';
+
+        if (unit === 's') {
+            // Convert seconds to appropriate unit
+            return `${(value * 1e6).toFixed(2)}μs`;
+        } else if (unit === '' || unit === '%') {
+            // Assume percentage/fidelity
+            return `${(value * 100).toFixed(2)}%`;
+        }
+        return value.toFixed(3);
+    };
+
 
 
     return (
@@ -50,19 +106,67 @@ export const ModalContent = (props) => {
                                     className='py-2'
                                     clearable
                                     value={qubitMetric}
-                                    items={[
-                                        { name: '1->0 Readout Error', value: 'measure_ssro_error_1_to_0' },
-                                        { name: '0->1 Readout Error', value: 'measure_ssro_error_0_to_1' },
-                                        { name: 'Readout Fidelity', value: 'measure_ssro_fidelity' },
-                                        { name: 'T1 Time', value: 't1_time' },
-                                        { name: 'T2 Time', value: 't2_time' },
-                                        { name: 'T2 Echo Time', value: 't2_echo_time' },
-                                        { name: 'PRX Gate Fidelity', value: 'prx_rb_fidelity' },
-                                    ]}
+                                    items={qubitMetricOptions}
                                     placeholder='Choose metric'
                                     onChangeValue={(e) => setQubitMetric(e.detail || '')}
                                 />
                             </div>
+
+                            <div className="w-full">
+                                {(qubitMetric) && (() => {
+                                    const qubitStats = qubitMetric ? getMetricStatistics(qubitMetric) : null;
+
+                                    return (
+                                        <div className="flex flex-col items-center w-full">
+                                            {qubitStats && (
+                                                <div className="w-full">
+                                                    <div
+                                                        className="w-full h-6 rounded my-2"
+                                                        style={{
+                                                            background: (() => {
+                                                                const isLowerBetter = qubitMetric.includes("error");
+                                                                let worst = isLowerBetter ? qubitStats.best : qubitStats.worst;
+                                                                let best = isLowerBetter ? qubitStats.worst : qubitStats.best;
+                                                                const colors = generateMetricGradient(worst, best, qubitStats.average);
+                                                                const gradientStops = [];
+                                                                for (let i = 0; i <= 10; i++) {
+                                                                    const index = Math.floor((i / 10) * (colors.length - 1));
+                                                                    const percentage = (i / 10) * 100;
+                                                                    gradientStops.push(`${colors[index]} ${percentage}%`);
+                                                                }
+                                                                return `linear-gradient(to right, ${gradientStops.join(', ')})`;
+                                                            })()
+                                                        }}
+                                                    />
+                                                    <div className="flex justify-between text-sm mb-1 w-full">
+                                                        <span>
+                                                            Worst:<br />
+                                                            {(() => {
+                                                                const isLowerBetter = qubitMetric.includes("error");
+                                                                const worst = isLowerBetter ? qubitStats.best : qubitStats.worst;
+                                                                return formatMetricValue(worst, qubitStats.unit);
+                                                            })()}
+                                                        </span>
+                                                        <span>
+                                                            Mdn:<br />
+                                                            {formatMetricValue(qubitStats.average, qubitStats.unit)}
+                                                        </span>
+                                                        <span>
+                                                            Best:<br />
+                                                            {(() => {
+                                                                const isLowerBetter = qubitMetric.includes("error");
+                                                                const best = isLowerBetter ? qubitStats.worst : qubitStats.best;
+                                                                return formatMetricValue(best, qubitStats.unit);
+                                                            })()}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })()}
+                            </div>
+
                             <div className='mt-4'>
                                 <p className='font-bold mb-[2px]'>Coupler Metric:</p>
                                 <CSelect
@@ -70,13 +174,66 @@ export const ModalContent = (props) => {
                                     className='py-2'
                                     clearable
                                     value={couplerMetric}
-                                    items={[
-                                        { name: 'CZ Gate Fidelity', value: 'cz_irb_fidelity' },
-                                        { name: 'Clifford Gate Fidelity', value: 'clifford_rb_fidelity' },
-                                    ]}
+                                    items={couplerMetricOptions}
                                     placeholder='Choose metric'
                                     onChangeValue={(e) => setCouplerMetric(e.detail || '')}
                                 />
+                            </div>
+                            
+                            <div className="w-full">
+                                {(couplerMetric) && (() => {
+                                    const couplerStats = couplerMetric ? getMetricStatistics(couplerMetric) : null;
+
+                                    return (
+                                        <div className="flex flex-col items-center w-full">
+
+                                            {couplerStats && (
+                                                <div className="w-full">
+                                                    <div
+                                                        className="w-full h-6 rounded my-2"
+                                                        style={{
+                                                            background: (() => {
+                                                                const isLowerBetter = couplerMetric.includes("error");
+                                                                let worst = isLowerBetter ? couplerStats.best : couplerStats.worst;
+                                                                let best = isLowerBetter ? couplerStats.worst : couplerStats.best;
+                                                                const colors = generateMetricGradient(worst, best, couplerStats.average);
+                                                                const gradientStops = [];
+                                                                for (let i = 0; i <= 10; i++) {
+                                                                    const index = Math.floor((i / 10) * (colors.length - 1));
+                                                                    const percentage = (i / 10) * 100;
+                                                                    gradientStops.push(`${colors[index]} ${percentage}%`);
+                                                                }
+                                                                return `linear-gradient(to right, ${gradientStops.join(', ')})`;
+                                                            })()
+                                                        }}
+                                                    />
+                                                    <div className="flex justify-between text-sm mb-1 w-full">
+                                                        <span>
+                                                            Worst: <br />
+                                                            {(() => {
+                                                                const isLowerBetter = couplerMetric.includes("error");
+                                                                const worst = isLowerBetter ? couplerStats.best : couplerStats.worst;
+                                                                return formatMetricValue(worst, couplerStats.unit);
+                                                            })()}
+                                                        </span>
+                                                        <span>
+                                                            Mdn: <br />
+                                                            {formatMetricValue(couplerStats.average, couplerStats.unit)}
+                                                        </span>
+                                                        <span>
+                                                            Best: <br />
+                                                            {(() => {
+                                                                const isLowerBetter = couplerMetric.includes("error");
+                                                                const best = isLowerBetter ? couplerStats.worst : couplerStats.best;
+                                                                return formatMetricValue(best, couplerStats.unit);
+                                                            })()}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })()}
                             </div>
 
                         </div>}
@@ -108,6 +265,9 @@ export const ModalContent = (props) => {
                                             calibrationData={calibrationData}
                                             qubitMetric={qubitMetric}
                                             couplerMetric={couplerMetric}
+                                            qubitMetricFormatted = {qubitMetricOptions.find(m => m.value === qubitMetric)?.name || qubitMetric}
+                                            couplerMetricFormatted = {couplerMetricOptions.find(m => m.value === couplerMetric)?.name || couplerMetric}
+
                                         />
                                     ) : (
                                         <HelmiLayout
