@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { getColorForMetricValue } from '../../utils/generateGradient';
 
-export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitMetric, couplerMetric }) {
+export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitMetric, couplerMetric,
+    qubitMetricFormatted, couplerMetricFormatted }) {
 
     const [hoveredNode, setHoveredNode] = useState(null);
     const [hoveredEdge, setHoveredEdge] = useState(null);
@@ -9,29 +11,68 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
     const [tooltip, setTooltip] = useState(null);
     const containerRef = useRef(null);
 
-    // Generate a 1000-point gradient from red to green with quicker color change
-    const generateGradient = () => {
-        const gradient = [];
-        for (let i = 0; i < 1000; i++) {
-            const linearRatio = i / 999; // 0 to 1
-            // Apply exponential curve to make color change quicker
-            const ratio = Math.pow(linearRatio, 15); // Higher exponent = quicker change
-            const red = Math.round(80 + 100 * (1 - ratio));
-            const green = Math.round(80 + 100 * ratio);
-            const blue = 0;
-            gradient.push(`rgb(${red}, ${green}, ${blue})`);
+
+    // Calculate metric statistics for qubit metrics
+    const getQubitMetricStats = () => {
+        if (!calibrationData || !qubitMetric || !calibrationData[qubitMetric]) {
+            return null;
         }
-        return gradient;
+
+        const values = Object.values(calibrationData[qubitMetric])
+            .map(data => data?.value)
+            .filter(value => value !== null && value !== undefined);
+
+        if (values.length === 0) return null;
+
+        const sortedValues = [...values].sort((a, b) => a - b);
+        const worst = sortedValues[0];
+        const best = sortedValues[sortedValues.length - 1];
+        const average = calibrationData[qubitMetric].statistics.median;
+
+        return { worst, best, average };
     };
 
-    const colorGradient = generateGradient();
+    // Calculate metric statistics for coupler metrics
+    const getCouplerMetricStats = () => {
+        if (!calibrationData || !couplerMetric || !calibrationData[couplerMetric]) {
+            return null;
+        }
+
+        const values = Object.values(calibrationData[couplerMetric])
+            .map(data => data?.value)
+            .filter(value => value !== null && value !== undefined);
+
+        if (values.length === 0) return null;
+
+        const sortedValues = [...values].sort((a, b) => a - b);
+        const worst = sortedValues[0];
+        const best = sortedValues[sortedValues.length - 1];
+        const average = calibrationData[couplerMetric].statistics.median;
+
+        return { worst, best, average };
+    };
+
+    // Format metric value for display
+    const formatMetricValue = (value, unit) => {
+        if (value === null || value === undefined) return 'N/A';
+
+        if (unit === 's') {
+            // Convert seconds to appropriate unit
+            return `${(value * 1e6).toFixed(2)}μs`;
+        } else if (unit === '' || unit === '%') {
+            // Assume percentage/fidelity
+            return `${(value * 100).toFixed(2)}%`;
+        }
+        return value.toFixed(3);
+    };
+
 
     // Get metric value for a specific qubit
     const getQubitMetricValue = (qubitId) => {
         if (!calibrationData || !qubitMetric || !calibrationData[qubitMetric]) {
             return null;
         }
-        
+
         const metricData = calibrationData[qubitMetric][qubitId];
         return metricData?.value ?? null;
     };
@@ -41,38 +82,10 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
         if (!calibrationData || !qubitMetric || !calibrationData[qubitMetric]) {
             return '';
         }
-        
+
         // Try to get unit from first available qubit
         const firstQubitData = Object.values(calibrationData[qubitMetric]).find(data => data?.unit);
         return firstQubitData?.unit || '';
-    };
-
-    // Convert metric value to color index (0-999)
-    const getColorIndex = (value, unit, metric) => {
-        if (value === null || value === undefined) {
-            return 500; // Default to middle color if no value
-        }
-
-        let colorIndex;
-        
-        if (unit === 's') {
-            // For seconds: values closer to 0 should be greener (higher index)
-            // Assuming typical range is 0 to some reasonable maximum
-            // We'll use a simple mapping where smaller values get higher indices
-            const maxExpected = 0.001; // 1ms as a reasonable upper bound
-            const normalizedValue = Math.min(value / maxExpected, 1);
-            colorIndex = Math.round((1 - normalizedValue) * 999);
-        }
-        else if (!metric || !metric.includes("fidelity")){
-            colorIndex = Math.round((1-value) * 999);
-        } else {
-            // For unit='' (percentages/fidelities): higher values should be greener
-            // Convert value like 0.99756 to per thousand units (997)
-            colorIndex = Math.round(value * 999);
-        }
-        
-        // Ensure index is within bounds
-        return Math.max(0, Math.min(999, colorIndex));
     };
 
     // Get color for a specific qubit
@@ -85,11 +98,29 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
         if (!calibrationData || !calibrationData[qubitMetric] || !(qubitId in calibrationData[qubitMetric])) {
             return '#888888';
         }
-        // Otherwise, return gradient color based on metric value
+
         const value = getQubitMetricValue(qubitId);
+        if (value === null || value === undefined) {
+            return '#888888';
+        }
+
+        const stats = getQubitMetricStats();
+        if (!stats) {
+            return '#888888';
+        }
+
+        // For metrics where lower values are better (like error rates, times)
         const unit = getMetricUnit();
-        const colorIndex = getColorIndex(value, unit, qubitMetric);
-        return colorGradient[colorIndex];
+        let worst = stats.worst;
+        let best = stats.best;
+
+        // Reverse the scale for certain metrics where lower is better
+        if ((qubitMetric && qubitMetric.includes("error"))) {
+            worst = stats.best;
+            best = stats.worst;
+        }
+
+        return getColorForMetricValue(value, worst, best, stats.average);
     };
 
     // Get coupler metric value for a specific coupler
@@ -97,7 +128,7 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
         if (!calibrationData || !couplerMetric || !calibrationData[couplerMetric]) {
             return null;
         }
-        
+
         const metricData = calibrationData[couplerMetric][coupleId];
         return metricData?.value ?? null;
     };
@@ -107,7 +138,7 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
         if (!calibrationData || !couplerMetric || !calibrationData[couplerMetric]) {
             return '';
         }
-        
+
         // Try to get unit from first available coupler
         const firstCouplerData = Object.values(calibrationData[couplerMetric]).find(data => data?.unit);
         return firstCouplerData?.unit || '';
@@ -119,39 +150,52 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
         if (!couplerMetric || couplerMetric == '') {
             return '#aaa';
         }
-        
-        // Create coupler key (try both directions as couplers might be stored either way)
+
+        // Create coupler key
         const coupleId1 = `${nodeA}__${nodeB}`;
         const coupleId2 = `${nodeB}__${nodeA}`;
-        
+
         // If coupler does not exist in calibration data, return grey
         if (!calibrationData || !calibrationData[couplerMetric]) {
             return '#888888';
         }
-        
+
         let value = getCouplerMetricValue(coupleId1);
         if (value === null) {
             value = getCouplerMetricValue(coupleId2);
         }
-        
-        if (value === null) {
+
+        if (value === null || value === undefined) {
             return '#888888'; // Grey if no data found
         }
-        
-        // Otherwise, return gradient color based on metric value
+
+        const stats = getCouplerMetricStats();
+        if (!stats) {
+            return '#888888';
+        }
+
+        // For metrics where lower values are better
         const unit = getCouplerMetricUnit();
-        const colorIndex = getColorIndex(value, unit, couplerMetric);
-        return colorGradient[colorIndex];
+        let worst = stats.worst;
+        let best = stats.best;
+
+        // Reverse the scale for certain metrics where lower is better
+        if ((couplerMetric && couplerMetric.includes("error"))) {
+            worst = stats.best;
+            best = stats.worst;
+        }
+
+        return getColorForMetricValue(value, worst, best, stats.average);
     };
 
     // Handle mouse move to update tooltip position relative to the container
     const handleMouseMove = (event) => {
         if (containerRef.current) {
             const rect = containerRef.current.getBoundingClientRect();
-            
-            setMousePos({ 
-                x: event.clientX - rect.left, 
-                y: event.clientY - rect.top 
+
+            setMousePos({
+                x: event.clientX - rect.left,
+                y: event.clientY - rect.top
             });
         }
     };
@@ -159,41 +203,40 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
     // Calculate tooltip position with boundary checking
     const getTooltipPosition = () => {
         if (!containerRef.current || !tooltip) return { left: 0, top: 0 };
-        
+
         const containerRect = containerRef.current.getBoundingClientRect();
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
-        
+
         let tooltipWidth = 300; // rough estimate
         let tooltipHeight = 150; // rough estimate
 
-        // Estimated tooltip dimensions (approximate)
         if (qubitMetric === '' && couplerMetric === '') {
             tooltipWidth = 100; // rough estimate
             tooltipHeight = 70; // rough estimate
         }
-        
+
         // Calculate absolute position on screen
         const absoluteX = containerRect.left + mousePos.x;
         const absoluteY = containerRect.top + mousePos.y;
-        
+
         let left = mousePos.x + 8;
         let top = mousePos.y + 8;
-        
+
         // Check right boundary against viewport
         if (absoluteX + 8 + tooltipWidth > viewportWidth) {
             left = mousePos.x - tooltipWidth - 8; // Position to the left of cursor
         }
-        
+
         // Check bottom boundary against viewport
         if (absoluteY + 8 + tooltipHeight > viewportHeight) {
             top = mousePos.y - tooltipHeight - 8; // Position above cursor
         }
-        
+
         // Ensure tooltip stays within container bounds
         left = Math.max(8, Math.min(left, containerRect.width - tooltipWidth - 8));
         top = Math.max(8, Math.min(top, containerRect.height - tooltipHeight - 8));
-        
+
         return { left, top };
     };
 
@@ -211,7 +254,7 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
     const viewBoxHeight = maxY - minY;
     const viewBox = `${minX} ${-maxY} ${viewBoxWidth} ${viewBoxHeight}`;
 
-    // Calculate dynamic max width based on number of qubits
+    // Calculate max width based on number of qubits
     const maxWidth = rawNodes.length * 100;
 
     return (
@@ -221,20 +264,20 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
             style={{ maxHeight: `${maxWidth}px` }}
             onMouseMove={handleMouseMove}
             onMouseLeave={() => { setHoveredNode(null); setHoveredEdge(null); setTooltip(null); }}
-                >
-                    <svg
-                    viewBox={viewBox}
-                    preserveAspectRatio="xMidYMid meet"
-                    className="w-full h-full"
-                    style={{ maxWidth: `${maxWidth}px`, maxHeight: `${maxWidth}px` }}
-                    >
-                    {edges.map(([a, b]) => {
-                        const A = coordMap[a];
-                        const B = coordMap[b];
-                        const key = `${a}-${b}`;
-                        const hover = hoveredEdge === key;
-                        const edgeColor = getCouplerColor(a, b);
-                        return (
+        >
+            <svg
+                viewBox={viewBox}
+                preserveAspectRatio="xMidYMid meet"
+                className="w-full h-full"
+                style={{ maxWidth: `${maxWidth}px`, maxHeight: `${maxWidth}px` }}
+            >
+                {edges.map(([a, b]) => {
+                    const A = coordMap[a];
+                    const B = coordMap[b];
+                    const key = `${a}-${b}`;
+                    const hover = hoveredEdge === key;
+                    const edgeColor = getCouplerColor(a, b);
+                    return (
                         <motion.line
                             key={key}
                             x1={A.x} y1={-A.y}
@@ -245,43 +288,44 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
                             initial={{ strokeWidth: 60 }}
                             animate={{ strokeWidth: hover ? 80 : 60 }}
                             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                            onMouseEnter={() => { 
-                            const coupleId1 = `${a}__${b}`;
-                            const coupleId2 = `${b}__${a}`;
-                            const metricValue = getCouplerMetricValue(coupleId1) ?? getCouplerMetricValue(coupleId2);
-                            const unit = getCouplerMetricUnit();
-                            const metricInfo = metricValue !== null && couplerMetric ? ` | ${couplerMetric}: ${metricValue}${unit}` : '';
-                            setHoveredEdge(key); 
-                            let uncertainty = null;
-                            const coupleId = getCouplerMetricValue(coupleId1) !== null ? coupleId1 : coupleId2;
-                            if (
-                                calibrationData &&
-                                couplerMetric &&
-                                calibrationData[couplerMetric] &&
-                                calibrationData[couplerMetric][coupleId] &&
-                                calibrationData[couplerMetric][coupleId].uncertainty !== undefined
-                            ) {
-                                uncertainty = calibrationData[couplerMetric][coupleId].uncertainty;
-                            }
-                            let uncertaintyInfo = uncertainty !== null ? ` (±${uncertainty}${unit})` : '';
-                            let details;
-                            if (couplerMetric && couplerMetric !== '' && metricValue === null) {
-                                details = `Connecting ${a} and ${b} Disabled`;
-                            } else {
-                                details = `Connecting ${a} and ${b}${metricInfo}${uncertaintyInfo}`;
-                            }
-                            setTooltip({
-                                type: 'edge',
-                                content: `Coupler: ${a}__${b}`,
-                                details
-                            });
+                            onMouseEnter={() => {
+                                const coupleId1 = `${a}__${b}`;
+                                const coupleId2 = `${b}__${a}`;
+                                const metricValue = getCouplerMetricValue(coupleId1) ?? getCouplerMetricValue(coupleId2);
+                                const unit = getCouplerMetricUnit();
+                                const formattedValue = formatMetricValue(metricValue, unit);
+                                const metricInfo = metricValue !== null && couplerMetricFormatted ? `${couplerMetric}: ${formattedValue}` : '';
+                                setHoveredEdge(key);
+                                let uncertainty = null;
+                                const coupleId = getCouplerMetricValue(coupleId1) !== null ? coupleId1 : coupleId2;
+                                if (
+                                    calibrationData &&
+                                    couplerMetric &&
+                                    calibrationData[couplerMetric] &&
+                                    calibrationData[couplerMetric][coupleId] &&
+                                    calibrationData[couplerMetric][coupleId].uncertainty !== undefined
+                                ) {
+                                    uncertainty = calibrationData[couplerMetric][coupleId].uncertainty;
+                                }
+                                let uncertaintyInfo = (uncertainty !== null && uncertainty !== "None") ? ` (±${formatMetricValue(uncertainty, unit)})` : '';
+                                let details;
+                                if (couplerMetric && couplerMetric !== '' && metricValue === null) {
+                                    details = `Disabled`;
+                                } else {
+                                    details = `${metricInfo}${uncertaintyInfo}`;
+                                }
+                                setTooltip({
+                                    type: 'edge',
+                                    content: `Coupler: ${a}__${b}`,
+                                    details
+                                });
                             }}
                             onMouseLeave={() => { setHoveredEdge(null); setTooltip(null); }}
                             className={hover ? 'cursor-pointer filter drop-shadow-md' : 'cursor-pointer'}
                         />
-                        );
-                    })}
-                    {rawNodes.map(n => {
+                    );
+                })}
+                {rawNodes.map(n => {
                     const hover = hoveredNode === n.id;
                     const nodeColor = getQubitColor(n.id);
                     return (
@@ -290,11 +334,12 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
                                 initial={{ scale: 1.1 }}
                                 animate={{ scale: hover ? 1.25 : 1.1 }}
                                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                                onMouseEnter={() => { 
+                                onMouseEnter={() => {
                                     const metricValue = getQubitMetricValue(n.id);
                                     const unit = getMetricUnit();
-                                    const metricInfo = metricValue !== null ? ` | ${qubitMetric}: ${metricValue}${unit}` : '';
-                                    setHoveredNode(n.id); 
+                                    const formattedValue = formatMetricValue(metricValue, unit);
+                                    const metricInfo = metricValue !== null ? `${qubitMetricFormatted}: ${formattedValue}` : '';
+                                    setHoveredNode(n.id);
                                     let uncertainty = null;
                                     if (
                                         calibrationData &&
@@ -305,18 +350,18 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
                                     ) {
                                         uncertainty = calibrationData[qubitMetric][n.id].uncertainty;
                                     }
-                                    let uncertaintyInfo = uncertainty !== null ? ` (±${uncertainty}${unit})` : '';
+                                    let uncertaintyInfo = (uncertainty !== null && uncertainty !== "None") ? ` (±${formatMetricValue(uncertainty, unit)})` : '';
                                     let details;
                                     if (qubitMetric && qubitMetric !== '' && metricValue === null) {
-                                        details = `Qubit: ${n.id} Disabled`;
+                                        details = `Disabled`;
                                     } else {
-                                        details = `Qubit: ${n.id}${metricInfo}${uncertaintyInfo}`;
+                                        details = `${metricInfo}${uncertaintyInfo}`;
                                     }
-                                    setTooltip({ 
-                                        type: 'node', 
-                                        content: `Qubit: ${n.id}`, 
+                                    setTooltip({
+                                        type: 'node',
+                                        content: `Qubit: ${n.id}`,
                                         details
-                                    }); 
+                                    });
                                 }}
                                 onMouseLeave={() => { setHoveredNode(null); setTooltip(null); }}
                                 className={hover ? 'cursor-pointer filter drop-shadow-lg' : 'cursor-pointer'}
@@ -341,17 +386,50 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
             </svg>
 
             {tooltip && (
-                <div
-                    className="max-w-[300px] absolute bg-black bg-opacity-90 text-white p-2 rounded-md text-xs font-mono pointer-events-none z-50"
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, y: 10 }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
+                    className="max-w-[320px] absolute pointer-events-none z-50 shadow-2xl"
                     style={{
                         left: getTooltipPosition().left + 'px',
                         top: getTooltipPosition().top + 'px'
                     }}
                 >
-                    {/* {console.log("Tooltip:", tooltip)} */}
-                    <div className="font-bold text-lg mb-0.5">{tooltip.content}</div>
-                    <div className="opacity-80 text-lg text-[11px]">{tooltip.details}</div>
-                </div>
+                    <div className="bg-gradient-to-br from-slate-800 to-slate-900 backdrop-blur-sm border border-slate-600/50 rounded-lg p-3 shadow-xl">
+                        {/* Arrow pointing to the element */}
+                        <div className="absolute -top-1 left-4 w-2 h-2 bg-slate-800 border-l border-t border-slate-600/50 rotate-45"></div>
+
+                        {/* Header with icon */}
+                        <div className="flex items-center gap-2 mb-2">
+                            <div className={`w-2 h-2 rounded-full ${tooltip.type === 'node' ? 'bg-blue-400' : 'bg-purple-400'}`}></div>
+                            <div className="font-semibold text-white text-lg font-mono tracking-wide">
+                                {tooltip.content}
+                            </div>
+                        </div>
+
+                        {/* Details with better formatting */}
+                        {tooltip.details &&
+                            <div className="flex flex-col sm:flex-row text-slate-300 text-md font-mono leading-relaxed bg-slate-900/50 rounded px-2 py-1.5 border border-slate-700/30">
+                                <p className='font-bold'>
+                                    {tooltip.details.split(":")[0]}
+                                    {tooltip.details !== "Disabled" &&
+                                        <span className='mr-1'>:</span>
+                                    }
+                                </p>
+
+                                <p>
+                                    {tooltip.details.split(":")[1]}
+                                </p>
+                            </div>
+                        }
+
+
+                        {/* Bottom accent */}
+                        <div className={`mt-2 h-0.5 rounded-full ${tooltip.type === 'node' ? 'bg-gradient-to-r from-blue-500 to-cyan-400' : 'bg-gradient-to-r from-purple-500 to-pink-400'}`}></div>
+                    </div>
+                </motion.div>
             )}
         </div>
     );
