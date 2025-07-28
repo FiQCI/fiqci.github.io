@@ -94,7 +94,6 @@ export const ModalContent = (props) => {
         if (values.length === 0) return null;
 
         const sorted = values.sort((a, b) => a - b);
-        const sum = values.reduce((a, b) => a + b, 0);
 
         return {
             worst: sorted[0],
