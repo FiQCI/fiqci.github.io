@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 
-export const useCalibration = (statusUrl)  => {
+export const useCalibration = (calibrationUrl)  => {
   const [calibrationData, setCalibrationData] = useState([])
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchStatus = async () => {
-    const url = statusUrl;
+    const fetchCalibration = async () => {
+    const url = calibrationUrl;
     try {
         const resp = await fetch (url);
         const result = await resp.json();
@@ -17,8 +17,8 @@ export const useCalibration = (statusUrl)  => {
       }
     }
 
-  fetchStatus();
-}, [statusUrl]);
+  fetchCalibration();
+}, [calibrationUrl]);
 
   return { calibrationData, error };
 }
