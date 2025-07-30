@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { getColorForMetricValue } from '../../utils/generateGradient';
+import { formatMetricValue } from '../../utils/formatMetricValue';
 
 export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitMetric, couplerMetric,
     qubitMetricFormatted, couplerMetricFormatted, thresholdQubit, thresholdCoupler }) {
@@ -51,21 +52,6 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
 
         return { worst, best, average };
     };
-
-    // Format metric value for display
-    const formatMetricValue = (value, unit) => {
-        if (value === null || value === undefined) return 'N/A';
-
-        if (unit === 's') {
-            // Convert seconds to appropriate unit
-            return `${(value * 1e6).toFixed(2)}μs`;
-        } else if (unit === '' || unit === '%') {
-            // Assume percentage/fidelity
-            return `${(value * 100).toFixed(2)}%`;
-        }
-        return value.toFixed(3);
-    };
-
 
     // Get metric value for a specific qubit
     const getQubitMetricValue = (qubitId) => {
