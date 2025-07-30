@@ -19,7 +19,6 @@ export const SideBar = (props) => {
         thresholdCoupler, setThresholdCoupler, thresholdQubit, setThresholdQubit } = props;
 
     const calibrationData = calibrationDataAll.metrics
-    const lastCalibrated = new Date(calibrationDataAll.quality_metric_set_end_timestamp)
 
     // Get current raw data based on selection
     const getCurrentRawData = () => {
