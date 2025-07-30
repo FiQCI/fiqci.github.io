@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
-import { useCalibration } from '../hooks/useCalibration';
-import { useDeviceInfo } from '../hooks/useDeviceInfo';
-import { HelmiLayout } from './QcLayouts/Helmi';
-import { Q50Layout } from './QcLayouts/Q50';
+import { useCalibration } from '../../hooks/useCalibration';
+import { useDeviceInfo } from '../../hooks/useDeviceInfo';
+import { HelmiLayout } from '../QcLayouts/Helmi';
+import { Q50Layout } from '../QcLayouts/Q50';
 import { Overview } from './StatusOverview';
-import { CalibrationTable } from './StatusModal/CalibrationTable';
-import { SideBar } from './StatusModal/SideBar';
+import { CalibrationTable } from './CalibrationTable';
+import { SideBar } from './SideBar';
 import {
     CCard, CCardTitle, CCardContent, CCardActions, CButton, CTabs,
     CTab, CTabItems, CTabItem
