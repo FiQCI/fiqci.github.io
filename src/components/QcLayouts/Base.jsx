@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { getColorForMetricValue } from '../../utils/generateGradient';
 import { formatMetricValue } from '../../utils/formatMetricValue';
