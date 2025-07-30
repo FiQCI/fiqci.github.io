@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CSelect, CRadioGroup, CSwitch, CButton } from '@cscfi/csc-ui-react';
 import { generateMetricGradient } from '../../utils/generateGradient';
 import { formatMetricValue } from '../../utils/formatMetricValue';
+import { getCurrentRawData, copyToClipboard, downloadRawData, getMetricStatistics } from '../../utils/sidebarUtils';
 
 export const SideBar = (props) => {
 
@@ -9,7 +10,6 @@ export const SideBar = (props) => {
     const [couplerInputValue, setCouplerInputValue] = useState('');
 
     const [copySuccess, setCopySuccess] = useState(false);
-
 
     const { activeTab, setThresholdCouplerValue, setThresholdQubitValue,
         calibrationDataAll, deviceInfoData, devicesWithStatus,
@@ -20,65 +20,22 @@ export const SideBar = (props) => {
 
     const calibrationData = calibrationDataAll.metrics
 
-    // Get current raw data based on selection
-    const getCurrentRawData = () => {
-        return rawDataType.value === 'calibration_data' ? calibrationDataAll : deviceInfoData;
-    };
-
     // Copy to clipboard function
-    const copyToClipboard = async () => {
-        try {
-            const data = JSON.stringify(getCurrentRawData(), null, 2);
-            await navigator.clipboard.writeText(data);
-            setCopySuccess(true);
-            setTimeout(() => setCopySuccess(false), 2000);
-        } catch (err) {
-            console.error('Failed to copy: ', err);
-        }
+    const handleCopyToClipboard = async () => {
+        const data = JSON.stringify(getCurrentRawData(rawDataType, calibrationDataAll, deviceInfoData), null, 2);
+        await copyToClipboard(data, setCopySuccess);
     };
 
     // Download as JSON file
-    const downloadRawData = () => {
-        const data = JSON.stringify(getCurrentRawData(), null, 2);
-        const blob = new Blob([data], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${deviceData.device_id.toLowerCase()}_${rawDataType.value}_${new Date().toISOString().split('T')[0]}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+    const handleDownloadRawData = () => {
+        const data = JSON.stringify(getCurrentRawData(rawDataType, calibrationDataAll, deviceInfoData), null, 2);
+        downloadRawData(data, deviceData, rawDataType);
     };
-
-    // Calculate statistics for selected metric
-    const getMetricStatistics = (metric) => {
-        if (!calibrationData || !metric || !calibrationData[metric]) {
-            return null;
-        }
-
-        const values = Object.values(calibrationData[metric])
-            .map(item => item?.value)
-            .filter(value => value !== null && value !== undefined && !isNaN(value));
-
-        if (values.length === 0) return null;
-
-        const sorted = values.sort((a, b) => a - b);
-
-        return {
-            worst: sorted[0],
-            best: sorted[sorted.length - 1],
-            average: calibrationData[metric].statistics.average,
-            median: calibrationData[metric].statistics.median,
-            unit: Object.values(calibrationData[metric]).find(item => item?.unit)?.unit || ''
-        };
-    };
-
 
     // Calculate threshold values when dependencies change
     useEffect(() => {
-        if (qubitMetric && calibrationData && calibrationData[qubitMetric]) {
-            const qubitStats = getMetricStatistics(qubitMetric);
+        if (qubitMetric && calibrationData) {
+            const qubitStats = getMetricStatistics(calibrationData, qubitMetric);
             if (qubitStats) {
                 const isLowerBetter = qubitMetric.includes("error");
                 const worst = isLowerBetter ? qubitStats.best : qubitStats.worst;
@@ -97,8 +54,8 @@ export const SideBar = (props) => {
     }, [qubitMetric, thresholdQubit]);
 
     useEffect(() => {
-        if (couplerMetric && calibrationData && calibrationData[couplerMetric]) {
-            const couplerStats = getMetricStatistics(couplerMetric);
+        if (couplerMetric && calibrationData) {
+            const couplerStats = getMetricStatistics(calibrationData, couplerMetric);
             if (couplerStats) {
                 const isLowerBetter = couplerMetric.includes("error");
                 const worst = isLowerBetter ? couplerStats.best : couplerStats.worst;
@@ -158,7 +115,7 @@ export const SideBar = (props) => {
 
                         <div className="w-full">
                             {(qubitMetric) && (() => {
-                                const qubitStats = qubitMetric ? getMetricStatistics(qubitMetric) : null;
+                                const qubitStats = qubitMetric ? getMetricStatistics(calibrationData, qubitMetric) : null;
 
                                 return (
                                     <div className="flex flex-col items-center w-full mt-2">
@@ -300,7 +257,7 @@ export const SideBar = (props) => {
 
                         <div className="w-full">
                             {(couplerMetric) && (() => {
-                                const couplerStats = couplerMetric ? getMetricStatistics(couplerMetric) : null;
+                                const couplerStats = couplerMetric ? getMetricStatistics(calibrationData, couplerMetric) : null;
 
                                 return (
                                     <div className="flex flex-col items-center w-full">
@@ -465,7 +422,7 @@ export const SideBar = (props) => {
                         <div className={`flex flex-col gap-2`}>
                             <CButton
                                 size="sm"
-                                onClick={copyToClipboard}
+                                onClick={handleCopyToClipboard}
                                 className={`max-w-[200px] ${copySuccess ? 'bg-[#B9DC9C] text-[#204303]' : ''}`}
                             >
                                 {copySuccess ? 'Copied!' : 'Copy'}
@@ -473,7 +430,7 @@ export const SideBar = (props) => {
                             <CButton
                                 size="sm"
                                 className='max-w-[200px]'
-                                onClick={downloadRawData}
+                                onClick={handleDownloadRawData}
                             >
                                 Download
                             </CButton>
