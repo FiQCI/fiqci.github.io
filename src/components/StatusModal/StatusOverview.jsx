@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const parseResultMedian = (data, unit) => {
     if (unit === '') {
         return (Number.parseFloat(data?.median) * 100).toFixed(2);
@@ -14,10 +15,15 @@ export const Overview = (props) => {
 
     const calibrationData = props.calibrationData;
 
+    const deviceInfoData = props.deviceInfoData;
+
+
+    const limitationsData = deviceInfoData?.job_policy || {};
+
     const limitations = {
-        "Max circuits per batch": "200",
-        "Max shots per job": "100000",
-        "Max jobs in queue": "500"
+        "Max circuits per batch": limitationsData?.max_number_circuits_per_batch || "-",
+        "Max shots per job": limitationsData?.max_number_shots_per_job || "-",
+        "Max jobs in queue": limitationsData?.max_queue_length || "-"
     }
 
     const qualityMetricsSingle = {
