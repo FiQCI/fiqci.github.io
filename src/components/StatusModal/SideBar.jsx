@@ -5,44 +5,50 @@ import { formatMetricValue } from '../../utils/formatMetricValue';
 import { getCurrentRawData, copyToClipboard, downloadRawData, getMetricStatistics } from '../../utils/sidebarUtils';
 
 export const SideBar = (props) => {
+    const {
+        activeTab,
+        metricsState,
+        updateMetricsState,
+        viewState,
+        updateViewState,
+        calibrationDataAll,
+        deviceInfoData,
+        devicesWithStatus,
+        qubitMetricOptions,
+        couplerMetricOptions,
+        deviceData,
+    } = props;
+
+    const calibrationData = calibrationDataAll.metrics;
 
     const [qubitInputValue, setQubitInputValue] = useState('');
     const [couplerInputValue, setCouplerInputValue] = useState('');
 
     const [copySuccess, setCopySuccess] = useState(false);
 
-    const { activeTab, setThresholdCouplerValue, setThresholdQubitValue,
-        calibrationDataAll, deviceInfoData, devicesWithStatus,
-        qubitMetricOptions, couplerMetricOptions, tableView, setTableView,
-        qubitSwitch, setQubitSwitch, couplerSwitch, setCouplerSwitch, rawDataType,
-        setRawDataType, deviceData, qubitMetric, setQubitMetric, couplerMetric, setCouplerMetric,
-        thresholdCoupler, setThresholdCoupler, thresholdQubit, setThresholdQubit } = props;
-
-    const calibrationData = calibrationDataAll.metrics
-
     // Copy to clipboard function
     const handleCopyToClipboard = async () => {
-        const data = JSON.stringify(getCurrentRawData(rawDataType, calibrationDataAll, deviceInfoData), null, 2);
+        const data = JSON.stringify(getCurrentRawData(viewState.rawDataType, calibrationDataAll, deviceInfoData), null, 2);
         await copyToClipboard(data, setCopySuccess);
     };
 
     // Download as JSON file
     const handleDownloadRawData = () => {
-        const data = JSON.stringify(getCurrentRawData(rawDataType, calibrationDataAll, deviceInfoData), null, 2);
-        downloadRawData(data, deviceData, rawDataType);
+        const data = JSON.stringify(getCurrentRawData(viewState.rawDataType, calibrationDataAll, deviceInfoData), null, 2);
+        downloadRawData(data, deviceData, viewState.rawDataType);
     };
 
     // Calculate threshold values when dependencies change
     useEffect(() => {
-        if (qubitMetric && calibrationData) {
-            const qubitStats = getMetricStatistics(calibrationData, qubitMetric);
+        if (metricsState.qubitMetric && calibrationData) {
+            const qubitStats = getMetricStatistics(calibrationData, metricsState.qubitMetric);
             if (qubitStats) {
-                const isLowerBetter = qubitMetric.includes("error");
+                const isLowerBetter = metricsState.qubitMetric.includes("error");
                 const worst = isLowerBetter ? qubitStats.best : qubitStats.worst;
                 const best = isLowerBetter ? qubitStats.worst : qubitStats.best;
                 const range = parseFloat(best) - parseFloat(worst);
-                const thresholdValue = parseFloat(worst) + (thresholdQubit * range);
-                setThresholdQubitValue(thresholdValue);
+                const thresholdValue = parseFloat(worst) + (metricsState.thresholdQubit * range);
+                updateMetricsState('thresholdQubitValue', thresholdValue);
 
                 // Update input display value
                 const displayValue = qubitStats.unit === 's' ? (thresholdValue * 1e6).toFixed(2) :
@@ -51,18 +57,18 @@ export const SideBar = (props) => {
                 setQubitInputValue(displayValue);
             }
         }
-    }, [qubitMetric, thresholdQubit]);
+    }, [metricsState.qubitMetric, metricsState.thresholdQubit]);
 
     useEffect(() => {
-        if (couplerMetric && calibrationData) {
-            const couplerStats = getMetricStatistics(calibrationData, couplerMetric);
+        if (metricsState.couplerMetric && calibrationData) {
+            const couplerStats = getMetricStatistics(calibrationData, metricsState.couplerMetric);
             if (couplerStats) {
-                const isLowerBetter = couplerMetric.includes("error");
+                const isLowerBetter = metricsState.couplerMetric.includes("error");
                 const worst = isLowerBetter ? couplerStats.best : couplerStats.worst;
                 const best = isLowerBetter ? couplerStats.worst : couplerStats.best;
                 const range = parseFloat(best) - parseFloat(worst);
-                const thresholdValue = parseFloat(worst) + (thresholdCoupler * range);
-                setThresholdCouplerValue(thresholdValue);
+                const thresholdValue = parseFloat(worst) + (metricsState.thresholdCoupler * range);
+                updateMetricsState('thresholdCouplerValue', thresholdValue);
 
                 // Update input display value
                 const displayValue = couplerStats.unit === 's' ? (thresholdValue * 1e6).toFixed(2) :
@@ -71,7 +77,7 @@ export const SideBar = (props) => {
                 setCouplerInputValue(displayValue);
             }
         }
-    }, [couplerMetric, thresholdCoupler]);
+    }, [metricsState.couplerMetric, metricsState.thresholdCoupler]);
 
     return (
         <div className='flex flex-col pb-4 mr-[50px] border-b-2 md:border-b-0 md:border-r-2 border-gray-400 col-span-1'>
@@ -102,20 +108,20 @@ export const SideBar = (props) => {
                                 hideDetails={true}
                                 className='py-2'
                                 clearable
-                                value={qubitMetric}
+                                value={metricsState.qubitMetric}
                                 items={qubitMetricOptions}
                                 placeholder='Choose metric'
                                 onChangeValue={(e) => {
-                                    setQubitMetric(e.detail || '');
-                                    setThresholdQubit(0);
+                                    updateMetricsState('qubitMetric', e.detail || '');
+                                    updateMetricsState('thresholdQubit', 0);
                                     setQubitInputValue('0');
                                 }}
                             />
                         </div>
 
                         <div className="w-full">
-                            {(qubitMetric) && (() => {
-                                const qubitStats = qubitMetric ? getMetricStatistics(calibrationData, qubitMetric) : null;
+                            {(metricsState.qubitMetric) && (() => {
+                                const qubitStats = metricsState.qubitMetric ? getMetricStatistics(calibrationData, metricsState.qubitMetric) : null;
 
                                 return (
                                     <div className="flex flex-col items-center w-full mt-2">
@@ -132,7 +138,7 @@ export const SideBar = (props) => {
                                                                 setQubitInputValue(e.target.value);
                                                                 const inputValue = parseFloat(e.target.value);
                                                                 if (!isNaN(inputValue)) {
-                                                                    const isLowerBetter = qubitMetric.includes("error");
+                                                                    const isLowerBetter = metricsState.qubitMetric.includes("error");
                                                                     const worst = isLowerBetter ? qubitStats.best : qubitStats.worst;
                                                                     const best = isLowerBetter ? qubitStats.worst : qubitStats.best;
                                                                     const range = parseFloat(best) - parseFloat(worst);
@@ -149,8 +155,8 @@ export const SideBar = (props) => {
                                                                     const sliderValue = (rawValue - parseFloat(worst)) / range;
                                                                     const clampedSliderValue = Math.max(0, Math.min(1, sliderValue));
 
-                                                                    setThresholdQubit(clampedSliderValue);
-                                                                    setThresholdQubitValue(rawValue);
+                                                                    updateMetricsState('thresholdQubit', clampedSliderValue);
+                                                                    updateMetricsState('thresholdQubitValue', rawValue);
                                                                 }
                                                             }}
                                                         />
@@ -164,7 +170,7 @@ export const SideBar = (props) => {
                                                 <div className="relative w-full h-6 rounded my-2"
                                                     style={{
                                                         background: (() => {
-                                                            const isLowerBetter = qubitMetric.includes("error");
+                                                            const isLowerBetter = metricsState.qubitMetric.includes("error");
                                                             let worst = isLowerBetter ? qubitStats.best : qubitStats.worst;
                                                             let best = isLowerBetter ? qubitStats.worst : qubitStats.best;
                                                             const colors = generateMetricGradient(worst, best, qubitStats.average);
@@ -182,8 +188,8 @@ export const SideBar = (props) => {
                                                         min="0"
                                                         max="1"
                                                         step="0.01"
-                                                        value={thresholdQubit}
-                                                        onChange={(e) => setThresholdQubit(parseFloat(e.target.value))}
+                                                        value={metricsState.thresholdQubit}
+                                                        onChange={(e) => updateMetricsState('thresholdQubit', parseFloat(e.target.value))}
                                                         className="absolute top-0 left-0 w-full h-full opacity-70 cursor-pointer slider"
                                                         style={{
                                                             background: 'transparent',
@@ -217,7 +223,7 @@ export const SideBar = (props) => {
                                                     <span>
                                                         Worst:<br />
                                                         {(() => {
-                                                            const isLowerBetter = qubitMetric.includes("error");
+                                                            const isLowerBetter = metricsState.qubitMetric.includes("error");
                                                             const worst = isLowerBetter ? qubitStats.best : qubitStats.worst;
                                                             return formatMetricValue(worst, qubitStats.unit);
                                                         })()}
@@ -225,7 +231,7 @@ export const SideBar = (props) => {
                                                     <span>
                                                         Best:<br />
                                                         {(() => {
-                                                            const isLowerBetter = qubitMetric.includes("error");
+                                                            const isLowerBetter = metricsState.qubitMetric.includes("error");
                                                             const best = isLowerBetter ? qubitStats.worst : qubitStats.best;
                                                             return formatMetricValue(best, qubitStats.unit);
                                                         })()}
@@ -244,20 +250,20 @@ export const SideBar = (props) => {
                                 hideDetails={true}
                                 className='py-2'
                                 clearable
-                                value={couplerMetric}
+                                value={metricsState.couplerMetric}
                                 items={couplerMetricOptions}
                                 placeholder='Choose metric'
                                 onChangeValue={(e) => {
-                                    setCouplerMetric(e.detail || '');
-                                    setThresholdCoupler(0);
+                                    updateMetricsState('couplerMetric', e.detail || '');
+                                    updateMetricsState('thresholdCoupler', 0);
                                     setCouplerInputValue('0');
                                 }}
                             />
                         </div>
 
                         <div className="w-full">
-                            {(couplerMetric) && (() => {
-                                const couplerStats = couplerMetric ? getMetricStatistics(calibrationData, couplerMetric) : null;
+                            {(metricsState.couplerMetric) && (() => {
+                                const couplerStats = metricsState.couplerMetric ? getMetricStatistics(calibrationData, metricsState.couplerMetric) : null;
 
                                 return (
                                     <div className="flex flex-col items-center w-full">
@@ -276,7 +282,7 @@ export const SideBar = (props) => {
                                                                 setCouplerInputValue(e.target.value);
                                                                 const inputValue = parseFloat(e.target.value);
                                                                 if (!isNaN(inputValue)) {
-                                                                    const isLowerBetter = couplerMetric.includes("error");
+                                                                    const isLowerBetter = metricsState.couplerMetric.includes("error");
                                                                     const worst = isLowerBetter ? couplerStats.best : couplerStats.worst;
                                                                     const best = isLowerBetter ? couplerStats.worst : couplerStats.best;
                                                                     const range = parseFloat(best) - parseFloat(worst);
@@ -293,8 +299,8 @@ export const SideBar = (props) => {
                                                                     const sliderValue = (rawValue - parseFloat(worst)) / range;
                                                                     const clampedSliderValue = Math.max(0, Math.min(1, sliderValue));
 
-                                                                    setThresholdCoupler(clampedSliderValue);
-                                                                    setThresholdCouplerValue(rawValue);
+                                                                    updateMetricsState('thresholdCoupler', clampedSliderValue);
+                                                                    updateMetricsState('thresholdCouplerValue', rawValue);
                                                                 }
                                                             }}
                                                         />
@@ -308,7 +314,7 @@ export const SideBar = (props) => {
                                                 <div className="relative w-full h-6 rounded my-2"
                                                     style={{
                                                         background: (() => {
-                                                            const isLowerBetter = couplerMetric.includes("error");
+                                                            const isLowerBetter = metricsState.couplerMetric.includes("error");
                                                             let worst = isLowerBetter ? couplerStats.best : couplerStats.worst;
                                                             let best = isLowerBetter ? couplerStats.worst : couplerStats.best;
                                                             const colors = generateMetricGradient(worst, best, couplerStats.average);
@@ -326,8 +332,8 @@ export const SideBar = (props) => {
                                                         min="0"
                                                         max="1"
                                                         step="0.01"
-                                                        value={thresholdCoupler}
-                                                        onChange={(e) => setThresholdCoupler(parseFloat(e.target.value))}
+                                                        value={metricsState.thresholdCoupler}
+                                                        onChange={(e) => updateMetricsState('thresholdCoupler', parseFloat(e.target.value))}
                                                         className="absolute top-0 left-0 w-full h-full opacity-70 cursor-pointer slider"
                                                         style={{
                                                             background: 'transparent',
@@ -340,7 +346,7 @@ export const SideBar = (props) => {
                                                     <span>
                                                         Worst: <br />
                                                         {(() => {
-                                                            const isLowerBetter = couplerMetric.includes("error");
+                                                            const isLowerBetter = metricsState.couplerMetric.includes("error");
                                                             const worst = isLowerBetter ? couplerStats.best : couplerStats.worst;
                                                             return formatMetricValue(worst, couplerStats.unit);
                                                         })()}
@@ -349,7 +355,7 @@ export const SideBar = (props) => {
                                                     <span>
                                                         Best: <br />
                                                         {(() => {
-                                                            const isLowerBetter = couplerMetric.includes("error");
+                                                            const isLowerBetter = metricsState.couplerMetric.includes("error");
                                                             const best = isLowerBetter ? couplerStats.worst : couplerStats.best;
                                                             return formatMetricValue(best, couplerStats.unit);
                                                         })()}
@@ -375,31 +381,31 @@ export const SideBar = (props) => {
                             { name: 'Calibration Data', value: 'calibration_data' },
                             { name: 'Device Info', value: 'device_info' },
                         ]}
-                        onChangeValue={(e) => setRawDataType(e.detail)}
+                        onChangeValue={(e) => updateViewState('rawDataType', e.detail)}
                         defaultValue={{ name: 'Calibration Data', value: 'calibration_data' }}
-                        value={rawDataType}
+                        value={viewState.rawDataType}
                         inline={true}
 
                     >
                     </CRadioGroup>
-                    {rawDataType.value === 'calibration_data' &&
+                    {viewState.rawDataType.value === 'calibration_data' &&
                         <div className='mt-8 ml-2'>
                             <CSwitch
-                                value={tableView}
-                                onChangeValue={(e) => setTableView(e.detail)}
+                                value={viewState.tableView}
+                                onChangeValue={(e) => updateViewState('tableView', e.detail)}
                             >
                                 Table View
                             </CSwitch>
                         </div>
                     }
-                    {tableView && rawDataType.value === 'calibration_data' &&
+                    {viewState.tableView && viewState.rawDataType.value === 'calibration_data' &&
                         <>
                             <div className='mt-2 ml-2 flex flex-col'>
                                 <CSwitch
-                                    value={qubitSwitch}
+                                    value={metricsState.qubitSwitch}
                                     onChangeValue={(e) => {
-                                        setQubitSwitch(e.detail)
-                                        setCouplerSwitch(!e.detail)
+                                        updateMetricsState('qubitSwitch', e.detail)
+                                        updateMetricsState('couplerSwitch', !e.detail)
                                     }}
                                 >
                                     Qubits
@@ -407,10 +413,10 @@ export const SideBar = (props) => {
                             </div>
                             <div className='mt-2 ml-2 flex flex-col'>
                                 <CSwitch
-                                    value={couplerSwitch}
+                                    value={metricsState.couplerSwitch}
                                     onChangeValue={(e) => {
-                                        setQubitSwitch(!e.detail)
-                                        setCouplerSwitch(e.detail)
+                                        updateMetricsState('qubitSwitch', !e.detail)
+                                        updateMetricsState('couplerSwitch', e.detail)
                                     }}
                                 >
                                     Couplers

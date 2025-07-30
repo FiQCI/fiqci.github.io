@@ -19,16 +19,31 @@ export const ModalContent = (props) => {
     const { deviceInfo: deviceInfoData, infoError } = useDeviceInfo(`https://fiqci-backend.2.rahtiapp.fi/device/${props.device_id.toLowerCase()}`)
 
     const [activeTab, setActiveTab] = useState('overview');
-    const [qubitMetric, setQubitMetric] = useState('');
-    const [couplerMetric, setCouplerMetric] = useState('');
-    const [thresholdQubit, setThresholdQubit] = useState(0.0);
-    const [thresholdCoupler, setThresholdCoupler] = useState(0.0);
-    const [thresholdCouplerValue, setThresholdCouplerValue] = useState(0.0);
-    const [thresholdQubitValue, setThresholdQubitValue] = useState(0.0);
-    const [rawDataType, setRawDataType] = useState({ name: 'Calibration Data', value: 'calibration_data' });
-    const [tableView, setTableView] = useState(false);
-    const [qubitSwitch, setQubitSwitch] = useState(true);
-    const [couplerSwitch, setCouplerSwitch] = useState(false);
+
+    const [metricsState, setMetricsState] = useState({
+        qubitMetric: '',
+        couplerMetric: '',
+        thresholdQubit: 0.0,
+        thresholdCoupler: 0.0,
+        thresholdCouplerValue: 0.0,
+        thresholdQubitValue: 0.0,
+    });
+
+    const [viewState, setViewState] = useState({
+        rawDataType: { name: 'Calibration Data', value: 'calibration_data' },
+        tableView: false,
+        qubitSwitch: true,
+        couplerSwitch: false,
+    });
+
+    // Update functions for grouped states
+    const updateMetricsState = (key, value) => {
+        setMetricsState((prevState) => ({ ...prevState, [key]: value }));
+    };
+
+    const updateViewState = (key, value) => {
+        setViewState((prevState) => ({ ...prevState, [key]: value }));
+    };
 
     const calibrationData = calibrationDataAll.metrics
     const lastCalibrated = new Date(calibrationDataAll.quality_metric_set_end_timestamp)
@@ -56,30 +71,16 @@ export const ModalContent = (props) => {
                 <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 min-[2600px]:grid-cols-4 gap-8'>
                     <SideBar
                         activeTab={activeTab}
-                        setThresholdCouplerValue={setThresholdCouplerValue}
-                        setThresholdQubitValue={setThresholdQubitValue}
+                        metricsState={metricsState}
+                        updateMetricsState={updateMetricsState}
+                        viewState={viewState}
+                        updateViewState={updateViewState}
                         calibrationDataAll={calibrationDataAll}
                         deviceInfoData={deviceInfoData}
                         devicesWithStatus={props.devicesWithStatus}
                         qubitMetricOptions={qubitMetricOptions}
                         couplerMetricOptions={couplerMetricOptions}
-                        tableView={tableView}
-                        setTableView={setTableView}
-                        qubitSwitch={qubitSwitch}
-                        setQubitSwitch={setQubitSwitch}
-                        couplerSwitch={couplerSwitch}
-                        setCouplerSwitch={setCouplerSwitch}
-                        rawDataType={rawDataType}
-                        setRawDataType={setRawDataType}
                         deviceData={{ ...props }}
-                        qubitMetric={qubitMetric}
-                        setQubitMetric={setQubitMetric}
-                        couplerMetric={couplerMetric}
-                        setCouplerMetric={setCouplerMetric}
-                        thresholdCoupler={thresholdCoupler}
-                        setThresholdCoupler={setThresholdCoupler}
-                        thresholdQubit={thresholdQubit}
-                        setThresholdQubit={setThresholdQubit}
                     />
 
                     <CTabs value={activeTab} onChangeValue={(e) => setActiveTab(e.detail)} className='col-span-1 md:col-span-2 lg:col-span-3'>
@@ -109,22 +110,22 @@ export const ModalContent = (props) => {
                                     {props.device_id.toLowerCase() === 'q50' ? (
                                         <Q50Layout
                                             calibrationData={calibrationData}
-                                            qubitMetric={qubitMetric}
-                                            couplerMetric={couplerMetric}
-                                            qubitMetricFormatted={qubitMetricOptions.find(m => m.value === qubitMetric)?.name || qubitMetric}
-                                            couplerMetricFormatted={couplerMetricOptions.find(m => m.value === couplerMetric)?.name || couplerMetric}
-                                            thresholdQubit={thresholdQubitValue}
-                                            thresholdCoupler={thresholdCouplerValue}
+                                            qubitMetric={metricsState.qubitMetric}
+                                            couplerMetric={metricsState.couplerMetric}
+                                            qubitMetricFormatted={qubitMetricOptions.find(m => m.value === metricsState.qubitMetric)?.name || metricsState.qubitMetric}
+                                            couplerMetricFormatted={couplerMetricOptions.find(m => m.value === metricsState.couplerMetric)?.name || metricsState.couplerMetric}
+                                            thresholdQubit={metricsState.thresholdQubitValue}
+                                            thresholdCoupler={metricsState.thresholdCouplerValue}
                                         />
                                     ) : (
                                         <HelmiLayout
                                             calibrationData={calibrationData}
-                                            qubitMetric={qubitMetric}
-                                            couplerMetric={couplerMetric}
-                                            qubitMetricFormatted={qubitMetricOptions.find(m => m.value === qubitMetric)?.name || qubitMetric}
-                                            couplerMetricFormatted={couplerMetricOptions.find(m => m.value === couplerMetric)?.name || couplerMetric}
-                                            thresholdQubit={thresholdQubitValue}
-                                            thresholdCoupler={thresholdCouplerValue}
+                                            qubitMetric={metricsState.qubitMetric}
+                                            couplerMetric={metricsState.couplerMetric}
+                                            qubitMetricFormatted={qubitMetricOptions.find(m => m.value === metricsState.qubitMetric)?.name || metricsState.qubitMetric}
+                                            couplerMetricFormatted={couplerMetricOptions.find(m => m.value === metricsState.couplerMetric)?.name || metricsState.couplerMetric}
+                                            thresholdQubit={metricsState.thresholdQubitValue}
+                                            thresholdCoupler={metricsState.thresholdCouplerValue}
                                         />
                                     )}
                                 </div>
@@ -136,19 +137,19 @@ export const ModalContent = (props) => {
                             </CTabItem>
                             <CTabItem value="raw">
                                 <div className='flex flex-col gap-4 max-h-[60vh] overflow-auto'>
-                                    {rawDataType.value === 'calibration_data' && tableView ? (
+                                    {viewState.rawDataType.value === 'calibration_data' && viewState.tableView ? (
                                         <CalibrationTable
                                             calibrationData={calibrationData}
-                                            qubitSwitch={qubitSwitch}
-                                            couplerSwitch={couplerSwitch}
+                                            qubitSwitch={viewState.qubitSwitch}
+                                            couplerSwitch={viewState.couplerSwitch}
                                             qubitMetricOptions={qubitMetricOptions}
                                             couplerMetricOptions={couplerMetricOptions}
                                         />
                                     ) : (
                                         <pre className="text-xs overflow-auto bg-gray-100 p-2 rounded whitespace-pre-wrap break-words max-w-full">
-                                            {rawDataType.value === 'calibration_data' &&
+                                            {viewState.rawDataType.value === 'calibration_data' &&
                                                 JSON.stringify(calibrationDataAll, null, 2)}
-                                            {rawDataType.value === 'device_info' &&
+                                            {viewState.rawDataType.value === 'device_info' &&
                                                 JSON.stringify(deviceInfoData, null, 2)}
                                         </pre>
                                     )}
