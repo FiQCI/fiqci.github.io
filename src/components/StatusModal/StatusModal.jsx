@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 
 import { CModal } from '@cscfi/csc-ui-react';
 
-import { ModalContent } from '../StatusModalConent';
+import { ModalContent } from './StatusModalConent';
 
 export default function useWindowSize() {
     const [width, setWidth] = useState(

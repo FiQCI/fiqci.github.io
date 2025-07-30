@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useStatus } from '../hooks/useStatus'
 import { mdiInformation, mdiClose, mdiAlert } from '@mdi/js';
 import { CCard, CCardTitle, CCardContent, CIcon } from '@cscfi/csc-ui-react';
-import { StatusModal } from './StatusModal';
+import { StatusModal } from './StatusModal/StatusModal';
 
 const StatusCard = (props) => {
   const isOnline = props.health;
