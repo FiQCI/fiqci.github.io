@@ -5,12 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--{\%- seo -\%}-->
-  <link rel="icon" href="{{ constants.favicon | absolute_url }}" />
-  <link rel="stylesheet" href="{{ 'properties.css' | absolute_url }}" />
-  <link rel="stylesheet" href="{{ 'main.css' | absolute_url }}" />
+  <link rel="icon" href="{{ constants.favicon | relative_url }}" />
+  <link rel="stylesheet" href="{{ 'properties.css' | relative_url }}" />
+  <link rel="stylesheet" href="{{ 'main.css' | relative_url }}" />
   {% include external/mathjax.html -%}
   {% include external/font.html %}
-  <script type="text/javascript" src="{{ "site.js" | absolute_url }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ "site.js" | relative_url }}" charset="utf-8"></script>
   {% if page.react and (site.pages | where: "name" page.name) %}
     {%- assign react_source = page.name | append: ".js" -%}
   {% elsif (site.collections | where: "label" page.collection) %}
@@ -18,5 +18,5 @@
   {% else %}
     {%- assign react_source = "default.js" -%}
   {% endif %}
-  <script type="text/javascript" src="{{ react_source | absolute_url }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ react_source | relative_url }}" charset="utf-8"></script>
 </head>
