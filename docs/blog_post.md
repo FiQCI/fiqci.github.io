@@ -1,7 +1,7 @@
 This document is an outline for writing a blog post for the FiQCI website. The document covers the most common
 formatting and syntax topics and explains technical aspects to know when writing a blog. Also use old blogs as a reference.
-E.g. [Circuit-Knitting-Blog.md](content/_publications/2024-08-27-Circuit-Knitting-Blog.md),
-[Topology.md](content/_publications/2024-08-29-Topology.md) are good examples since not all old blogs exactly follow the principles
+E.g. [Circuit-Knitting-Blog.md](../content/_publications/2024-08-27-Circuit-Knitting-Blog.md),
+[Topology.md](../content/_publications/2024-08-29-Topology.md) are good examples since not all old blogs exactly follow the principles
 outlined here.
 
 ## Contents
