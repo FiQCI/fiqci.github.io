@@ -96,6 +96,13 @@ cookie_consent:
 
 "/access/":
 
+  getting_started:
+    text: |-
+      For getting started see the
+    link:
+      title: CSC Quantum Computing docs.
+      href: https://docs.csc.fi/computing/quantum-computing/overview/
+
   resource_estimator:
     text: |-
       For estimating the runtime of a quantum job try out the 
