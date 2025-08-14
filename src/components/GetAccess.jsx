@@ -75,7 +75,7 @@ export const GetAccess = props => {
                 <div>
                     <h2>Getting Started</h2>
 
-                    <p className="pt-4">For getting started see <a className="text-base text-sky-800 hover:underline" href="https://docs.csc.fi/computing/quantum-computing/overview/">CSC Quantum Computuing docs.</a></p>
+                    <p className="pt-4">For getting started see <a className="text-base text-sky-800 hover:underline" href="https://docs.csc.fi/computing/quantum-computing/overview/">CSC Quantum Computing docs.</a></p>
 
                     <p className="pt-4">Please see status of services from <a className="text-base text-sky-800 hover:underline" href={prependBaseURL("/status")}>Status</a> -page.</p>
 
