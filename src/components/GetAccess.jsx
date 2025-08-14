@@ -45,6 +45,7 @@ export const GetAccess = props => {
     const quantum_resources = props?.quantum_resources
     const supercomputer_resources = props?.supercomputer_resources
     const emulation_resources = props?.emulation_resources
+    const getting_started = props?.getting_started
 
     const resource_estimator = props?.resource_estimator
 
@@ -75,7 +76,7 @@ export const GetAccess = props => {
                 <div>
                     <h2>Getting Started</h2>
 
-                    <p className="pt-4">For getting started see <a className="text-base text-sky-800 hover:underline" href="https://docs.csc.fi/computing/quantum-computing/overview/">CSC Quantum Computing docs.</a></p>
+                    <p className="pt-4">{getting_started?.text} <a className="text-base text-sky-800 hover:underline" href={getting_started?.link.href}>{getting_started?.link.title}</a></p>
 
                     <p className="pt-4">Please see status of services from <a className="text-base text-sky-800 hover:underline" href={prependBaseURL("/status")}>Status</a> -page.</p>
 
