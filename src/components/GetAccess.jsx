@@ -73,7 +73,11 @@ export const GetAccess = props => {
             <div className="col-span-1"></div>
             <div className="col-span-3 flex flex-col gap-8 pb-20">
                 <div>
-                    <p className="pt-[24px]">Please see status of services from <a className="text-base text-sky-800 hover:underline" href={prependBaseURL("/status")}>Status</a> -page</p>
+                    <h2>Getting Started</h2>
+
+                    <p className="pt-4">For getting started see <a className="text-base text-sky-800 hover:underline" href="https://docs.csc.fi/computing/quantum-computing/overview/">CSC Quantum Computuing docs.</a></p>
+
+                    <p className="pt-4">Please see status of services from <a className="text-base text-sky-800 hover:underline" href={prependBaseURL("/status")}>Status</a> -page.</p>
 
                     <p className="pt-4"> {resource_estimator?.text} <a className="text-sky-800 hover:underline" href={resource_estimator?.link.href}>{resource_estimator?.link.title}</a>. </p>
                 </div>
