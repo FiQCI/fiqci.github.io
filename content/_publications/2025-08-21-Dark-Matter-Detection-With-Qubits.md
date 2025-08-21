@@ -139,7 +139,7 @@ In **Figure 4**, the enhancement circuit was run with 15 qubits on the simulator
 
 ![Calibration map](/assets/images/Dark-Matter-Detection/Calibration.png)
 
-**Figure 5**: The layout of the VTT Q50 quantum computer with overlaid calibration data on the 31st of July 2025, the date of the experiment. 
+**Figure 5**: The layout of the VTT Q50 quantum computer with overlaid calibration data on the 31st of July 2025, the date of the experiment. This graph can be found form the VTT Q50 layout section on the [FiQCI website](https://fiqci.fi/status/).
 
 ## Conclusions
 
@@ -155,22 +155,23 @@ The code for the sensitivity enhancement circuit can be found [here](https://git
 
 ## References <a id="references"></a>
 
-1. C. L. Degen, F. Reinhard, and P. Cappellaro, “Quantum sensing,” arXiv preprint arXiv:1611.02427, June 2017. [Online]. Available: [https://arxiv.org/pdf/1611.02427](https://arxiv.org/pdf/1611.02427)
+1. C. L. Degen, F. Reinhard, and P. Cappellaro, “Quantum sensing,” arXiv preprint arXiv:1611.02427, June 2017. [Online]. Available: [https://arxiv.org/abs/1611.02427](https://arxiv.org/abs/1611.02427)
 
-2. A. Chou, K. Irwin, R. H. Maruyama, O. K. Baker, C. Bartram, K. K. Berggren, G. Cancelo, D. Carney, C. L. Chang, H.-M. Cho, M. Garcia‑Sciveres, P. W. Graham et al., “Quantum Sensors for High Energy Physics,” arXiv preprint arXiv:2311.01930, Nov. 2023. [Online]. Available: [https://arxiv.org/pdf/2311.01930](https://arxiv.org/pdf/2311.01930)
+2. A. Chou, K. Irwin, R. H. Maruyama, O. K. Baker, C. Bartram, K. K. Berggren, G. Cancelo, D. Carney, C. L. Chang, H.-M. Cho, M. Garcia‑Sciveres, P. W. Graham et al., “Quantum Sensors for High Energy Physics,” arXiv preprint arXiv:2311.01930, Nov. 2023. [Online]. Available: [https://arxiv.org/abs/2311.01930](https://arxiv.org/abs/2311.01930)
 
-3. S. Chen, H. Fukuda, T. Inada, T. Moroi, T. Nitta, and T. Sichanugrist, “Detection of hidden photon dark matter using the direct excitation of transmon qubits,” arXiv preprint arXiv:2212.03884, Dec. 2022. [Online]. Available: [https://arxiv.org/pdf/2212.03884](https://arxiv.org/pdf/2212.03884)
+3. S. Chen, H. Fukuda, T. Inada, T. Moroi, T. Nitta, and T. Sichanugrist, “Detection of hidden photon dark matter using the direct excitation of transmon qubits,” arXiv preprint arXiv:2212.03884, Dec. 2022. [Online]. Available: [https://arxiv.org/abs/2212.03884](https://arxiv.org/abs/2212.03884)
 
-4. S. Chen, H. Fukuda, T. Inada, T. Moroi, T. Nitta, and T. Sichanugrist, “Search for QCD axion dark matter with transmon qubits and quantum circuit,” arXiv preprint arXiv:2407.19755, Jul. 29, 2024. [Online]. Available: [https://arxiv.org/pdf/2407.19755](https://arxiv.org/pdf/2407.19755)
+4. S. Chen, H. Fukuda, T. Inada, T. Moroi, T. Nitta, and T. Sichanugrist, “Search for QCD axion dark matter with transmon qubits and quantum circuit,” arXiv preprint arXiv:2407.19755, Jul. 29, 2024. [Online]. Available: [https://arxiv.org/abs/2407.19755](https://arxiv.org/abs/2407.19755)
 
-5. S. Chen, H. Fukuda, T. Inada, T. Moroi, T. Nitta, and T. Sichanugrist, “Quantum enhancement in dark matter detection with quantum computation,” arXiv preprint arXiv:2311.10413, revised Jul. 30, 2024. [Online]. Available: [https://arxiv.org/pdf/2311.10413](https://arxiv.org/pdf/2311.10413)
+5. S. Chen, H. Fukuda, T. Inada, T. Moroi, T. Nitta, and T. Sichanugrist, “Quantum enhancement in dark matter detection with quantum computation,” arXiv preprint arXiv:2311.10413, revised Jul. 30, 2024. [Online]. Available: [https://arxiv.org/abs/2311.10413](https://arxiv.org/abs/2311.10413)
 
-6. S. Profumo, "An introduction to particle dark matter," arXiv preprint arXiv:1910.05610, Oct. 2019. [Online]. Available: [https://arxiv.org/pdf/1910.05610](https://arxiv.org/pdf/1910.05610)
+6. S. Profumo, "An introduction to particle dark matter," arXiv preprint arXiv:1910.05610, Oct. 2019. [Online]. Available: [https://arxiv.org/abs/1910.05610](https://arxiv.org/abs/1910.05610)
 
-7. B. R. Garrett and D. E. McKay, "Dark matter: A primer," arXiv preprint arXiv:1006.2483, Jan. 2011. [Online]. Available: [http://arxiv.org/pdf/1006.2483](http://arxiv.org/pdf/1006.2483)
+7. B. R. Garrett and D. E. McKay, "Dark matter: A primer," arXiv preprint arXiv:1006.2483, Jan. 2011. [Online]. Available: [https://arxiv.org/abs/1006.2483](https://arxiv.org/abs/1006.2483)
 
-8. Chadha-Day, F., Ellis, J., and Marsh, D. J. E., “Axion dark matter: What is it and why now?”, <i>Science Advances</i>, vol. 8, no. 8, Art. no. eabj3618, 2022. doi:10.1126/sciadv.abj3618
+8. Chadha-Day, F., Ellis, J., and Marsh, D. J. E., “Axion dark matter: What is it and why now?”, <i>Science Advances</i>, vol. 8, no. 8, Art. no. eabj3618, 2022. [doi:10.1126/sciadv.abj3618](http://science.org/doi/10.1126/sciadv.abj3618)
 
-9. M. Tuokkola, Y. Sunada, H. Kivijärvi, et al., “Methods to achieve near‑millisecond energy relaxation and dephasing times for a superconducting transmon qubit,” Nat. Commun., vol. 16, art. nr. 5421, Jul. 8, 2025, doi: 10.1038/s41467‑025‑61126‑0
+9. M. Tuokkola, Y. Sunada, H. Kivijärvi, et al., “Methods to achieve near‑millisecond energy relaxation and dephasing times for a superconducting transmon qubit,” Nat. Commun., vol. 16, art. nr. 5421, Jul. 8, 2025, [doi: 10.1038/s41467‑025‑61126‑0](https://www.nature.com/articles/s41467-025-61126-0)
 
-10. https://images.nasa.gov/details/webb_first_deep_field (Accessed 15.08.2025)
+10. [https://images.nasa.gov/details/webb_first_deep_field](https://images.nasa.gov/details/webb_first_deep_field) (Accessed 15.08.2025)
+
