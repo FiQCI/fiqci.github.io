@@ -5,6 +5,8 @@ collection: publications #don't change
 header: #thumbnail image for the post
   teaser: /assets/images/Dark-Matter-Detection/dark_matter_thumbnail.jpg #e.g /assets/images/topology/thumbnail.png
 published: true
+description: |-
+  What is dark matter? is a question that as been asked by scientists for many years. Recently an interest has spiked on using qubits as sensors for finding dark matter. Superconducting qubits are used for searching for a specific type of dark matter particle, an axion. Axions are light particles that do not interact with "ordinary" matter easily. However, they can cause additional electrical currents while coupling to photons which could be sensed by a qubit. These signals are very weak and it has been proposed that the sensitivity of the qubit sensor system could be increased with a quantum circuit. In this blog post, an introduction to the basics of using qubits as sensors and an introduction to axion dark matter is given. The use of superconducting qubits for axion dark matter detection is also motivated and the circuit for the sensitivity enhancement is presented. The code for this circuit is also available so that anyone can run it on the VTT Q50 quantum computer.
 author: Meeri Makitalo #name of the author
 layout: post #don't change
 tags: #keywords related to the topic of the blog, e.g Helmi, Quantum, etc
