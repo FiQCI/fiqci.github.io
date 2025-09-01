@@ -5,6 +5,7 @@ collection: publications
 header:
   teaser: /assets/images/LUMI-Quantum-simulations-thumbnail.png
 published: true
+description: The EuroHPC LUMI supercomputer, hosted by CSC - IT Center for Science in Kajaani, Finland, supports a wide range of world-leading research and development, from digital twins of the Earth to the formation of cosmic strings in the early universe. Now, large quantum algorithms can be efficiently simulated, pushing the frontiers for the next generation of science and discovery.
 author: Michael Mucciardi
 layout: post
 tags:
