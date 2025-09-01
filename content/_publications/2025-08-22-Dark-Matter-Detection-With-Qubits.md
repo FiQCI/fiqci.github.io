@@ -1,9 +1,9 @@
 ---
 title: 'Dark Matter Detection with Qubits' #Blog title
-date: 2025-08-21 #the date of publication as yyyy-mm-dd
+date: 2025-08-22 #the date of publication as yyyy-mm-dd
 collection: publications #don't change
 header: #thumbnail image for the post
-  teaser: /assets/images/LUMI-Quantum-simulations-thumbnail.png #/assets/images/Dark-Matter-Detection/dark_matter_thumbnail.jpg #e.g /assets/images/topology/thumbnail.png
+  teaser: /assets/images/Dark-Matter-Detection/dark_matter_thumbnail.jpg #e.g /assets/images/topology/thumbnail.png
 published: true
 author: Meeri Makitalo #name of the author
 layout: post #don't change
