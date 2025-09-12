@@ -142,32 +142,33 @@ The code for the Fermi-Hubbard VQE for the simulation of electronic systems can 
 
 ## References
 
-[1] C. Cade et al., “Strategies for solving the Fermi-Hubbard model on near-term quantum computers”, Phys. Rev. B 102, 235122 (2020) doi: https://doi.org/10.1103/PhysRevB.102.235122
+1. C. Cade et al., “Strategies for solving the Fermi-Hubbard model on near-term quantum computers”, Phys. Rev. B 102, 235122 (2020) doi: [https://doi.org/10.1103/PhysRevB.102.235122](https://doi.org/10.1103/PhysRevB.102.235122)
 
-[2] M. Stephens, "Gaining a Quantum Advantage Sooner than Expected”, Physics 13 (2020): pp. 159, doi: https://doi.org/10.1103/Physics.13.s159
+2. M. Stephens, "Gaining a Quantum Advantage Sooner than Expected”, Physics 13 (2020): pp. 159, doi: [https://doi.org/10.1103/Physics.13.s159](https://doi.org/10.1103/Physics.13.s159)
 
-[3] D. Wecker, M. Hastings, N. Wiebe. “Solving strongly correlated electron models on a quantum computer”, Phys. Rev. A 92, 062318 (2015). doi: https://doi.org/10.1103/PhysRevA.92.062318
+3. D. Wecker, M. Hastings, N. Wiebe. “Solving strongly correlated electron models on a quantum computer”, Phys. Rev. A 92, 062318 (2015). doi: [https://doi.org/10.1103/PhysRevA.92.062318](https://doi.org/10.1103/PhysRevA.92.062318)
 
-[4] A. Kan and B. C. B. Symons. “Resource-optimized fault-tolerant simulation of the Fermi-Hubbard model and high-temperature superconductor models”, npj Quantum 11, 138 (2025). doi: [10.1038/s41534-025-01091-0](https://doi.org/10.1038/s41534-025-01091-0)
+4. A. Kan and B. C. B. Symons. “Resource-optimized fault-tolerant simulation of the Fermi-Hubbard model and high-temperature superconductor models”, npj Quantum 11, 138 (2025). doi: [10.1038/s41534-025-01091-0](https://doi.org/10.1038/s41534-025-01091-0)
 
-[5] M. Cerezo, A. Arrasmith, R. Babbush, et al. “Variational quantum algorithms”, Nat Rev Phys 3, pp. 625–644 (2021). doi: https://doi.org/10.1038/s42254-021-00348-9
+5. M. Cerezo, A. Arrasmith, R. Babbush, et al. “Variational quantum algorithms”, Nat Rev Phys 3, pp. 625–644 (2021). doi: [https://doi.org/10.1038/s42254-021-00348-9](https://doi.org/10.1038/s42254-021-00348-9)
 
-[6] Y. Liu, S. Che, J. Zhou, et al. “Fermihedral: On the Optimal Compilation for Fermion-to-Qubit Encoding”, ASPLOS 2024, pp. 382–397(2024). doi: https://doi.org/10.48550/arXiv.2403.17794
+6. Y. Liu, S. Che, J. Zhou, et al. “Fermihedral: On the Optimal Compilation for Fermion-to-Qubit Encoding”, ASPLOS 2024, pp. 382–397(2024). doi: [https://doi.org/10.48550/arXiv.2403.17794](https://doi.org/10.48550/arXiv.2403.17794)
 
-[7] https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-hardware/measurement-error-mitigation.ipynb [Accessed: Aug. 22 2025]
+7. [https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-hardware/measurement-error-mitigation.ipynb](https://github.com/Qiskit/textbook/blob/main/notebooks/quantum-hardware/measurement-error-mitigation.ipynb) [Accessed: Aug. 22 2025]
 
-[8] R. Hicks, B. Kobrin, C. Bauer, and B. Nachman. "Active readout-error mitigation", Phys. Rev. A 105, 012419 (2022). doi: https://doi.org/10.1103/PhysRevA.105.012419
+8. R. Hicks, B. Kobrin, C. Bauer, and B. Nachman. "Active readout-error mitigation", Phys. Rev. A 105, 012419 (2022). doi: [https://doi.org/10.1103/PhysRevA.105.012419](https://doi.org/10.1103/PhysRevA.105.012419)
 
-[9] J. Tilly, H. Chen, S. Cao, et al. "The Variational Quantum Eigensolver: A review of methods and best practices", Physics Reports 986, pp. 1–128 (2022).
+9. J. Tilly, H. Chen, S. Cao, et al. "The Variational Quantum Eigensolver: A review of methods and best practices", Physics Reports 986, pp. 1–128 (2022).
 doi: [10.1016/j.physrep.2022.08.003](http://dx.doi.org/10.1016/j.physrep.2022.08.003)
 
-[10] R. Wiersema, C. Zhou, Y. de Sereville, et al. "Exploring entanglement and optimization within the Hamiltonian Variational Ansatz." PRX Quan-
-tum, 1:020319 (2020). doi: https://doi.org/10.1103/PRXQuantum.1.020319
+10. R. Wiersema, C. Zhou, Y. de Sereville, et al. "Exploring entanglement and optimization within the Hamiltonian Variational Ansatz." PRX Quan-
+tum, 1:020319 (2020). doi: [https://doi.org/10.1103/PRXQuantum.1.020319](https://doi.org/10.1103/PRXQuantum.1.020319)
 
-[11] L. Bittel and M. Kliesch. "Training variational quantum algorithms is NP-hard", Physical Review Letters, 127(12) (2021). doi: https://doi.org/10.1103/PhysRevLett.127.120502
+11. L. Bittel and M. Kliesch. "Training variational quantum algorithms is NP-hard", Physical Review Letters, 127(12) (2021). doi: [https://doi.org/10.1103/PhysRevLett.127.120502](https://doi.org/10.1103/PhysRevLett.127.120502)
 
-[12] K. Brown, W. Munro, and V. Kendon. "Using quantum computers for quantum simulation",
-Entropy, 12(11):2268–2307 (2010). doi: https://doi.org/10.3390/e12112268.
+12. K. Brown, W. Munro, and V. Kendon. "Using quantum computers for quantum simulation",
+Entropy, 12(11):2268–2307 (2010). doi: [https://doi.org/10.3390/e12112268](https://doi.org/10.3390/e12112268)
 
-[13] B. Martin, P. Simon, and M. Rančić. "Simulating strongly interacting Hubbard chains with the variational Hamiltonian ansatz on a quantum computer", Phys. Rev. Research 4, 023190 (2022). doi: https://doi.org/10.1103/PhysRevResearch.4.023190
+13. B. Martin, P. Simon, and M. Rančić. "Simulating strongly interacting Hubbard chains with the variational Hamiltonian ansatz on a quantum computer", Phys. Rev. Research 4, 023190 (2022). doi: [https://doi.org/10.1103/PhysRevResearch.4.023190
+](https://doi.org/10.1103/PhysRevResearch.4.023190)
 
