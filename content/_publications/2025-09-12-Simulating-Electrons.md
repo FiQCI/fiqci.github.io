@@ -3,8 +3,10 @@ title: 'Simulating Electrons on LUMI + VTT Q50: Benchmarking Fermi-Hubbard Model
 date: 2025-09-12 #the date of publication as yyyy-mm-dd
 collection: publications #don't change
 header: #thumbnail image for the post
-  teaser: /assets/images/Simulating-Electrons/Fermi-Hubbard.png #e.g //assets/images/topology/thumbnail.png
+  teaser: /assets/images/Simulating-Electrons/thumbnail.png #e.g //assets/images/topology/thumbnail.png
 published: true
+description: |-
+  Simulating electrons is an important but challenging task in condensed matter physics and material science. Simulation of electronic models, such as solving the ground state energy of the Fermi-Hubbard model, is expected to be among the first non-trivial problems to demonstrate quantum advantage on near-term quantum computers. Here, the leading approach to solving this problem, a hybrid quantum-classical algorithm called the Variational Quantum Eigensolver (VQE) is explored. We present results from running the hybrid algorithm using the LUMI supercomputer and the VTT Q50 quantum computer and share benchmarking results on how circuit choice and compiler selection impact performance. In addition, we demonstrate the implementation of error mitigation strategies to improve results.
 author: Noora Kajaste #name of the author
 layout: post #don't change
 tags: #keywords related to the topic of the blog, e.g Helmi, Quantum, etc
