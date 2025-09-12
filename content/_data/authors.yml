@@ -26,7 +26,12 @@ Meeri Makitalo:
 Michael Mucciardi:
   name        : "Michael Mucciardi"
   bio         : "Senior Systems Specialist at CSC, Quantum Technologies"
-  avatar      : "/assets/images/authors/Michael_Mucciardi.jpg"  
+  avatar      : "/assets/images/authors/Michael_Mucciardi.jpg" 
+
+Noora Kajaste:
+  name        : "Noora Kajaste"
+  bio         : "Summer Trainee at CSC, Quantum Technologies"
+  avatar      : "/assets/images/authors/Noora_Kajaste.jpg" 
 
 FiQCI:
   name        : "FiQCI Team"
