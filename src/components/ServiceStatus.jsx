@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 
 import { useStatus } from '../hooks/useStatus'
+import { useBookings } from '../hooks/useBookings.jsx';
 import { mdiInformation, mdiClose, mdiAlert } from '@mdi/js';
-import { CCard, CCardTitle, CCardContent, CIcon } from '@cscfi/csc-ui-react';
+import { CCard, CCardTitle, CCardContent, CIcon, CButton } from '@cscfi/csc-ui-react';
 import { StatusModal } from './StatusModal/StatusModal';
+import { BookingModal } from './bookingCalendar.jsx';
 
 const StatusCard = (props) => {
   const isOnline = props.health;
@@ -39,6 +41,7 @@ const StatusCard = (props) => {
 
 export const ServiceStatus = (props) => {
   const { status: statusList } = useStatus("https://fiqci-backend.2.rahtiapp.fi/devices/healthcheck");
+  const { bookingData: bookingData } = useBookings("http://localhost:3000/bookings")
   const qcs = props["quantum-computers"] || [];
 
   const devicesWithStatus = (qcs.length === 0 || !Array.isArray(statusList))
@@ -51,7 +54,8 @@ export const ServiceStatus = (props) => {
         };
       });
   
-      const [modalOpen, setModalOpen] = useState(false);
+  const [bookingModalOpen, setBookingModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
   const [modalProps, setModalProps] = useState({});
   const handleCardClick = (qc) => {
     setModalProps({ ...qc, devicesWithStatus });
@@ -87,11 +91,27 @@ export const ServiceStatus = (props) => {
           {props.alert?.type ? props.alert?.text : 'Loading...'}
         </p>
       </div>
-      <div className='pt-[24px] pb-[60px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 min-[2600px]:grid-cols-4 w-full gap-[24px]'>
+      <div className='pt-[24px] flex flex-col gap-6 mb-6 justify-start'>
+        <h2 className='text-on-white'>Calendar</h2>
+        <p>
+          VTT devices can at times be reserved. At these times the queue will be paused. 
+          Reservations can be viewed from this calendar.
+        </p>
+        <CButton className='w-32' onClick={() => setBookingModalOpen(true)}>Open Calendar</CButton>
+      </div>
+      
+      <h2 className='text-on-white'>Devices</h2>
+      <div className='pb-[60px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 min-[2600px]:grid-cols-4 w-full gap-[24px]'>
         {devicesWithStatus.map((qc, index) => (
           <StatusCard key={qc.device_id || index} {...qc} onClick={() => handleCardClick(qc)} />
         ))}
+        
+        
       </div>
+      {bookingModalOpen && (
+        <BookingModal bookingData={bookingData} name={"Calendar"} isModalOpen={bookingModalOpen} setIsModalOpen={setBookingModalOpen} />
+      )}
+
       {modalOpen && (
         <StatusModal {...modalProps} isModalOpen={modalOpen} setIsModalOpen={setModalOpen} />
       )}
