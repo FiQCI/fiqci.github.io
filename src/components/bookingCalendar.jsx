@@ -154,6 +154,24 @@ const BookingCalendar = (props) => {
 
     const hideTooltip = () => setTooltip({ ...tooltip, visible: false });
 
+    // Close tooltip when user touches/clicks outside the tooltip
+    useEffect(() => {
+        if (!tooltip.visible) return;
+        const handlePointerDown = (e) => {
+            // If tooltip ref exists and click is outside, close
+            const tooltipEl = document.getElementById('booking-tooltip-overlay');
+            if (tooltipEl && !tooltipEl.contains(e.target)) {
+                hideTooltip();
+            }
+        };
+        document.addEventListener('mousedown', handlePointerDown, true);
+        document.addEventListener('touchstart', handlePointerDown, true);
+        return () => {
+            document.removeEventListener('mousedown', handlePointerDown, true);
+            document.removeEventListener('touchstart', handlePointerDown, true);
+        };
+    }, [tooltip.visible]);
+
     // Close tooltip on scroll (mobile)
     useEffect(() => {
         const handler = () => hideTooltip();
@@ -163,48 +181,71 @@ const BookingCalendar = (props) => {
 
     return (
         <div className="flex flex-col gap-6 p-2 sm:p-4">
-            <div className="flex flex-row flex-wrap gap-6">
-                <CTextField 
-                    className="min-[820px]:hidden block"
-                    label-on-top
-                    hideDetails={true}
-                    label={"Date"}
-                    type={"date"}
-                    value={format(selectedDate, "yyyy-MM-dd")}
-                    onChangeValue={handleDateChange}
-                    validate={false}
-                    validation={"Invalid date"}
-                />
-                <div className="flex flex-row gap-2">
-                    <CSelect
+            <div className="flex flex-col gap-6">
+                <div className="flex flex-row flex-wrap gap-6">
+                    <CTextField
+                        className="min-[820px]:hidden block"
+                        label-on-top
                         hideDetails={true}
-                        label={"Device"}
-                        className='w-24 -py-[2px]'
-                        clearable
-                        value={filter}
-                        items={[
-                            { name: 'Q5', value: 'Q5' },
-                            { name: 'Q50', value: 'Q50' },
-                            { name: 'All', value: 'All' },
-                        ]}
-                        placeholder='Device'
-                        onChangeValue={handleFilterChange}
+                        label={"Date"}
+                        type={"date"}
+                        value={format(selectedDate, "yyyy-MM-dd")}
+                        onChangeValue={handleDateChange}
+                        validate={false}
+                        validation={"Invalid date"}
                     />
+                    <div className="flex flex-row gap-2">
+                        <CSelect
+                            hideDetails={true}
+                            label={"Device"}
+                            className='w-24 -py-[2px]'
+                            clearable
+                            value={filter}
+                            items={[
+                                { name: 'Q5', value: 'Q5' },
+                                { name: 'Q50', value: 'Q50' },
+                                { name: 'All', value: 'All' },
+                            ]}
+                            placeholder='Device'
+                            onChangeValue={handleFilterChange}
+                        />
+                    </div>
+                    <div className="flex flex-row gap-2">
+                        <CSelect
+                            hideDetails={true}
+                            label={"View"}
+                            className='w-24 -py-[2px]'
+                            clearable
+                            value={view}
+                            items={[
+                                { name: 'List', value: 'List' },
+                                { name: 'Grid', value: 'Grid' },
+                            ]}
+                            placeholder='View'
+                            onChangeValue={handleViewChange}
+                        />
+                    </div>
+
                 </div>
-                <div className="flex flex-row gap-2">
-                    <CSelect
-                        hideDetails={true}
-                        label={"View"}
-                        className='w-24 -py-[2px]'
-                        clearable
-                        value={view}
-                        items={[
-                            { name: 'List', value: 'List' },
-                            { name: 'Grid', value: 'Grid' },
-                        ]}
-                        placeholder='View'
-                        onChangeValue={handleViewChange}
-                    />
+                <div className="flex flex-row gap-4">
+                    <div className="min-[820px]:flex hidden flex-row gap-2">
+                        <span className="text-[#004E84] ml-1">•</span>
+                        <p>Partially Reserved</p>
+                    </div>
+                    <div className="min-[820px]:flex hidden flex-row gap-2">
+                        <div className="bg-[#004E84] border border-1 border-gray-600 self-center w-[15px] h-[15px]" ></div>
+                        <p>Selected Day</p>
+                    </div>
+                    <div className="min-[820px]:flex hidden flex-row gap-2">
+                        <div className="bg-[#CCE6F1] border border-1 border-gray-600 self-center w-[15px] h-[15px]" ></div>
+                        <p>Today</p>
+                    </div>
+                    {view === "Grid" && (
+                        <div className="flex flex-row gap-2">
+                            <div className="bg-[#f87171] border border-1 border-gray-600 self-center w-[15px] h-[15px]" ></div>
+                            <p>Booked</p>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="flex flex-col md:flex-row gap-6">
@@ -297,7 +338,6 @@ const BookingCalendar = (props) => {
                                                             onMouseEnter={bookings.length ? (e) => { setSelectedBooking(bookings.length === 1 ? bookings[0] : bookings); showTooltip(e, tooltipContent); } : undefined}
                                                             onMouseLeave={() => { setSelectedBooking(null); hideTooltip(); }}
                                                             onTouchStart={bookings.length ? (e) => { setSelectedBooking(bookings.length === 1 ? bookings[0] : bookings); showTooltip(e, tooltipContent); } : undefined}
-                                                            onTouchEnd={() => { setTimeout(hideTooltip, 200); }}
                                                             onClick={bookings.length ? (e) => { setSelectedBooking(bookings.length === 1 ? bookings[0] : bookings); showTooltip(e, tooltipContent); } : undefined}
                                                         />
                                                     );
@@ -308,6 +348,7 @@ const BookingCalendar = (props) => {
                                     {/* Tooltip overlay */}
                                     {tooltip.visible && (
                                         <div
+                                            id="booking-tooltip-overlay"
                                             style={{
                                                 position: 'fixed',
                                                 left: tooltip.x + 10,
@@ -320,7 +361,7 @@ const BookingCalendar = (props) => {
                                                 boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
                                                 fontSize: '0.95rem',
                                                 whiteSpace: 'pre-line',
-                                                pointerEvents: 'none',
+                                                pointerEvents: 'auto',
                                                 maxWidth: '80vw',
                                                 minWidth: '120px',
                                                 wordBreak: 'break-word',
