@@ -41,7 +41,7 @@ const StatusCard = (props) => {
 
 export const ServiceStatus = (props) => {
   const { status: statusList } = useStatus("https://fiqci-backend.2.rahtiapp.fi/devices/healthcheck");
-  const { bookingData: bookingData } = useBookings("http://localhost:3000/bookings")
+  const { bookingData: bookingData } = useBookings("https://fiqci-backend.2.rahtiapp.fi/bookings")
   const qcs = props["quantum-computers"] || [];
 
   const devicesWithStatus = (qcs.length === 0 || !Array.isArray(statusList))
@@ -109,7 +109,7 @@ export const ServiceStatus = (props) => {
         
       </div>
       {bookingModalOpen && (
-        <BookingModal bookingData={bookingData} name={"Calendar"} isModalOpen={bookingModalOpen} setIsModalOpen={setBookingModalOpen} />
+        <BookingModal bookingData={bookingData} name={"Reservations"} isModalOpen={bookingModalOpen} setIsModalOpen={setBookingModalOpen} />
       )}
 
       {modalOpen && (
