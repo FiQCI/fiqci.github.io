@@ -3,6 +3,7 @@ This is the repository for building and maintaining the webpage for the Finnish 
 ## Contents
 - [Site rewrite](#site-rewrite)
   - [Running Locally](#running-locally)
+    - [Using Docker](#using-docker)  
     - [Tools](#tools)
       - [Install `asdf` for runtime version management](#install-asdf-for-runtime-version-management)
         - [Install Ruby and Node.js using `asdf`](#install-ruby-and-nodejs-using-asdf)
