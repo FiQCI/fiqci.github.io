@@ -1,0 +1,18 @@
+services:
+  fiqci-dev:
+    build: .
+    ports:
+      - "4000:4000"
+      - "35729:35729"
+    volumes:
+      # Mount source code but exclude dependencies
+      - .:/app
+      - /app/node_modules  # prevent host's node_modules from overriding container's node_modules
+      - /app/vendor # prevent host's vendor directory from overriding container's Ruby gems
+    environment:
+      - BUNDLE_PATH=vendor/bundle
+      - NODE_ENV=development
+      - JEKYLL_ENV=development
+      - JEKYLL_HOST=0.0.0.0
+    command: npm run watch
+    working_dir: /app
