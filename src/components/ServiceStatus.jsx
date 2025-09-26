@@ -92,12 +92,12 @@ export const ServiceStatus = (props) => {
         </p>
       </div>
       <div className='pt-[24px] flex flex-col gap-6 mb-6 justify-start'>
-        <h2 className='text-on-white'>Calendar</h2>
+        <h2 className='text-on-white'>Reservations</h2>
         <p>
           VTT devices can at times be reserved. At these times the queue will be paused. 
-          Reservations can be viewed from this calendar.
+          Reservations can be viewed from this calendar. Note that making reservations through FiQCI is not currently possible.
         </p>
-        <CButton className='w-32' onClick={() => setBookingModalOpen(true)}>Open Calendar</CButton>
+        <CButton className='w-32' onClick={() => setBookingModalOpen(true)}>View Reservations</CButton>
       </div>
       
       <h2 className='text-on-white'>Devices</h2>
