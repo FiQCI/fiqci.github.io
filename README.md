@@ -19,6 +19,23 @@ The site was recently overhauled. Here you can find documentation on how to add 
 
 ## Running Locally
 
+### Using Docker
+
+A [`Dockerfile`](./Dockerfile) and [`docker-compose.yml`](./docker-compose.yml) are provided to build and view the website locally using a containerised environment. To build the docker container use 
+
+```sh
+docker compose build 
+```
+
+And then run the container with:
+
+```sh
+docker compose up
+```
+
+The site is viewable at [`http://localhost:4000/`](http://localhost:4000/). 
+
+
 ### Tools
 
 - (`asdf` for runtime version management)

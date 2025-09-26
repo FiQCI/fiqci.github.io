@@ -8,9 +8,9 @@ permalink: site.js
     "key": "{{ forloop.index }}",
     "type": "{{ publication.filters.Type | default: 'Post' }}",
     "title": "{{ publication.title }}",
-    "url": "{{ publication.url | absolute_url }}",
+    "url": "{{ publication.url | relative_url }}",
     "date": "{{ publication.date | date: '%-d.%-m.%Y' }}",
-    "teaser": "{{ publication.header.teaser | absolute_url }}",
+    "teaser": "{{ publication.header.teaser | relative_url }}",
     "filters": {
       {%- for category in publication.filters %}
         "{{ category[0] }}": "{{ category[1] }}"
