@@ -208,6 +208,7 @@ const BookingCalendar = (props) => {
                             ]}
                             placeholder='Device'
                             onChangeValue={handleFilterChange}
+                            key={`device-select-${props.isModalOpen}`}
                         />
                     </div>
                     <div className="flex flex-row gap-2">
@@ -223,6 +224,7 @@ const BookingCalendar = (props) => {
                             ]}
                             placeholder='View'
                             onChangeValue={handleViewChange}
+                            key={`view-select-${props.isModalOpen}`}
                         />
                     </div>
 
