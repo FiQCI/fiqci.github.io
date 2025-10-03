@@ -68,6 +68,15 @@ const BookingCalendar = (props) => {
     const [validDate, setValidDate] = useState(true)
 
     useEffect(() => {
+        if (props.isModalOpen) {
+            setTimeout(() => {
+                // Force browser to recalculate layout
+                window.dispatchEvent(new Event('resize'));
+            }, 50);
+        }
+    }, [props.isModalOpen]);
+
+    useEffect(() => {
         setBookings(bookingData)
     }, [bookingData])
 
@@ -180,7 +189,7 @@ const BookingCalendar = (props) => {
     }, []);
 
     return (
-        <div className="flex flex-col gap-6 p-2 sm:p-4">
+        <div id="booking-modal" className="flex flex-col gap-6 p-2 sm:p-4">
             <div className="flex flex-col gap-6">
                 <div className="flex flex-row flex-wrap gap-6">
                     <CTextField
