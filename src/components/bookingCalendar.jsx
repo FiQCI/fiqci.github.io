@@ -240,11 +240,15 @@ const BookingCalendar = (props) => {
                 </div>
                 <div className="flex flex-row gap-4">
                     <div className="min-[820px]:flex hidden flex-row gap-2">
-                        <span className="text-[#004E84] ml-1">•</span>
+                        <div className="bg-[#8fd144] border border-1 border-gray-600 self-center w-[15px] h-[15px]" ></div>
+                        <p>Available</p>
+                    </div>
+                    <div className="min-[820px]:flex hidden flex-row gap-2">
+                        <div className="bg-[#FFF3CD] border border-1 border-gray-600 self-center w-[15px] h-[15px]" ></div>
                         <p>Partially Reserved</p>
                     </div>
                     <div className="min-[820px]:flex hidden flex-row gap-2">
-                        <div className="bg-[#004E84] border border-1 border-gray-600 self-center w-[15px] h-[15px]" ></div>
+                        <div className="bg-[#006edc] border border-1 border-gray-600 self-center w-[15px] h-[15px]" ></div>
                         <p>Selected Day</p>
                     </div>
                     <div className="min-[820px]:flex hidden flex-row gap-2">
@@ -260,19 +264,33 @@ const BookingCalendar = (props) => {
                 </div>
             </div>
             <div className="flex flex-col md:flex-row gap-6">
-                {/* Calendar */}
                 <Calendar
                     className="min-[820px]:block hidden border p-4 shadow bg-white w-[40%] max-w-[400px]"
                     value={selectedDate}
                     onClickDay={(value) => setSelectedDate(value)}
-                    tileContent={({ date }) =>
-                        bookingsByDate[format(date, "yyyy-MM-dd")] ? (
-                            <span className="text-[#004E84] ml-1">•</span>
-                        ) : null
-                    }
+                    tileClassName={({ date }) => {
+                        const dateKey = format(date, "yyyy-MM-dd");
+                        const todayKey = format(new Date(), "yyyy-MM-dd");
+                        const selectedKey = format(selectedDate, "yyyy-MM-dd");
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+                        const d = new Date(date);
+                        d.setHours(0, 0, 0, 0);
+                        if (d.getTime() === today.getTime()) return 'today';
+                        if (dateKey === todayKey || dateKey === selectedKey) return null;
+                        return bookingsByDate[dateKey] ? 'partially-reserved' : d > today ? 'available' : null;
+                    }}
+                    tileDisabled={({ date, view }) => {
+                        if (view === "month") {
+                            const today = new Date();
+                            today.setHours(0, 0, 0, 0);
+                            const d = new Date(date);
+                            d.setHours(0, 0, 0, 0);
+                            return d < today;
+                        }
+                        return false;
+                    }}
                 />
-
-                {/* Daily booking list or grid */}
                 {selectedDate && (
                     <div className="p-2 border flex-grow sm:p-4 min-[820px]:max-h-[314px] max-h-fit overflow-auto shadow bg-white">
                         <h3 className="text-on-white mb-2 font-bold">
