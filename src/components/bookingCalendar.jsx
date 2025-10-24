@@ -47,6 +47,11 @@ export const BookingModal = (props) => {
 // Helper to group bookings by date
 const groupBookingsByDate = (bookings) => {
     return bookings.reduce((acc, booking) => {
+
+        const start = parseISO(booking.start_time);
+        const end = parseISO(booking.end_time);
+        if (start.getTime() === end.getTime()) return acc;
+
         const dateKey = format(parseISO(booking.start_time), "yyyy-MM-dd");
         if (!acc[dateKey]) acc[dateKey] = [];
         acc[dateKey].push(booking);
@@ -280,16 +285,7 @@ const BookingCalendar = (props) => {
                         if (dateKey === todayKey || dateKey === selectedKey) return null;
                         return bookingsByDate[dateKey] ? 'partially-reserved' : d > today ? 'available' : null;
                     }}
-                    tileDisabled={({ date, view }) => {
-                        if (view === "month") {
-                            const today = new Date();
-                            today.setHours(0, 0, 0, 0);
-                            const d = new Date(date);
-                            d.setHours(0, 0, 0, 0);
-                            return d < today;
-                        }
-                        return false;
-                    }}
+                    
                 />
                 {selectedDate && (
                     <div className="p-2 border flex-grow sm:p-4 min-[820px]:max-h-[314px] max-h-fit overflow-auto shadow bg-white">
