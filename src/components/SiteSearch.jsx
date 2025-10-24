@@ -6,6 +6,7 @@ import {
   CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
 import { prependBaseURL } from '../utils/url';
+import { capitalizeFirstLetter } from "../utils/textUtils";
 
 const style = {
   "--_c-button-font-size": 14,
@@ -105,10 +106,6 @@ function findItemByRef(ref, store) {
     .toLowerCase();
 
   return Object.values(store).flat().find(item => item.key.toLowerCase() === normalizedRef);
-}
-
-function capitalizeFirstLetter(val) {
-  return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
 
 const SearchBar = ({ setResults, setQuery, query }) => {

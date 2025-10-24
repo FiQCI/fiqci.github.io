@@ -77,9 +77,9 @@ const FilterTheme = ({ selectedTheme, handleChangeTheme }) => (
             value={selectedTheme}
             items={[
                 { name: 'HPC+QC+AI', value: 'HPC+QC+AI' },
-                { name: 'Programming', value: 'programming' },
-                { name: 'Webinar/Lecture', value: 'webinar/lecture' },
-                { name: 'Course/Workshop', value: 'course/workshop' },
+                { name: 'Programming', value: 'Programming' },
+                { name: 'Webinar/Lecture', value: 'Webinar/Lecture' },
+                { name: 'Course/Workshop', value: 'Course/Workshop' },
             ]}
             placeholder='Choose a theme'
             onChangeValue={handleChangeTheme}

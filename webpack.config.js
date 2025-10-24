@@ -47,6 +47,7 @@ fs.writeFileSync(jekyllConfigFilepath, yaml.stringify(jekyllConfig));
 
 module.exports = {
   entry: entryFiles,
+  devtool: 'inline-source-map',
   output: {
     filename: "[name].js",
     path: outputDirpath,
