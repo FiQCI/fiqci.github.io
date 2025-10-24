@@ -285,6 +285,16 @@ const BookingCalendar = (props) => {
                         if (dateKey === todayKey || dateKey === selectedKey) return null;
                         return bookingsByDate[dateKey] ? 'partially-reserved' : d > today ? 'available' : null;
                     }}
+                    tileDisabled={({ date, view }) => {
+                        if (view === "month") {
+                            const today = new Date();
+                            today.setHours(0, 0, 0, 0);
+                            const d = new Date(date);
+                            d.setHours(0, 0, 0, 0);
+                            return d < today;
+                        }
+                        return false;
+                    }}
                     
                 />
                 {selectedDate && (
