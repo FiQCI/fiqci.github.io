@@ -46,8 +46,8 @@ cookie_consent:
     announcement:
       text: The VTT Q50 quantum computer is now available!
       link:
-        title: 3rd call for Academic Q50 projects is open!
-        href: "/publications/2025-10-03-Q50-Call-3_2025"
+        title: How to get access to FiQCI quantum computers?
+        href: "/access"
     buttons:
       - title: How to get access
         href: "/access"
