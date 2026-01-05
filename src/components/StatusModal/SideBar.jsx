@@ -77,8 +77,12 @@ export const SideBar = (props) => {
                     metricsState={metricsState}
                     updateMetricsState={updateMetricsState}
                     calibrationData={calibrationData}
-                    qubitMetricOptions={qubitMetricOptions}
-                    couplerMetricOptions={couplerMetricOptions}
+                    qubitMetricOptions={qubitMetricOptions.filter(opt =>
+                        Object.prototype.hasOwnProperty.call(calibrationData ?? {}, opt.value)
+                    )}
+                    couplerMetricOptions={couplerMetricOptions.filter(opt =>
+                        Object.prototype.hasOwnProperty.call(calibrationData ?? {}, opt.value)
+                    )}
                     qubitInputValue={qubitInputValue}
                     setQubitInputValue={setQubitInputValue}
                     couplerInputValue={couplerInputValue}
