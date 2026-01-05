@@ -53,6 +53,7 @@ export const ModalContent = (props) => {
             { name: '1->0 Readout Error', value: 'measure_ssro_error_1_to_0' },
             { name: '0->1 Readout Error', value: 'measure_ssro_error_0_to_1' },
             { name: 'Readout Fidelity', value: 'measure_ssro_fidelity' },
+            { name: 'Readout Fidelity', value: 'measure_fielity_ssro_fidelity' }, //for q50
             { name: 'T1 Time', value: 't1_time' },
             { name: 'T2 Time', value: 't2_time' },
             { name: 'T2 Echo Time', value: 't2_echo_time' },
