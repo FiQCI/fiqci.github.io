@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DeviceStatus } from './DeviceStatus';
 import { MetricSwitcher } from './MetricSwitcher';
 import { RawDataSwitcher } from './RawDataSwitcher';
-import { CRadioGroup, CSwitch, CButton } from '@cscfi/csc-ui-react';
-import { getCurrentRawData, copyToClipboard, downloadRawData, getMetricStatistics } from '../../utils/sidebarUtils';
+import { getMetricStatistics } from '../../utils/sidebarUtils';
 
 export const SideBar = (props) => {
     const {
