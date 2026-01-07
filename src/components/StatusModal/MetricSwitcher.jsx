@@ -1,8 +1,10 @@
 import React from 'react';
-import { CSelect } from '@cscfi/csc-ui-react';
+import { CIcon, CSelect, COption } from '@cscfi/csc-ui-react';
 import { generateMetricGradient } from '../../utils/generateGradient';
 import { formatMetricValue } from '../../utils/formatMetricValue';
 import { getMetricStatistics } from '../../utils/sidebarUtils';
+import {mdiHelpCircleOutline} from "@mdi/js"
+
 
 export const MetricSwitcher = (props) => {
 
@@ -14,20 +16,41 @@ export const MetricSwitcher = (props) => {
         <div className='sticky top-4'>
             <div className='overflow-y-auto scroll-smooth max-h-[70vh] pr-4'>
                 <div>
-                    <p className='font-bold mb-[2px]'>Qubit Metric:</p>
+                    <div className='flex'>
+                        <p className='font-bold mb-[2px]'>Qubit Metric:</p>
+                        <CIcon
+                            title="Hover over dropdown options for abbreviations."
+                            className='w-5'
+                            path={mdiHelpCircleOutline}
+                        />
+                    </div>
+                    
                     <CSelect
                         hideDetails={true}
                         className='py-2'
                         clearable
                         value={metricsState.qubitMetric}
-                        items={qubitMetricOptions}
+                        //items={qubitMetricOptions}
                         placeholder='Choose metric'
                         onChangeValue={(e) => {
                             updateMetricsState('qubitMetric', e.detail || '');
                             updateMetricsState('thresholdQubit', 0);
                             setQubitInputValue('0');
                         }}
-                    />
+
+
+                    >
+                        {qubitMetricOptions.map(option => 
+                            <COption
+                                key={option.value} 
+                                value={option.value}
+                                name={option.name}
+                                title={option?.title}
+                                >
+                                {option.name}
+                            </COption>
+                        )}
+                    </CSelect>
                 </div>
 
                 <div className="w-full">
