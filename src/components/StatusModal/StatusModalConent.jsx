@@ -76,6 +76,7 @@ export const ModalContent = (props) => {
             { name: 'QNDness Fidelity', value: 'measure_qndness_fidelity', title: 'QND = Quantum Non-Demolition'},
             { name: 'QNDness 0 State', value: 'measure_qndness_qndness_0', title: 'QND = Quantum Non-Demolition'},
             { name: 'QNDness 1 State', value: 'measure_qndness_qndness_1', title: 'QND = Quantum Non-Demolition'},
+            { name: 'QNDness Repeatability', value: 'measure_qndness_repeatability', title: 'QND = Quantum Non-Demolition'},
 
         ]
 
