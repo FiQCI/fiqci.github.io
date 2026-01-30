@@ -46,8 +46,8 @@ cookie_consent:
     announcement:
       text: A new call for access to the VTT Q50 quantum computer is now open!
       link:
-        title: How to get access to FiQCI quantum computers?
-        href: "/access"
+        title: How to get access to the Q50 quantum computer?
+        href: "/publications/2026-01-30-Q50-Call-current"
     buttons:
       - title: How to get access
         href: "/access"
