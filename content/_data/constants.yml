@@ -44,10 +44,10 @@ cookie_consent:
     tagline: Making the power of quantum computing accessible
     subtitle: FiQCI – Finnish quantum-computing infrastructure
     announcement:
-      text: The VTT Q50 quantum computer is now available!
+      text: A new call for access to the VTT Q50 quantum computer is now open!
       link:
-        title: How to get access to FiQCI quantum computers?
-        href: "/access"
+        title: How to get access to the Q50 quantum computer?
+        href: "/publications/2026-01-30-Q50-Call-current"
     buttons:
       - title: How to get access
         href: "/access"
@@ -134,7 +134,7 @@ cookie_consent:
         Hybrid HPC+QC access was opened in 2025. VTT Q50 is operated by VTT, and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.jpg"
       links:
-        - link: "/publications/2025-07-03-Q50-Call-2_2025"
+        - link: "/publications/2026-01-30-Q50-Call-current"
           teaser: "Apply for access to VTT Q50"
         - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
           teaser: "How to access VTT Q50, instructions"
