@@ -4,10 +4,9 @@ date: 2024-08-23
 collection: publications
 header:
   teaser: /assets/images/helmi-lumi-web-interface/thumbnail.png
-published: true
+published: false
 author: Huyen Do
 layout: post
-visible: 1
 filters:
   Skill level: Beginner # Beginner, Advanced
   Type: Instructions # Blog, Instructions, News
