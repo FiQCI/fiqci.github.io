@@ -141,14 +141,11 @@ const BookingCalendar = (props) => {
             if (isNaN(newDate) || newDate.toString() === 'Invalid Date') {
                 setValidDate(false);
                 setSelectedDate(new Date());
-                console.log(newDate)
                 return;
             }
             setSelectedDate(newDate);
             setValidDate(true);
-            console.log(newDate)
         } catch {
-            console.log("here")
             setValidDate(false);
         }
     }

@@ -177,7 +177,7 @@ const BlogsList = ({ id, title, blogs, paginationOptions, handlePageChange, show
 
 //Full blogs component
 export const Blogs = () => {
-    const blogs_dict = SITE.publications; //get blogs
+    const blogs_dict = SITE.publications.filter(blog => blog.hidden != "true")
     const [isModalOpen, setIsModalOpen] = useState(false); //modal control
     const [filters, setFilters] = useState({
         "Skill level": { "Advanced": false, "Beginner": false },

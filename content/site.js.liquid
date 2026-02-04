@@ -4,20 +4,23 @@ permalink: site.js
 {%- capture publications -%}
 [
 {%- for publication in site.publications %}
-  {
-    "key": "{{ forloop.index }}",
-    "type": "{{ publication.filters.Type | default: 'Post' }}",
-    "title": "{{ publication.title }}",
-    "url": "{{ publication.url | relative_url }}",
-    "date": "{{ publication.date | date: '%-d.%-m.%Y' }}",
-    "teaser": "{{ publication.header.teaser | relative_url }}",
-    "filters": {
-      {%- for category in publication.filters %}
-        "{{ category[0] }}": "{{ category[1] }}"
-        {%- unless forloop.last -%},{%- endunless -%}
-      {%- endfor %}
-    } 
-  }{%- unless forloop.last == true -%},{%- endunless -%}
+ {% if post.hidden == null or post.hidden == false %}
+    {
+      "key": "{{ forloop.index }}",
+      "type": "{{ publication.filters.Type | default: 'Post' }}",
+      "title": "{{ publication.title }}",
+      "url": "{{ publication.url | relative_url }}",
+      "date": "{{ publication.date | date: '%-d.%-m.%Y' }}",
+      "teaser": "{{ publication.header.teaser | relative_url }}",
+      "hidden": "{{ publication.hidden | jsonify }}",
+      "filters": {
+        {%- for category in publication.filters %}
+          "{{ category[0] }}": "{{ category[1] }}"
+          {%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor %}
+      } 
+    }{%- unless forloop.last == true -%},{%- endunless -%}
+  {% endif %}
 {% endfor %}
 ]
 {%- endcapture -%}

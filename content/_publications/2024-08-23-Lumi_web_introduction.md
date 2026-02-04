@@ -5,6 +5,7 @@ collection: publications
 header:
   teaser: /assets/images/helmi-lumi-web-interface/thumbnail.png
 published: true
+hidden: true
 author: Huyen Do
 layout: post
 filters:
