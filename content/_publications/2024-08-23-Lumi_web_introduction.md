@@ -4,7 +4,8 @@ date: 2024-08-23
 collection: publications
 header:
   teaser: /assets/images/helmi-lumi-web-interface/thumbnail.png
-published: false
+published: true
+hidden: true
 author: Huyen Do
 layout: post
 filters:
