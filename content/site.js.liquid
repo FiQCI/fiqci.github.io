@@ -3,7 +3,7 @@ permalink: site.js
 ---
 {%- capture publications -%}
 [
-{%- for publication in site.publications %}
+{%- for publication in site.publications | where: "published", true %}
   {
     "key": "{{ forloop.index }}",
     "type": "{{ publication.filters.Type | default: 'Post' }}",
@@ -24,7 +24,7 @@ permalink: site.js
 
 {%- capture events -%}
 [
-  {%- for event_post in site.events %}
+  {%- for event_post in site.events | where: "published", true %}
   {
     "key": "{{ forloop.index }}",
     "type": "Event",
