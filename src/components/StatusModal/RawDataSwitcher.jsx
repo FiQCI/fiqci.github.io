@@ -53,7 +53,6 @@ export const RawDataSwitcher = (props) => {
                             value={viewState.qubitSwitch}
                             onChangeValue={(e) => {
                                 updateViewState('qubitSwitch', e.detail)
-                                updateViewState('couplerSwitch', !e.detail)
                             }}
                         >
                             Qubits
@@ -61,10 +60,9 @@ export const RawDataSwitcher = (props) => {
                     </div>
                     <div className='mt-2 ml-2 flex flex-col'>
                         <CSwitch
-                            value={viewState.couplerSwitch}
+                            value={!viewState.qubitSwitch}
                             onChangeValue={(e) => {
                                 updateViewState('qubitSwitch', !e.detail)
-                                updateViewState('couplerSwitch', e.detail)
                             }}
                         >
                             Couplers
