@@ -13,29 +13,40 @@ export const CalibrationTable = (props) => {
 
     // Get all unique qubit/coupler IDs
     const allIds = new Set();
+    const idMap = {}; // Map normalized IDs to actual IDs in data
     allMetrics.forEach(metric => {
         Object.keys(calibrationData[metric]).forEach(id => {
-            if (id !== 'statistics' && ((qubitSwitch && !id.includes("__")) || (couplerSwitch && id.includes("__")))) {
-                allIds.add(id);
+            if (id !== 'statistics' && ((qubitSwitch && !id.includes("__")) || (!qubitSwitch && id.includes("__")))) {
+                // Normalize the ID
+                const match = id.match(/QB(\d+)__QB(\d+)/);
+                let normalizedId = id;
+                if (match) {
+                    const [, num1, num2] = match;
+                    const smaller = Math.min(parseInt(num1), parseInt(num2));
+                    const larger = Math.max(parseInt(num1), parseInt(num2));
+                    normalizedId = `QB${smaller}__QB${larger}`;
+                }
+                allIds.add(normalizedId);
+                idMap[normalizedId] = id; // Store the actual ID
             }
         });
     });
 
-    const sortedIds = Array.from(allIds).map(id => {
-        const match = id.match(/QB(\d+)__QB(\d+)/);
-        if (match) {
-            const [, num1, num2] = match;
-            const smaller = Math.min(parseInt(num1), parseInt(num2));
-            const larger = Math.max(parseInt(num1), parseInt(num2));
-            return `QB${smaller}__QB${larger}`;
-        }
-        return id;
-    });
-
+    var sortedIds;
+    if (qubitSwitch){
+        sortedIds = Array.from(allIds).sort();
+    } else {
+        sortedIds = Array.from(allIds).sort((a, b) => {
+            const [a1, a2] = a.match(/QB(\d+)__QB(\d+)/).slice(1).map(Number);
+            const [b1, b2] = b.match(/QB(\d+)__QB(\d+)/).slice(1).map(Number);
+            return a1 - b1 || a2 - b2;
+        });
+    }
     // Filter out metrics that have only N/A values for the filtered IDs
     const metrics = allMetrics.filter(metric => {
         return sortedIds.some(id => {
-            const data = calibrationData[metric][id];
+            const actualId = idMap[id];
+            const data = calibrationData[metric][actualId];
             const value = data?.value;
             return value !== null && value !== undefined;
         });
@@ -58,25 +69,27 @@ export const CalibrationTable = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                         {sortedIds.map(id => (
+                        {sortedIds.map(id => (
                             <tr key={id}>
                                 <td>{id}</td>
                                 {metrics.map(metric => {
-                                    let data = calibrationData[metric][id];
+                                    const actualId = idMap[id];
+                                    let data = calibrationData[metric][actualId];
                                     let value = data?.value;
-                                    
-                                    // If not found, try with flipped numbers
-                                    if ((value === null || value === undefined) && id.includes('__')) {
-                                        const match = id.match(/QB(\d+)__QB(\d+)/);
+                                    const unit = data?.unit || '';
+
+                                    // Try flipped ID if value is N/A
+                                    if ((value === null || value === undefined) && actualId.includes("__")) {
+                                        const match = actualId.match(/QB(\d+)__QB(\d+)/);
                                         if (match) {
-                                            const [, num1, num2] = match;
-                                            const flippedId = `QB${num2}__QB${num1}`;
-                                            data = calibrationData[metric][flippedId];
-                                            value = data?.value;
+                                            const flippedId = `QB${match[2]}__QB${match[1]}`;
+                                            const flippedData = calibrationData[metric][flippedId];
+                                            if (flippedData?.value !== null && flippedData?.value !== undefined) {
+                                                value = flippedData.value;
+                                            }
                                         }
                                     }
-                                    
-                                    const unit = data?.unit || '';
+
                                     return (
                                         <td key={`${id}-${metric}`}>
                                             {value !== null && value !== undefined ? formatMetricValue(value, unit) : 'N/A'}
