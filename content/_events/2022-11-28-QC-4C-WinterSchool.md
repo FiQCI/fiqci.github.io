@@ -4,7 +4,7 @@ date: 2022-11-28
 published: true
 link: http://www.chem.helsinki.fi/ws2022.html
 header:
-  teaser: /assets/images/pennylane-lumi.png
+  teaser: /assets/images/pennylane-lumi.webp
 tags:
   - Kvasi
 filters:

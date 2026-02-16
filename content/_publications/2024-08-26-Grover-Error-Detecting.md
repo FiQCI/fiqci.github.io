@@ -3,7 +3,7 @@ title: 'Quadratic Speedup Search Algorithm with [[4, 2, 2]] Quantum Error Detect
 date: 2024-08-26
 collection: publications
 header:
-    teaser: /assets/images/grover/thumbnail.png
+    teaser: /assets/images/grover/thumbnail.webp
 published: true
 author: Huyen Do
 layout: post
@@ -42,7 +42,7 @@ The number of iterations required to find the correct answer is proportional to 
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/grover/grover_2bit_example.png" alt="Example of Grover's 2-bit implementation">
+        <img src="/assets/images/grover/grover_2bit_example.webp" alt="Example of Grover's 2-bit implementation">
         <figcaption>
             <p>
                 <em> Figure 1: Grover's Search Algorithm for a 2-bit number with the oracle marking the state '01'. Since this is a search for a 2-bit number, only one iteration of the amplitude amplification step is required. </em>
@@ -67,7 +67,7 @@ In this implementation, the Grover search circuit is encoded using fault-toleran
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/grover/encode_v1.png" alt="Example of Grover's 2-bit implementation with [[4, 2, 2]] code">
+        <img src="/assets/images/grover/encode_v1.webp" alt="Example of Grover's 2-bit implementation with [[4, 2, 2]] code">
         <figcaption>
             <p>
                 <em>Figure 2: Implementation of Grover's Search Algorithm using the [[4, 2, 2]] quantum error-detecting code.</em>
@@ -80,7 +80,7 @@ To validate the correctness of the encoded circuit, we ran the algorithm on an i
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/grover/simulator_enc.png" alt="Simulation results for Grover's Search with [[4, 2, 2]] code">
+        <img src="/assets/images/grover/simulator_enc.webp" alt="Simulation results for Grover's Search with [[4, 2, 2]] code">
         <figcaption>
             <p>
                 <em>Figure 3: The accuracy of Grover's Search Algorithm for different 2-bit numbers marked in the oracle state on a simulator.</em>
@@ -95,7 +95,7 @@ To compare the performance of the encoded and unencoded versions of the circuit,
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/grover/unenc.png" alt="Unencoded Grover's 2-bit implementation">
+        <img src="/assets/images/grover/unenc.webp" alt="Unencoded Grover's 2-bit implementation">
         <figcaption>
             <p>
                 <em>Figure 4: Unencoded Grover's search circuit for a 2-bit number</em>
@@ -110,7 +110,7 @@ The results from the Helmi QPU indicate that the overall accuracy is below 50%, 
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/grover/helmi_result.png" alt="Results of Grover's search on Helmi">
+        <img src="/assets/images/grover/helmi_result.webp" alt="Results of Grover's search on Helmi">
         <figcaption>
             <p>
                 <em> Figure 5: The accuracy of Grover's Search algorithm running on Helmi with the unencoded version (left) and the encoded version (right).</em>
@@ -121,7 +121,7 @@ The results from the Helmi QPU indicate that the overall accuracy is below 50%, 
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/grover/bar_helmi.png" alt="Results of Grover's search on Helmi">
+        <img src="/assets/images/grover/bar_helmi.webp" alt="Results of Grover's search on Helmi">
         <figcaption>
             <p>
                 <em> Figure 6: Compare the performance of encoded and unencoded version.</em>

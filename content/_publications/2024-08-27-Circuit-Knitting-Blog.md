@@ -3,7 +3,7 @@ title: 'Quantum Circuit-Knitting on FiQCI'
 date: 2024-08-27
 collection: publications
 header:
-  teaser: /assets/images/QCut-logo.jpg
+  teaser: /assets/images/QCut-logo.webp
 published: true
 description: |-
   In the noisy intermediate scale quantum (NISQ) era of quantum computing the main factor limiting practical applications is the number of quality qubits available on a single quantum processing unit (QPU). For realising quantum utility, or even advantage on NISQ and future devices it can be useful to take a large quantum algorithm, cut it into smaller pieces and distribute the pieces on separate QPUs for execution in parallel. This would allow circumventing some of the hardware limitations, especially concerning the number of qubits on NISQ devices. Here, we use real hardware of the Finnish Quantum Computing Infrastructure (FiQCI) and simulations to demonstrate such a method, known as quantum circuit knitting.
@@ -22,7 +22,7 @@ filters:
 ---
 *In the noisy intermediate scale quantum (NISQ) era of quantum computing the main factor limiting practical applications is the number of quality qubits available on a single quantum processing unit (QPU). For realising quantum utility, or even advantage on NISQ and future devices it can be useful to take a large quantum algorithm, cut it into smaller pieces and distribute the pieces on separate QPUs for execution in parallel. This would allow circumventing some of the hardware limitations, especially concerning the number of qubits on NISQ devices. Here, we use real hardware of the Finnish Quantum Computing Infrastructure (FiQCI) and simulations to demonstrate such a method, known as quantum circuit knitting.*
 
-![Simple visualization of circuit knitting](/assets/images/Circuit-Knitting-Blog/circuit-knitting-simple-visual.png)
+![Simple visualization of circuit knitting](/assets/images/Circuit-Knitting-Blog/circuit-knitting-simple-visual.webp)
 
 This blog focuses on a form of circuit knitting known as wire-cutting with local operations. For those interested in other forms of circuit knitting check out [gate-cuts](https://arxiv.org/abs/1909.07534) and [cutting with classical communication](https://arxiv.org/abs/2205.00016). Wire-cutting means that a large quantum circuit is split into subcircuits by "cutting" a wire. Local operations means that there is no communication allowed between the formed subcircuits. Wire-cutting was chosen since it is the most viable circuit knitting method for currently existing hardware, requiring no classical communication between QPUs, reset gates, or mid-circuit measurements. We perform wire-cuts with a Python package, [QCut](https://github.com/jooniv/QCut), built on top of Qiskit. QCut was built for performing wire-cuts on real hardware connected to FiQCI as a part of CSC's summer trainee program. This, together with classical computing power provided by the LUMI supercomputer enhances the ability to investigate the performance of large variational quantum algorithms (VQAs) through FiQCI. VQAs can be used, for example, for solving problems in chemistry, optimization, materials science, and machine learning. 
 
@@ -30,7 +30,7 @@ This blog focuses on a form of circuit knitting known as wire-cutting with local
 
 Essentially wire-cutting is exactly what the name indicates. It splits a circuit into multiple pieces by cutting one or multiple wires and moving all subsequent operations on the wire onto a new qubit <a href="#references">[1]</a>. Wire-cutting has a linear qubit overhead that scales with the number of cuts made. For example, a five-qubit circuit could be split into two three-qubit circuits with a single cut or two two-qubit circuits and one three-qubit circuit with two cuts. Below is a figure demonstrating how a circuit could be split using wire-cutting.
 
-![Example on how circuit changes when a wire is cut](/assets/images/Circuit-Knitting-Blog/circuit-knitting-general-example.png)
+![Example on how circuit changes when a wire is cut](/assets/images/Circuit-Knitting-Blog/circuit-knitting-general-example.webp)
 
 The main motivation behind wire-cutting (and other forms of circuit knitting) is increasing the number of available qubits <a href="#references">[1]</a> by instead of requiring larger quantum computers, introducing the concept of distributed quantum computing. In distributed quantum computing a quantum circuit too large for any single quantum computer to execute can be cut into multiple pieces. The resulting subcircuits can then be executed in parallel on multiple separate quantum computers, or, of course, sequentially on a single quantum computer.
 
@@ -44,7 +44,7 @@ Before advancing further into how wire-cutting works we'll cover a few topics im
 
 The quantum channel technique is essentially a way to represent a transformation of a quantum state. While this may sound exactly like your normal quantum gates (and gates are also quantum channels), the difference to gates is that channels do not need to be unitary. This allows quantum channels to describe a much broader class of transformations. For example, those that require classically conditioned quantum gates such as the reset operation defined as
 
-![reset gate implementation](/assets/images/Circuit-Knitting-Blog/reset-gate.png)
+![reset gate implementation](/assets/images/Circuit-Knitting-Blog/reset-gate.webp)
 
 Even though we here perform wire-cuts without the need for reset gates and all of our operations can be implemented without classically conditioned operations, it is good to know what we mean when referring to a quantum channel below.
 
@@ -95,13 +95,13 @@ The QPD contains two types of operations. Basis measurements and state initializ
 
 <a id="examplecircuit"></a>
 
-![example of wire cut placement](/assets/images/Circuit-Knitting-Blog/wire-cut-example.png)
+![example of wire cut placement](/assets/images/Circuit-Knitting-Blog/wire-cut-example.webp)
 
 The subcircuits will then be
 
-![example of a subcircuit produced by a wire cut](/assets/images/Circuit-Knitting-Blog/wire-cut-example-sub1.png)
+![example of a subcircuit produced by a wire cut](/assets/images/Circuit-Knitting-Blog/wire-cut-example-sub1.webp)
 
-![example of a subcircuit produced by a wire cut](/assets/images/Circuit-Knitting-Blog/wire-cut-example-sub2.png)
+![example of a subcircuit produced by a wire cut](/assets/images/Circuit-Knitting-Blog/wire-cut-example-sub2.webp)
 
 Now to be able to estimate the original circuit's expectation values we need to insert operations from the <a href="#qdplist">QPD</a>, creating a total of 8 subcircuit pairs (one for each row in the <a href="#qdplist">QPD</a> ). In a more general setting, the total number of subcircuit groups of size *k* is given by $ 8^n $, where *n* is the number of cuts made and *k* is the number of parts the circuit is cut to. In addition to the number of circuits, also the number of samples needed scales exponentially with the number of cuts. Thus, the time complexity scales exponentially with the number of cuts. The sampling overhead can be represented in the big-O notation as O($\gamma^{2n}$) <a href="#references">[4]</a>, where $ \gamma $ is the sum of the absolute values of the coefficients of the QPD (4 for wire-cutting). If more than one cut is made the operations for each circuit are given by the cartesian product of the QPD with itself repeated for each cut. After running all of the subcircuits on a simulator or a quantum computer we can use classical post-processing to reconstruct the expectation values.
 
@@ -135,7 +135,7 @@ circuit.measure_all()
 
 circuit.draw("mpl")
 ```
-![initial circuit](/assets/images/Circuit-Knitting-Blog/initial-circuit.png)
+![initial circuit](/assets/images/Circuit-Knitting-Blog/initial-circuit.webp)
 
 ### Insert cut operations
 
@@ -151,15 +151,15 @@ cut_circuit.cx(2,3)
 cut_circuit.draw("mpl")
 ```
 
-![cut circuit](/assets/images/Circuit-Knitting-Blog/cut-circuit.png)
+![cut circuit](/assets/images/Circuit-Knitting-Blog/cut-circuit.webp)
 
 After this, we can use QCut to separate the cut_circuit from the cut location and generate all the needed experiment circuits by inserting operations from the QPD. Once we have the experiment circuits we can then execute them and estimate the expectation values of the original circuit using QCut. Here we have calculated the expectation values using the Helmi quantum computer both with and without QCut. Additionally, the expectation values have also been calculated with an ideal simulator. The separated subcircuits before inserting gates from QPD and the final results can be seen below.
 
-![subcircuit produced by QCut](/assets/images/Circuit-Knitting-Blog/cut-circuit-sub1.png)
+![subcircuit produced by QCut](/assets/images/Circuit-Knitting-Blog/cut-circuit-sub1.webp)
 
-![subcircuit produced by QCut](/assets/images/Circuit-Knitting-Blog/cut-circuit-sub2.png)
+![subcircuit produced by QCut](/assets/images/Circuit-Knitting-Blog/cut-circuit-sub2.webp)
 
-![bar plot of expectation values](/assets/images/Circuit-Knitting-Blog/results-bar-plot.png)
+![bar plot of expectation values](/assets/images/Circuit-Knitting-Blog/results-bar-plot.webp)
 
 As we can see since the subcircuits use fewer qubits, have fewer gates, and are therefore less deep, they are less erroneous than the full circuit. This explains why the reconstructed expectation values are closer to the ideal ones than the ones obtained by running the full circuit.
 
@@ -173,7 +173,7 @@ QAOA is a quantum approximation algorithm for solving combinatorial problems by 
 
 Now let's say we have a simple graph that we wish to solve the Max-Cut problem for using a QAOA.
 
-![graph for QAOA Max-Cut problem](/assets/images/Circuit-Knitting-Blog/qaoa-graph.png)
+![graph for QAOA Max-Cut problem](/assets/images/Circuit-Knitting-Blog/qaoa-graph.webp)
 
 First, we need a problem Hamiltonian for this graph that describes essentially the energy of the system which we here want to minimise. For this graph the Hamiltonian is 
 
@@ -181,11 +181,11 @@ $$ZZ_{01} + ZZ_{02} + ZZ_{12} + ZZ_{23} + ZZ_{24} + ZZ_{34}$$
 
 Here $ ZZ_{ij} $ are RZZ-rotation gates and *i*, and *j* are some qubit indices. You can see that each RZZ-gate here corresponds to a vertex in the graph. Now this Hamiltonian can be converted to a circuit by taking the terms as gates. This gives us the circuit below. Now this Hamiltonian is our cost function and its expectation value is what we want to minimise by finding appropriate parameters for the RZZ-gates. In addition to the cost Hamiltonian, we also need a mixer Hamiltonian that stops us from getting stuck in a suboptimal state. Here the mizer consists of applying RX-gates on each qubit. We will choose initial parameters of $ [-\pi, -\pi] $. Here we will use the scipy.minimize() function using the COBYLA method to minimize the cost function.
 
-![circuit for QAOA Max-Cut problem](/assets/images/Circuit-Knitting-Blog/qaoa-circuit.png)
+![circuit for QAOA Max-Cut problem](/assets/images/Circuit-Knitting-Blog/qaoa-circuit.webp)
 
 We can see that the circuit is structured in a way where we can easily cut a wire on the second qubit to split it in two. This is shown in the circuit below. After this, the QCut wire-cutting procedure can be executed just like we did above.
 
-![cut circuit for QAOA Max-Cut problem](/assets/images/Circuit-Knitting-Blog/qaoa-cut-circuit.png)
+![cut circuit for QAOA Max-Cut problem](/assets/images/Circuit-Knitting-Blog/qaoa-cut-circuit.webp)
 
 In the circuit, you can notice that the parameters are $ -2\pi $ instead of $ -\pi $ This is just because when constructing the circuit we multiply the parameters by 2. This is just a convention and does not affect our results.
 
@@ -195,15 +195,15 @@ Now that we have our cost function and circuit we can solve the problem. A noteb
 
 Solving the QAOA with Qiskits AerSimulator as our backend we can see that the results obtained are very close to the true minimum of -2 and that QCut can accurately estimate the cost function.
 
-![ideal result for QAOA Max-Cut problem](/assets/images/Circuit-Knitting-Blog/qaoa-QCut-results.png)
+![ideal result for QAOA Max-Cut problem](/assets/images/Circuit-Knitting-Blog/qaoa-QCut-results.webp)
 
 When running with the IQMFakeAdonis backend that models the noise of the Helmi quantum computer we see that neither the uncut QAOA nor the one cut with QCut reach the true minimum. The results from QCut again closely match the results obtained with the noisy simulator. Even though the accurate minimum cost is not reached, the optimal parameters reached with QCut are good enough to accurately obtain all of the solution states to the Max-Cut problem. Thus QCut could be used to accurately solve similar optimization problems requiring more qubits than available on the physical hardware.
 
-![noisy result for QAOA Max-Cut problem](/assets/images/Circuit-Knitting-Blog/qaoa-QCut-sim-results.png)
+![noisy result for QAOA Max-Cut problem](/assets/images/Circuit-Knitting-Blog/qaoa-QCut-sim-results.webp)
 
 One can see that the ideal solution states [4, 5, 6, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 22, 25, 26, 27] have the highest probabilities to be measured. The ideal solution states were calculated with the openQAOA python package.
 
-![noisy solution states](/assets/images/Circuit-Knitting-Blog/qaoa-result-states-reconstruct.png)
+![noisy solution states](/assets/images/Circuit-Knitting-Blog/qaoa-result-states-reconstruct.webp)
 
 So even though the results are erroneous, with QCut they are of sufficient quality to accurately solve the problem. 
 

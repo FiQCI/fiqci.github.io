@@ -3,7 +3,7 @@ title: 'Breaking New Ground: Simulating Quantum Algorithms Up to 44 Qubits on LU
 date: 2025-04-01
 collection: publications
 header:
-  teaser: /assets/images/LUMI-Quantum-simulations-thumbnail.png
+  teaser: /assets/images/LUMI-Quantum-simulations-thumbnail.webp
 published: true
 description: The EuroHPC LUMI supercomputer, hosted by CSC - IT Center for Science in Kajaani, Finland, supports a wide range of world-leading research and development, from digital twins of the Earth to the formation of cosmic strings in the early universe. Now, large quantum algorithms can be efficiently simulated, pushing the frontiers for the next generation of science and discovery.
 author: Michael Mucciardi
@@ -189,11 +189,11 @@ Localized computations take place within the nodes before having to transfer dat
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
     <div style="margin-right: 10px; text-align: center; margin-bottom: 20px;">
-        <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/16_nodes_connectivity_graph-updated.png" alt="32" style="display: block; margin-left: auto; margin-right: auto;">
+        <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/16_nodes_connectivity_graph-updated.webp" alt="32" style="display: block; margin-left: auto; margin-right: auto;">
         <div>Figure 1. Network traffic - 16 nodes</div>
     </div>
     <div style="margin-right: 10px; text-align: center; margin-bottom: 20px;">
-        <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/32_nodes_connectivity_graph-seperate.png" alt="64" style="display: block; margin-left: auto; margin-right: auto;">
+        <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/32_nodes_connectivity_graph-seperate.webp" alt="64" style="display: block; margin-left: auto; margin-right: auto;">
         <div>Figure 2. Network traffic - 32 nodes</div>
     </div>
 </div>
@@ -207,7 +207,7 @@ When our users inquired about running multinode simulations with Qiskit, we took
 Multiple container build iterations took place before arriving at the latest version of qiskit/qiskit-aer. The biggest performance improvements in the qiskit-aer container comes from the usage of the same Native HPE Cray MPI software that is built on the node.
 
 <div style="text-align: center;">
-  <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/singularity_container_arranged_size.png" alt="Singularity Container" width="900px"/>
+  <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/singularity_container_arranged_size.webp" alt="Singularity Container" width="900px"/>
   <br>
   <div style="display: inline-block;">
     <small><em>
@@ -458,7 +458,7 @@ Device  [Model : Revision]    Temp    Power   Partitions      SCLK     MCLK     
 **Quantum Volume - Single Node execution time results - chart**
 
 <div style="text-align: center;">
-  <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/Single-Node-Quantum-Volume.png" alt=Single Node execution time results width="900px"/>
+  <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/Single-Node-Quantum-Volume.webp" alt=Single Node execution time results width="900px"/>
   <br>
   <div style="display: inline-block;">
     <small><em>
@@ -650,7 +650,7 @@ Equipped with the tools needed to estimate the resource needs before submitting 
 **Quantum Volume - Strong Scaling execution time results - chart**
 
 <p align="center">
-  <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/Strong-Scaling-Quantum-Volume-34-Qubits-26-Blocking-Qubits.png" alt="Quantum Volume Single Node Simulations" width="900px"/>
+  <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/Strong-Scaling-Quantum-Volume-34-Qubits-26-Blocking-Qubits.webp" alt="Quantum Volume Single Node Simulations" width="900px"/>
   <br>
   <small><em>
       Figure 4: Chart displaying the execution time of Quantum Volume depth 10, 30, 100, and 300 on a range of nodes.
@@ -728,15 +728,15 @@ $$
 
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
     <div style="margin-right: 10px; text-align: center; margin-bottom: 20px;">
-        <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/weak-scaling-32-nodes-network-complexity.png" alt="32" style="display: block; margin-left: auto; margin-right: auto;">
+        <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/weak-scaling-32-nodes-network-complexity.webp" alt="32" style="display: block; margin-left: auto; margin-right: auto;">
         <div>Figure 6. Network traffic - 32 nodes</div>
     </div>
     <div style="margin-right: 10px; text-align: center; margin-bottom: 20px;">
-        <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/weak-scaling-64-nodes-network-complexity.png" alt="64" style="display: block; margin-left: auto; margin-right: auto;">
+        <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/weak-scaling-64-nodes-network-complexity.webp" alt="64" style="display: block; margin-left: auto; margin-right: auto;">
         <div>Figure 7. Network traffic - 64 nodes</div>
     </div>
     <div style="text-align: center; margin-bottom: 20px;">
-        <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/weak-scaling-128-nodes-network-complexity.png" alt="128" style="display: block; margin-left: auto; margin-right: auto;">
+        <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/weak-scaling-128-nodes-network-complexity.webp" alt="128" style="display: block; margin-left: auto; margin-right: auto;">
         <div>Figure 8. Network traffic - 128 nodes</div>
     </div>
 </div>
@@ -776,7 +776,7 @@ $$
 **Quantum Volume - Weak Scaling execution time results**
 
 <p align="center">
-  <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/Weak-Scaling-Quantum-Volume-29-Blocking-Qubits.png" alt="Quantum Volume Single Node Simulations" width="900px"/>
+  <img src="/assets/images/LUMI-Quantum-Simulations-qiskit-aer/Weak-Scaling-Quantum-Volume-29-Blocking-Qubits.webp" alt="Quantum Volume Single Node Simulations" width="900px"/>
   <br>
   <small><em>
       Figure 9: Chart displaying the execution time of Quantum Volume simulations using recommended node allocations for qubit ranges of 34-44.

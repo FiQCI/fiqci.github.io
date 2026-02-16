@@ -3,7 +3,7 @@ title: 'Financial algorithms on real quantum computers'
 date: 2024-04-09
 collection: publications
 header:
-  teaser: /assets/images/vtt-images/VTT_kvanttitietokone_labra-3237.jpg
+  teaser: /assets/images/vtt-images/VTT_kvanttitietokone_labra-3237.webp
 published: true
 author: Olli Mukkula
 layout: post
@@ -33,7 +33,7 @@ The impatient reader, who just wants to know how all of this works in practice, 
 The main idea of the QAE algorithm is to find the solutions to a problem from an unstructured set of possible answers. This set of answers is encoded into the amplitudes of quantum states in a register of quantum bits. Due to the unique properties of quantum computers, a single quantum query is enough to search the whole set of solutions, find the desired answer, and mark it by inverting the phase of the corresponding quantum state. We call this particular quantum state the "good state." The marked phase, however, does not lead to quantum advantage on its own, as it does not show up in measurements. QAE solves this by increasing the amplitude of the “good state” through the process called amplitude amplification. When done correctly, this increases the probability of measuring the good state significantly. Converting the states into the computational basis using the inverse quantum Fourier transform allows classically mapping the measured states into the estimates of the amplitudes of the original states. Because the increased amplitude of the good state causes it to be measured more frequently, the correct answer is recovered with high probability. The efficiency of the amplitude amplification and its effect on the number of queries is the source of the quadratic increase in performance.
 
 <figure>
-    <img src="/assets/images/Financial-Algorithms-Blog/Figure1-QAE-circuit.png" alt="Figure 1: QAE circuit">
+    <img src="/assets/images/Financial-Algorithms-Blog/Figure1-QAE-circuit.webp" alt="Figure 1: QAE circuit">
     <figcaption>
     <p>
     <em>Figure 1: A simple example of a QAE circuit based on Brassard's approach [1]. The “good state” is encoded into the objective (obj) qubit by quantum gate A. The amplitude amplification is implemented by repeatedly applying different powers of the Q operator. In this approach, the amplification operations are controlled by the register of evaluation qubits (eval)</em>
@@ -49,7 +49,7 @@ The original approach to quantum amplitude estimation proposed by Brassard et al
 To make up for the simplified circuits, MLQAE uses additional postprocessing in the form of maximum likelihood estimation. Though not quite as mathematically rigorous as the original algorithm by Brassard, the MLQAE has been subject to much research and seems to keep up with quadratic speedup [[4](#references),[5](#references)]. The good performance of the MLQAE is corroborated by Figure 3, where we present a comparison between QAE and MLQAE on Helmi. Where MLQAE achieves good accuracy, QAE suffers from a small number of available qubits in addition to a significant error arising from the large number of gates and long execution time of the circuit. On the other hand, the additional classical processing in MLQAE introduces some inaccuracy to the answer. Overall, given the advantages over Brassards QAE, MLQAE looks to be a good choice for implementing financial algorithms on near-term quantum computers.
 
 <figure>
-    <img src="/assets/images/Financial-Algorithms-Blog/Figure2-MLQAE.png" alt="Figure 2: MLQAE circuit">
+    <img src="/assets/images/Financial-Algorithms-Blog/Figure2-MLQAE.webp" alt="Figure 2: MLQAE circuit">
     <figcaption>
     <p>
     <em>Figure 2: Using MLQAE to implement the circuit of Figure 1 consists of a batch of simpler circuits with different powers of amplification operations Q. Compared to the approach in Figure 1, the MLQAE requires no additional evaluation qubits</em>
@@ -58,7 +58,7 @@ To make up for the simplified circuits, MLQAE uses additional postprocessing in 
 </figure>
 
 <figure>
-    <img src="/assets/images/Financial-Algorithms-Blog/Figure3-QAE-MLQAE-comparison.png" alt="Figure 3: Comparison between QAE and MLQAE">
+    <img src="/assets/images/Financial-Algorithms-Blog/Figure3-QAE-MLQAE-comparison.webp" alt="Figure 3: Comparison between QAE and MLQAE">
     <figcaption>
     <p>
     <em>Figure 3: Comparison between QAE and MLQAE. The amplitude error is plotted as a function of queries, which in QAE are related to the number of qubits and in MLQAE to the number of circuits. Note the different scales of y-axes</em>
@@ -73,7 +73,7 @@ Of course, real-world problems go beyond simple multiplication. Option pricing i
 Here, a reality check is in order. Both housing price estimation and option pricing encounter challenges on a real QPU. The circuits required for more complex problems are too long for current noise levels. Displayed in Figure 4 are the results of the European option pricing done with MLQAE. A simulation converges faster than the classical sampling method. However, results with a real QPU fall apart due to the qubits' loss of coherence. The good news is that these algorithms work as a concept even with quantum computers like Helmi, with only a few qubits available. Increased accuracy comes in time with more advanced hardware.
 
 <figure>
-    <img src="/assets/images/Financial-Algorithms-Blog/Figure4-Statistical-mean-of-amplitude-error.png" alt="Figure 4: Statistical-mean-of-amplitude-error">
+    <img src="/assets/images/Financial-Algorithms-Blog/Figure4-Statistical-mean-of-amplitude-error.webp" alt="Figure 4: Statistical-mean-of-amplitude-error">
     <figcaption>
     <p>
     <em>Figure 4: Statistical mean of amplitude error for evaluating the European call option. Comparison between MLQAE algorithm on a simulator and the Helmi quantum computer, and a classical sampling method</em>
@@ -89,7 +89,7 @@ Last November, the Hanken School of Economics in Finland and Ultrahack organized
 It was great to see teams utilizing the Finnish quantum computer as a part of their projects. One such team, Qumpula Quantum, won 2nd place in the competition. A popular topic in this year's hackathon was quantum machine learning, which was also implemented using Leena.
 
 <figure>
-    <img src="/assets/images/Financial-Algorithms-Blog/Figure5-Hanken-Hackathon.png" alt="Figure 5: Hanken-Hackathon">
+    <img src="/assets/images/Financial-Algorithms-Blog/Figure5-Hanken-Hackathon.webp" alt="Figure 5: Hanken-Hackathon">
     <figcaption>
     <p>
     <em>Figure 5: CSC and VTT had teams mentoring at Hanken Quantum Hackathon. Pictured at the bottom left: Nikolas Klemola Tango, Olli Mukkula, Modupe Falodun and Jake Muff. Photos: Aleksi Leskinen</em>

@@ -3,7 +3,7 @@ title: 'Quantum k-means for clustering and segmenting satellite images'
 date: 2024-08-22
 collection: publications
 header:
-  teaser: /assets/images/Satellite-Thumbnail.jpg
+  teaser: /assets/images/Satellite-Thumbnail.webp
 published: true
 author: Meeri Makitalo
 layout: post
@@ -31,14 +31,14 @@ Previously, the EuroSAT data set has been classified with a quantum convolutiona
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
 
   <div style="width: 45%; text-align: center; margin-bottom: 10px;">
-    <img src="/assets/images/QKmeans-Blog/Residential_1.jpg" alt="Example of an image that is labeled as Residential" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/Residential_1.webp" alt="Example of an image that is labeled as Residential" style="width: 100%;">
     <p>
     <em>Example of an image that is labeled as Residential</em>
     </p>
   </div>
 
   <div style="width: 45%; text-align: center; margin-bottom: 10px;">
-    <img src="/assets/images/QKmeans-Blog/Forest_1.jpg" alt="Example of an image that is labeled as Forest" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/Forest_1.webp" alt="Example of an image that is labeled as Forest" style="width: 100%;">
     <p>
     <em>Example of an image that is labeled as Forest</em>
     </p>
@@ -71,7 +71,7 @@ Kopczyk also presents one of the most common ways of finding the similarity betw
 <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
 
   <div style="width: 100%; text-align: center; margin-bottom: 10px;">
-    <img src="/assets/images/QKmeans-Blog/Circuit.png" alt="The circuit diagram of the swap test" style="width: 10cm;">
+    <img src="/assets/images/QKmeans-Blog/Circuit.webp" alt="The circuit diagram of the swap test" style="width: 10cm;">
     <p>
     <em>Figure 2: The circuit diagram of the swap test used to compute the similarity between two quantum states.</em>
     </p>
@@ -224,27 +224,27 @@ The clusters can also be visualized by plotting. **Figure 3** shows the results 
 <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
 
   <div style="width: 45%; text-align: center; margin: 10px;">
-    <img src="/assets/images/QKmeans-Blog/QKmeansEuroSAT1.png" alt="QDataset1" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/QKmeansEuroSAT1.webp" alt="QDataset1" style="width: 100%;">
   </div>
 
   <div style="width: 46%; text-align: center; margin: 10px;">
-    <img src="/assets/images/QKmeans-Blog/KmeansEuroSAT1.png" alt="Dataset1" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/KmeansEuroSAT1.webp" alt="Dataset1" style="width: 100%;">
   </div>
 
   <div style="width: 45%; text-align: center; margin: 10px;">
-    <img src="/assets/images/QKmeans-Blog/QKmeansEuroSAT4.png" alt="QDataset4" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/QKmeansEuroSAT4.webp" alt="QDataset4" style="width: 100%;">
   </div>
 
   <div style="width: 45%; text-align: center; margin: 10px;">
-    <img src="/assets/images/QKmeans-Blog/KmeansEuroSAT4.png" alt="Dataset1" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/KmeansEuroSAT4.webp" alt="Dataset1" style="width: 100%;">
   </div>
   
   <div style="width: 46%; text-align: center; margin: 10px;">
-    <img src="/assets/images/QKmeans-Blog/QKmeansEuroSAT6.png" alt="QDataset6" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/QKmeansEuroSAT6.webp" alt="QDataset6" style="width: 100%;">
   </div>
 
   <div style="width: 45%; text-align: center; margin: 10px;">
-    <img src="/assets/images/QKmeans-Blog/KmeansEuroSAT6.png" alt="Dataset6" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/KmeansEuroSAT6.webp" alt="Dataset6" style="width: 100%;">
   </div>
 
   <div style="width: 100%; text-align: left; margin-top: 10px;">
@@ -260,14 +260,14 @@ Each point in the cluster can be traced back to the image that it represents. Th
 <div style="display: flex; flex-direction: column; align-items: center;">
 
   <div style="width: 100%; text-align: center; margin-bottom: 10px;">
-    <img src="/assets/images/QKmeans-Blog/Cluster_residential.png" alt="Cluster Residential" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/Cluster_residential.webp" alt="Cluster Residential" style="width: 100%;">
     <p>
     <em>(a) The images of residential areas with their true and predicted labels.</em>
     </p>
   </div>
   
   <div style="width: 100%; text-align: center; margin-bottom: 10px;">
-    <img src="/assets/images/QKmeans-Blog/Cluster_forest.png" alt="Cluster Forest" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/Cluster_forest.webp" alt="Cluster Forest" style="width: 100%;">
     <p>
     <em>(b) The images of forest with their true and predicted labels.</em>
     </p>
@@ -296,43 +296,43 @@ The results of the image segmentation done with the quantum k-means algorithm ca
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
 
   <div style="width: 19%; text-align: center; margin: 3px;">
-    <img src="/assets/images/QKmeans-Blog/AnnualCrop_1623.jpg" alt="AnnualCrop" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/AnnualCrop_1623.webp" alt="AnnualCrop" style="width: 100%;">
   </div>
   
   <div style="width: 19%; text-align: center; margin: 3px;">
-    <img src="/assets/images/QKmeans-Blog/HerbaceousVegetation_82.jpg" alt="Vegetation" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/HerbaceousVegetation_82.webp" alt="Vegetation" style="width: 100%;">
   </div>
   
   <div style="width: 19%; text-align: center; margin: 3px;">
-    <img src="/assets/images/QKmeans-Blog/Highway_364.jpg" alt="Highway" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/Highway_364.webp" alt="Highway" style="width: 100%;">
   </div>
   
   <div style="width: 19%; text-align: center; margin: 3px;">
-    <img src="/assets/images/QKmeans-Blog/Industrial_106.jpg" alt="Industrial" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/Industrial_106.webp" alt="Industrial" style="width: 100%;">
   </div>
   
   <div style="width: 19%; text-align: center; margin: 3px;">
-    <img src="/assets/images/QKmeans-Blog/River_219.jpg" alt="River" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/River_219.webp" alt="River" style="width: 100%;">
   </div>
   
   <div style="width: 19%; text-align: center; margin: 3px;">
-    <img src="/assets/images/QKmeans-Blog/QAnnualCrop_1623.png" alt="QAnnualCrop" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/QAnnualCrop_1623.webp" alt="QAnnualCrop" style="width: 100%;">
   </div>
   
   <div style="width: 19%; text-align: center; margin: 3px;">
-    <img src="/assets/images/QKmeans-Blog/QHerbaceousVegetation_82.png" alt="QVegetation" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/QHerbaceousVegetation_82.webp" alt="QVegetation" style="width: 100%;">
   </div>
 
   <div style="width: 19%; text-align: center; margin: 3px;">
-    <img src="/assets/images/QKmeans-Blog/QHighway_364.png" alt="QHighway" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/QHighway_364.webp" alt="QHighway" style="width: 100%;">
   </div>
   
   <div style="width: 19%; text-align: center; margin: 3px;">
-    <img src="/assets/images/QKmeans-Blog/QIndustrial_106.png" alt="QIndustrial" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/QIndustrial_106.webp" alt="QIndustrial" style="width: 100%;">
   </div>
   
   <div style="width: 19%; text-align: center; margin: 3px;">
-    <img src="/assets/images/QKmeans-Blog/QRiver_219.png" alt="QRiver" style="width: 100%;">
+    <img src="/assets/images/QKmeans-Blog/QRiver_219.webp" alt="QRiver" style="width: 100%;">
   </div>
 
   <div style="width: 100%; text-align: left; margin-top: 10px;">

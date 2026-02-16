@@ -3,7 +3,7 @@ title: 'Open Call for pilot projects for access to the Helmi quantum computer'
 date: 2022-11-01
 collection: publications
 header:
-  teaser: /assets/images/FiQCI-banner.jpg
+  teaser: /assets/images/FiQCI-banner.webp
 published: true
 author: FiQCI
 layout: post

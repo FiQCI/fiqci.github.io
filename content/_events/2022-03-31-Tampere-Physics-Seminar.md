@@ -4,7 +4,7 @@ date: 2022-03-31
 published: true
 link: https://homepages.tuni.fi/tapio.rantala/opetus/files/FYS.250-Fysiikan.seminaari/schedule.21-22.txt
 header:
-  teaser: /assets/images/pennylane-lumi.png
+  teaser: /assets/images/pennylane-lumi.webp
 tags:
   - Helmi
 filters:

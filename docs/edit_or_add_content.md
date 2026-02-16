@@ -59,7 +59,7 @@ and
        The VTT Q5 "Helmi" is the first Finnish quantum computer. Helmi is based on superconducting technology and provides 5 qubits
        in a star-shape topology. Hybrid HPC+QC access was opened in 2022. Helmi is operated by VTT,
        and was co-developed with IQM Quantm Computers.
-      image: "/assets/images/vtt-images/VTT_lab-2.jpg"
+      image: "/assets/images/vtt-images/VTT_lab-2.webp"
       links:
         - link: ""
           teaser: "How to access VTT Q5, instructions"
@@ -277,7 +277,7 @@ Each section contains static text content, link urls, image paths, etc else that
   access_cards: #resource access cars under the hero conteent
     - title: Quantum computers
       href: /access/#quantum
-      teaser: /assets/images/FiQCI-banner.jpg
+      teaser: /assets/images/FiQCI-banner.webp
       description: |-
         The Finnish quantum-computing infrastructure (FiQCI) provides access to quantum computers
         through the LUMI supercomputer environment. Currently there are two quantum computers
@@ -287,7 +287,7 @@ Each section contains static text content, link urls, image paths, etc else that
           href: /access/#quantum
     - title: Supercomputers
       href: /access/#super
-      teaser: /assets/images/vtt-images/VTT_lab-2.jpg
+      teaser: /assets/images/vtt-images/VTT_lab-2.webp
       description: |-
         The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
         is the pan-European EuroHPC LUMI supercomputer.
@@ -296,7 +296,7 @@ Each section contains static text content, link urls, image paths, etc else that
           href: /access/#super
     - title: Emulation resources
       href: /access/#emulation
-      teaser: /assets/images/FiQCI-banner.jpg
+      teaser: /assets/images/FiQCI-banner.webp
       description: |-
         With the LUMI supercomputer it is possible to emulate quantum computers with up to 44 qubits.
         This allows for testing and development of quantum algorithms without the need for actual quantum hardware.
@@ -323,7 +323,7 @@ Each section contains static text content, link urls, image paths, etc else that
        The VTT Q5 "Helmi" is the first Finnish quantum computer. Helmi is based on superconducting technology and provides 5 qubits
        in a star-shape topology. Hybrid HPC+QC access was opened in 2022. Helmi is operated by VTT,
        and was co-developed with IQM Quantm Computers.
-      image: "/assets/images/vtt-images/VTT_lab-2.jpg"
+      image: "/assets/images/vtt-images/VTT_lab-2.webp"
       links:
         - link: ""
           teaser: "How to access VTT Q5, instructions"
@@ -336,7 +336,7 @@ Each section contains static text content, link urls, image paths, etc else that
       desc: |-
         VTT Q50 is based on superconducting technology and provides 53 qubits in a square grid topology.
         Hybrid HPC+QC access was opened in 2025. VTT Q50 is operated by VTT, , and was co-developed with IQM Quantm Computers.
-      image: "/assets/images/vtt-images/VTT_lab-2.jpg"
+      image: "/assets/images/vtt-images/VTT_lab-2.webp"
       links:
         - link: ""
           teaser: "How to access VTT Q50, instructions"
@@ -350,7 +350,7 @@ Each section contains static text content, link urls, image paths, etc else that
       desc: |-
         Presently the backbone of the classical HPC and AI resources in FiQCI. The pre-exascale EuroHPC LUMI supercomputer
         serves as the portal for hybrid HPC+QC. LUMI is hosted by CSC in Kajaani, Finland.
-      image: "/assets/images/FiQCI-banner.jpg"
+      image: "/assets/images/FiQCI-banner.webp"
       links:
         - link: ""
           teaser: "How to access Lumi"
@@ -363,7 +363,7 @@ Each section contains static text content, link urls, image paths, etc else that
     - name: Quantum emualtion with LUMI
       desc: |-
         The LUMI supercomputer enables full emulation and simulation of quantum algorithms of up to 44 qubits.
-      image: "/assets/images/FiQCI-banner.jpg"
+      image: "/assets/images/FiQCI-banner.webp"
       links:
         - link: ""
           teaser: "Quantum emulation documentation"

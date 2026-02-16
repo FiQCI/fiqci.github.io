@@ -3,7 +3,7 @@ title: 'A recap of the Two-Day “Introduction to Quantum Computing and FiQCI”
 date: 2024-06-06
 collection: publications
 header:
-  teaser: /assets/images/vtt-images/VTT_kvanttitietokone_labra-3237.jpg
+  teaser: /assets/images/vtt-images/VTT_kvanttitietokone_labra-3237.webp
 published: true
 author: Joonas Nivala
 layout: post
@@ -27,7 +27,7 @@ filters:
 We are thrilled to share the highlights from our recent two-day course on quantum computing and the Finnish Quantum-Computing Infrastructure (FiQCI). The event, hosted on June 3rd and 4th, 2024, was a great success, bringing together people from different fields to learn about the fundamentals of quantum computing and FiQCI.
 
 <figure>
-    <img src="/assets/images/blogs/Suman-Kundu-superconducting-qubits.png" alt="Picture of Suman Kundu lecturing">
+    <img src="/assets/images/blogs/Suman-Kundu-superconducting-qubits.webp" alt="Picture of Suman Kundu lecturing">
     <figcaption>
     <p>
     <em>Suman Kundu providing insight on the inner workings of superconducting qubits.</em>

@@ -3,7 +3,7 @@ title: 'Dark Matter Detection with Qubits' #Blog title
 date: 2025-08-21 #the date of publication as yyyy-mm-dd
 collection: publications #don't change
 header: #thumbnail image for the post
-  teaser: /assets/images/Dark-Matter-Detection/dark_matter_thumbnail.jpg #e.g /assets/images/topology/thumbnail.png
+  teaser: /assets/images/Dark-Matter-Detection/dark_matter_thumbnail.webp #e.g /assets/images/topology/thumbnail.webp
 published: true
 description: |-
   What is dark matter? is a question that as been asked by scientists for many years. Recently an interest has spiked on using qubits as sensors for finding dark matter. Superconducting qubits are used for searching for a specific type of dark matter particle, an axion. Axions are light particles that do not interact with "ordinary" matter easily. However, they can cause additional electrical currents while coupling to photons which could be sensed by a qubit. These signals are very weak and it has been proposed that the sensitivity of the qubit sensor system could be increased with a quantum circuit. In this blog post, an introduction to the basics of using qubits as sensors and an introduction to axion dark matter is given. The use of superconducting qubits for axion dark matter detection is also motivated and the circuit for the sensitivity enhancement is presented. The code for this circuit is also available so that anyone can run it on the VTT Q50 quantum computer.
@@ -77,7 +77,7 @@ This is repeated as many times as desired and then the whole detection protocol 
 
 As the signals from dark matter and its interactions are faint, very sensitive devices are needed to observe them. The sensitivity of the qubit sensor can be improved by using entangled qubits [[4,5]](#references) using Greenberg-Horne-Zeilinger (GHZ) states. The GHZ state works in the following way: first $N$ qubits are initialized into the ground state, then they are put into superposition with a Hadamard gate and entangled by, for example, using CNOT gates [[1]](#references). The new state now evolves for a certain time $\tau$ and it picks up a phase, the phase in this case is from the axion-photon interaction, that is enhanced by a factor of $N$, then the superposition state is converted back with more of the same entanglement gates, CNOT gates in this case, and finally the first qubit is read out. The oscillation frequency will increase by a factor of $N$. The noise from the measurement does not increase as only one qubit is measured. **Figure 1** shows an example of this kind of a circuit for 10 qubits.
 
-![Signal enhancement circuit](/assets/images/Dark-Matter-Detection/EnhancedQC.png)
+![Signal enhancement circuit](/assets/images/Dark-Matter-Detection/EnhancedQC.webp)
 **Figure 1**: A diagram of the enhancement circuit for the dark matter detection with qubits.
 
 The detection protocol with entangled qubits is similar to the one with only one qubit [[4]](#references). The detection is begun by preparing the qubits and initializing them to the ground state. Then they are passed trough the signal enhancement circuit, where the qubits evolve for time $\tau$. In this example the qubits will evolve according to the unitary $U_{DM}$. This cycle is repeated as many times as desired and then the whole protocol is repeated for a qubit frequency that would correspond to a new axion mass. Also these measurements can take a year to complete. 
@@ -109,11 +109,11 @@ The circuits without the simulated dark matter signal were run 100 times to matc
 
 In **Figure 2**, the circuits with the simulated dark matter signal were also run on a simulator that mimics the VTT Q50 quantum computer. **Figure 3** shows the probabilities of a qubit being in an excited state after a simulated dark matter signal is applied. The circuits were run with 1, 5 and 10 qubits. This time the circuits were run on the actual VTT Q50 quantum computer.
 
-![Simulator run with 1 qubit](/assets/images/Dark-Matter-Detection/1qubit.png)
+![Simulator run with 1 qubit](/assets/images/Dark-Matter-Detection/1qubit.webp)
 
-![Simulator run with 5 qubits](/assets/images/Dark-Matter-Detection/5qubits.png)
+![Simulator run with 5 qubits](/assets/images/Dark-Matter-Detection/5qubits.webp)
 
-![Simulator run with 10 qubits](/assets/images/Dark-Matter-Detection/10qubits.png)
+![Simulator run with 10 qubits](/assets/images/Dark-Matter-Detection/10qubits.webp)
 
 **Figure 2**: Probability of a qubit being in an excited state with and without $U_{DM}$ acting on it. The circuits have 1, 5, and 10 qubits respectively and were run on a simulator mimicking the VTT Q50 quantum computer. The dashed red line is the experiment without the simulated dark matter signal. The blue line is the experiment with the simulated dark matter signal.
 
@@ -121,11 +121,11 @@ For the experiment without a simulated dark matter signal in **Figure 2**, it ca
 
 The experiments with the simulated dark matter signal in **Figure 2** show that even with a rather low number of qubits, a clear improvement can be observed in the probabilities of the qubit being in an excited state. This makes observation of a dark matter particle easier. With the entangled circuit that has multiple qubits as sensors, a bigger range of dark matter particles with different masses and kinetic mixing parameters can be seen exciting the qubit. This means that the probability of observing an axion in the whole possible mass range is more likely than with a single qubit as the sensor. There are some constraints for the mass and kinetic mixing parameter coming from cosmological and astrophysical models and from existing dark matter search results, [[4]](#references), that have not been accounted for in this example. Thus, some of the mass and kinetic mixing parameters used in this sweep might not make physically sense even if they are shown to be probable to observe in the results from the circuit.
 
-![Q50 run with 1 qubit](/assets/images/Dark-Matter-Detection/Q501Qubit.png)
+![Q50 run with 1 qubit](/assets/images/Dark-Matter-Detection/Q501Qubit.webp)
 
-![Q50 run with 5 qubits](/assets/images/Dark-Matter-Detection/Q505Qubits.png)
+![Q50 run with 5 qubits](/assets/images/Dark-Matter-Detection/Q505Qubits.webp)
 
-![Q50 run with 10 qubits](/assets/images/Dark-Matter-Detection/Q5010Qubits.png)
+![Q50 run with 10 qubits](/assets/images/Dark-Matter-Detection/Q5010Qubits.webp)
 
 **Figure 3**: Probability of a qubit being in an excited state after $U_{DM}$ has acted on it. The circuits have 1, 5, and 10 qubits respectively and were run on the VTT Q50 quantum computer.
 
@@ -133,13 +133,13 @@ Comparing the results of the enhancement circuits run with the simulator to the 
 
 In **Figure 4**, the enhancement circuit was run with 15 qubits on the simulator mimicking VTT Q50 and the VTT Q50 quantum computer. These results show that on the real quantum computer the noise increases quickly with the number of gates in the quantum circuit, blending the dark matter signal into the noise. These results could be improved by choosing qubits that have low error rates and good couplers between them. This is possible by checking the layout of the VTT Q50 quantum computer with overlaid calibration data from the [FiQCI website](https://fiqci.fi/status/). The calibration map at the time when the circuits were run is in **Figure 5**.
 
-![Simulator run with 15 qubits](/assets/images/Dark-Matter-Detection/15qubits.png)
+![Simulator run with 15 qubits](/assets/images/Dark-Matter-Detection/15qubits.webp)
 
-![Q50 run with 15 qubits](/assets/images/Dark-Matter-Detection/Q5015Qubits.png)
+![Q50 run with 15 qubits](/assets/images/Dark-Matter-Detection/Q5015Qubits.webp)
 
 **Figure 4**: Probability of a qubit being in an excited state after $U_{DM}$ has acted on it. The circuit has 15 qubits and was run on the simulator mimicking VTT Q50 and the real VTT Q50 quantum computer respectively.
 
-![Calibration map](/assets/images/Dark-Matter-Detection/Calibration.png)
+![Calibration map](/assets/images/Dark-Matter-Detection/Calibration.webp)
 
 **Figure 5**: The layout of the VTT Q50 quantum computer with overlaid calibration data on the 31st of July 2025, the date of the experiment. This graph can be found form the VTT Q50 layout section on the [FiQCI website](https://fiqci.fi/status/).
 

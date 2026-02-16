@@ -4,7 +4,7 @@ date: 2021-05-12
 published: true
 link: https://youtu.be/EnDKcCAjRtg
 header:
-  teaser: /assets/images/pennylane-lumi.png
+  teaser: /assets/images/pennylane-lumi.webp
 tags:
   - Kvasi
 filters:

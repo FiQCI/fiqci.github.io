@@ -3,7 +3,7 @@ title: 'Getting started with Helmi through LUMI web interface'
 date: 2024-08-23
 collection: publications
 header:
-  teaser: /assets/images/helmi-lumi-web-interface/thumbnail.png
+  teaser: /assets/images/helmi-lumi-web-interface/thumbnail.webp
 published: true
 hidden: true
 author: Huyen Do
@@ -45,7 +45,7 @@ Login into LUMI [web interface](https://www.lumi.csc.fi/public/) then click on `
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/helmi-lumi-web-interface/jupyter_starting.png" alt="jupyter start">
+        <img src="/assets/images/helmi-lumi-web-interface/jupyter_starting.webp" alt="jupyter start">
     </figure>
 </div>
 
@@ -53,7 +53,7 @@ Fill in the required fields as shown in the picture below:
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/helmi-lumi-web-interface/lumi_jupyter.png" alt="jupyter on lumi">
+        <img src="/assets/images/helmi-lumi-web-interface/lumi_jupyter.webp" alt="jupyter on lumi">
     </figure>
 </div>
 
@@ -76,7 +76,7 @@ Once your Jupyter session is active, you can start writing and testing your quan
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/helmi-lumi-web-interface/jupyter_example.png" alt="jupyter example">
+        <img src="/assets/images/helmi-lumi-web-interface/jupyter_example.webp" alt="jupyter example">
     </figure>
 </div>
 
@@ -130,7 +130,7 @@ print("\nCounts result:")
 print(counts)
 
 # You can also plot the histogram and save it into your lumi workspace
-plot_histogram(counts).savefig("histogram.png")
+plot_histogram(counts).savefig("histogram.webp")
 ```
 
 ### Sbatch script to run on LUMI
@@ -180,7 +180,7 @@ sbatch script.sh
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/helmi-lumi-web-interface/sbatch.png" alt="sbatch output">
+        <img src="/assets/images/helmi-lumi-web-interface/sbatch.webp" alt="sbatch output">
     </figure>
 </div>
 
@@ -192,7 +192,7 @@ squeue --me
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/helmi-lumi-web-interface/squeue.png" alt="squeue output">
+        <img src="/assets/images/helmi-lumi-web-interface/squeue.webp" alt="squeue output">
     </figure>
 </div>
 
@@ -200,7 +200,7 @@ If you type the command again and see no output, the job has already finished. Y
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/helmi-lumi-web-interface/workspace.png" alt="work space">
+        <img src="/assets/images/helmi-lumi-web-interface/workspace.webp" alt="work space">
     </figure>
 </div>
 
@@ -208,7 +208,7 @@ All the `print()` statements from the Python file will be written in the output 
 
 <div style="text-align: center;">
     <figure style="display: inline-block; text-align: left;  margin: 0; padding: 0;">
-        <img src="/assets/images/helmi-lumi-web-interface/output_print.png" alt="sbatch output">
+        <img src="/assets/images/helmi-lumi-web-interface/output_print.webp" alt="sbatch output">
     </figure>
 </div>
 

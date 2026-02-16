@@ -1,39 +1,39 @@
 Olli Mukkula:
   name        : "Olli Mukkula"
   bio         : "Application Specialist at CSC, Quantum Technologies"
-  avatar      : "/assets/images/authors/Olli_Mukkula.png"
+  avatar      : "/assets/images/authors/Olli_Mukkula.webp"
 
 Joonas Nivala:
   name        : "Joonas Nivala"
   bio         : "Junior Application Specialist at CSC, Quantum Technologies"
-  avatar      : "/assets/images/authors/Joonas_Nivala.jpg"
+  avatar      : "/assets/images/authors/Joonas_Nivala.webp"
 
 Nikolas Klemola Tango:
   name        : "Nikolas Klemola Tango"
   bio         : "Junior Application Specialist at CSC, Quantum Technologies"
-  avatar      : "/assets/images/authors/Nikolas_Klemola_Tango.jpg"
+  avatar      : "/assets/images/authors/Nikolas_Klemola_Tango.webp"
 
 Huyen Do:
   name        : "Huyen Do"
   bio         : "Quantum Computing trainee at CSC, Quantum Technologies"
-  avatar      : "/assets/images/authors/Huyen_Do.jpg"
+  avatar      : "/assets/images/authors/Huyen_Do.webp"
 
 Meeri Makitalo:
   name        : "Meeri Mäkitalo"
   bio         : "Junior Application Specialist at CSC, Quantum Technologies"
-  avatar      : "/assets/images/authors/Meeri_Makitalo.jpg"
+  avatar      : "/assets/images/authors/Meeri_Makitalo.webp"
 
 Michael Mucciardi:
   name        : "Michael Mucciardi"
   bio         : "Senior Systems Specialist at CSC, Quantum Technologies"
-  avatar      : "/assets/images/authors/Michael_Mucciardi.jpg" 
+  avatar      : "/assets/images/authors/Michael_Mucciardi.webp" 
 
 Noora Kajaste:
   name        : "Noora Kajaste"
   bio         : "Summer Trainee at CSC, Quantum Technologies"
-  avatar      : "/assets/images/authors/Noora_Kajaste.jpg" 
+  avatar      : "/assets/images/authors/Noora_Kajaste.webp" 
 
 FiQCI:
   name        : "FiQCI Team"
   bio         : "The FiQCI team"
-  avatar      : "/assets/images/FiQCI-logo.png"
+  avatar      : "/assets/images/FiQCI-logo.webp"
