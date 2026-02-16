@@ -9,6 +9,23 @@ layout: base
 
 {%- include react/root.html id='hero' -%}
 
+<style>
+  #hero-background-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #hero-container {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+  }
+</style>
+
+<link rel="preload" as="image" href="{{ '/assets/images/FiQCI-banner.webp' | relative_url }}" fetchpriority="high">
+
 {{ content }}
 
 <div id="about" class="pb-20 text-white bg-[#0D2B53] w-full">
