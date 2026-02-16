@@ -23,16 +23,18 @@
   
   {% include external/font.html %}
 
-  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preconnect" href="https://rsms.me/" crossorigin>
+
   <link rel="dns-prefetch" href="https://fiqci-backend.2.rahtiapp.fi">
 
-  <!-- Defer React CDN scripts to unblock rendering -->
-  <script crossorigin defer src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin defer src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- Add React from CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   
   <script type="text/javascript" src="{{ "runtime.js" | relative_url }}"></script>
   <script defer src="/vendors.js"></script>
-  <script defer type="text/javascript" src="{{ "common.js" | relative_url }}"></script>
+  <script type="text/javascript" src="{{ "common.js" | relative_url }}"></script>
+
 
   <script defer type="text/javascript" src="{{ "site.js" | relative_url }}" charset="utf-8"></script>
   {% if page.react and (site.pages | where: "name" page.name) %}
@@ -42,5 +44,5 @@
   {% else %}
     {%- assign react_source = "default.js" -%}
   {% endif %}
-  <script defer type="text/javascript" src="{{ react_source | relative_url }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ react_source | relative_url }}" charset="utf-8"></script>
 </head>
