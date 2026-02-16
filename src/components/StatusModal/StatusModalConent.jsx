@@ -34,7 +34,6 @@ export const ModalContent = (props) => {
         rawDataType: { name: 'Calibration Data', value: 'calibration_data' },
         tableView: false,
         qubitSwitch: true,
-        couplerSwitch: false,
     });
 
     // Update functions for grouped states
@@ -132,7 +131,6 @@ export const ModalContent = (props) => {
                                         <CalibrationTable
                                             calibrationData={calibrationData}
                                             qubitSwitch={viewState.qubitSwitch}
-                                            couplerSwitch={viewState.couplerSwitch}
                                             qubitMetricOptions={qubitMetricOptions}
                                             couplerMetricOptions={couplerMetricOptions}
                                         />

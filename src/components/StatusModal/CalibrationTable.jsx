@@ -5,7 +5,7 @@ import { formatMetricValue } from '../../utils/formatMetricValue';
 // Render calibration data as a table
 export const CalibrationTable = (props) => {
 
-    const { calibrationData, qubitSwitch, couplerSwitch, qubitMetricOptions, couplerMetricOptions } = props;
+    const { calibrationData, qubitSwitch, qubitMetricOptions, couplerMetricOptions } = props;
     if (!calibrationData) return <p>No calibration data available</p>;
 
     const allMetrics = Object.keys(calibrationData);
