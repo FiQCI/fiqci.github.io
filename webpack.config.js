@@ -46,14 +46,20 @@ fs.writeFileSync(jekyllConfigFilepath, yaml.stringify(jekyllConfig));
 
 
 module.exports = {
+  mode: process.env.NODE_ENV === "production" ? "production" : "development",
   entry: entryFiles,
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   output: {
     filename: "[name].js",
+    chunkFilename: "[name].js",
     path: outputDirpath,
   },
   resolve: {
     extensions: [".js", ".jsx"],
+  },
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM'
   },
   module: {
     rules: [
@@ -81,6 +87,24 @@ module.exports = {
         ],
       },
     ],
+  },
+  optimization: {
+    runtimeChunk: { name: "runtime" },
+    splitChunks: {
+      chunks: "all",
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+        common: {
+          name: "common",
+          minChunks: 2,
+          chunks: "all",
+        },
+      },
+    },
   },
   plugins: [
     new webpack.DefinePlugin({
