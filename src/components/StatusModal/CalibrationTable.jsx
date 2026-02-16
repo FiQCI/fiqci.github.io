@@ -21,7 +21,16 @@ export const CalibrationTable = (props) => {
         });
     });
 
-    const sortedIds = Array.from(allIds);
+    const sortedIds = Array.from(allIds).map(id => {
+        const match = id.match(/QB(\d+)__QB(\d+)/);
+        if (match) {
+            const [, num1, num2] = match;
+            const smaller = Math.min(parseInt(num1), parseInt(num2));
+            const larger = Math.max(parseInt(num1), parseInt(num2));
+            return `QB${smaller}__QB${larger}`;
+        }
+        return id;
+    });
 
     // Filter out metrics that have only N/A values for the filtered IDs
     const metrics = allMetrics.filter(metric => {
@@ -53,8 +62,20 @@ export const CalibrationTable = (props) => {
                             <tr key={id}>
                                 <td>{id}</td>
                                 {metrics.map(metric => {
-                                    const data = calibrationData[metric][id];
-                                    const value = data?.value;
+                                    let data = calibrationData[metric][id];
+                                    let value = data?.value;
+
+                                    // If not found, try with flipped numbers
+                                    if ((value === null || value === undefined) && id.includes('__')) {
+                                        const match = id.match(/QB(\d+)__QB(\d+)/);
+                                        if (match) {
+                                            const [, num1, num2] = match;
+                                            const flippedId = `QB${num2}__QB${num1}`;
+                                            data = calibrationData[metric][flippedId];
+                                            value = data?.value;
+                                        }
+                                    }
+
                                     const unit = data?.unit || '';
                                     return (
                                         <td key={`${id}-${metric}`}>
