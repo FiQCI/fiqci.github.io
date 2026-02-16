@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { getDeviceMetricsConfig, pickMetricData, getMetricUnit } from '../../config/deviceMetrics';
 
 
 const parseResultMedian = (data, unit) => {
@@ -17,11 +18,11 @@ const parseResultMedian = (data, unit) => {
 export const Overview = (props) => {
 
     const calibrationData = props.calibrationData;
-
     const deviceInfoData = props.deviceInfoData;
-
-
     const limitationsData = deviceInfoData?.job_policy || {};
+
+    const deviceName = deviceInfoData?.name || '';
+    const { overview } = getDeviceMetricsConfig(deviceName);
 
     const limitations = {
         "Max circuits per batch": limitationsData?.max_number_circuits_per_batch || "-",
@@ -29,40 +30,27 @@ export const Overview = (props) => {
         "Max jobs in queue": limitationsData?.max_queue_length || "-"
     }
 
+    const buildMetric = (title, keys) => {
+        const entry = pickMetricData(calibrationData, keys);
+        const unit = getMetricUnit(entry?.data) || '%';
+        return {
+            title,
+            value: parseResultMedian(entry?.data?.statistics, unit),
+            unit,
+        };
+    };
+
     const qualityMetricsSingle = {
-        "median-prx": {
-            title: 'Median single-qubit gate fidelity',
-            value: parseResultMedian(calibrationData?.["prx_rb_fidelity"]?.statistics, calibrationData?.["prx_rb_fidelity"]?.["QB1"]?.unit),
-            unit: calibrationData?.["prx_rb_fidelity"]?.["QB1"]?.unit || '%'
-        },
-        "median-readout-fidelity": {
-            title: 'Median readout fidelity',
-            value: parseResultMedian(calibrationData?.["measure_ssro_fidelity"]?.statistics, calibrationData?.["measure_ssro_fidelity"]?.["QB1"]?.unit),
-            unit: calibrationData?.["measure_ssro_fidelity"]?.["QB1"]?.unit || '%'
-        },
-        "median-t1": {
-            title: 'Median T1 time',
-            value: parseResultMedian(calibrationData?.["t1_time"]?.statistics, calibrationData?.["t1_time"]?.["QB1"]?.unit),
-            unit: calibrationData?.["t1_time"]?.["QB1"]?.unit || '%'
-        },
-        "median-t2": {
-            title: 'Median T2 time',
-            value: parseResultMedian(calibrationData?.["t2_time"]?.statistics, calibrationData?.["t2_time"]?.["QB1"]?.unit),
-            unit: calibrationData?.["t2_time"]?.["QB1"]?.unit || '%'
-        },
-    }
+        "median-prx": buildMetric('Median single-qubit gate fidelity', overview?.single?.singleGateFidelity),
+        "median-readout-fidelity": buildMetric('Median readout fidelity', overview?.single?.readoutFidelity),
+        "median-t1": buildMetric('Median T1 time', overview?.single?.t1),
+        "median-t2": buildMetric('Median T2 time', overview?.single?.t2),
+    };
+
     const qualityMetricsTwo = {
-        "median-2-qubit": {
-            title: 'Median 2-qubit gate fidelity',
-            value: parseResultMedian(calibrationData?.["cz_irb_fidelity"]?.statistics, calibrationData?.["cz_irb_fidelity"]?.[0]?.unit),
-            unit: calibrationData?.["cz_irb_fidelity"]?.["QB1__QB3"]?.unit || '%'
-        },
-        "median-clifford": {
-            title: 'Median Clifford gate fidelity',
-            value: parseResultMedian(calibrationData?.["clifford_rb_fidelity"]?.statistics, calibrationData?.["clifford_rb_fidelity"]?.[0]?.unit),
-            unit: calibrationData?.["clifford_rb_fidelity"]?.["QB1__QB3"]?.unit || '%'
-        }
-    }
+        "median-2-qubit": buildMetric('Median 2-qubit gate fidelity', overview?.coupler?.twoQubitFidelity),
+        "median-clifford": buildMetric('Median Clifford gate fidelity', overview?.coupler?.cliffordFidelity),
+    };
 
     return (
         <div className="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-child col-span-1 md:col-span-2 lg:col-span-3">

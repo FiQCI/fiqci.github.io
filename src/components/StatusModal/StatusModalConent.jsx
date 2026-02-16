@@ -12,7 +12,7 @@ import {
     CTab, CTabItems, CTabItem
 } from '@cscfi/csc-ui-react';
 import { object } from 'framer-motion/client';
-
+import { getDeviceMetricsConfig } from '../../config/deviceMetrics';
 
 export const ModalContent = (props) => {
 
@@ -49,47 +49,11 @@ export const ModalContent = (props) => {
     const calibrationData = calibrationDataAll.metrics
     const lastCalibrated = new Date(calibrationDataAll.quality_metric_set_end_timestamp)
 
-    const qubitMetricOptions =
-        [
-            //coherence times
-            { name: 'T1 Time', value: 't1_time' },
-            { name: 'T2 Time', value: 't2_time' },
-            { name: 'T2 Echo Time', value: 't2_echo_time' },
+    const deviceName = deviceInfoData?.name || '';
+    const deviceConfig = getDeviceMetricsConfig(deviceName);
 
-            //gate fidelity
-            { name: 'PRX Gate Fidelity', value: 'prx_rb_fidelity' },
-
-            //Q50 readout metrics
-            //Helmi: does not exist
-            { name: '1->0 Readout Error', value: 'measure_fidelity_ssro_error_1_to_0' },
-            { name: '0->1 Readout Error', value: 'measure_fidelity_ssro_error_0_to_1' },
-            { name: 'Readout Fidelity', value: 'measure_fidelity_ssro_fidelity' },
-
-            //Q50: mid circuit measurement metrics
-            //Helmi: readout metrics
-            { name: '1->0 MCM Error', value: 'measure_ssro_error_1_to_0', title: 'MCM = Mid Circuit Measurement' },
-            { name: '0->1 MCM Error', value: 'measure_ssro_error_0_to_1', title: 'MCM = Mid Circuit Measurement' },
-            { name: 'MCM Fidelity', value: 'measure_ssro_fidelity', title: 'MCM = Mid Circuit Measurement' },
-
-            //Q50: destructiveness of measurement metrics
-            //Helmi: does not exist
-            { name: 'QNDness Fidelity', value: 'measure_qndness_fidelity', title: 'QND = Quantum Non-Demolition'},
-            { name: 'QNDness 0 State', value: 'measure_qndness_qndness_0', title: 'QND = Quantum Non-Demolition'},
-            { name: 'QNDness 1 State', value: 'measure_qndness_qndness_1', title: 'QND = Quantum Non-Demolition'},
-            { name: 'QNDness Repeatability', value: 'measure_qndness_repeatability', title: 'QND = Quantum Non-Demolition'},
-
-        ]
-
-    if (deviceInfoData?.name === 'Q5') {
-        qubitMetricOptions[0].name = '1->0 Readout Error';
-        qubitMetricOptions[1].name = '0->1 Readout Error';
-        qubitMetricOptions[2].name = 'Readout Fidelity';
-    }
-
-    const couplerMetricOptions = [
-        { name: 'CZ Gate Fidelity', value: 'cz_irb_fidelity' },
-        { name: 'Clifford Gate Fidelity', value: 'clifford_rb_fidelity' },
-    ]
+    const qubitMetricOptions = deviceConfig.qubitOptions || getDeviceMetricsConfig('default').qubitOptions;
+    const couplerMetricOptions = deviceConfig.couplerOptions || getDeviceMetricsConfig('default').couplerOptions;
 
     return (
         <CCard style={{ overflow: 'scroll' }} className='text-on-white !m-0 lg:mx-[100px] flex flex-col overflow-scroll lg:!overflow-auto max-h-[80vh] '>
