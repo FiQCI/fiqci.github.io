@@ -34,7 +34,11 @@ export const CalibrationTable = (props) => {
 
     var sortedIds;
     if (qubitSwitch){
-        sortedIds = Array.from(allIds).sort();
+        sortedIds = Array.from(allIds).sort((a, b) => {
+            const numA = parseInt(a.replace('QB', ''));
+            const numB = parseInt(b.replace('QB', ''));
+            return numA - numB;
+        });
     } else {
         sortedIds = Array.from(allIds).sort((a, b) => {
             const [a1, a2] = a.match(/QB(\d+)__QB(\d+)/).slice(1).map(Number);
