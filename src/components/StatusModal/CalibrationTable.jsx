@@ -58,13 +58,13 @@ export const CalibrationTable = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {sortedIds.map(id => (
+                         {sortedIds.map(id => (
                             <tr key={id}>
                                 <td>{id}</td>
                                 {metrics.map(metric => {
                                     let data = calibrationData[metric][id];
                                     let value = data?.value;
-
+                                    
                                     // If not found, try with flipped numbers
                                     if ((value === null || value === undefined) && id.includes('__')) {
                                         const match = id.match(/QB(\d+)__QB(\d+)/);
@@ -75,7 +75,7 @@ export const CalibrationTable = (props) => {
                                             value = data?.value;
                                         }
                                     }
-
+                                    
                                     const unit = data?.unit || '';
                                     return (
                                         <td key={`${id}-${metric}`}>
