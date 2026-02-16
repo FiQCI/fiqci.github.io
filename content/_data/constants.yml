@@ -248,8 +248,8 @@ cookie_consent:
       title: here
       href: https://www.lumi-supercomputer.eu/lumi-service-status/
   alert:
-    text: Access to VTT Q50 through FiQCI is now open. Status of the quantum computers can be seen below.
-    type: info # Alert type can be info, warning, or error
+    text: VTT Q50 is down for scheduled maintenance until March 5, 2026.
+    type: warning # Alert type can be info, warning, or error
   quantum-computers:
     - name: VTT Q5 (Helmi)
       qubits: 5
