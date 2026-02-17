@@ -4,7 +4,7 @@ date: 2024-09-05
 published: true
 link: https://csc.fi/koulutuskalenteri/introduction-to-quantum-computing-and-fiqci-2/
 header:
-  teaser: /assets/images/vtt-images/VTT_kvanttitietokone_labra-3237.jpg
+  teaser: /assets/images/vtt-images/VTT_kvanttitietokone_labra-3237.webp
 tags:
   - Helmi
   - LUMI

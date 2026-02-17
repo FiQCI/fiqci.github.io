@@ -4,7 +4,7 @@ date: 2024-07-03
 published: true
 link: https://ssl.eventilla.com/summerschool2024
 header:
-  teaser: /assets/images/HPC-Summer-School.jpg
+  teaser: /assets/images/HPC-Summer-School.webp
 tags:
   - LUMI
   - Helmi

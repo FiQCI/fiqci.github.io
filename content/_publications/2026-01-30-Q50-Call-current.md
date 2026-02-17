@@ -3,7 +3,7 @@ title: 'Open Call 1/2026 for Academic Projects for the VTT Q50 Quantum Computer'
 date: 2026-01-30
 collection: publications
 header:
-  teaser: /assets/images/about-icon.jpg
+  teaser: /assets/images/about-icon.webp
 published: true
 author: FiQCI
 layout: post

@@ -3,7 +3,7 @@ title: 'Helmi Software Update'
 date: 2023-07-17
 collection: publications
 header:
-  teaser: /assets/images/update.png
+  teaser: /assets/images/update.webp
 published: true
 author: FiQCI
 layout: post

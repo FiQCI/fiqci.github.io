@@ -3,12 +3,12 @@ title: 'Full reboot of the LUMI Wednesday 28 September'
 date: 2022-09-22
 permalink: /_pages/status/2022-09-22-Full-reboot-Wednesday-28-September/
 header:
-  teaser: /assets/images/about-icon.jpg
+  teaser: /assets/images/about-icon.webp
 published: true
 layout: post
 # gallery:
-#   - url: /assets/images/about-icon.jpg
-#     image_path: /assets/images/about-icon.jpg
+#   - url: /assets/images/about-icon.webp
+#     image_path: /assets/images/about-icon.webp
 #     title: Before and after comparison
 tags:
   - lumi

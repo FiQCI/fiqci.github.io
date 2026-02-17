@@ -4,7 +4,7 @@ date: 2024-04-23
 published: true
 link: https://www.aka.fi/en/about-us/whats-new/events/impact-training-event-for-rrf-research/
 header:
-  teaser: /assets/images/pennylane-lumi.png
+  teaser: /assets/images/pennylane-lumi.webp
 tags:
   - LUMI
   - Helmi

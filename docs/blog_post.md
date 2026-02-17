@@ -34,7 +34,7 @@ title: 'The main title of the post' #Blog title
 date: yyyy-mm-dd #the date of publication as yyyy-mm-dd
 collection: publications #don't change
 header: #thumbnail image for the post
-  teaser: /assets/images/{path to teaser image of your blog} #e.g /assets/images/topology/thumbnail.png
+  teaser: /assets/images/{path to teaser image of your blog} #e.g /assets/images/topology/thumbnail.webp
 published: true
 author: author name #name of the author
 layout: post #don't change
@@ -82,7 +82,7 @@ You can add images in markdown like:
 
 e.g: 
 ```markdown
-![Example on how circuit changes when a wire is cut](/assets/images/Circuit-Knitting-Blog/circuit-knitting-general-example.png)
+![Example on how circuit changes when a wire is cut](/assets/images/Circuit-Knitting-Blog/circuit-knitting-general-example.webp)
 ```
 
 You can also use HTML for more fine-grained layout control:
@@ -96,7 +96,7 @@ You can also use HTML for more fine-grained layout control:
 e.g
 ```html
 <figure style="display: inline-block; text-align: left; margin: 0; padding: 0;">
-    <img src="/assets/images/topology/grid.png" alt="Qubit grid" style="width: 70%">
+    <img src="/assets/images/topology/grid.webp" alt="Qubit grid" style="width: 70%">
 </figure>
 ```
 

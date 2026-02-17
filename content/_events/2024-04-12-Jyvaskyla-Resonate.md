@@ -4,7 +4,7 @@ date: 2024-04-12
 published: true
 link: https://www.jyu.fi/en/events/resonate-quantum-day-2024
 header:
-  teaser: /assets/images/Resonate-Jyvaskyla-2024-Modupe.jpg
+  teaser: /assets/images/Resonate-Jyvaskyla-2024-Modupe.webp
 tags:
   - LUMI
   - Helmi

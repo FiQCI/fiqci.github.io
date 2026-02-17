@@ -4,7 +4,7 @@ date: 2022-01-20
 published: true
 link: https://youtu.be/pc-cZ-eThUQ
 header:
-  teaser: /assets/images/pennylane-lumi.png
+  teaser: /assets/images/pennylane-lumi.webp
 tags:
   - Helmi
 filters:

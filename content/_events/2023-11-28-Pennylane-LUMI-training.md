@@ -4,7 +4,7 @@ date: 2023-11-28
 published: true
 link: https://ssl.eventilla.com/event/qJlel
 header:
-  teaser: /assets/images/pennylane-lumi.png
+  teaser: /assets/images/pennylane-lumi.webp
 tags:
   - Pennylane
   - LUMI

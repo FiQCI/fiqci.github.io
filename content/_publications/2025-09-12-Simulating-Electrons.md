@@ -3,7 +3,7 @@ title: 'Simulating Electrons on LUMI + VTT Q50: Benchmarking Fermi-Hubbard Model
 date: 2025-09-12 #the date of publication as yyyy-mm-dd
 collection: publications #don't change
 header: #thumbnail image for the post
-  teaser: /assets/images/Simulating-Electrons/thumbnail.png #e.g //assets/images/topology/thumbnail.png
+  teaser: /assets/images/Simulating-Electrons/thumbnail.webp #e.g //assets/images/topology/thumbnail.webp
 published: true
 description: |-
   Simulating electrons is an important but challenging task in condensed matter physics and material science. Simulation of electronic models, such as solving the ground state energy of the Fermi-Hubbard model, is expected to be among the first non-trivial problems to demonstrate quantum advantage on near-term quantum computers. Here, the leading approach to solving this problem, a hybrid quantum-classical algorithm called the Variational Quantum Eigensolver (VQE) is explored. We present results from running the hybrid algorithm using the LUMI supercomputer and the VTT Q50 quantum computer and share benchmarking results on how circuit choice and compiler selection impact performance. In addition, we demonstrate the implementation of error mitigation strategies to improve results.
@@ -28,7 +28,7 @@ Quantum systems such as electrons exhibit complicated behavior, which is notorio
 
 The Fermi-Hubbard model describes fermions, such as electrons, in a solid. In the model, the behavior of electrons in a solid is represented by a lattice where the electrons can hop between lattice sites [[1, 2, 3, 4]](#references). The electron interactions include a repulsive on-site interaction $U$ and a kinetic energy $t$ that allows the electrons to move around. The ratio between the repulsive interaction and kinetic energy, $U/t$, determines the electron distribution over the lattice sites [[3]](#references). 
 
-![2D Fermi-Hubbard Model](/assets/images/Simulating-Electrons/Fermi-Hubbard.png)
+![2D Fermi-Hubbard Model](/assets/images/Simulating-Electrons/Fermi-Hubbard.webp)
 
 **Figure 1**: An illustration of the two-dimensional Fermi-Hubbard model showing a lattice of 25 sites. The arrows represent electrons, with spin either up or down. Each site can be either unoccupied, singly occupied, or doubly occupied by two electrons with opposite spins.
 
@@ -44,7 +44,7 @@ VQAs leverage a learning-based approach, where a parametrized quantum circuit is
 
 The Variational Quantum Eigensolver (VQE) in particular is designed for the task of finding the ground state energy of a quantum system, an important problem in applications such as drug design and material science. The cost function in a VQE is the energy of the system, which is iteratively minimized in the classical optimization loop until the final ground state energy is (hopefully) achieved. The parametrized quantum circuit defines the search space or the family of quantum states that the optimization can explore [[9]](#references).
 
-![VQA structure](/assets/images/Simulating-Electrons/VQE_structure.png)
+![VQA structure](/assets/images/Simulating-Electrons/VQE_structure.webp)
 
 **Figure 2**: An illustration of the structure of a Variational Quantum Eigensolver. The quantum circuit is iteratively executed on a quantum computer, and the circuit parameters $\theta$ are updated each time using classical post-processing within the loop.
 
@@ -54,19 +54,19 @@ The choice of quantum circuit is particularly important in Variational Quantum A
 
 Here, a comparison of three different circuit options for the Fermi-Hubbard model VQE was made: the hardware efficient EfficientSU2 circuit, the Hamiltonian Variational Ansatz (HVA) which is commonly used for the Fermi-Hubbard model, and a custom physically-inspired fermionic circuit developed in this work. Additionally, all three of these were tested with an extra number-preserving (NP) layer to increase expressibility.
 
-<img src="/assets/images/Simulating-Electrons/SU2_circuit.png" alt="SU2 circuit" style="width: 57%">
+<img src="/assets/images/Simulating-Electrons/SU2_circuit.webp" alt="SU2 circuit" style="width: 57%">
 
 **Figure 3**: The hardware efficient EfficientSU2 circuit.
 
-![HVA circuit](/assets/images/Simulating-Electrons/HVA_circuit.png)
+![HVA circuit](/assets/images/Simulating-Electrons/HVA_circuit.webp)
 **Figure 4**: The Hamiltonian Variational Ansatz.
 
-![Fermionic circuit](/assets/images/Simulating-Electrons/Fermionic_circuit.png)
+![Fermionic circuit](/assets/images/Simulating-Electrons/Fermionic_circuit.webp)
 **Figure 5**: The physically-inspired fermionic circuit. 
 
 From **Figure 6** below it can be seen that the fermionic + NP, HVA + NP and SU2 + NP circuits perform best, reaching the correct ground state energy in noiseless simulation. However, while the hardware-efficient SU2 + NP circuit predicts the energy accurately for small numbers of qubits, it does not respect the physical symmetries of the system (conservation of particle number and spin) and fails to scale to larger models. The Hamiltonian Variational Ansatz (HVA + NP) and the custom physically inspired fermionic circuit (fermionic + NP) also respect the symmetries of the system. Therefore, the best performing parametrized circuits were found to be the fermionic + NP circuit and the HVA + NP circuit. Both reach the correct ground state energy with a good accuracy, scale to larger systems, and respect the physical symmetries of the Fermi-Hubbard model.
 
-<img src="/assets/images/Simulating-Electrons/energy_convergence.png" alt="Circuit comparison plot"  style="width: 60%">
+<img src="/assets/images/Simulating-Electrons/energy_convergence.webp" alt="Circuit comparison plot"  style="width: 60%">
 
 **Figure 6**: A comparison of the performance of different parametrized quantum circuits in finding the ground state energy of the Fermi-Hubbard model. Each circuit has 6 qubits. A noiseless simulator together with the BFGS optimizer has been used.
 
@@ -79,7 +79,7 @@ Due to the variability in native gatesets and qubit connectivity across quantum 
 
 Figure 7 compares the performance of these compilers for our specific problem.
 
-![Compiler comparison](/assets/images/Simulating-Electrons/compilers.png)
+![Compiler comparison](/assets/images/Simulating-Electrons/compilers.webp)
 
 **Figure 7**: Comparisons of energy error and two-qubit gate count for different compilers, obtained from noiseless simulation.
 
@@ -89,7 +89,7 @@ Comparing the energy error given by the different compilers, TKET gave the small
 
 The VQE for the Fermi-Hubbard model was run on the VTT Q50 quantum computer using 6 qubits. **Figure 8** shows a comparison of the energy convergence and thus ground state energy achieved on a real quantum computer (VTT Q50) and noisy simulator (FakeAphrodite). When running on the real quantum computer, the SPSA optimizer was used as it performs the best with noise.
 
-<img src="/assets/images/Simulating-Electrons/energy_VQE.png" alt="VQE energy convergence" style="width: 86%">
+<img src="/assets/images/Simulating-Electrons/energy_VQE.webp" alt="VQE energy convergence" style="width: 86%">
 
 **Figure 8**: VQE energy convergence on a real quantum computer (VTT Q50) and noisy simulator (FakeAphrodite).
 
@@ -97,15 +97,15 @@ From **Figure 8** it can be seen that on the real quantum computer, the energy c
 
 In addition to the ground state energy, the VQE gives the occupation states of the system, or the distribution of the electrons in the lattice. The states obtained from the VQE following the fermion-to-qubit transformation encode the occupation states of the electron lattice model as follows, taking one state of the 2-site chain as an example:
 
-![occupation](/assets/images/Simulating-Electrons/occupation.png)
+![occupation](/assets/images/Simulating-Electrons/occupation.webp)
 
-![Results U/t=0.0001](/assets/images/Simulating-Electrons/plot_U_0001.png)
+![Results U/t=0.0001](/assets/images/Simulating-Electrons/plot_U_0001.webp)
 **Figure 9**: Results obtained from noiseless simulation (left) and the VTT Q50 quantum computer (right) for the half-filled 1D Fermi-Hubbard model at low $U/t$ ratio, showing nearly equal distribution over states with double occupancy (0101 and 1010) and antiferromagnetic states (0110 and 1001).
 
-![Results U/t=2](/assets/images/Simulating-Electrons/plot_U_2.png)
+![Results U/t=2](/assets/images/Simulating-Electrons/plot_U_2.webp)
 **Figure 10**: Results obtained from noiseless simulation (left) and the VTT Q50 quantum computer (right) for the half-filled 1D Fermi-Hubbard model at intermediate $U/t$ ratio, showing decreasing double occupancy.
 
-![Results U/t=350](/assets/images/Simulating-Electrons/plot_U_350.png)
+![Results U/t=350](/assets/images/Simulating-Electrons/plot_U_350.webp)
 **Figure 11**: Results obtained from noiseless simulation (left) and the VTT Q50 quantum computer (right) for the half-filled 1D Fermi-Hubbard model at a high $U/t$ ratio, showing vanishing double occupancy and a strong preference for antiferromagetism. The system at high $U/t$ ratio is highly entangled and therefore more difficult to simulate, as shown by the appearence of the states 0011 and 1100 in the noiseless results, which are nonphysical at half-filling.
 
 Each lattice site in the Fermi–Hubbard model can be empty, singly occupied (one electron), or doubly occupied (two electrons with opposite spins, as required by the Pauli exclusion principle). At half filling, the model captures Mott insulating behavior. For small $U/t$ (weak interactions), the repulsion between electrons is small compared to their kinetic energy, so double occupation is common: one spin-up and one spin-down electron can occupy the same site. As $U$ increases, however, double occupation becomes energetically costly, and the system favors configurations that avoid it. At large $U/t$, double occupancy is strongly suppressed, and the ground state instead exhibits antiferromagnetic order [[3]](#references).
@@ -119,14 +119,14 @@ Current and near-term quantum computers are hindered by noise, which is a major 
 
 Post-selection is an error mitigation method that can be used when the system of interest has some known symmetry [[13]](#references). In the case of the Fermi-Hubbard model, the system is number-preserving and conserves spin. The physically inspired and problem-specific fermionic circuit has been designed so that it respects these symmetries. However, when run on a real quantum computer, the noise from the device causes the measurement results to leak into physically incorrect states, which do not preserve the particle number. This type of error can be mitigated by filtering out the physically incorrect states [[13]](#references). The effect of implementing post-selection on the measurement results obtained from the VTT Q50 quantum computer is shown below.
 
-![Post-selection](/assets/images/Simulating-Electrons/post_selection.png)
+![Post-selection](/assets/images/Simulating-Electrons/post_selection.webp)
 
 **Figure 12**: Plot showing the effect of implementing post-selection to results obtained from the VTT Q50 quantum computer. Post-selection has been implemented to the noisy results presented in the previous section.
 
 ### Readout Error Mitigation
 Readout error mitigation (REM) is an error mitigation strategy used to reduce the effect of the noise occurring during the final measurement [[7]](#references). Here, readout error mitigation was implemented by first composing and running calibration circuits, generating a mitigation matrix based on the calibration results and finding its inverse matrix. This inverse mitigation matrix was used with the CorrelatedReadoutMitigator from Qiskit Experiments to obtain the mitigated energies. The inverse matrix was also applied to the noisy state counts to obtain the mitigated counts. A Jupyter Notebook with the steps for this can be found [here](https://github.com/CSCfi/Quantum/tree/main/Variational-Algorithms-on-Q50).
 
-![Readout error mitigation](/assets/images/Simulating-Electrons/energy_plot_REM.png)
+![Readout error mitigation](/assets/images/Simulating-Electrons/energy_plot_REM.webp)
 
 **Figure 13**: A plot of energy convergence results for the ground state energy of the Fermi-Hubbard model obtained from running the algorithm with 6 qubits on the VTT Q50 quantum computer with and without readout error mitigation. 
 

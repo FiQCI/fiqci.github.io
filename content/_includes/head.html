@@ -18,11 +18,29 @@
 
   <!--{\%- seo -\%}-->
   <link rel="icon" href="{{ constants.favicon | relative_url }}" />
-  <link rel="stylesheet" href="{{ 'properties.css' | relative_url }}" />
-  <link rel="stylesheet" href="{{ 'main.css' | relative_url }}" />
-  {% include external/mathjax.html -%}
+  <link rel="preload" as="image" href="{{ '/assets/images/FiQCI-banner.webp' | relative_url }}" fetchpriority="high">
+  <link rel="preload" href="/properties.css" as="style">
+  <link rel="preload" href="/api/pages.json" as="fetch" crossorigin>
+  <link rel="preload" href="/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/main.css"></noscript>
+  <link rel="stylesheet" href="/properties.css">
+  
   {% include external/font.html %}
-  <script type="text/javascript" src="{{ "site.js" | relative_url }}" charset="utf-8"></script>
+
+  <link rel="preconnect" href="https://rsms.me/" crossorigin>
+
+  <link rel="dns-prefetch" href="https://fiqci-backend.2.rahtiapp.fi">
+
+  <!-- Add React from CDN -->
+  <script defer src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script defer src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <script type="text/javascript" src="{{ "runtime.js" | relative_url }}"></script>
+  <script defer src="/vendors.js"></script>
+  <script type="text/javascript" src="{{ "common.js" | relative_url }}"></script>
+
+
+  <script defer type="text/javascript" src="{{ "site.js" | relative_url }}" charset="utf-8"></script>
   {% if page.react and (site.pages | where: "name" page.name) %}
     {%- assign react_source = page.name | append: ".js" -%}
   {% elsif (site.collections | where: "label" page.collection) %}

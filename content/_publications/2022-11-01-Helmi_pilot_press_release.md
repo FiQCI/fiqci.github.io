@@ -3,7 +3,7 @@ title: 'Finland opens quantum computer for research purposes – the fusion of q
 date: 2022-11-01
 collection: publications
 header:
-  teaser: /assets/images/FiQCI-banner.jpg
+  teaser: /assets/images/FiQCI-banner.webp
 published: true
 author: FiQCI
 layout: post
@@ -23,7 +23,7 @@ enables the best possible use of the quantum computer’s computing power. This 
 that this kind of hybrid service connecting a supercomputer and a general-purpose quantum computer is 
 opened for researchers.*
 
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/FiQCI-banner.jpg" alt="FiQCI-Banner">
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/FiQCI-banner.webp" alt="FiQCI-Banner">
 
 Quantum computers, while potentially extremely powerful at certain tasks, need supervision by traditional 
 classical computers. Finland is one of the few countries worldwide that has connected a quantum computer 

@@ -4,7 +4,7 @@ date: 2024-09-04
 published: true
 link: https://csc.fi/en/training-calendar/qcut-quantum-circuit-knitting-on-fiqci/
 header:
-  teaser: /assets/images/QCut-logo.jpg
+  teaser: /assets/images/QCut-logo.webp
 tags:
   - Helmi
   - LUMI

@@ -4,7 +4,7 @@ date: 2024-04-16
 published: true
 link: https://www.luonnonfilosofia.fi/kokoukset/tilaisuudet-kevatkaudella-2024/
 header:
-  teaser: /assets/images/pennylane-lumi.png
+  teaser: /assets/images/pennylane-lumi.webp
 tags:
   - LUMI
   - Helmi

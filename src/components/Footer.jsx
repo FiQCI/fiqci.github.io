@@ -6,15 +6,15 @@ export const Footer = (props) => {
 
     const supporterLogos = props.supporterLogoPath
         ? <>
-            <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-vtt.jpg`)} alt="VTT" className="h-10" />
-            <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-aalto.png`)} alt="Aalto University" className="h-10" />
-            <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-csc.svg`)} alt="CSC" className="h-10" />
+            <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-vtt.webp`)} alt="VTT" className="h-10 w-auto" width="50" height="40" />
+            <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-aalto.webp`)} alt="Aalto University" className="h-10 w-auto" width="50" height="40" />
+            <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-csc.svg`)} alt="CSC" className="h-10 w-auto" width="50" height="40" />
         </>
         : <></>
     const funderLogos = props.funderLogoPath
         ? <>
-            <img src={prependBaseURL(`${props.funderLogoPath}/Academy_of_Finland.png`)} alt="Academy of Finland" className="h-10" />
-            <img src={prependBaseURL(`${props.funderLogoPath}/EU-RRF.jpg`)} alt="EU Funding" className="h-10" />
+            <img src={prependBaseURL(`${props.funderLogoPath}/Academy_of_Finland.webp`)} alt="Academy of Finland" className="h-10 w-auto" width="50" height="40" />
+            <img src={prependBaseURL(`${props.funderLogoPath}/EU-RRF.webp`)} alt="EU Funding" className="h-10 w-auto" width="50" height="40" />
         </>
         : <></>
 

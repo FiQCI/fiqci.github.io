@@ -4,7 +4,7 @@ date: 2021-06-02
 published: true
 link: https://csc.fi/en/training-calendar/online-introduction-to-quantum-computing-and-algorithms-3rd-ed/
 header:
-  teaser: /assets/images/pennylane-lumi.png
+  teaser: /assets/images/pennylane-lumi.webp
 tags:
   - Kvasi
 filters:

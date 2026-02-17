@@ -4,7 +4,7 @@ date: 2022-05-11
 published: true
 link: https://ssl.eventilla.com/event/GGlzk
 header:
-  teaser: /assets/images/pennylane-lumi.png
+  teaser: /assets/images/pennylane-lumi.webp
 tags:
   - LUMI
   - Helmi
