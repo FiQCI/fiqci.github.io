@@ -7,7 +7,6 @@ layout: base
 
 {% assign mission_data = site.data.constants["/"].mission.links %}
 
-{%- include react/root.html id='hero' -%}
 
 <style>
   #hero-background-image {
@@ -21,10 +20,11 @@ layout: base
     position: relative;
     width: 100%;
     min-height: 400px;
+    height: 400px;
   }
 </style>
 
-<link rel="preload" as="image" href="{{ '/assets/images/FiQCI-banner.webp' | relative_url }}" fetchpriority="high">
+{%- include react/root.html id='hero' -%}
 
 {{ content }}
 
@@ -51,7 +51,7 @@ layout: base
                             >
                                 <div class="sm:mx-0 flex items-center gap-3">
                                     <div class="text-sm">{{ mission_data.about.title }}</div>
-                                    <svg class="icon" viewBox="0 0 24 24">
+                                    <svg class="icon" viewBox="0 0 24 24" width="24" height="24">
                                         <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
                                     </svg>
                                 </div>
@@ -65,7 +65,7 @@ layout: base
                             >
                                 <div class="sm:mx-0 flex items-center gap-3">
                                     <div class="text-sm">{{ mission_data.access.title }}</div>
-                                    <svg class="icon" viewBox="0 0 24 24">
+                                    <svg class="icon" viewBox="0 0 24 24" width="24" height="24">
                                         <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
                                     </svg>
                                 </div>
