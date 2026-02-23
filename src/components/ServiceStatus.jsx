@@ -49,7 +49,7 @@ const StatusCard = (props) => {
 }
 
 export const ServiceStatus = (props) => {
-  const { status: statusList } = useStatus(`${API_BASE_URL}/devices/healthcheck`);
+  const { status: statusList } = useStatus(`https://fiqci-backend.2.rahtiapp.fi/devices/healthcheck`);
   const { bookingData: bookingData } = useBookings(`${API_BASE_URL}/bookings`)
   const qcs = props["quantum-computers"] || [];
 
@@ -57,35 +57,36 @@ export const ServiceStatus = (props) => {
   const [devicesWithStatus, setDevicesWithStatus] = useState([]);
 
   useEffect(() => {
-    // Compute devicesWithStatus inside the effect
-    const devicesWithStatus = (qcs.length === 0 || !Array.isArray(statusList))
-      ? qcs
-      : qcs.map(device => {
-        const deviceStatus = statusList.find(({ name }) => name === device.device_id);
-        return {
-          ...device,
-          health: deviceStatus?.health ?? false,
-        };
-      });
-
-    setDevicesWithStatus(devicesWithStatus);
-
-    if (!devicesWithStatus || devicesWithStatus.length === 0) {
-      setDeviceStatusList([]);
+    // Only run when both are ready
+    if (!Array.isArray(statusList) || statusList.length === 0 || !Array.isArray(qcs) || qcs.length === 0) {
       return;
     }
 
+    // Calculate devicesWithStatus once
+    const devicesWithStatus = qcs.map(device => {
+      const deviceStatus = statusList.find(({ name }) => name === device.device_id);
+      return {
+        ...device,
+        health: deviceStatus?.health ?? false,
+      };
+    });
+
     const deviceStatusList = devicesWithStatus.map(async device => {
       const url = `${API_BASE_URL}/device/${device.device_id.toLowerCase()}`;
-      const data = await fetch(url)
-        .then(resp => resp.json())
-        .then(result => result?.data || {})
-        .catch(() => ({status: 'offline'}));
-      return { ...device, device_status: data.status };
+      try {
+        const resp = await fetch(url);
+        if (!resp.ok) {
+          return { ...device, device_status: "offline" };
+        }
+        const result = await resp.json();
+        const data = result?.data || {};
+        return { ...device, device_status: data.status };
+      } catch (e) {
+        return { ...device, device_status: "offline" };
+      }
     });
-    
+
     Promise.all(deviceStatusList).then(results => {
-      console.log(`Device status list results:`, results);
       setDeviceStatusList(results);
     });
   }, [qcs, statusList]);
@@ -122,7 +123,7 @@ export const ServiceStatus = (props) => {
       });
     }
     setSortedDevices(sorted);
-  }, [devicesWithStatus, sort]);
+  }, [device_status_list, sort]);
 
   const handleSortChange = useCallback(selectedSort => {
     setSort(selectedSort.detail || 'status');
