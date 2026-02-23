@@ -15,10 +15,12 @@ import {
 import { object } from 'framer-motion/client';
 import { getDeviceMetricsConfig } from '../../config/deviceMetrics';
 
+import { API_BASE_URL } from '../../config/api';
+
 export const ModalContent = (props) => {
 
-    const { calibrationData: calibrationDataAll, calibrationError } = useCalibration(`http://127.0.0.1:3000/device/${props.device_id.toLowerCase()}/calibration`)
-    const { deviceInfo: deviceInfoData, infoError } = useDeviceInfo(`http://127.0.0.1:3000/device/${props.device_id.toLowerCase()}`)
+    const { calibrationData: calibrationDataAll, calibrationError } = useCalibration(`${API_BASE_URL}/device/${props.device_id.toLowerCase()}/calibration`)
+    const { deviceInfo: deviceInfoData, infoError } = useDeviceInfo(`${API_BASE_URL}/device/${props.device_id.toLowerCase()}`)
 
     const [activeTab, setActiveTab] = useState('overview');
 
