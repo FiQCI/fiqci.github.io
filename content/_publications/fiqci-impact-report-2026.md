@@ -26,7 +26,7 @@ filters:
 
 This report was written for the Research Council of Finland RRF Impact Report series 2026. It describes the RRF funded activities and context of FiQCI during the period 2022-2025. The project received funding from the European Union – NextGenerationEU instrument and was funded by the Research Council of Finland under grant number 346146.
 
-The PDF version of the report can be downloaded here.
+[The PDF version of the report can be downloaded here.](/assets/fiqci-impact-report-2026/FiQCI-impact-report-2026-02-27.pdf)
 
 | | |
 |---|---|
