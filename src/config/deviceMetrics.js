@@ -43,7 +43,7 @@ export const DEVICE_METRICS = {
                 t2: ['t2_time'],
             },
             coupler: {
-                twoQubitFidelity: ['cz_irb_tgss_crf_fidelity', 'cz_irb_fidelity'],
+                twoQubitFidelity: ['cz_irb_crf_crf_fidelity', 'cz_irb_fidelity'],
                 cliffordFidelity: ['clifford_rb_uz_cz_fidelity', 'clifford_rb_fidelity'],
             },
         },
@@ -65,7 +65,7 @@ export const DEVICE_METRICS = {
             { name: 'QNDness Repeatability', value: 'measure_qndness_constant_repeatability', title: 'QND = Quantum Non-Demolition' },
         ],
         couplerOptions: [
-            { name: 'CZ Gate Fidelity', value: 'cz_irb_tgss_crf_fidelity' },
+            { name: 'CZ Gate Fidelity', value: 'cz_irb_crf_crf_fidelity' },
             { name: 'Clifford Gate Fidelity', value: 'clifford_rb_uz_cz_fidelity' },
         ],
     },
