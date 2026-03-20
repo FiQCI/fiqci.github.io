@@ -2,21 +2,22 @@ export const DEVICE_METRICS = {
     default: {
         overview: {
             single: {
-                singleGateFidelity: ['prx_rb_fidelity'],
-                readoutFidelity: ['measure_ssro_fidelity'],
+                singleGateFidelity: ['prx_rb_drag_crf_sx_fidelity', 'prx_rb_fidelity'],
+                readoutFidelity: ['measure_fidelity_ssro_constant_fidelity', 'measure_ssro_fidelity'],
                 t1: ['t1_time'],
                 t2: ['t2_time'],
             },
             coupler: {
-                twoQubitFidelity: ['cz_irb_fidelity'],
-                cliffordFidelity: ['clifford_rb_fidelity'],
+                twoQubitFidelity: ['cz_irb_crf_crf_fidelity', 'cz_irb_fidelity'],
+                cliffordFidelity: ['clifford_rb_uz_cz_fidelity', 'clifford_rb_fidelity'],
             },
         },
         qubitOptions: [
             { name: 'T1 Time', value: 't1_time' },
             { name: 'T2 Time', value: 't2_time' },
             { name: 'T2 Echo Time', value: 't2_echo_time' },
-            { name: 'PRX Gate Fidelity', value: 'prx_rb_fidelity' },
+            { name: 'PRX Gate Fidelity', value: 'prx_rb_drag_crf_sx_fidelity' },
+            { name: 'Clifford Gate Fidelity', value: 'clifford_rb_xy_fidelity' },
             { name: '1->0 Readout Error', value: 'measure_fidelity_ssro_constant_error_1_to_0' },
             { name: '0->1 Readout Error', value: 'measure_fidelity_ssro_constant_error_0_to_1' },
             { name: 'Readout Fidelity', value: 'measure_fidelity_ssro_constant_fidelity' },
@@ -29,8 +30,8 @@ export const DEVICE_METRICS = {
             { name: 'QNDness Repeatability', value: 'measure_qndness_constant_repeatability', title: 'QND = Quantum Non-Demolition' },
         ],
         couplerOptions: [
-            { name: 'CZ Gate Fidelity', value: 'cz_irb_fidelity' },
-            { name: 'Clifford Gate Fidelity', value: 'clifford_rb_fidelity' },
+            { name: 'CZ Gate Fidelity', value: 'cz_irb_crf_crf_fidelity' },
+            { name: 'Clifford Gate Fidelity', value: 'clifford_rb_uz_cz_fidelity' },
         ],
     },
 
