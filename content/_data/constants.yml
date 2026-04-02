@@ -44,7 +44,7 @@ cookie_consent:
     tagline: Making the power of quantum computing accessible
     subtitle: FiQCI – Finnish quantum-computing infrastructure
     announcement:
-      text: The VTT Q%= Quantum Computer is now available for use through FiQCI!
+      text: The VTT Q50 Quantum Computer is now available for use through FiQCI!
       link:
         title: How to get access to the Q50 quantum computer?
         href: "/publications/2026-01-30-Q50-Call-current"
