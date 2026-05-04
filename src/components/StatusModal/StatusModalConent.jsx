@@ -51,10 +51,6 @@ export const ModalContent = (props) => {
     const deviceName = deviceInfoData?.name || '';
     const deviceConfig = getDeviceMetricsConfig(deviceName);
 
-    console.log('Device name:', deviceName);
-    console.log('Calibration Data:', calibrationData);
-    console.log('Device Config:', deviceConfig);
-
     const qubitMetricOptions = deviceConfig.qubitOptions || getDeviceMetricsConfig('default').qubitOptions;
     const couplerMetricOptions = deviceConfig.couplerOptions || getDeviceMetricsConfig('default').couplerOptions;
 
