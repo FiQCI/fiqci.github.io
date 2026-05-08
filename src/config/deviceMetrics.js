@@ -112,8 +112,10 @@ export const pickMetricData = (calibrationData, keys = []) => {
     return null;
 };
 
-export const getMetricUnit = (metricData) =>
-    metricData?.QB1?.unit ||
-    metricData?.[0]?.unit ||
-    metricData?.QB1__QB3?.unit ||
-    '';
+export const getMetricUnit = (metricData) => {
+    if (!metricData) return '';
+    for (const key in metricData) {
+        if (metricData[key]?.unit) return metricData[key].unit;
+    }
+    return '';
+};
