@@ -249,7 +249,7 @@ cookie_consent:
       href: https://www.lumi-supercomputer.eu/lumi-service-status/
   alert:
     text: |-
-      VTT Q5 (Helmi) is currently down pending maintenance.
+      VTT Q5 (Helmi) will be indefinitely offline and will be removed from our services soon.
     type: warning # Alert type can be info, warning, or error
   quantum-computers:
     - name: VTT Q5 (Helmi)
