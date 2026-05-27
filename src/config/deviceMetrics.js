@@ -74,7 +74,7 @@ export const DEVICE_METRICS = {
     Q20: {
         overview: {
             single: {
-                singleGateFidelity: ['prx_rb_drag_crf_sx_fidelity', 'prx_rb_fidelity'],
+                singleGateFidelity: ['prx_rb_drag_crf_fidelity', 'prx_rb_fidelity'],
                 readoutFidelity: ['measure_fidelity_ssro_constant_fidelity', 'measure_ssro_fidelity'],
                 t1: ['t1_time'],
                 t2: ['t2_time'],
