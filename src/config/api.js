@@ -1,0 +1,1 @@
+export const API_BASE_URL = "https://fiqci-backend.2.rahtiapp.fi";

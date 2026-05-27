@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 
 import { useStatus } from '../hooks/useStatus'
 import { useBookings } from '../hooks/useBookings.jsx';
 import { mdiInformation, mdiClose, mdiAlert } from '@mdi/js';
-import { CCard, CCardTitle, CCardContent, CIcon, CButton } from '@cscfi/csc-ui-react';
+import { CCard, CCardTitle, CCardContent, CIcon, CButton, CSelect } from '@cscfi/csc-ui-react';
 import { StatusModal } from './StatusModal/StatusModal';
 import { BookingModal } from './bookingCalendar.jsx';
 
@@ -57,6 +57,32 @@ export const ServiceStatus = (props) => {
   const [bookingModalOpen, setBookingModalOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false);
   const [modalProps, setModalProps] = useState({});
+  const [sort, setSort] = useState("status")
+
+  const sortedDevices = useMemo(() => {
+    if (sort === 'status') {
+      return [...devicesWithStatus].sort((a, b) => (
+        b.health === a.health ? b.qubits - a.qubits : b.health ? 1 : -1
+      ));
+    } else if (sort === 'least_qubits') {
+      return [...devicesWithStatus].sort((a, b) => a.qubits - b.qubits);
+    } else if (sort === 'most_qubits') {
+      return [...devicesWithStatus].sort((a, b) => b.qubits - a.qubits);
+    } else if (sort === 'host') {
+      return [...devicesWithStatus].sort((a, b) => {
+        const hostAName = a.name.split(" ")[0];
+        const hostBName = b.name.split(" ")[0];
+        const nameCompare = hostAName.localeCompare(hostBName);
+        return nameCompare !== 0 ? nameCompare : b.qubits - a.qubits;
+      });
+    }
+    return devicesWithStatus;
+  }, [devicesWithStatus, sort]);
+
+  const handleSortChange = useCallback(selectedSort => {
+    setSort(selectedSort.detail || 'status');
+  }, []);
+
   const handleCardClick = (qc) => {
     setModalProps({ ...qc, devicesWithStatus });
     setModalOpen(true);
@@ -100,9 +126,28 @@ export const ServiceStatus = (props) => {
         <CButton className='w-32' onClick={() => setBookingModalOpen(true)}>View Reservations</CButton>
       </div>
       
-      <h2 className='text-on-white'>Devices</h2>
+      <div className='flex flex-col sm:flex-row gap-8'>
+        <h2 className='text-on-white'>Devices</h2>
+        <CSelect
+          hideDetails={true}
+          label={"Sort"}
+          className='w-40'
+          clearable
+          value={sort}
+          items={[
+            { name: 'Status', value: 'status' },
+            { name: 'Least qubits', value: 'least_qubits' },
+            { name: 'Most qubits', value: 'most_qubits' },
+            { name: 'Host', value: 'host' },
+          ]}
+          placeholder='Sort'
+          onChangeValue={handleSortChange}
+          key={`device-sort`}
+        />
+      </div>
+
       <div className='pb-[60px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 min-[2600px]:grid-cols-4 w-full gap-[24px]'>
-        {devicesWithStatus.map((qc, index) => (
+        {sortedDevices.map((qc, index) => (
           <StatusCard key={qc.device_id || index} {...qc} onClick={() => handleCardClick(qc)} />
         ))}
         
@@ -119,5 +164,4 @@ export const ServiceStatus = (props) => {
     </div>
   );
 }
-
 

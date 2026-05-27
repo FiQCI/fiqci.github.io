@@ -14,10 +14,12 @@ import {
 import { object } from 'framer-motion/client';
 import { getDeviceMetricsConfig } from '../../config/deviceMetrics';
 
+import { API_BASE_URL } from '../../config/api';
+
 export const ModalContent = (props) => {
 
-    const { calibrationData: calibrationDataAll, calibrationError } = useCalibration(`https://fiqci-backend.2.rahtiapp.fi/device/${props.device_id.toLowerCase()}/calibration`)
-    const { deviceInfo: deviceInfoData, infoError } = useDeviceInfo(`https://fiqci-backend.2.rahtiapp.fi/device/${props.device_id.toLowerCase()}`)
+    const { calibrationData: calibrationDataAll, calibrationError } = useCalibration(`${API_BASE_URL}/device/${props.device_id.toLowerCase()}/calibration`)
+    const { deviceInfo: deviceInfoData, infoError } = useDeviceInfo(`${API_BASE_URL}/device/${props.device_id.toLowerCase()}`)
 
     const [activeTab, setActiveTab] = useState('overview');
 

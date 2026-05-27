@@ -119,6 +119,10 @@ abbr:where([title]) {
   color: #ababab;
 }
 
+.reserved {
+  background-color: #f5422b;
+}
+
 .partially-reserved {
   background-color: #FFF3CD;
 }
