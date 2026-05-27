@@ -25,7 +25,7 @@ title: 'Title of the Event' #Event name
 date: yyyy-mm-dd #date when to be published as yyyy-mm-dd
 published: true #leave as is
 link: https://the-event.fi/info/signup #link to event page
-tags: #keywords related to the event, e.g Helmi, Quantum, etc
+tags: #keywords related to the event, e.g Q20, Quantum, etc
   - tag_1
   - tag_2
   - etc
