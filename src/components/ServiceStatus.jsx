@@ -6,6 +6,7 @@ import { mdiInformation, mdiClose, mdiAlert } from '@mdi/js';
 import { CCard, CCardTitle, CCardContent, CIcon, CButton, CSelect } from '@cscfi/csc-ui-react';
 import { StatusModal } from './StatusModal/StatusModal';
 import { BookingModal } from './bookingCalendar.jsx';
+import { API_BASE_URL } from '../config/api';
 
 const StatusCard = (props) => {
   const isOnline = props.health;
@@ -40,8 +41,8 @@ const StatusCard = (props) => {
 }
 
 export const ServiceStatus = (props) => {
-  const { status: statusList } = useStatus("https://fiqci-backend.2.rahtiapp.fi/devices/healthcheck");
-  const { bookingData: bookingData } = useBookings("https://fiqci-backend.2.rahtiapp.fi/bookings")
+  const { status: statusList } = useStatus(`${API_BASE_URL}/devices/healthcheck`);
+  const { bookingData: bookingData } = useBookings(`${API_BASE_URL}/bookings`)
   const qcs = props["quantum-computers"] || [];
 
   const devicesWithStatus = (qcs.length === 0 || !Array.isArray(statusList))
