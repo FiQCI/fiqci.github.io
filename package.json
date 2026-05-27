@@ -45,7 +45,7 @@
     "react-dom": "^18.3.1",
     "style-loader": "^4.0.0",
     "tailwindcss": "^3.4.14",
-    "webpack": "^5.95.0",
+    "webpack": "^5.106.2",
     "webpack-cli": "^5.1.4",
     "yaml": "^2.7.0"
   },
@@ -53,7 +53,7 @@
     "@cscfi/csc-ui": "^2.3.0",
     "@cscfi/csc-ui-react": "^2.3.0",
     "date-fns": "^4.1.0",
-    "dompurify": "^3.2.4",
+    "dompurify": "^3.4.0",
     "framer-motion": "^12.23.22",
     "front-matter": "^4.0.2",
     "gray-matter": "^4.0.3",
