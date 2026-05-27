@@ -61,7 +61,7 @@ h2 {
 #blogView table,
 #blogView th,
 #blogView td {
-    color: #001C39;
+    color: inherit !important;
 }
 
 #blogView a {
