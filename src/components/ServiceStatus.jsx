@@ -11,7 +11,7 @@ const StatusCard = (props) => {
   const isOnline = props.health;
   const { onClick, ...rest } = props
   return (
-    <CCard onClick={onClick} className='border-[0.2px] border-gray-100 rounded-none shadow-md hover:shadow-xl col-span-1 h-[236px]'>
+    <CCard onClick={onClick} className='border-[0.2px] border-gray-100 rounded-none shadow-md hover:shadow-xl col-span-1 min-h-[236px]'>
       <CCardTitle className='font-bold text-on-white text-[18px]'>
         <p>{props.name}</p>
       </CCardTitle>
@@ -20,6 +20,7 @@ const StatusCard = (props) => {
           <p className=""><strong>Qubits:</strong> {props.qubits}</p>
           <p className=""><strong>Basis gates:</strong> {props.basis}</p>
           <p className=""><strong>Topology:</strong> {props.topology}</p>
+          <p className=""><strong>Pulse access:</strong> {props.pulse === "True" ? "Yes" : "No"}</p>
         </div>
 
         <div className='flex flex-col gap-0 text-[14px]'>

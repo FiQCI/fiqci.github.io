@@ -256,12 +256,14 @@ cookie_consent:
       qubits: 5
       basis: "PRX, CZ"
       topology: "Star"
+      pulse: "False"
       device_id: "Q5"
 
     - name: VTT Q50
       qubits: 53
       basis: "PRX, CZ"
       topology: "Square grid"
+      pulse: "True"
       device_id: "Q50"
 
 "/cookies/":
