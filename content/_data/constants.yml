@@ -115,7 +115,7 @@ cookie_consent:
     - name: Aalto Q20
       desc: |-
         Aalto Q20 is an IQM superconducting quantum computer with 20 qubits in a square grid topology. It is operated by Aalto University.
-      image: "/assets/images/vtt-images/VTT_lab-2.webp"
+      image: "/assets/images/aalto-qc/aalto-q20.webp"
       links:
         - link: "/publications/2026-05-11-Academic-Call-2026-02"
           teaser: "Apply for access to Aalto Q20"
@@ -136,6 +136,18 @@ cookie_consent:
           icon: mdiArrowRight
         - link: "https://qx.vtt.fi/docs/devices/q50.html"
           teaser: "Read more about VTT Q50 (VTT website)"
+          icon: mdiOpenInNew
+    
+    - name: VTT Q5 (Helmi) - End of life
+      desc: |-
+        VTT Q5 (Helmi) was a superconducting quantum computer with 5 qubits in a star topology. It was operated by VTT, and was co-developed with IQM Quantum Computers. The device was decommissioned in 2026.
+      image: "/assets/images/vtt-images/VTT_lab-2.webp"
+      links:
+        - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
+          teaser: "How to access VTT Q5 (Helmi), instructions"
+          icon: mdiArrowRight
+        - link: "https://qx.vtt.fi/docs/devices/q5.html"
+          teaser: "Read more about VTT Q5 (VTT website)"
           icon: mdiOpenInNew
 
   supercomputer_resources:
