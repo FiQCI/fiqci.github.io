@@ -2,7 +2,6 @@ import React from 'react'
 import { useState } from 'react'
 import { useCalibration } from '../../hooks/useCalibration';
 import { useDeviceInfo } from '../../hooks/useDeviceInfo';
-import { HelmiLayout } from '../QcLayouts/Helmi';
 import { Q50Layout } from '../QcLayouts/Q50';
 import { Q20Layout } from '../QcLayouts/Q20';
 import { Overview } from './StatusOverview';
@@ -120,17 +119,7 @@ export const ModalContent = (props) => {
                                             thresholdQubit={metricsState.thresholdQubitValue}
                                             thresholdCoupler={metricsState.thresholdCouplerValue}
                                         />
-                                    ) : (
-                                        <HelmiLayout
-                                            calibrationData={calibrationData}
-                                            qubitMetric={metricsState.qubitMetric}
-                                            couplerMetric={metricsState.couplerMetric}
-                                            qubitMetricFormatted={qubitMetricOptions.find(m => m.value === metricsState.qubitMetric)?.name || metricsState.qubitMetric}
-                                            couplerMetricFormatted={couplerMetricOptions.find(m => m.value === metricsState.couplerMetric)?.name || metricsState.couplerMetric}
-                                            thresholdQubit={metricsState.thresholdQubitValue}
-                                            thresholdCoupler={metricsState.thresholdCouplerValue}
-                                        />
-                                    )}
+                                    ) : null}
                                 </div>
                             </CTabItem>
                             <CTabItem value="graphical">
