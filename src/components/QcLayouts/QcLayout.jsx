@@ -4,8 +4,22 @@ import { getColorForMetricValue } from '../../utils/generateGradient';
 import { formatMetricValue } from '../../utils/formatMetricValue';
 import { getMetricStatistics } from '../../utils/sidebarUtils';
 
-export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitMetric, couplerMetric,
-    qubitMetricFormatted, couplerMetricFormatted, thresholdQubit, thresholdCoupler }) {
+const DEFAULT_NODE_COLOR = '#004E84';
+const GREY = '#888888';
+
+// Node rect side length in SVG user units (must match the <rect> below).
+const NODE_UNITS = 90;
+// Largest a qubit node may render on screen, in pixels. The whole layout is
+// capped proportionally so nodes/couplers never exceed this, regardless of how
+// few qubits a layout has (otherwise small layouts like Q20 scale up huge).
+const MAX_NODE_PX = 48;
+
+export function QcLayout({ layout, metrics }) {
+    const { spacing, nodes, edges } = layout;
+    const {
+        calibrationData, qubitMetric, couplerMetric,
+        qubitMetricFormatted, couplerMetricFormatted, thresholdQubit, thresholdCoupler,
+    } = metrics;
 
     const [hoveredNode, setHoveredNode] = useState(null);
     const [hoveredEdge, setHoveredEdge] = useState(null);
@@ -13,150 +27,77 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
     const [tooltip, setTooltip] = useState(null);
     const containerRef = useRef(null);
 
-    // Get metric value for a specific qubit
-    const getQubitMetricValue = (qubitId) => {
-        if (!calibrationData || !qubitMetric || !calibrationData[qubitMetric]) {
-            return null;
-        }
-
-        const metricData = calibrationData[qubitMetric][qubitId];
-        return metricData?.value ?? null;
+    // Get the metric value for a given id (qubit id or coupler key)
+    const getMetricValue = (metric, id) => {
+        if (!calibrationData || !metric || !calibrationData[metric]) return null;
+        return calibrationData[metric][id]?.value ?? null;
     };
 
-    // Get unit for the current metric
-    const getMetricUnit = () => {
-        if (!calibrationData || !qubitMetric || !calibrationData[qubitMetric]) {
-            return '';
-        }
-
-        // Try to get unit from first available qubit
-        const firstQubitData = Object.values(calibrationData[qubitMetric]).find(data => data?.unit);
-        return firstQubitData?.unit || '';
+    // Get the unit for a metric, read from the first entry that has one
+    const getMetricUnit = (metric) => {
+        if (!calibrationData || !metric || !calibrationData[metric]) return '';
+        const entry = Object.values(calibrationData[metric]).find(data => data?.unit);
+        return entry?.unit || '';
     };
 
-    // Get color for a specific qubit
-    const getQubitColor = (qubitId) => {
-        // If no metric is selected, return default blue
-        if (!qubitMetric || qubitMetric == '') {
-            return '#004E84';
-        }
-        // If qubit does not exist in calibration data, return grey
-        if (!calibrationData || !calibrationData[qubitMetric] || !(qubitId in calibrationData[qubitMetric])) {
-            return '#888888';
-        }
+    // Resolve a coupler key from the two endpoints (try both orderings)
+    const couplerKey = (a, b) => {
+        if (getMetricValue(couplerMetric, `${a}__${b}`) !== null) return `${a}__${b}`;
+        return `${b}__${a}`;
+    };
 
-        const value = getQubitMetricValue(qubitId);
-        if (value === null || value === undefined) {
-            return '#888888';
-        }
+    // Color for a metric value. dim: 1 = qubit, 2 = coupler.
+    const getColor = (metric, id, dim, threshold) => {
+        // No metric selected: qubits get the brand blue, couplers a light grey
+        if (!metric || metric === '') return dim === 1 ? DEFAULT_NODE_COLOR : '#aaa';
+        if (!calibrationData || !calibrationData[metric]) return GREY;
 
-        const stats = getMetricStatistics(calibrationData, qubitMetric, 1);
-        if (!stats) {
-            return '#888888';
-        }
+        const value = getMetricValue(metric, id);
+        if (value === null || value === undefined) return GREY;
 
-        // For metrics where lower values are better (like error rates, times)
-        const unit = getMetricUnit();
+        const stats = getMetricStatistics(calibrationData, metric, dim);
+        if (!stats) return GREY;
+
         let worst = stats.worst;
         let best = stats.best;
-        // Reverse the scale for certain metrics where lower is better
-        if ((qubitMetric && qubitMetric.includes("error"))) {
+        // Reverse the scale for metrics where lower is better (error rates)
+        if (metric.includes('error')) {
             worst = stats.best;
             best = stats.worst;
-            if (parseFloat(value) > thresholdQubit) {
-                return '#888888'; // Grey if above threshold (higher error is worse)
-            }
-        }
-        else {
-            if (parseFloat(value) < thresholdQubit) {
-                return '#888888'; // Grey if below threshold (lower value is worse)
-            }
+            if (parseFloat(value) > threshold) return GREY; // above threshold = worse
+        } else if (parseFloat(value) < threshold) {
+            return GREY; // below threshold = worse
         }
 
         return getColorForMetricValue(value, worst, best, stats.average);
     };
 
-    // Get coupler metric value for a specific coupler
-    const getCouplerMetricValue = (coupleId) => {
-        if (!calibrationData || !couplerMetric || !calibrationData[couplerMetric]) {
-            return null;
-        }
+    // Build tooltip content for a hovered qubit or coupler.
+    // label is the displayed title (e.g. "Qubit: QB1" / "Coupler: QB1__QB2").
+    const buildTooltip = (type, metric, id, formatted, label) => {
+        const value = getMetricValue(metric, id);
+        const unit = getMetricUnit(metric);
+        const metricInfo = value !== null && formatted ? `${formatted}: ${formatMetricValue(value, unit)}` : '';
 
-        const metricData = calibrationData[couplerMetric][coupleId];
-        return metricData?.value ?? null;
-    };
+        const uncertainty = calibrationData?.[metric]?.[id]?.uncertainty;
+        const uncertaintyInfo = (uncertainty !== undefined && uncertainty !== null && uncertainty !== 'None')
+            ? ` (±${formatMetricValue(uncertainty, unit)})`
+            : '';
 
-    // Get unit for the current coupler metric
-    const getCouplerMetricUnit = () => {
-        if (!calibrationData || !couplerMetric || !calibrationData[couplerMetric]) {
-            return '';
-        }
+        const details = (metric && metric !== '' && value === null)
+            ? 'Disabled'
+            : `${metricInfo}${uncertaintyInfo}`;
 
-        // Try to get unit from first available coupler
-        const firstCouplerData = Object.values(calibrationData[couplerMetric]).find(data => data?.unit);
-        return firstCouplerData?.unit || '';
-    };
-
-    // Get color for a specific coupler/edge
-    const getCouplerColor = (nodeA, nodeB) => {
-        // If no metric is selected, return default grey
-        if (!couplerMetric || couplerMetric == '') {
-            return '#aaa';
-        }
-
-        // Create coupler key
-        const coupleId1 = `${nodeA}__${nodeB}`;
-        const coupleId2 = `${nodeB}__${nodeA}`;
-
-        // If coupler does not exist in calibration data, return grey
-        if (!calibrationData || !calibrationData[couplerMetric]) {
-            return '#888888';
-        }
-
-        let value = getCouplerMetricValue(coupleId1);
-        if (value === null) {
-            value = getCouplerMetricValue(coupleId2);
-        }
-        if (value === null || value === undefined) {
-            return '#888888'; // Grey if no data found
-        }
-
-        const stats = getMetricStatistics(calibrationData, couplerMetric, 2);
-        if (!stats) {
-            return '#888888';
-        }
-
-        // For metrics where lower values are better
-        const unit = getCouplerMetricUnit();
-        let worst = stats.worst;
-        let best = stats.best;
-
-        // Reverse the scale for certain metrics where lower is better
-        if ((couplerMetric && couplerMetric.includes("error"))) {
-            worst = stats.best;
-            best = stats.worst;
-
-            if (parseFloat(value) > thresholdCoupler) {
-                return '#888888'; // Grey if above threshold (higher error is worse)
-            }
-        }
-        else {
-            if (parseFloat(value) < thresholdCoupler) {
-                return '#888888'; // Grey if below threshold (lower value is worse)
-            }
-        }
-
-        return getColorForMetricValue(value, worst, best, stats.average);
+        return { type, content: label, details };
     };
 
     // Handle mouse move to update tooltip position relative to the container
     const handleMouseMove = (event) => {
         if (containerRef.current) {
             const rect = containerRef.current.getBoundingClientRect();
-
             setMousePos({
                 x: event.clientX - rect.left,
-                y: event.clientY - rect.top
+                y: event.clientY - rect.top,
             });
         }
     };
@@ -201,12 +142,12 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
         return { left, top };
     };
 
-    // Build coordinate map directly from raw nodes
-    const coordMap = Object.fromEntries(rawNodes.map(n => [n.id, n]));
+    // Build coordinate map directly from nodes
+    const coordMap = Object.fromEntries(nodes.map(n => [n.id, n]));
 
     // Compute dynamic bounds
-    const xs = rawNodes.map(n => n.x);
-    const ys = rawNodes.map(n => n.y);
+    const xs = nodes.map(n => n.x);
+    const ys = nodes.map(n => n.y);
     const minX = Math.min(...xs) - spacing;
     const maxX = Math.max(...xs) + spacing;
     const minY = Math.min(...ys) - spacing;
@@ -215,8 +156,10 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
     const viewBoxHeight = maxY - minY;
     const viewBox = `${minX} ${-maxY} ${viewBoxWidth} ${viewBoxHeight}`;
 
-    // Calculate max width based on number of qubits
-    const maxWidth = rawNodes.length * 100;
+    // Cap the rendered size so an SVG unit never maps to more pixels than
+    // MAX_NODE_PX / NODE_UNITS — i.e. nodes/couplers stay the same on-screen size
+    // across layouts. Use the larger viewBox dimension so neither axis overshoots.
+    const maxWidth = (MAX_NODE_PX / NODE_UNITS) * Math.max(viewBoxWidth, viewBoxHeight);
 
     return (
         <div
@@ -237,7 +180,7 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
                     const B = coordMap[b];
                     const key = `${a}-${b}`;
                     const hover = hoveredEdge === key;
-                    const edgeColor = getCouplerColor(a, b);
+                    const edgeColor = getColor(couplerMetric, couplerKey(a, b), 2, thresholdCoupler);
                     return (
                         <motion.line
                             key={key}
@@ -250,45 +193,17 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
                             animate={{ strokeWidth: hover ? 80 : 60 }}
                             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                             onMouseEnter={() => {
-                                const coupleId1 = `${a}__${b}`;
-                                const coupleId2 = `${b}__${a}`;
-                                const metricValue = getCouplerMetricValue(coupleId1) ?? getCouplerMetricValue(coupleId2);
-                                const unit = getCouplerMetricUnit();
-                                const formattedValue = formatMetricValue(metricValue, unit);
-                                const metricInfo = metricValue !== null && couplerMetricFormatted ? `${couplerMetricFormatted}: ${formattedValue}` : '';
                                 setHoveredEdge(key);
-                                let uncertainty = null;
-                                const coupleId = getCouplerMetricValue(coupleId1) !== null ? coupleId1 : coupleId2;
-                                if (
-                                    calibrationData &&
-                                    couplerMetric &&
-                                    calibrationData[couplerMetric] &&
-                                    calibrationData[couplerMetric][coupleId] &&
-                                    calibrationData[couplerMetric][coupleId].uncertainty !== undefined
-                                ) {
-                                    uncertainty = calibrationData[couplerMetric][coupleId].uncertainty;
-                                }
-                                let uncertaintyInfo = (uncertainty !== null && uncertainty !== "None") ? ` (±${formatMetricValue(uncertainty, unit)})` : '';
-                                let details;
-                                if (couplerMetric && couplerMetric !== '' && metricValue === null) {
-                                    details = `Disabled`;
-                                } else {
-                                    details = `${metricInfo}${uncertaintyInfo}`;
-                                }
-                                setTooltip({
-                                    type: 'edge',
-                                    content: `Coupler: ${a}__${b}`,
-                                    details
-                                });
+                                setTooltip(buildTooltip('edge', couplerMetric, couplerKey(a, b), couplerMetricFormatted, `Coupler: ${a}__${b}`));
                             }}
                             onMouseLeave={() => { setHoveredEdge(null); setTooltip(null); }}
                             className={hover ? 'cursor-pointer filter drop-shadow-md' : 'cursor-pointer'}
                         />
                     );
                 })}
-                {rawNodes.map(n => {
+                {nodes.map(n => {
                     const hover = hoveredNode === n.id;
-                    const nodeColor = getQubitColor(n.id);
+                    const nodeColor = getColor(qubitMetric, n.id, 1, thresholdQubit);
                     return (
                         <g key={n.id} transform={`translate(${n.x} ${-n.y})`}>
                             <motion.g
@@ -296,33 +211,8 @@ export function BaseQcLayout({ rawNodes, edges, spacing, calibrationData, qubitM
                                 animate={{ scale: hover ? 1.25 : 1.1 }}
                                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                                 onMouseEnter={() => {
-                                    const metricValue = getQubitMetricValue(n.id);
-                                    const unit = getMetricUnit();
-                                    const formattedValue = formatMetricValue(metricValue, unit);
-                                    const metricInfo = metricValue !== null ? `${qubitMetricFormatted}: ${formattedValue}` : '';
                                     setHoveredNode(n.id);
-                                    let uncertainty = null;
-                                    if (
-                                        calibrationData &&
-                                        qubitMetric &&
-                                        calibrationData[qubitMetric] &&
-                                        calibrationData[qubitMetric][n.id] &&
-                                        calibrationData[qubitMetric][n.id].uncertainty !== undefined
-                                    ) {
-                                        uncertainty = calibrationData[qubitMetric][n.id].uncertainty;
-                                    }
-                                    let uncertaintyInfo = (uncertainty !== null && uncertainty !== "None") ? ` (±${formatMetricValue(uncertainty, unit)})` : '';
-                                    let details;
-                                    if (qubitMetric && qubitMetric !== '' && metricValue === null) {
-                                        details = `Disabled`;
-                                    } else {
-                                        details = `${metricInfo}${uncertaintyInfo}`;
-                                    }
-                                    setTooltip({
-                                        type: 'node',
-                                        content: `Qubit: ${n.id}`,
-                                        details
-                                    });
+                                    setTooltip(buildTooltip('node', qubitMetric, n.id, qubitMetricFormatted, `Qubit: ${n.id}`));
                                 }}
                                 onMouseLeave={() => { setHoveredNode(null); setTooltip(null); }}
                                 className={hover ? 'cursor-pointer filter drop-shadow-lg' : 'cursor-pointer'}
