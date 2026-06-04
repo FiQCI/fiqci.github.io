@@ -43,7 +43,7 @@ permalink: store.js
   {%- assign filtered_pages = filtered_pages | reject: "url", "/404.html" -%}
   {%- assign filtered_pages = filtered_pages | reject: "url", "/api/" -%}
   {%- for page in filtered_pages -%}
-    {%- unless page.url contains '.json' or page.url contains '.css' or page.url contains '.js' or page.path contains '/api/' -%}
+    {%- unless page.url contains '.json' or page.url contains '.css' or page.url contains '.js' or page.path contains '/api/' or page.redirect -%}
     {%- assign full_content = page.content | default: "" | append: site.data.constants[page.url] -%}
     {
       "key": "{{ page.url | slugify }}",
