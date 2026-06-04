@@ -108,3 +108,98 @@ mjx-container {
 #tags-data {
   overflow-x: hidden;
 }
+
+/* Inline code (single backticks → bare <code>, not inside <pre>). */
+#blogView :not(pre) > code {
+    background-color: #eff1f3;
+    color: #24292e;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.875em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    word-break: break-word;
+}
+
+/* Tailwind Typography (.prose) adds backticks via code::before/::after. */
+#blogView :not(pre) > code::before,
+#blogView :not(pre) > code::after {
+    content: none;
+}
+
+/* Rouge syntax highlighting (Jekyll). Code blocks with a language
+   specifier (```python, ```bash, …) are wrapped in `.highlight` and the
+   tokens get short class names (k, s, nf, c, …). Theme below colors them. */
+#blogView .highlight pre.highlight,
+#blogView pre.highlight {
+    background-color: #f6f8fa;
+    color: #24292e;
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+}
+
+#blogView .highlight .c,    /* Comment */
+#blogView .highlight .c1,   /* Comment.Single */
+#blogView .highlight .cm,   /* Comment.Multiline */
+#blogView .highlight .cs,   /* Comment.Special */
+#blogView .highlight .cp,   /* Comment.Preproc */
+#blogView .highlight .cd { color: #6a737d; font-style: italic; }
+
+#blogView .highlight .k,    /* Keyword */
+#blogView .highlight .kn,   /* Keyword.Namespace (import/from) */
+#blogView .highlight .kc,   /* Keyword.Constant */
+#blogView .highlight .kd,   /* Keyword.Declaration */
+#blogView .highlight .kp,   /* Keyword.Pseudo */
+#blogView .highlight .kr,   /* Keyword.Reserved */
+#blogView .highlight .kt { color: #d73a49; }  /* Keyword.Type */
+
+#blogView .highlight .o,    /* Operator */
+#blogView .highlight .ow { color: #d73a49; }  /* Operator.Word (and/or/not/in) */
+
+#blogView .highlight .s,    /* String */
+#blogView .highlight .s1,   /* String.Single */
+#blogView .highlight .s2,   /* String.Double */
+#blogView .highlight .sa,   /* String.Affix (f, r prefixes) */
+#blogView .highlight .sb,   /* String.Backtick */
+#blogView .highlight .sc,   /* String.Char */
+#blogView .highlight .sd,   /* String.Doc */
+#blogView .highlight .se,   /* String.Escape */
+#blogView .highlight .sh,   /* String.Heredoc */
+#blogView .highlight .si,   /* String.Interpol */
+#blogView .highlight .sx,   /* String.Other */
+#blogView .highlight .sr,   /* String.Regex */
+#blogView .highlight .ss { color: #032f62; }  /* String.Symbol */
+
+#blogView .highlight .mi,   /* Number.Integer */
+#blogView .highlight .m,    /* Number */
+#blogView .highlight .mf,   /* Number.Float */
+#blogView .highlight .mh,   /* Number.Hex */
+#blogView .highlight .mo,   /* Number.Oct */
+#blogView .highlight .il { color: #005cc5; }  /* Number.Integer.Long */
+
+#blogView .highlight .nf,   /* Name.Function */
+#blogView .highlight .fm { color: #6f42c1; }  /* Name.Function.Magic */
+
+#blogView .highlight .nc,   /* Name.Class */
+#blogView .highlight .nn,   /* Name.Namespace */
+#blogView .highlight .no,   /* Name.Constant */
+#blogView .highlight .ne { color: #6f42c1; }  /* Name.Exception */
+
+#blogView .highlight .nb,   /* Name.Builtin */
+#blogView .highlight .bp { color: #005cc5; }  /* Name.Builtin.Pseudo (self) */
+
+#blogView .highlight .nv,   /* Name.Variable */
+#blogView .highlight .vc,   /* Name.Variable.Class */
+#blogView .highlight .vg,   /* Name.Variable.Global */
+#blogView .highlight .vi { color: #e36209; }  /* Name.Variable.Instance */
+
+#blogView .highlight .na { color: #6f42c1; }  /* Name.Attribute */
+#blogView .highlight .nt { color: #22863a; }  /* Name.Tag */
+#blogView .highlight .nd { color: #6f42c1; }  /* Name.Decorator */
+
+#blogView .highlight .n,    /* Name */
+#blogView .highlight .p { color: #24292e; }   /* Punctuation */
+
+#blogView .highlight .err { color: #b31d28; } /* Error */
+#blogView .highlight .gd { color: #b31d28; background-color: #ffeef0; } /* Generic.Deleted */
+#blogView .highlight .gi { color: #22863a; background-color: #f0fff4; } /* Generic.Inserted */

@@ -126,7 +126,7 @@ export const ServiceStatus = (props) => {
         <CButton className='w-32' onClick={() => setBookingModalOpen(true)}>View Reservations</CButton>
       </div>
       
-      <div className='flex flex-col sm:flex-row gap-8'>
+      <div className='flex flex-col sm:flex-row gap-4 sm:gap-20'>
         <h2 className='text-on-white'>Devices</h2>
         <CSelect
           hideDetails={true}
