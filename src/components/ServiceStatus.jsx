@@ -7,6 +7,24 @@ import { CCard, CCardTitle, CCardContent, CIcon, CButton, CSelect } from '@cscfi
 import { StatusModal } from './StatusModal/StatusModal';
 import { BookingModal } from './bookingCalendar.jsx';
 
+const ALERT_STYLES = {
+  warning: { bg: 'bg-orange-200', icon: mdiAlert },
+  error: { bg: 'bg-red-200', icon: mdiClose },
+  info: { bg: 'bg-sky-200', icon: mdiInformation },
+};
+
+const AlertBanner = ({ type, text }) => {
+  const { bg, icon } = ALERT_STYLES[type?.toLowerCase()] ?? ALERT_STYLES.info;
+  return (
+    <div className={`flex flex-row gap-4 w-full p-3 rounded-md ${bg} items-start sm:items-center`}>
+      <CIcon key={icon} path={icon} />
+      <p className='text-[16px]'>
+        {type ? text : 'Loading...'}
+      </p>
+    </div>
+  );
+};
+
 const StatusCard = (props) => {
   const isOnline = props.health;
   const { onClick, ...rest } = props
@@ -87,20 +105,8 @@ export const ServiceStatus = (props) => {
     setModalProps({ ...qc, devicesWithStatus });
     setModalOpen(true);
   };
-  // Determine alert color based on props.alert.type
-  const alertType = props.alert?.type?.toLowerCase();
-  let icon = '';
-  let alertBg = '';
-  if (alertType === 'warning') {
-    alertBg = 'bg-orange-200';
-    icon = mdiAlert;
-  } else if (alertType === 'error') {
-    alertBg = 'bg-red-200';
-    icon = mdiClose;
-  } else {
-    alertBg = 'bg-sky-200';
-    icon = mdiInformation;
-  }
+  // Support both a single `alert` object and a list of `alerts`.
+  const alerts = props.alerts ?? (props.alert ? [props.alert] : []);
 
   return (
     <div className="flex gap-6 flex-col sm:flex-col items-stretch text-on-white">
@@ -111,12 +117,13 @@ export const ServiceStatus = (props) => {
       <p className='text-[16px]'>
         {props.lumi?.desc} <a href={props.lumi?.link?.href} className="hover:underline text-sky-800">{props.lumi?.link?.title}</a>.
       </p>
-      <div className={`flex flex-row gap-4 w-full p-3 rounded-md ${alertBg} items-start sm:items-center`}>
-        <CIcon key={icon} path={icon} />
-        <p className='text-[16px]'>
-          {props.alert?.type ? props.alert?.text : 'Loading...'}
-        </p>
-      </div>
+      {alerts.length > 0 && (
+        <div className='flex flex-col gap-3'>
+          {alerts.map((alert, index) => (
+            <AlertBanner key={index} {...alert} />
+          ))}
+        </div>
+      )}
       <div className='pt-[24px] flex flex-col gap-6 mb-6 justify-start'>
         <h2 className='text-on-white'>Reservations</h2>
         <p>
