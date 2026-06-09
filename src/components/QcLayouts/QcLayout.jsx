@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { getColorForMetricValue } from '../../utils/generateGradient';
 import { formatMetricValue } from '../../utils/formatMetricValue';
 import { getMetricStatistics } from '../../utils/sidebarUtils';
@@ -169,13 +170,45 @@ export function QcLayout({ layout, metrics }) {
             onMouseMove={handleMouseMove}
             onMouseLeave={() => { setHoveredNode(null); setHoveredEdge(null); setTooltip(null); }}
         >
-            <svg
-                viewBox={viewBox}
-                preserveAspectRatio="xMidYMid meet"
-                className="w-full h-full"
-                style={{ maxWidth: `${maxWidth}px`, maxHeight: `${maxWidth}px` }}
+            <TransformWrapper
+                key={`${nodes.length}-${spacing}`}
+                minScale={0.5}
+                maxScale={8}
+                doubleClick={{ mode: 'reset' }}
+                wheel={{ step: 0.003, smoothStep: 0.0002 }}
+                panning={{ velocityDisabled: true }}
+                onPanningStart={() => setTooltip(null)}
             >
-                {edges.map(([a, b]) => {
+                {({ zoomIn, zoomOut, resetTransform }) => (
+                    <>
+                        <div className="absolute top-2 right-2 z-50 flex flex-col gap-1">
+                            <button
+                                type="button"
+                                onClick={() => zoomIn()}
+                                aria-label="Zoom in"
+                                className="w-8 h-8 flex items-center justify-center text-lg leading-none bg-slate-800/80 text-white rounded shadow hover:bg-slate-700"
+                            >+</button>
+                            <button
+                                type="button"
+                                onClick={() => zoomOut()}
+                                aria-label="Zoom out"
+                                className="w-8 h-8 flex items-center justify-center text-lg leading-none bg-slate-800/80 text-white rounded shadow hover:bg-slate-700"
+                            >−</button>
+                            <button
+                                type="button"
+                                onClick={() => resetTransform()}
+                                aria-label="Reset view"
+                                className="w-8 h-8 flex items-center justify-center text-base leading-none bg-slate-800/80 text-white rounded shadow hover:bg-slate-700"
+                            >⟳</button>
+                        </div>
+                        <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full !flex !items-center !justify-center">
+                            <svg
+                                viewBox={viewBox}
+                                preserveAspectRatio="xMidYMid meet"
+                                className="w-full h-full"
+                                style={{ maxWidth: `${maxWidth}px`, maxHeight: `${maxWidth}px` }}
+                            >
+                                {edges.map(([a, b]) => {
                     const A = coordMap[a];
                     const B = coordMap[b];
                     const key = `${a}-${b}`;
@@ -234,7 +267,11 @@ export function QcLayout({ layout, metrics }) {
                         </g>
                     );
                 })}
-            </svg>
+                            </svg>
+                        </TransformComponent>
+                    </>
+                )}
+            </TransformWrapper>
 
             {tooltip && (
                 <motion.div
@@ -249,9 +286,6 @@ export function QcLayout({ layout, metrics }) {
                     }}
                 >
                     <div className="bg-gradient-to-br from-slate-800 to-slate-900 backdrop-blur-sm border border-slate-600/50 rounded-lg p-3 shadow-xl">
-                        {/* Arrow pointing to the element */}
-                        <div className="absolute -top-1 left-4 w-2 h-2 bg-slate-800 border-l border-t border-slate-600/50 rotate-45"></div>
-
                         {/* Header with icon */}
                         <div className="flex items-center gap-2 mb-2">
                             <div className={`w-2 h-2 rounded-full ${tooltip.type === 'node' ? 'bg-blue-400' : 'bg-purple-400'}`}></div>
