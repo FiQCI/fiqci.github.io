@@ -247,10 +247,13 @@ cookie_consent:
     link:
       title: here
       href: https://www.lumi-supercomputer.eu/lumi-service-status/
-  alert:
-    text: |-
-      VTT Q5 (Helmi) will be indefinitely offline and will be removed from our services soon.
-    type: warning # Alert type can be info, warning, or error
+  alerts: # Each alert renders as its own banner. type can be info, warning, or error
+    - text: |-
+        VTT Q5 (Helmi) will be indefinitely offline and will be removed from our services soon.
+      type: warning
+    - text: |-
+        VTT Q50 will be down for maintenance from 19th June to 17th July. During this time, the Q50 will not be available for use. We apologize for any inconvenience this may cause.
+      type: warning
   quantum-computers:
     - name: VTT Q5 (Helmi)
       qubits: 5
