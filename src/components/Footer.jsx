@@ -56,9 +56,6 @@ export const Footer = (props) => {
                             </a>
                         </p>
                         <div className="flex space-x-4 text-gray-950">
-                            <a href={prependBaseURL("/cookies")} className="underline">
-                                Cookies
-                            </a>
                             <a href={prependBaseURL("/accessibility")} className="underline">
                                 Accessibility statements
                             </a>
