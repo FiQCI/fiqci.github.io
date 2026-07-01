@@ -41,7 +41,7 @@ const jekyllConfig = {
   keep_files: Object.entries(entryFiles)
     .map(([fname, _]) => `${fname}.js`)
     .concat(cssFilenames)
-    .concat(["vendors.js", "runtime.js", "common.js"]),
+    .concat(["vendors.js", "runtime.js", "common.js", "lunr.js"]),
 }
 fs.writeFileSync(jekyllConfigFilepath, yaml.stringify(jekyllConfig));
 
@@ -95,7 +95,12 @@ module.exports = {
       chunks: "all",
       cacheGroups: {
         vendors: {
-          test: /[\\/]node_modules[\\/]/,
+          // Everything in node_modules goes into the shared vendors bundle,
+          // EXCEPT lunr. lunr is only reached via a dynamic import() in
+          // SiteSearch, so excluding it here lets it stay in its own async
+          // chunk (lunr.js) that is fetched only when a search runs, instead
+          // of being hoisted into vendors.js on every page.
+          test: /[\\/]node_modules[\\/](?!lunr[\\/])/,
           name: "vendors",
           chunks: "all",
         },
