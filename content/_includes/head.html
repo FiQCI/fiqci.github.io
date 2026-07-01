@@ -19,7 +19,9 @@
 
   <!--{\%- seo -\%}-->
   <link rel="icon" href="{{ constants.favicon | relative_url }}" />
-  <link rel="preload" as="image" href="{{ '/assets/images/FiQCI-banner.webp' | relative_url }}" fetchpriority="high">
+  <link rel="preload" as="image" href="{{ '/assets/images/FiQCI-banner.webp' | relative_url }}"
+        imagesrcset="{{ '/assets/images/FiQCI-banner-640.webp' | relative_url }} 640w, {{ '/assets/images/FiQCI-banner-1024.webp' | relative_url }} 1024w, {{ '/assets/images/FiQCI-banner.webp' | relative_url }} 1280w, {{ '/assets/images/FiQCI-banner-1920.webp' | relative_url }} 1920w"
+        imagesizes="100vw" fetchpriority="high">
   <link rel="preload" href="/properties.css" as="style">
   <link rel="preload" href="/api/pages.json" as="fetch" crossorigin>
   <link rel="preload" href="/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
