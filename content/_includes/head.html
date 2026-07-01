@@ -30,7 +30,9 @@
   
   {% include external/font.html %}
 
-  <link rel="preconnect" href="https://rsms.me/" crossorigin>
+  {% if site.matomo_url and site.matomo_url != "" %}
+  <link rel="preconnect" href="https://{{ site.matomo_url }}">
+  {% endif %}
 
   <link rel="dns-prefetch" href="https://fiqci-backend.2.rahtiapp.fi">
 
@@ -38,9 +40,9 @@
   <script defer src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script defer src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   
-  <script type="text/javascript" src="{{ "runtime.js" | relative_url }}"></script>
+  <script defer type="text/javascript" src="{{ "runtime.js" | relative_url }}"></script>
   <script defer src="/vendors.js"></script>
-  <script type="text/javascript" src="{{ "common.js" | relative_url }}"></script>
+  <script defer type="text/javascript" src="{{ "common.js" | relative_url }}"></script>
 
 
   <script defer type="text/javascript" src="{{ "site.js" | relative_url }}" charset="utf-8"></script>
@@ -51,5 +53,5 @@
   {% else %}
     {%- assign react_source = "default.js" -%}
   {% endif %}
-  <script type="text/javascript" src="{{ react_source | relative_url }}" charset="utf-8"></script>
+  <script defer type="text/javascript" src="{{ react_source | relative_url }}" charset="utf-8"></script>
 </head>

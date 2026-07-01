@@ -42,6 +42,10 @@ const jekyllConfig = {
     .map(([fname, _]) => `${fname}.js`)
     .concat(cssFilenames)
     .concat(["vendors.js", "runtime.js", "common.js", "lunr.js"]),
+  // Surface the Matomo host (same MATOMO_URL env the DefinePlugin injects into
+  // the JS bundle) to Jekyll so head.html can emit a <link rel="preconnect">.
+  // Empty in local dev where MATOMO_URL is unset, so no preconnect is rendered.
+  matomo_url: process.env.MATOMO_URL || "",
 }
 fs.writeFileSync(jekyllConfigFilepath, yaml.stringify(jekyllConfig));
 
