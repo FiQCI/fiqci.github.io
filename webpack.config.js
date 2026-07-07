@@ -46,6 +46,12 @@ const jekyllConfig = {
   // the JS bundle) to Jekyll so head.html can emit a <link rel="preconnect">.
   // Empty in local dev where MATOMO_URL is unset, so no preconnect is rendered.
   matomo_url: process.env.MATOMO_URL || "",
+  // "owner/repo" of the building repository, set automatically by GitHub
+  // Actions. This is FiQCI/dev (deployed to dev.fiqci.fi) here and the
+  // production repo (deployed to fiqci.fi) after changes are merged over.
+  // head.html gates a noindex on this so only the dev site is kept out of
+  // search engines. Empty in local dev.
+  github_repository: process.env.GITHUB_REPOSITORY || "",
 }
 fs.writeFileSync(jekyllConfigFilepath, yaml.stringify(jekyllConfig));
 
