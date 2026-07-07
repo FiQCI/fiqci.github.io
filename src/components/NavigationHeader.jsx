@@ -75,7 +75,9 @@ export const NavigationHeader = props => {
             <img
                 src={prependBaseURL(props.logo)}
                 alt="Logo"
-                className="h-7"
+                width={340}
+                height={100}
+                className="h-7 w-auto"
             />
         </a>
         : <></>

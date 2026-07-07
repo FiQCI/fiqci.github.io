@@ -70,9 +70,16 @@ export const Hero = props => {
         <div className='mb-[-300px] sm:mb-[-250px] md:mb-[-250px] lg:mb-[-200px] xl:mb-[-250px]'>
             <div id="hero-container" className="w-full min-h-[400px] relative">
                 {/* Image will be pre-rendered in HTML, React just manages the container */}
-                <img 
+                <img
                     id="hero-background-image"
                     src={prependBaseURL("/assets/images/FiQCI-banner.webp")}
+                    srcSet={
+                        `${prependBaseURL("/assets/images/FiQCI-banner-640.webp")} 640w, ` +
+                        `${prependBaseURL("/assets/images/FiQCI-banner-1024.webp")} 1024w, ` +
+                        `${prependBaseURL("/assets/images/FiQCI-banner.webp")} 1280w, ` +
+                        `${prependBaseURL("/assets/images/FiQCI-banner-1920.webp")} 1920w`
+                    }
+                    sizes="100vw"
                     alt="Hero background"
                     fetchpriority="high"
                     className="absolute inset-0 w-full h-full object-cover"
