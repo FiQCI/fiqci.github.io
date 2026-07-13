@@ -44,10 +44,10 @@ cookie_consent:
     tagline: Making the power of quantum computing accessible
     subtitle: FiQCI – Finnish quantum-computing infrastructure
     announcement:
-      text: The VTT Q50 Quantum Computer is now available for use through FiQCI!
+      text: The Aalto Q20 Quantum Computer is now available for use through FiQCI!
       link:
-        title: How to get access to the Q50 quantum computer?
-        href: "/publications/2026-05-11-Academic-Call-2026-02"
+        title: How to get access to FiQCI quantum computers?
+        href: "/resource-call"
     buttons:
       - title: How to get access
         href: "/access"
@@ -117,7 +117,7 @@ cookie_consent:
         Aalto Q20 is an IQM superconducting quantum computer with 20 qubits in a square grid topology. It is operated by Aalto University.
       image: "/assets/images/aalto-qc/aalto-q20.webp"
       links:
-        - link: "/publications/2026-05-11-Academic-Call-2026-02"
+        - link: "/resource-call"
           teaser: "Apply for access to Aalto Q20"
         - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
           teaser: "How to access Aalto Q20, instructions"
@@ -129,7 +129,7 @@ cookie_consent:
         Hybrid HPC+QC access was opened in 2025. VTT Q50 is operated by VTT, and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.webp"
       links:
-        - link: "/publications/2026-05-11-Academic-Call-2026-02"
+        - link: "/resource-call"
           teaser: "Apply for access to VTT Q50"
         - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
           teaser: "How to access VTT Q50, instructions"
@@ -241,7 +241,7 @@ cookie_consent:
 
         Additionally, users should also acknowledge using FiQCI quantum computers if applicable:
 
-      acknowledge-link-url: /publications/2026-05-11-Academic-Call-2026-02
+      acknowledge-link-url: /resource-call
       acknowledge-link-text: see here
 
 "/status/":
