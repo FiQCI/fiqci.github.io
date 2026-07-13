@@ -6,7 +6,7 @@ import { mdiInformation, mdiClose, mdiAlert } from '@mdi/js';
 import { CCard, CCardTitle, CCardContent, CIcon, CButton, CSelect } from '@cscfi/csc-ui-react';
 import { StatusModal } from './StatusModal/StatusModal';
 import { BookingModal } from './bookingCalendar.jsx';
-import { API_BASE_URL } from '../config/api';
+import { API_BASE_URL } from '../config/api.js';
 
 const ALERT_STYLES = {
   warning: { bg: 'bg-orange-200', icon: mdiAlert },

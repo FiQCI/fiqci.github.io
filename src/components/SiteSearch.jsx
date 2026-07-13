@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import lunr from 'lunr';
 import { mdiMagnify, mdiArrowRight, mdiClose } from '@mdi/js';
 import {
   CButton, CPagination, CIcon, CCheckbox, CModal, CCard,
@@ -35,8 +34,12 @@ function normalizeQuery(query) {
   return `${exactMatch} ${wildcardMatch}`;
 }
 
-function searchContent(query, store) {
+async function searchContent(query, store) {
   const queryStr = normalizeQuery(query);
+
+  // Lazily load lunr: it is ~30 KB and only needed once a search runs, so it
+  // is split into its own async chunk instead of shipping in vendors.js.
+  const { default: lunr } = await import(/* webpackChunkName: "lunr" */ 'lunr');
 
   const idx = lunr(function () {
     this.ref('key');
@@ -119,11 +122,11 @@ const SearchBar = ({ setResults, setQuery, query }) => {
     setResults({ general: [], blogs: [], events: [] });
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const input = query;
     if (input.trim() !== "") {
-      const searchResults = searchContent(input, STORE);
+      const searchResults = await searchContent(input, STORE);
       setResults(searchResults);
     } else {
       setResults({ general: [], blogs: [], events: [] });
@@ -345,8 +348,7 @@ export const SiteSearch = () => {
     let initSearch = params.get("search");
     if (initSearch && initSearch.trim() !== "") {
       setQuery(initSearch);
-      const searchResults = searchContent(initSearch, STORE);
-      setResults(searchResults);
+      searchContent(initSearch, STORE).then(setResults);
     }
     else{
       const state = getLocalStorageState('siteSearchState');
@@ -354,8 +356,7 @@ export const SiteSearch = () => {
         setFilters(state.filters);
         setQuery(state.query);
         if (state.query && state.query.trim() !== "") {
-          const searchResults = searchContent(state.query, STORE);
-          setResults(searchResults);
+          searchContent(state.query, STORE).then(setResults);
         }
       }
     }
