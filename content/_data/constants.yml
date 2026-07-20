@@ -252,7 +252,7 @@ cookie_consent:
         VTT Q5 (Helmi) will be indefinitely offline and will be removed from our services soon.
       type: warning
     - text: |-
-        VTT Q50 will be down for maintenance from 18th June to 17th July. During this time, the Q50 will not be available for use. We apologize for any inconvenience this may cause.
+        VTT Q50 will be down for maintenance from 18th June to 23rd July. During this time, the Q50 will not be available for use. We apologize for any inconvenience this may cause.
       type: warning
   quantum-computers:
     - name: VTT Q5 (Helmi)
