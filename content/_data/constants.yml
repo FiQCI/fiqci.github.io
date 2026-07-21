@@ -44,7 +44,7 @@ cookie_consent:
     tagline: Making the power of quantum computing accessible
     subtitle: FiQCI – Finnish quantum-computing infrastructure
     announcement:
-      text: The Aalto Q20 Quantum Computer is now available for use through FiQCI!
+      text: Access to the Aalto Q20 Quantum Computer is coming soon!
       link:
         title: How to get access to FiQCI quantum computers?
         href: "/resource-call"
@@ -253,7 +253,7 @@ cookie_consent:
       href: https://www.lumi-supercomputer.eu/lumi-service-status/
   alerts: # Each alert renders as its own banner. type can be info, warning, or error
     - text: |-
-        Aalto Q20 is now available for use.
+        Aalto Q20 access is coming soon!
       type: info
     - text: |-
         VTT Q50 will be down for maintenance from 18th June to 17th July. During this time, the Q50 will not be available for use. We apologize for any inconvenience this may cause.
