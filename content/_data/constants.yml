@@ -142,9 +142,6 @@ cookie_consent:
         VTT Q5 (Helmi) was a superconducting quantum computer with 5 qubits in a star topology. It was operated by VTT, and was co-developed with IQM Quantum Computers. The device was decommissioned in 2026.
       image: "/assets/images/vtt-images/VTT_lab-2.webp"
       links:
-        - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
-          teaser: "How to access VTT Q5 (Helmi), instructions"
-          icon: mdiArrowRight
         - link: "https://qx.vtt.fi/docs/devices/q5.html"
           teaser: "Read more about VTT Q5 (VTT website)"
           icon: mdiOpenInNew
