@@ -104,6 +104,7 @@ export const ServiceStatus = (props) => {
 
   const handleCardClick = (qc) => {
     setModalProps({ ...qc, devicesWithStatus });
+    setModalProps({ ...qc, devicesWithStatus });
     setModalOpen(true);
   };
   // Support both a single `alert` object and a list of `alerts`.
@@ -160,6 +161,8 @@ export const ServiceStatus = (props) => {
         ))}
         
         
+        
+        
       </div>
       {bookingModalOpen && (
         <BookingModal bookingData={bookingData} name={"Reservations"} isModalOpen={bookingModalOpen} setIsModalOpen={setBookingModalOpen} />
@@ -168,6 +171,7 @@ export const ServiceStatus = (props) => {
       {modalOpen && (
         <StatusModal {...modalProps} isModalOpen={modalOpen} setIsModalOpen={setModalOpen} />
       )}
+      
       
     </div>
   );
