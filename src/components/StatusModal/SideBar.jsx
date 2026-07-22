@@ -29,7 +29,7 @@ export const SideBar = (props) => {
     // Calculate threshold values when dependencies change
     useEffect(() => {
         if (metricsState.qubitMetric && calibrationData) {
-            const qubitStats = getMetricStatistics(calibrationData, metricsState.qubitMetric);
+            const qubitStats = getMetricStatistics(calibrationData, metricsState.qubitMetric, 1);
             if (qubitStats) {
                 const isLowerBetter = metricsState.qubitMetric.includes("error");
                 const worst = isLowerBetter ? qubitStats.best : qubitStats.worst;
@@ -49,7 +49,7 @@ export const SideBar = (props) => {
 
     useEffect(() => {
         if (metricsState.couplerMetric && calibrationData) {
-            const couplerStats = getMetricStatistics(calibrationData, metricsState.couplerMetric);
+            const couplerStats = getMetricStatistics(calibrationData, metricsState.couplerMetric, 2);
             if (couplerStats) {
                 const isLowerBetter = metricsState.couplerMetric.includes("error");
                 const worst = isLowerBetter ? couplerStats.best : couplerStats.worst;

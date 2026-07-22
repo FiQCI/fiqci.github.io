@@ -5,11 +5,24 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ page.description | default: constants.description }}">
+
+  {% comment %}
+    Keep the dev site (dev.fiqci.fi, built from FiQCI/dev) out of search
+    engines. site.github_repository comes from the build environment (see
+    webpack.config.js), so the production repo renders no noindex even though
+    this file is merged over verbatim.
+  {% endcomment %}
+  {% if site.github_repository == "FiQCI/dev" %}
+  <meta name="robots" content="noindex, nofollow">
+  {% endif %}
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:title" content="{{ page.title | default: constants.title }}">
   <meta property="og:description" content="{{ page.description | default: page.title }}">
+  
+  <meta name="google-site-verification" content="p4UjGUzyLKNumVehEA-0X6ISlYP4z9Rr9uKWDWo1PVA" />
   {% if page.layout == "post" %}
     <meta property="og:image" content="{{ page.header.teaser | default: constants.preview | absolute_url }}">
   {% else %}
@@ -18,7 +31,9 @@
 
   <!--{\%- seo -\%}-->
   <link rel="icon" href="{{ constants.favicon | relative_url }}" />
-  <link rel="preload" as="image" href="{{ '/assets/images/FiQCI-banner.webp' | relative_url }}" fetchpriority="high">
+  <link rel="preload" as="image" href="{{ '/assets/images/FiQCI-banner.webp' | relative_url }}"
+        imagesrcset="{{ '/assets/images/FiQCI-banner-640.webp' | relative_url }} 640w, {{ '/assets/images/FiQCI-banner-1024.webp' | relative_url }} 1024w, {{ '/assets/images/FiQCI-banner.webp' | relative_url }} 1280w, {{ '/assets/images/FiQCI-banner-1920.webp' | relative_url }} 1920w"
+        imagesizes="100vw" fetchpriority="high">
   <link rel="preload" href="/properties.css" as="style">
   <link rel="preload" href="/api/pages.json" as="fetch" crossorigin>
   <link rel="preload" href="/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -27,7 +42,9 @@
   
   {% include external/font.html %}
 
-  <link rel="preconnect" href="https://rsms.me/" crossorigin>
+  {% if site.matomo_url and site.matomo_url != "" %}
+  <link rel="preconnect" href="https://{{ site.matomo_url }}">
+  {% endif %}
 
   <link rel="dns-prefetch" href="https://fiqci-backend.2.rahtiapp.fi">
 
@@ -35,9 +52,9 @@
   <script defer src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script defer src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   
-  <script type="text/javascript" src="{{ "runtime.js" | relative_url }}"></script>
+  <script defer type="text/javascript" src="{{ "runtime.js" | relative_url }}"></script>
   <script defer src="/vendors.js"></script>
-  <script type="text/javascript" src="{{ "common.js" | relative_url }}"></script>
+  <script defer type="text/javascript" src="{{ "common.js" | relative_url }}"></script>
 
 
   <script defer type="text/javascript" src="{{ "site.js" | relative_url }}" charset="utf-8"></script>
@@ -48,5 +65,5 @@
   {% else %}
     {%- assign react_source = "default.js" -%}
   {% endif %}
-  <script type="text/javascript" src="{{ react_source | relative_url }}" charset="utf-8"></script>
+  <script defer type="text/javascript" src="{{ react_source | relative_url }}" charset="utf-8"></script>
 </head>

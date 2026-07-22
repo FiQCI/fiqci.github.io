@@ -35,13 +35,40 @@ reactPageSources.forEach((dir) => {
 const cssFilenames = fs
   .readdirSync(stylesheetsDirpath)
   .map((file) => path.parse(file).base);
+
+// The production site (fiqci.fi) is any deploy that is neither the dev repo
+// nor a local build. Only it gets the canonical fiqci.fi url and a generated
+// sitemap; the dev site (dev.fiqci.fi) is noindex, so a sitemap there would be
+// undesirable. Driven by the build environment, so the same merged code
+// behaves correctly in both repos.
+const buildingRepo = process.env.GITHUB_REPOSITORY || "";
+const isProductionSite = buildingRepo !== "" && buildingRepo !== "FiQCI/dev";
+
 const jekyllConfig = {
   source: JEKYLL_SOURCE_DIR,
   destination: OUTPUT_DIR,
   keep_files: Object.entries(entryFiles)
     .map(([fname, _]) => `${fname}.js`)
     .concat(cssFilenames)
-    .concat(["vendors.js", "runtime.js", "common.js"]),
+    .concat(["vendors.js", "runtime.js", "common.js", "lunr.js"]),
+  // Surface the Matomo host (same MATOMO_URL env the DefinePlugin injects into
+  // the JS bundle) to Jekyll so head.html can emit a <link rel="preconnect">.
+  // Empty in local dev where MATOMO_URL is unset, so no preconnect is rendered.
+  matomo_url: process.env.MATOMO_URL || "",
+  // "owner/repo" of the building repository, set automatically by GitHub
+  // Actions. This is FiQCI/dev (deployed to dev.fiqci.fi) here and the
+  // production repo (deployed to fiqci.fi) after changes are merged over.
+  // head.html gates a noindex on this so only the dev site is kept out of
+  // search engines. Empty in local dev.
+  github_repository: process.env.GITHUB_REPOSITORY || "",
+  // Canonical origin used by the `absolute_url` filter (og:url, og:image) and
+  // by jekyll-sitemap. Per-repo so each deploy emits its own domain.
+  url: isProductionSite ? "https://fiqci.fi" : "https://dev.fiqci.fi",
+  // Only the production site generates sitemap.xml. Leaving the dev/local
+  // plugins list empty keeps jekyll-sitemap inert there even though the gem is
+  // installed. This overrides (does not merge with) any `plugins` in
+  // _config.yml, which currently defines none.
+  plugins: isProductionSite ? ["jekyll-sitemap"] : [],
 }
 fs.writeFileSync(jekyllConfigFilepath, yaml.stringify(jekyllConfig));
 
@@ -95,7 +122,12 @@ module.exports = {
       chunks: "all",
       cacheGroups: {
         vendors: {
-          test: /[\\/]node_modules[\\/]/,
+          // Everything in node_modules goes into the shared vendors bundle,
+          // EXCEPT lunr. lunr is only reached via a dynamic import() in
+          // SiteSearch, so excluding it here lets it stay in its own async
+          // chunk (lunr.js) that is fetched only when a search runs, instead
+          // of being hoisted into vendors.js on every page.
+          test: /[\\/]node_modules[\\/](?!lunr[\\/])/,
           name: "vendors",
           chunks: "all",
         },

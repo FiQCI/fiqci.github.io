@@ -6,15 +6,15 @@ export const Footer = (props) => {
 
     const supporterLogos = props.supporterLogoPath
         ? <>
-            <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-vtt.webp`)} alt="VTT" className="h-10 w-auto" width="50" height="40" />
-            <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-aalto.webp`)} alt="Aalto University" className="h-10 w-auto" width="50" height="40" />
-            <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-csc.svg`)} alt="CSC" className="h-10 w-auto" width="50" height="40" />
+            <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-vtt.webp`)} alt="VTT" className="h-12 w-auto" width="260" height="175" />
+            <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-aalto.webp`)} alt="Aalto University" className="h-12 w-auto" width="190" height="175" />
+            <img src={prependBaseURL(`${props.supporterLogoPath}/footer-logo-csc.svg`)} alt="CSC" className="h-12 w-auto" width="300" height="189" />
         </>
         : <></>
     const funderLogos = props.funderLogoPath
         ? <>
-            <img src={prependBaseURL(`${props.funderLogoPath}/Academy_of_Finland.webp`)} alt="Academy of Finland" className="h-10 w-auto" width="50" height="40" />
-            <img src={prependBaseURL(`${props.funderLogoPath}/EU-RRF.webp`)} alt="EU Funding" className="h-10 w-auto" width="50" height="40" />
+            <img src={prependBaseURL(`${props.funderLogoPath}/Academy_of_Finland.webp`)} alt="Academy of Finland" className="h-16 w-auto" width="300" height="162" />
+            <img src={prependBaseURL(`${props.funderLogoPath}/EU-RRF.webp`)} alt="EU Funding" className="h-12 w-auto" width="360" height="108" />
         </>
         : <></>
 
@@ -56,9 +56,6 @@ export const Footer = (props) => {
                             </a>
                         </p>
                         <div className="flex space-x-4 text-gray-950">
-                            <a href={prependBaseURL("/cookies")} className="underline">
-                                Cookies
-                            </a>
                             <a href={prependBaseURL("/accessibility")} className="underline">
                                 Accessibility statements
                             </a>

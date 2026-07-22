@@ -5,7 +5,7 @@ Olli Mukkula:
 
 Joonas Nivala:
   name        : "Joonas Nivala"
-  bio         : "Junior Application Specialist at CSC, Quantum Technologies"
+  bio         : "Application Specialist at CSC, Quantum Technologies"
   avatar      : "/assets/images/authors/Joonas_Nivala.webp"
 
 Nikolas Klemola Tango:
@@ -32,6 +32,11 @@ Noora Kajaste:
   name        : "Noora Kajaste"
   bio         : "Summer Trainee at CSC, Quantum Technologies"
   avatar      : "/assets/images/authors/Noora_Kajaste.webp" 
+
+Essi Maaranen:
+  name        : "Essi Maaranen"
+  bio         : "Application Specialist at CSC, Quantum Technologies"
+  avatar      : "/assets/images/authors/Essi_Maaranen.webp"
 
 FiQCI:
   name        : "FiQCI Team"

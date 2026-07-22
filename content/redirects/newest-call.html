@@ -1,0 +1,23 @@
+---
+permalink: /resource-call
+redirect: true
+sitemap: false
+---
+{%- assign calls = site.publications | where_exp: "p", "p.title contains 'Open Call'" | sort: "date" -%}
+{%- assign newest = calls | last -%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url={{ newest.url }}">
+    <link rel="canonical" href="{{ newest.url }}">
+    <meta name="robots" content="noindex">
+    <title>Redirecting…</title>
+    <script>location.replace("{{ newest.url }}" + location.hash);</script>
+  </head>
+  <body>
+    <p>Redirecting to the latest open call:
+      <a href="{{ newest.url }}">{{ newest.title }}</a>.
+    </p>
+  </body>
+</html>

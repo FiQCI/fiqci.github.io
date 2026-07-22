@@ -2,8 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import { useCalibration } from '../../hooks/useCalibration';
 import { useDeviceInfo } from '../../hooks/useDeviceInfo';
-import { HelmiLayout } from '../QcLayouts/Helmi';
-import { Q50Layout } from '../QcLayouts/Q50';
+import { QcLayout } from '../QcLayouts/QcLayout';
+import { QC_LAYOUTS } from '../QcLayouts/layouts';
 import { Overview } from './StatusOverview';
 import { CalibrationTable } from './CalibrationTable';
 import { SideBar } from './SideBar';
@@ -99,27 +99,20 @@ export const ModalContent = (props) => {
                             </CTabItem>
                             <CTabItem value="layout">
                                 <div className='flex justify-center items-center w-full'>
-                                    {props.device_id.toLowerCase() === 'q50' ? (
-                                        <Q50Layout
-                                            calibrationData={calibrationData}
-                                            qubitMetric={metricsState.qubitMetric}
-                                            couplerMetric={metricsState.couplerMetric}
-                                            qubitMetricFormatted={qubitMetricOptions.find(m => m.value === metricsState.qubitMetric)?.name || metricsState.qubitMetric}
-                                            couplerMetricFormatted={couplerMetricOptions.find(m => m.value === metricsState.couplerMetric)?.name || metricsState.couplerMetric}
-                                            thresholdQubit={metricsState.thresholdQubitValue}
-                                            thresholdCoupler={metricsState.thresholdCouplerValue}
+                                    {QC_LAYOUTS[props.device_id.toLowerCase()] ? (
+                                        <QcLayout
+                                            layout={QC_LAYOUTS[props.device_id.toLowerCase()]}
+                                            metrics={{
+                                                calibrationData,
+                                                qubitMetric: metricsState.qubitMetric,
+                                                couplerMetric: metricsState.couplerMetric,
+                                                qubitMetricFormatted: qubitMetricOptions.find(m => m.value === metricsState.qubitMetric)?.name || metricsState.qubitMetric,
+                                                couplerMetricFormatted: couplerMetricOptions.find(m => m.value === metricsState.couplerMetric)?.name || metricsState.couplerMetric,
+                                                thresholdQubit: metricsState.thresholdQubitValue,
+                                                thresholdCoupler: metricsState.thresholdCouplerValue,
+                                            }}
                                         />
-                                    ) : (
-                                        <HelmiLayout
-                                            calibrationData={calibrationData}
-                                            qubitMetric={metricsState.qubitMetric}
-                                            couplerMetric={metricsState.couplerMetric}
-                                            qubitMetricFormatted={qubitMetricOptions.find(m => m.value === metricsState.qubitMetric)?.name || metricsState.qubitMetric}
-                                            couplerMetricFormatted={couplerMetricOptions.find(m => m.value === metricsState.couplerMetric)?.name || metricsState.couplerMetric}
-                                            thresholdQubit={metricsState.thresholdQubitValue}
-                                            thresholdCoupler={metricsState.thresholdCouplerValue}
-                                        />
-                                    )}
+                                    ) : null}
                                 </div>
                             </CTabItem>
                             <CTabItem value="graphical">
