@@ -270,6 +270,7 @@ cookie_consent:
       qubits: 20
       basis: "PRX, CZ"
       topology: "Square grid"
+      pulse: "True"
       device_id: "Q20"
 
 "/cookies/":
