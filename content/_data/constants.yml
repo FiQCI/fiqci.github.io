@@ -255,9 +255,6 @@ cookie_consent:
     - text: |-
         Aalto Q20 access is coming soon!
       type: info
-    - text: |-
-        VTT Q50 will be down for maintenance from 18th June to 23rd July. During this time, the Q50 will not be available for use. We apologize for any inconvenience this may cause.
-      type: warning
   quantum-computers:
     - name: VTT Q50
       qubits: 53
