@@ -165,8 +165,8 @@ export function QcLayout({ layout, metrics }) {
     return (
         <div
             ref={containerRef}
-            className="relative w-full aspect-square overflow-hidden flex justify-center"
-            style={{ maxHeight: `${maxWidth}px` }}
+            className="relative w-full aspect-square overflow-hidden flex justify-center items-center mx-auto"
+            style={{ maxWidth: `min(${maxWidth}px, 60vh)`, maxHeight: `min(${maxWidth}px, 60vh)` }}
             onMouseMove={handleMouseMove}
             onMouseLeave={() => { setHoveredNode(null); setHoveredEdge(null); setTooltip(null); }}
         >
