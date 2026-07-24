@@ -254,7 +254,7 @@ cookie_consent:
       link: "https://fiqci.fi/resource-estimator"
     - text: |-
         Aalto Q20 access is currently being rolled out! See the CSC Quantum Computing docs for more info.
-        link: "https://docs.csc.fi/computing/quantum-computing/overview/"
+      link: "https://docs.csc.fi/computing/quantum-computing/overview/"
       type: info
   quantum-computers:
     - name: VTT Q50
