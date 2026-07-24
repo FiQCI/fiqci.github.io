@@ -44,10 +44,10 @@ cookie_consent:
     tagline: Making the power of quantum computing accessible
     subtitle: FiQCI – Finnish quantum-computing infrastructure
     announcement:
-      text: Access to the Aalto Q20 Quantum Computer is coming soon!
+      text: Access to the Aalto Q20 Quantum Computer is currently being rolled out! See the CSC Quantum Computing docs for more info.
       link:
-        title: How to get access to FiQCI quantum computers?
-        href: "/resource-call"
+        title: CSC Quantum Computing docs
+        href: "https://docs.csc.fi/computing/quantum-computing/overview/"
     buttons:
       - title: How to get access
         href: "/access"
@@ -253,7 +253,8 @@ cookie_consent:
       type: info
       link: "https://fiqci.fi/resource-estimator"
     - text: |-
-        Aalto Q20 access is coming soon!
+        Aalto Q20 access is currently being rolled out! See the CSC Quantum Computing docs for more info.
+        link: "https://docs.csc.fi/computing/quantum-computing/overview/"
       type: info
   quantum-computers:
     - name: VTT Q50
