@@ -44,10 +44,10 @@ cookie_consent:
     tagline: Making the power of quantum computing accessible
     subtitle: FiQCI – Finnish quantum-computing infrastructure
     announcement:
-      text: The VTT Q50 Quantum Computer is now available for use through FiQCI!
+      text: Access to the Aalto Q20 Quantum Computer is currently being rolled out! See the CSC Quantum Computing docs for more info.
       link:
-        title: How to get access to the Q50 quantum computer?
-        href: "/publications/2026-05-11-Academic-Call-2026-02"
+        title: CSC Quantum Computing docs
+        href: "https://docs.csc.fi/computing/quantum-computing/overview/"
     buttons:
       - title: How to get access
         href: "/access"
@@ -72,7 +72,7 @@ cookie_consent:
       description: |-
         The Finnish quantum-computing infrastructure (FiQCI) provides access to quantum computers
         through the LUMI supercomputer environment. Currently there are two quantum computers
-        available for use: VTT Q5 (Helmi), and VTT Q50.
+        available for use: Aalto Q20 and VTT Q50.
       links:
         - title: Quantum computer resources
           href: /access/#quantum
@@ -104,29 +104,23 @@ cookie_consent:
       title: CSC Quantum Computing docs.
       href: https://docs.csc.fi/computing/quantum-computing/overview/
 
-  resource_estimator:
-    text: |-
-      For estimating the runtime of a quantum job try out the 
-    link:
-      title: FiQCI QPU resource estimator
-      href: https://fiqci.fi/resource-estimator
+  alerts:
+    - text: |-
+        For estimating the runtime of a quantum job try out the FiQCI QPU resource estimator.
+      type: info
+      link: "https://fiqci.fi/resource-estimator"
 
   quantum_resources:
-    - name: VTT Q5 (Helmi)
+    - name: Aalto Q20
       desc: |-
-        The VTT Q5 "Helmi" is the first Finnish quantum computer. Helmi is based on superconducting technology and provides 5 qubits
-        in a star-shape topology. Hybrid HPC+QC access was opened in 2022. Helmi is operated by VTT,
-        and was co-developed with IQM Quantum Computers.
-      image: "/assets/images/vtt-images/VTT_lab-2.webp"
+        Aalto Q20 is an IQM superconducting quantum computer with 20 qubits in a square grid topology. It is operated by Aalto University.
+      image: "/assets/images/aalto-qc/aalto-q20.webp"
       links:
-        - link: "/publications/2022-11-01-Helmi_pilot"
-          teaser: "Apply for access to VTT Q5"
+        - link: "/resource-call"
+          teaser: "Apply for access to Aalto Q20"
         - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
-          teaser: "How to access VTT Q5, instructions"
+          teaser: "How to access Aalto Q20, instructions"
           icon: mdiArrowRight
-        - link: "https://qx.vtt.fi/docs/devices/q5.html"
-          teaser: "Read more about VTT Q5 (VTT website)"
-          icon: mdiOpenInNew
 
     - name: VTT Q50
       desc: |-
@@ -134,13 +128,22 @@ cookie_consent:
         Hybrid HPC+QC access was opened in 2025. VTT Q50 is operated by VTT, and was co-developed with IQM Quantum Computers.
       image: "/assets/images/vtt-images/VTT_lab-2.webp"
       links:
-        - link: "/publications/2026-05-11-Academic-Call-2026-02"
+        - link: "/resource-call"
           teaser: "Apply for access to VTT Q50"
         - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
           teaser: "How to access VTT Q50, instructions"
           icon: mdiArrowRight
         - link: "https://qx.vtt.fi/docs/devices/q50.html"
           teaser: "Read more about VTT Q50 (VTT website)"
+          icon: mdiOpenInNew
+    
+    - name: VTT Q5 (Helmi) - End of life
+      desc: |-
+        VTT Q5 (Helmi) was a superconducting quantum computer with 5 qubits in a star topology. It was operated by VTT, and was co-developed with IQM Quantum Computers. The device was decommissioned in 2026.
+      image: "/assets/images/vtt-images/VTT_lab-2.webp"
+      links:
+        - link: "https://qx.vtt.fi/docs/devices/q5.html"
+          teaser: "Read more about VTT Q5 (VTT website)"
           icon: mdiOpenInNew
 
   supercomputer_resources:
@@ -234,11 +237,8 @@ cookie_consent:
 
         Additionally, users should also acknowledge using FiQCI quantum computers if applicable:
 
-      helmi-link-url: /publications/2022-11-01-Helmi_pilot
-      helmi-link-text: VTT Q5 (Helmi)
-
-      q50-link-url: /publications/2025-03-04-Q50-Call-2_2025
-      q50-link-text: VTT Q50
+      acknowledge-link-url: /resource-call
+      acknowledge-link-text: see here
 
 "/status/":
   info: Here you can find the status of the Quantum Computers connected to LUMI.
@@ -249,23 +249,27 @@ cookie_consent:
       href: https://www.lumi-supercomputer.eu/lumi-service-status/
   alerts: # Each alert renders as its own banner. type can be info, warning, or error
     - text: |-
-        VTT Q5 (Helmi) will be indefinitely offline and will be removed from our services soon.
-      type: warning
+        For estimating the runtime of a quantum job try out the FiQCI QPU resource estimator.
+      type: info
+      link: "https://fiqci.fi/resource-estimator"
     - text: |-
-        VTT Q50 will be down for maintenance from 18th June to 23rd July. During this time, the Q50 will not be available for use. We apologize for any inconvenience this may cause.
-      type: warning
+        Aalto Q20 access is currently being rolled out! See the CSC Quantum Computing docs for more info.
+      link: "https://docs.csc.fi/computing/quantum-computing/overview/"
+      type: info
   quantum-computers:
-    - name: VTT Q5 (Helmi)
-      qubits: 5
-      basis: "PRX, CZ"
-      topology: "Star"
-      device_id: "Q5"
-
     - name: VTT Q50
       qubits: 53
       basis: "PRX, CZ"
       topology: "Square grid"
+      pulse: "True"
       device_id: "Q50"
+    
+    - name: Aalto Q20
+      qubits: 20
+      basis: "PRX, CZ"
+      topology: "Square grid"
+      pulse: "True"
+      device_id: "Q20"
 
 "/cookies/":
   title: Cookie Policy

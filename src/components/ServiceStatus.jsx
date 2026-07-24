@@ -7,30 +7,13 @@ import { CCard, CCardTitle, CCardContent, CIcon, CButton, CSelect } from '@cscfi
 import { StatusModal } from './StatusModal/StatusModal';
 import { BookingModal } from './bookingCalendar.jsx';
 import { API_BASE_URL } from '../config/api.js';
-
-const ALERT_STYLES = {
-  warning: { bg: 'bg-orange-200', icon: mdiAlert },
-  error: { bg: 'bg-red-200', icon: mdiClose },
-  info: { bg: 'bg-sky-200', icon: mdiInformation },
-};
-
-const AlertBanner = ({ type, text }) => {
-  const { bg, icon } = ALERT_STYLES[type?.toLowerCase()] ?? ALERT_STYLES.info;
-  return (
-    <div className={`flex flex-row gap-4 w-full p-3 rounded-md ${bg} items-start sm:items-center`}>
-      <CIcon key={icon} path={icon} />
-      <p className='text-[16px]'>
-        {type ? text : 'Loading...'}
-      </p>
-    </div>
-  );
-};
+import { AlertBanner } from './AlertBanner.jsx';
 
 const StatusCard = (props) => {
   const isOnline = props.health;
   const { onClick, ...rest } = props
   return (
-    <CCard onClick={onClick} className='border-[0.2px] border-gray-100 rounded-none shadow-md hover:shadow-xl col-span-1 h-[236px]'>
+    <CCard onClick={onClick} className='border-[0.2px] border-gray-100 rounded-none shadow-md hover:shadow-xl col-span-1 min-h-[236px]'>
       <CCardTitle className='font-bold text-on-white text-[18px]'>
         <p>{props.name}</p>
       </CCardTitle>
@@ -39,6 +22,7 @@ const StatusCard = (props) => {
           <p className=""><strong>Qubits:</strong> {props.qubits}</p>
           <p className=""><strong>Basis gates:</strong> {props.basis}</p>
           <p className=""><strong>Topology:</strong> {props.topology}</p>
+          <p className=""><strong>Pulse access:</strong> {props.pulse === "True" ? "Yes" : "No"}</p>
         </div>
 
         <div className='flex flex-col gap-0 text-[14px]'>
@@ -104,6 +88,7 @@ export const ServiceStatus = (props) => {
 
   const handleCardClick = (qc) => {
     setModalProps({ ...qc, devicesWithStatus });
+    setModalProps({ ...qc, devicesWithStatus });
     setModalOpen(true);
   };
   // Support both a single `alert` object and a list of `alerts`.
@@ -160,6 +145,8 @@ export const ServiceStatus = (props) => {
         ))}
         
         
+        
+        
       </div>
       {bookingModalOpen && (
         <BookingModal bookingData={bookingData} name={"Reservations"} isModalOpen={bookingModalOpen} setIsModalOpen={setBookingModalOpen} />
@@ -168,6 +155,7 @@ export const ServiceStatus = (props) => {
       {modalOpen && (
         <StatusModal {...modalProps} isModalOpen={modalOpen} setIsModalOpen={setModalOpen} />
       )}
+      
       
     </div>
   );

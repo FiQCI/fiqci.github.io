@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { prependBaseURL } from '../utils/url';
+import { AlertBanner } from './AlertBanner.jsx';
 
 const ResourceCard = ({ resource }) => {
     return (
@@ -47,6 +48,8 @@ export const GetAccess = props => {
     const emulation_resources = props?.emulation_resources
     const getting_started = props?.getting_started
 
+    const alerts = props.alerts ?? (props.alert ? [props.alert] : []);
+
     const resource_estimator = props?.resource_estimator
 
     useEffect(() => {
@@ -79,9 +82,16 @@ export const GetAccess = props => {
                     <p className="pt-4">{getting_started?.text} <a className="text-base text-sky-800 hover:underline" href={getting_started?.link.href}>{getting_started?.link.title}</a></p>
 
                     <p className="pt-4">Please see status of services from <a className="text-base text-sky-800 hover:underline" href={prependBaseURL("/status")}>Status</a> -page.</p>
-
-                    <p className="pt-4"> {resource_estimator?.text} <a className="text-sky-800 hover:underline" href={resource_estimator?.link.href}>{resource_estimator?.link.title}</a>. </p>
                 </div>
+
+                {alerts.length > 0 && (
+                    <div className='flex flex-col gap-3'>
+                    {alerts.map((alert, index) => (
+                        <AlertBanner key={index} {...alert} />
+                    ))}
+                    </div>
+                )}
+            
 
                 <ResourceList id={"quantum"} title={"Quantum computer resources"} resources={quantum_resources} />
 

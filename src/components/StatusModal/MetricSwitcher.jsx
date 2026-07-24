@@ -55,7 +55,7 @@ export const MetricSwitcher = (props) => {
 
                 <div className="w-full">
                     {(metricsState.qubitMetric) && (() => {
-                        const qubitStats = metricsState.qubitMetric ? getMetricStatistics(calibrationData, metricsState.qubitMetric) : null;
+                        const qubitStats = metricsState.qubitMetric ? getMetricStatistics(calibrationData, metricsState.qubitMetric, 1) : null;
 
                         return (
                             <div className="flex flex-col items-center w-full mt-2">
@@ -197,7 +197,7 @@ export const MetricSwitcher = (props) => {
 
                 <div className="w-full">
                     {(metricsState.couplerMetric) && (() => {
-                        const couplerStats = metricsState.couplerMetric ? getMetricStatistics(calibrationData, metricsState.couplerMetric) : null;
+                        const couplerStats = metricsState.couplerMetric ? getMetricStatistics(calibrationData, metricsState.couplerMetric, 2) : null;
 
                         return (
                             <div className="flex flex-col items-center w-full">

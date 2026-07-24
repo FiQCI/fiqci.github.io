@@ -38,7 +38,7 @@ header: #thumbnail image for the post
 published: true
 author: author name #name of the author
 layout: post #don't change
-tags: #keywords related to the topic of the blog, e.g Helmi, Quantum, etc
+tags: #keywords related to the topic of the blog, e.g Q20, Quantum, etc
   - tag_1
   - tag_2
   - etc
