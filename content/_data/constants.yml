@@ -256,6 +256,9 @@ cookie_consent:
         Aalto Q20 access is currently being rolled out! See the CSC Quantum Computing docs for more info.
       link: "https://docs.csc.fi/computing/quantum-computing/overview/"
       type: info
+    - text: |-
+        Access to EuroHPC VLQ is coming soon!
+      type: info
   quantum-computers:
     - name: VTT Q50
       qubits: 53
