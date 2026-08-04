@@ -15,84 +15,130 @@ const parseResultMedian = (data, unit) => {
     }
 }
 
+const Section = (props) => (
+    <div className='col-span-1'>
+        <p className="pb-2 text-[18px]"><strong>{props.title}</strong></p>
+        {props.children}
+        <div className="h-4" />
+    </div>
+)
+
+const MetricRows = (props) => (
+    <>
+        {props.metrics.map((metric) => (
+            <div key={metric.key} className="flex pb-2 gap-2">
+                <p className="text-[14px]">
+                    {metric.title}: <strong>
+                        {metric.value}
+                        {metric.unit === 's' ? <> &#x03BC;s</> : metric.unit ? metric.unit : '%'}
+                    </strong>
+                </p>
+            </div>
+        ))}
+    </>
+)
+
+const Unavailable = () => <p className="text-[14px]">Not available</p>
+
 export const Overview = (props) => {
 
     const calibrationData = props.calibrationData;
     const deviceInfoData = props.deviceInfoData;
     const limitationsData = deviceInfoData?.job_policy || {};
 
-    const deviceName = deviceInfoData?.name || '';
+    const deviceName = deviceInfoData?.name || props.device_id || '';
     const { overview } = getDeviceMetricsConfig(deviceName);
 
-    const limitations = {
-        "Max circuits per batch": limitationsData?.max_number_circuits_per_batch || "-",
-        "Max shots per job": limitationsData?.max_number_shots_per_job || "-",
-        "Max jobs in queue": limitationsData?.max_queue_length || "-"
-    }
+    // Failed fetch gets a message; an untracked metric is just omitted.
+    const calibrationUnavailable = !!props.calibrationError
+        || !calibrationData
+        || Object.keys(calibrationData).length === 0;
+    const limitationsUnavailable = !!props.infoError || !deviceInfoData;
 
-    const buildMetric = (title, keys) => {
+    const buildMetric = (key, title, keys) => {
         const entry = pickMetricData(calibrationData, keys);
         const unit = getMetricUnit(entry?.data) || '%';
         return {
+            key,
             title,
             value: parseResultMedian(entry?.data?.statistics, unit),
             unit,
         };
     };
 
-    const qualityMetricsSingle = {
-        "median-prx": buildMetric('Median single-qubit gate fidelity', overview?.single?.singleGateFidelity),
-        "median-readout-fidelity": buildMetric('Median readout fidelity', overview?.single?.readoutFidelity),
-        "median-t1": buildMetric('Median T1 time', overview?.single?.t1),
-        "median-t2": buildMetric('Median T2 time', overview?.single?.t2),
-    };
+    const qubitMetrics = [
+        buildMetric('median-prx', 'Median single-qubit gate fidelity', overview?.single?.singleGateFidelity),
+        buildMetric('median-readout-fidelity', 'Median readout fidelity', overview?.single?.readoutFidelity),
+        buildMetric('median-t1', 'Median T1 time', overview?.single?.t1),
+        buildMetric('median-t2', 'Median T2 time', overview?.single?.t2),
+    ].filter(metric => metric.value !== null);
 
-    const qualityMetricsTwo = {
-        "median-2-qubit": buildMetric('Median 2-qubit gate fidelity', overview?.coupler?.twoQubitFidelity),
-        "median-clifford": buildMetric('Median Clifford gate fidelity', overview?.coupler?.cliffordFidelity),
-    };
+    const couplerMetrics = [
+        buildMetric('median-2-qubit', 'Median 2-qubit gate fidelity', overview?.coupler?.twoQubitFidelity),
+        buildMetric('median-clifford', 'Median Clifford gate fidelity', overview?.coupler?.cliffordFidelity),
+    ].filter(metric => metric.value !== null);
+
+    const limitations = [
+        { key: 'max-circuits', title: 'Max circuits per batch', value: limitationsData?.max_number_circuits_per_batch },
+        { key: 'max-shots', title: 'Max shots per job', value: limitationsData?.max_number_shots_per_job },
+        { key: 'max-queue', title: 'Max jobs in queue', value: limitationsData?.max_queue_length },
+    ].filter(limitation => limitation.value !== null && limitation.value !== undefined);
+
+    const sections = [];
+
+    if (calibrationUnavailable) {
+        sections.push(
+            <Section key='calibration' title='Calibration Metrics:'>
+                <Unavailable />
+            </Section>
+        );
+    } else {
+        if (qubitMetrics.length > 0) {
+            sections.push(
+                <Section key='qubit' title='Qubit Metrics:'>
+                    <MetricRows metrics={qubitMetrics} />
+                </Section>
+            );
+        }
+        if (couplerMetrics.length > 0) {
+            sections.push(
+                <Section key='coupler' title='Coupler Metrics:'>
+                    <MetricRows metrics={couplerMetrics} />
+                </Section>
+            );
+        }
+    }
+
+    if (limitationsUnavailable) {
+        sections.push(
+            <Section key='limitations' title='Limitations:'>
+                <Unavailable />
+            </Section>
+        );
+    } else if (limitations.length > 0) {
+        sections.push(
+            <Section key='limitations' title='Limitations:'>
+                {limitations.map(limitation => (
+                    <div key={limitation.key} className="flex pb-2 gap-2">
+                        <p className="text-[14px]">{limitation.title}: </p>
+                        <p className="text-[14px]"><strong>{limitation.value}</strong></p>
+                    </div>
+                ))}
+            </Section>
+        );
+    }
+
+    if (sections.length === 0) {
+        return (
+            <div className='col-span-1 md:col-span-2 lg:col-span-3'>
+                <p className='text-[14px]'>No device data is currently available.</p>
+            </div>
+        )
+    }
 
     return (
         <div className="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-child col-span-1 md:col-span-2 lg:col-span-3">
-            <div className='col-span-1'>
-                <p className="pb-2 text-[18px]"><strong>Qubit Metrics:</strong></p>
-                {Object.entries(qualityMetricsSingle).filter(([key, metric]) => metric.value !== null).map(([key, metric]) => (
-                    <div key={key} className="flex pb-2 gap-2">
-                        <p className="text-[14px]">
-                            {metric.title}: <strong>
-                                {metric.value}
-                                {metric.unit === 's' ? <> &#x03BC;s</> : metric.unit ? metric.unit : '%'}
-                            </strong>
-                        </p>
-                    </div>
-                ))}
-                <div className="h-4" />
-
-            </div>
-            <div className='col-span-1'>
-                <p className="pb-2 text-[18px]"><strong>Coupler Metrics:</strong></p>
-                {Object.entries(qualityMetricsTwo).map(([key, metric]) => (
-                    <div key={key} className="flex pb-2 gap-2">
-                        <p className="text-[14px]">
-                            {metric.title}: <strong>
-                                {metric.value}
-                                {metric.unit === 's' ? <> &#x03BC;s</> : metric.unit ? metric.unit : '%'}
-                            </strong>
-                        </p>
-                    </div>
-                ))}
-                <div className="h-4" />
-
-            </div>
-            <div className='col-span-1'>
-                <p className="pb-2 text-[18px]"><strong>Limitations:</strong></p>
-                {Object.entries(limitations).map(([key, value]) => (
-                    <div key={key} className="flex pb-2 gap-2">
-                        <p className="text-[14px]">{key}: </p>
-                        <p className="text-[14px]"><strong>{value}</strong></p>
-                    </div>
-                ))}
-            </div>
+            {sections}
         </div>
     )
 }

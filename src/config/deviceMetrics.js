@@ -107,6 +107,53 @@ export const DEVICE_METRICS = {
         ],
     },
 
+    // IQM 24-qubit star: every qubit couples to one central computational
+    // resonator (COMPR1). Two-qubit gates and MOVE gates are expressed as
+    // qubit<->resonator (QBxx__COMPR1) couplers. Resonator-level metrics
+    // (t1_time / t2_time with a COMPR1 entry) are derived automatically from
+    // the calibration data via the layout's resonator id — see StatusModalConent.
+    VLQ: {
+        overview: {
+            single: {
+                singleGateFidelity: ['prx_rb_drag_crf_fidelity', 'prx_rb_fidelity'],
+                readoutFidelity: ['measure_fidelity_ssro_constant_fidelity', 'measure_ssro_fidelity'],
+                t1: ['t1_time'],
+                t2: ['t2_time'],
+            },
+            coupler: {
+                twoQubitFidelity: ['cz_irb_crf_crf_fidelity', 'cz_irb_fidelity'],
+                cliffordFidelity: ['clifford_rb_xy_move_cz_fidelity', 'clifford_rb_fidelity'],
+            },
+        },
+        qubitOptions: [
+            { name: 'T1 Time', value: 't1_time' },
+            { name: 'T2 Time', value: 't2_time' },
+            { name: 'T2 Echo Time', value: 't2_echo_time' },
+            { name: 'PRX Gate Fidelity', value: 'prx_rb_drag_crf_fidelity' },
+            { name: 'Clifford Gate Fidelity', value: 'clifford_rb_xy_fidelity' },
+            { name: '1->0 Readout Error', value: 'measure_fidelity_ssro_constant_error_1_to_0' },
+            { name: '0->1 Readout Error', value: 'measure_fidelity_ssro_constant_error_0_to_1' },
+            { name: 'Readout Fidelity', value: 'measure_fidelity_ssro_constant_fidelity' },
+            { name: '1->0 MCM Error', value: 'measure_ssro_constant_error_1_to_0', title: 'MCM = Mid Circuit Measurement' },
+            { name: '0->1 MCM Error', value: 'measure_ssro_constant_error_0_to_1', title: 'MCM = Mid Circuit Measurement' },
+            { name: 'MCM Fidelity', value: 'measure_ssro_constant_fidelity', title: 'MCM = Mid Circuit Measurement' },
+            { name: 'QNDness Fidelity', value: 'measure_qndness_constant_fidelity', title: 'QND = Quantum Non-Demolition' },
+            { name: 'QNDness 0 State', value: 'measure_qndness_constant_qndness_0', title: 'QND = Quantum Non-Demolition' },
+            { name: 'QNDness 1 State', value: 'measure_qndness_constant_qndness_1', title: 'QND = Quantum Non-Demolition' },
+            { name: 'QNDness Repeatability', value: 'measure_qndness_constant_repeatability', title: 'QND = Quantum Non-Demolition' },
+        ],
+        // The last three are qubit<->resonator<->qubit gates keyed
+        // QBx__COMPR1__QBanchor. They are rendered on the QBx__COMPR1 edge (see
+        // QcLayout's coupler-key resolver), colored by the QBx__COMPR1__QBanchor value.
+        couplerOptions: [
+            { name: 'CZ Gate Fidelity', value: 'cz_irb_crf_crf_fidelity' },
+            { name: 'MOVE Gate Fidelity', value: 'move_irb_crf_crf_fidelity' },
+            { name: 'Move CZ 0', value: 'move_ncz_irb_fidelity_0' },
+            { name: 'Move CZ 1', value: 'move_ncz_irb_fidelity_1' },
+            { name: 'Move Clifford', value: 'clifford_rb_xy_move_cz_fidelity' },
+        ],
+    },
+
     Q5: {
         overview: {
             single: {
@@ -136,8 +183,15 @@ export const DEVICE_METRICS = {
     },
 };
 
-export const getDeviceMetricsConfig = (deviceName = '') =>
-    DEVICE_METRICS[deviceName] || DEVICE_METRICS.default;
+export const getDeviceMetricsConfig = (deviceName = '') => {
+    if (DEVICE_METRICS[deviceName]) return DEVICE_METRICS[deviceName];
+    // Fall back to a case-insensitive match so a device_id like "vlq" resolves the
+    // "VLQ" config (the /device info endpoint that supplies the canonical name is
+    // not always available).
+    const key = Object.keys(DEVICE_METRICS)
+        .find(k => k.toLowerCase() === String(deviceName).toLowerCase());
+    return (key && DEVICE_METRICS[key]) || DEVICE_METRICS.default;
+};
 
 export const pickMetricData = (calibrationData, keys = []) => {
     for (const key of keys) {

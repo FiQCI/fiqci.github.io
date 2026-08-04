@@ -3,6 +3,14 @@
 // To add a new QC: add one entry to QC_LAYOUTS keyed by the lowercased device_id,
 // with { spacing, nodes, edges }. No new component or call-site change is needed.
 //
+// Two topology shapes are supported:
+//   1. Lattice  — qubits coupled directly to neighbouring qubits. `edges` is a list
+//      of [qubitA, qubitB] pairs (see Q20/Q50).
+//   2. Star     — every qubit couples to a single central resonator providing
+//      one-to-all connectivity. Add a `resonator` descriptor and make
+//      each edge a [qubit, resonator.id] pair. The resonator renders as a central
+//      bar and each edge as a coupler from its qubit to that bar.
+//
 // Nodes are positioned on a diagonal grid. `grid(xOrigin, yOrigin, spacing)` returns
 // a helper `(id, col, row) => { id, x, y }` so coordinates read as grid offsets instead
 // of repeated `xOrigin + spacing * N` arithmetic.
@@ -88,7 +96,46 @@ const q50Edges = [
     ['QB2', 'QB1'],
 ];
 
+// --- VLQ (24-qubit IQM star) ----------------------------------------------
+// One central computational resonator with every qubit coupled to it, giving
+// one-to-all connectivity. Qubits sit in two rows above and below the resonator:
+//
+//     O  O  O ... (12 qubits)
+//     |  |  |
+//     ===========   <- central resonator
+//     |  |  |
+//     O  O  O ... (12 qubits)
+//
+// `RESONATOR_ID` must match the resonator's name in the calibration coupler keys
+// (e.g. "QB1__COMPR1") and in any resonator-level metrics. It is also shown as
+// the label on the resonator bar. Change it here if the backend uses another name.
+const RESONATOR_ID = 'COMPR1';
+const vlqSpacing = 140;
+const vlqCols = 12; // 12 qubits per row, 24 total
+const vlqDiamond = vlqSpacing * 0.45; // half a node's diagonal, for bar overlap
+
+// Top row QB1..QB12 (left→right), bottom row QB13..QB24 (left→right).
+const vlqNodes = [
+    ...Array.from({ length: vlqCols }, (_, col) => ({
+        id: `QB${col + 1}`, x: col * vlqSpacing, y: vlqSpacing,
+    })),
+    ...Array.from({ length: vlqCols }, (_, col) => ({
+        id: `QB${col + 1 + vlqCols}`, x: col * vlqSpacing, y: -vlqSpacing,
+    })),
+];
+// Central resonator bar, spanning slightly past the outermost qubit columns.
+const vlqResonator = {
+    id: RESONATOR_ID,
+    label: 'Computational Resonator',
+    y: 0,
+    x1: -vlqDiamond,
+    x2: (vlqCols - 1) * vlqSpacing + vlqDiamond,
+};
+// Every qubit couples to the resonator.
+const vlqEdges = vlqNodes.map(n => [n.id, RESONATOR_ID]);
+
 export const QC_LAYOUTS = {
     q20: { spacing: q20Spacing, nodes: q20Nodes, edges: q20Edges },
     q50: { spacing: q50Spacing, nodes: q50Nodes, edges: q50Edges },
+    vlq: { spacing: vlqSpacing, nodes: vlqNodes, edges: vlqEdges, resonator: vlqResonator },
 };
