@@ -109,6 +109,9 @@ cookie_consent:
         For estimating the runtime of a quantum job try out the FiQCI QPU resource estimator.
       type: info
       link: "https://fiqci.fi/resource-estimator"
+    - text: |-
+        Access to EuroHPC VLQ is coming soon!
+      type: info
 
   quantum_resources:
     - name: Aalto Q20
