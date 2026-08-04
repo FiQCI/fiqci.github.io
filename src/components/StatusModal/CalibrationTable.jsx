@@ -32,20 +32,17 @@ export const CalibrationTable = (props) => {
         });
     });
 
-    var sortedIds;
-    if (qubitSwitch){
-        sortedIds = Array.from(allIds).sort((a, b) => {
-            const numA = parseInt(a.replace('QB', ''));
-            const numB = parseInt(b.replace('QB', ''));
-            return numA - numB;
-        });
-    } else {
-        sortedIds = Array.from(allIds).sort((a, b) => {
-            const [a1, a2] = a.match(/QB(\d+)__QB(\d+)/).slice(1).map(Number);
-            const [b1, b2] = b.match(/QB(\d+)__QB(\d+)/).slice(1).map(Number);
-            return a1 - b1 || a2 - b2;
-        });
-    }
+    // Sort on the numeric segments so ids that aren't QBx__QBy (e.g. VLQ's
+    // QBx__COMPR1 and QBx__COMPR1__QBanchor) still order sensibly.
+    const sortedIds = Array.from(allIds).sort((a, b) => {
+        const numsA = (a.match(/\d+/g) || []).map(Number);
+        const numsB = (b.match(/\d+/g) || []).map(Number);
+        for (let i = 0; i < Math.max(numsA.length, numsB.length); i++) {
+            const diff = (numsA[i] ?? -1) - (numsB[i] ?? -1);
+            if (diff) return diff;
+        }
+        return a.localeCompare(b);
+    });
     // Filter out metrics that have only N/A values for the filtered IDs
     const metrics = allMetrics.filter(metric => {
         return sortedIds.some(id => {
