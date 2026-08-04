@@ -288,7 +288,7 @@ cookie_consent:
       pulse: "True"
       device_id: "Q20"
 
-    - name: VLQ
+    - name: EuroHPC VLQ
       qubits: 24
       basis: "PRX, CZ, MOVE"
       topology: "Star"
