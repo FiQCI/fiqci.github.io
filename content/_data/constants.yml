@@ -136,6 +136,20 @@ cookie_consent:
         - link: "https://qx.vtt.fi/docs/devices/q50.html"
           teaser: "Read more about VTT Q50 (VTT website)"
           icon: mdiOpenInNew
+      
+    - name: EuroHPC VLQ
+      desc: |-
+        EuroHPC VLQ is a superconducting IQM quantum computer with 24 qubits in a star topology. It is operated by IT4I.
+      image: "/assets/images/vlq-images/vlq-image.jpg"
+      links:
+        - link: "/resource-call"
+          teaser: "Apply for access to EuroHPC VLQ"
+        - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
+          teaser: "How to access EuroHPC VLQ, instructions"
+          icon: mdiArrowRight
+        - link: "https://docs.it4i.cz/en/docs/clusters/vlq/introduction"
+          teaser: "Read more about EuroHPC VLQ (IT4I website)"
+          icon: mdiOpenInNew
     
     - name: VTT Q5 (Helmi) - End of life
       desc: |-
@@ -256,6 +270,9 @@ cookie_consent:
         Aalto Q20 access is currently being rolled out! See the CSC Quantum Computing docs for more info.
       link: "https://docs.csc.fi/computing/quantum-computing/overview/"
       type: info
+    - text: |-
+        Access to EuroHPC VLQ is coming soon!
+      type: info
   quantum-computers:
     - name: VTT Q50
       qubits: 53
@@ -270,6 +287,13 @@ cookie_consent:
       topology: "Square grid"
       pulse: "True"
       device_id: "Q20"
+
+    - name: VLQ
+      qubits: 24
+      basis: "PRX, CZ, MOVE"
+      topology: "Star"
+      pulse: "True"
+      device_id: "VLQ"
 
 "/cookies/":
   title: Cookie Policy

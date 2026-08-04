@@ -2,12 +2,13 @@ import React, { useCallback, useMemo, useState } from 'react'
 
 import { useStatus } from '../hooks/useStatus'
 import { useBookings } from '../hooks/useBookings.jsx';
-import { mdiInformation, mdiClose, mdiAlert } from '@mdi/js';
+import { mdiInformation, mdiClose, mdiAlert, mdiRefresh } from '@mdi/js';
 import { CCard, CCardTitle, CCardContent, CIcon, CButton, CSelect } from '@cscfi/csc-ui-react';
 import { StatusModal } from './StatusModal/StatusModal';
 import { BookingModal } from './bookingCalendar.jsx';
 import { API_BASE_URL } from '../config/api.js';
 import { AlertBanner } from './AlertBanner.jsx';
+import { StatusPillLoading } from './Loading.jsx';
 
 const StatusCard = (props) => {
   const isOnline = props.health;
@@ -27,7 +28,9 @@ const StatusCard = (props) => {
 
         <div className='flex flex-col gap-0 text-[14px]'>
           <strong>Service status:</strong>
-          {isOnline ? (
+          {props.statusLoading ? (
+            <StatusPillLoading />
+          ) : isOnline ? (
             <div className='text-center text-[#204303] bg-[#B9DC9C] border-[0.5px] border-[#204303] rounded-[100px] w-[88px] h-[25px]'>
               <p className='font-bold text-[14px]'>Online</p>
             </div>
@@ -43,7 +46,7 @@ const StatusCard = (props) => {
 }
 
 export const ServiceStatus = (props) => {
-  const { status: statusList } = useStatus(`${API_BASE_URL}/devices/healthcheck`);
+  const { status: statusList, loading: statusLoading, refetch: refetchStatus } = useStatus(`${API_BASE_URL}/devices/healthcheck`);
   const { bookingData: bookingData } = useBookings(`${API_BASE_URL}/bookings`)
   const qcs = props["quantum-computers"] || [];
 
@@ -137,11 +140,20 @@ export const ServiceStatus = (props) => {
           onChangeValue={handleSortChange}
           key={`device-sort`}
         />
+        <CButton
+          className='w-min self-start sm:self-center'
+          ghost
+          loading={statusLoading}
+          onClick={refetchStatus}
+        >
+          Refresh
+          <CIcon path={mdiRefresh} />
+        </CButton>
       </div>
 
       <div className='pb-[60px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 min-[2600px]:grid-cols-4 w-full gap-[24px]'>
         {sortedDevices.map((qc, index) => (
-          <StatusCard key={qc.device_id || index} {...qc} onClick={() => handleCardClick(qc)} />
+          <StatusCard key={qc.device_id || index} {...qc} statusLoading={statusLoading} onClick={() => handleCardClick(qc)} />
         ))}
         
         
@@ -153,7 +165,13 @@ export const ServiceStatus = (props) => {
       )}
 
       {modalOpen && (
-        <StatusModal {...modalProps} isModalOpen={modalOpen} setIsModalOpen={setModalOpen} />
+        <StatusModal
+          {...modalProps}
+          devicesWithStatus={devicesWithStatus}
+          statusLoading={statusLoading}
+          isModalOpen={modalOpen}
+          setIsModalOpen={setModalOpen}
+        />
       )}
       
       

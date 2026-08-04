@@ -9,7 +9,8 @@ import {mdiHelpCircleOutline} from "@mdi/js"
 export const MetricSwitcher = (props) => {
 
     const { metricsState, updateMetricsState, calibrationData,
-            qubitMetricOptions, couplerMetricOptions, qubitInputValue, setQubitInputValue,
+            qubitMetricOptions, couplerMetricOptions,
+            qubitInputValue, setQubitInputValue,
             couplerInputValue, setCouplerInputValue } = props;
 
     return (
@@ -185,14 +186,24 @@ export const MetricSwitcher = (props) => {
                         className='py-2'
                         clearable
                         value={metricsState.couplerMetric}
-                        items={couplerMetricOptions}
                         placeholder='Choose metric'
                         onChangeValue={(e) => {
                             updateMetricsState('couplerMetric', e.detail || '');
                             updateMetricsState('thresholdCoupler', 0);
                             setCouplerInputValue('0');
                         }}
-                    />
+                    >
+                        {couplerMetricOptions.map(option =>
+                            <COption
+                                key={option.value}
+                                value={option.value}
+                                name={option.name}
+                                title={option?.title}
+                            >
+                                {option.name}
+                            </COption>
+                        )}
+                    </CSelect>
                 </div>
 
                 <div className="w-full">

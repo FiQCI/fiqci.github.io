@@ -16,10 +16,14 @@ const NODE_UNITS = 90;
 const MAX_NODE_PX = 48;
 
 export function QcLayout({ layout, metrics }) {
-    const { spacing, nodes, edges } = layout;
+    const { spacing, nodes, edges, resonator } = layout;
+    // Star layouts (with a central resonator) render qubits as upright squares;
+    // lattice layouts render them as 45°-rotated diamonds.
+    const nodeRotation = resonator ? 0 : 45;
     const {
         calibrationData, qubitMetric, couplerMetric,
-        qubitMetricFormatted, couplerMetricFormatted, thresholdQubit, thresholdCoupler,
+        qubitMetricFormatted, couplerMetricFormatted,
+        thresholdQubit, thresholdCoupler,
     } = metrics;
 
     const [hoveredNode, setHoveredNode] = useState(null);
@@ -41,16 +45,26 @@ export function QcLayout({ layout, metrics }) {
         return entry?.unit || '';
     };
 
-    // Resolve a coupler key from the two endpoints (try both orderings)
+    // Resolve a coupler key from the two endpoints (try both orderings).
     const couplerKey = (a, b) => {
         if (getMetricValue(couplerMetric, `${a}__${b}`) !== null) return `${a}__${b}`;
-        return `${b}__${a}`;
+        if (getMetricValue(couplerMetric, `${b}__${a}`) !== null) return `${b}__${a}`;
+        // Star MOVE/CZ gates routed through the resonator to a fixed anchor qubit
+        // are keyed QBx__RES__QBanchor. The edge is (QBx, RES): find the matching
+        // key so the gate's value renders on that edge (and shows on hover).
+        if (resonator && calibrationData?.[couplerMetric]) {
+            const qubit = a === resonator.id ? b : a;
+            const prefix = `${qubit}__${resonator.id}__`;
+            const match = Object.keys(calibrationData[couplerMetric]).find(k => k.startsWith(prefix));
+            if (match) return match;
+        }
+        return `${a}__${b}`;
     };
 
-    // Color for a metric value. dim: 1 = qubit, 2 = coupler.
+    // Color for a metric value. dim: 1 = qubit, 2 = coupler, 3 = resonator.
     const getColor = (metric, id, dim, threshold) => {
-        // No metric selected: qubits get the brand blue, couplers a light grey
-        if (!metric || metric === '') return dim === 1 ? DEFAULT_NODE_COLOR : '#aaa';
+        // No metric selected: qubits/resonator get the brand blue, couplers a light grey
+        if (!metric || metric === '') return dim === 2 ? '#aaa' : DEFAULT_NODE_COLOR;
         if (!calibrationData || !calibrationData[metric]) return GREY;
 
         const value = getMetricValue(metric, id);
@@ -108,8 +122,6 @@ export function QcLayout({ layout, metrics }) {
         if (!containerRef.current || !tooltip) return { left: 0, top: 0 };
 
         const containerRect = containerRef.current.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
 
         let tooltipWidth = 300; // rough estimate
         let tooltipHeight = 150; // rough estimate
@@ -119,26 +131,30 @@ export function QcLayout({ layout, metrics }) {
             tooltipHeight = 70; // rough estimate
         }
 
-        // Calculate absolute position on screen
-        const absoluteX = containerRect.left + mousePos.x;
-        const absoluteY = containerRect.top + mousePos.y;
-
         let left = mousePos.x + 8;
         let top = mousePos.y + 8;
 
-        // Check right boundary against viewport
-        if (absoluteX + 8 + tooltipWidth > viewportWidth) {
-            left = mousePos.x - tooltipWidth - 8; // Position to the left of cursor
+        // Horizontal: keep the tooltip's right edge within the layout area so it
+        // never spills past the right edge. If it would, flip it to the left of
+        // the cursor; never let it run off the left of the viewport.
+        const maxLeft = containerRect.width - tooltipWidth - 8; // relative to container
+        if (left > maxLeft) {
+            left = mousePos.x - tooltipWidth - 8; // flip to the left of the cursor
         }
+        const minLeft = 8; // keep the tooltip's left edge inside the layout area
+        left = Math.min(left, maxLeft);
+        left = Math.max(left, minLeft);
 
-        // Check bottom boundary against viewport
-        if (absoluteY + 8 + tooltipHeight > viewportHeight) {
-            top = mousePos.y - tooltipHeight - 8; // Position above cursor
+        // Vertical: keep the tooltip's bottom within the layout area so it never
+        // spills past the bottom edge. If it would, flip it above the cursor; let
+        // it extend upward (the modal has room above) but never above the viewport.
+        const maxTop = containerRect.height - tooltipHeight - 8; // relative to container
+        if (top > maxTop) {
+            top = mousePos.y - tooltipHeight - 8; // flip above the cursor
         }
-
-        // Ensure tooltip stays within container bounds
-        left = Math.max(8, Math.min(left, containerRect.width - tooltipWidth - 8));
-        top = Math.max(8, Math.min(top, containerRect.height - tooltipHeight - 8));
+        const minTop = 8; // keep the tooltip's top edge inside the layout area
+        top = Math.min(top, maxTop);
+        top = Math.max(top, minTop);
 
         return { left, top };
     };
@@ -146,27 +162,50 @@ export function QcLayout({ layout, metrics }) {
     // Build coordinate map directly from nodes
     const coordMap = Object.fromEntries(nodes.map(n => [n.id, n]));
 
-    // Compute dynamic bounds
+    // Resolve an edge's two endpoints. A star-layout edge connects a qubit to the
+    // central resonator: that endpoint isn't a node, so it maps to the point on the
+    // resonator bar directly above/below the qubit (a vertical coupler).
+    const endpoint = (id, other) => {
+        if (resonator && id === resonator.id) return { x: coordMap[other].x, y: resonator.y };
+        return coordMap[id];
+    };
+
+    // Compute dynamic bounds (include the resonator bar if present)
     const xs = nodes.map(n => n.x);
     const ys = nodes.map(n => n.y);
-    const minX = Math.min(...xs) - spacing;
-    const maxX = Math.max(...xs) + spacing;
-    const minY = Math.min(...ys) - spacing;
-    const maxY = Math.max(...ys) + spacing;
+    if (resonator) {
+        xs.push(resonator.x1, resonator.x2);
+        ys.push(resonator.y);
+    }
+    // Margin around the outermost nodes. Star layouts pack tightly (upright
+    // squares), so they only need a node-sized margin; lattice layouts keep a
+    // full spacing of breathing room.
+    const margin = resonator ? NODE_UNITS * 0.75 : spacing;
+    const minX = Math.min(...xs) - margin;
+    const maxX = Math.max(...xs) + margin;
+    const minY = Math.min(...ys) - margin;
+    const maxY = Math.max(...ys) + margin;
     const viewBoxWidth = maxX - minX;
     const viewBoxHeight = maxY - minY;
     const viewBox = `${minX} ${-maxY} ${viewBoxWidth} ${viewBoxHeight}`;
 
     // Cap the rendered size so an SVG unit never maps to more pixels than
     // MAX_NODE_PX / NODE_UNITS — i.e. nodes/couplers stay the same on-screen size
-    // across layouts. Use the larger viewBox dimension so neither axis overshoots.
-    const maxWidth = (MAX_NODE_PX / NODE_UNITS) * Math.max(viewBoxWidth, viewBoxHeight);
+    // across layouts. The container matches the viewBox aspect ratio so a wide,
+    // short layout (e.g. the star) isn't padded out to a tall square.
+    const pxPerUnit = MAX_NODE_PX / NODE_UNITS;
+    const maxRenderWidth = pxPerUnit * viewBoxWidth;
+    const maxRenderHeight = pxPerUnit * viewBoxHeight;
 
     return (
         <div
             ref={containerRef}
-            className="relative w-full aspect-square overflow-hidden flex justify-center items-center mx-auto"
-            style={{ maxWidth: `min(${maxWidth}px, 60vh)`, maxHeight: `min(${maxWidth}px, 60vh)` }}
+            className="relative w-full overflow-hidden flex justify-center items-center mx-auto"
+            style={{
+                aspectRatio: `${viewBoxWidth} / ${viewBoxHeight}`,
+                maxWidth: `${maxRenderWidth}px`,
+                maxHeight: `${maxRenderHeight}px`,
+            }}
             onMouseMove={handleMouseMove}
             onMouseLeave={() => { setHoveredNode(null); setHoveredEdge(null); setTooltip(null); }}
         >
@@ -206,11 +245,10 @@ export function QcLayout({ layout, metrics }) {
                                 viewBox={viewBox}
                                 preserveAspectRatio="xMidYMid meet"
                                 className="w-full h-full"
-                                style={{ maxWidth: `${maxWidth}px`, maxHeight: `${maxWidth}px` }}
-                            >
+                                            >
                                 {edges.map(([a, b]) => {
-                    const A = coordMap[a];
-                    const B = coordMap[b];
+                    const A = endpoint(a, b);
+                    const B = endpoint(b, a);
                     const key = `${a}-${b}`;
                     const hover = hoveredEdge === key;
                     const edgeColor = getColor(couplerMetric, couplerKey(a, b), 2, thresholdCoupler);
@@ -227,13 +265,53 @@ export function QcLayout({ layout, metrics }) {
                             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                             onMouseEnter={() => {
                                 setHoveredEdge(key);
-                                setTooltip(buildTooltip('edge', couplerMetric, couplerKey(a, b), couplerMetricFormatted, `Coupler: ${a}__${b}`));
+                                setTooltip(buildTooltip('edge', couplerMetric, couplerKey(a, b), couplerMetricFormatted, `Coupler: ${couplerKey(a, b)}`));
                             }}
                             onMouseLeave={() => { setHoveredEdge(null); setTooltip(null); }}
                             className={hover ? 'cursor-pointer filter drop-shadow-md' : 'cursor-pointer'}
                         />
                     );
                 })}
+                {resonator && (() => {
+                    const hover = hoveredEdge === resonator.id;
+                    const barHeight = 90;
+                    // The resonator has no dropdown of its own: its T1/T2 share the
+                    // qubit keys, so the bar follows the selected qubit metric.
+                    const barColor = getColor(qubitMetric, resonator.id, 1, thresholdQubit);
+                    return (
+                        <motion.g
+                            initial={{ scale: 1 }}
+                            animate={{ scale: hover ? 1.04 : 1 }}
+                            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                            style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
+                            onMouseEnter={() => {
+                                setHoveredEdge(resonator.id);
+                                setTooltip(buildTooltip('resonator', qubitMetric, resonator.id, qubitMetricFormatted, `Resonator: ${resonator.id}`));
+                            }}
+                            onMouseLeave={() => { setHoveredEdge(null); setTooltip(null); }}
+                            className={hover ? 'cursor-pointer filter drop-shadow-lg' : 'cursor-pointer'}
+                        >
+                            <rect
+                                x={resonator.x1}
+                                y={-resonator.y - barHeight / 2}
+                                width={resonator.x2 - resonator.x1}
+                                height={barHeight}
+                                rx={10}
+                                fill={barColor}
+                            />
+                            <text
+                                x={(resonator.x1 + resonator.x2) / 2}
+                                y={-resonator.y}
+                                fill="#fff"
+                                fontFamily="monospace"
+                                fontSize={40}
+                                fontWeight="bold"
+                                textAnchor="middle"
+                                dominantBaseline="central"
+                            >{resonator.id}</text>
+                        </motion.g>
+                    );
+                })()}
                 {nodes.map(n => {
                     const hover = hoveredNode === n.id;
                     const nodeColor = getColor(qubitMetric, n.id, 1, thresholdQubit);
@@ -250,7 +328,7 @@ export function QcLayout({ layout, metrics }) {
                                 onMouseLeave={() => { setHoveredNode(null); setTooltip(null); }}
                                 className={hover ? 'cursor-pointer filter drop-shadow-lg' : 'cursor-pointer'}
                             >
-                                <g transform="rotate(45)">
+                                <g transform={`rotate(${nodeRotation})`}>
                                     <rect x={-45} y={-45} width={90} height={90} rx={10} fill={nodeColor} />
                                     <text
                                         x={0} y={0}
@@ -260,7 +338,7 @@ export function QcLayout({ layout, metrics }) {
                                         fontWeight="bold"
                                         textAnchor="middle"
                                         dominantBaseline="central"
-                                        transform="rotate(-45)"
+                                        transform={`rotate(${-nodeRotation})`}
                                     >{n.id}</text>
                                 </g>
                             </motion.g>
