@@ -8,6 +8,7 @@ import { StatusModal } from './StatusModal/StatusModal';
 import { BookingModal } from './bookingCalendar.jsx';
 import { API_BASE_URL } from '../config/api.js';
 import { AlertBanner } from './AlertBanner.jsx';
+import { StatusPillLoading } from './Loading.jsx';
 
 const StatusCard = (props) => {
   const isOnline = props.health;
@@ -27,7 +28,9 @@ const StatusCard = (props) => {
 
         <div className='flex flex-col gap-0 text-[14px]'>
           <strong>Service status:</strong>
-          {isOnline ? (
+          {props.statusLoading ? (
+            <StatusPillLoading />
+          ) : isOnline ? (
             <div className='text-center text-[#204303] bg-[#B9DC9C] border-[0.5px] border-[#204303] rounded-[100px] w-[88px] h-[25px]'>
               <p className='font-bold text-[14px]'>Online</p>
             </div>
@@ -150,7 +153,7 @@ export const ServiceStatus = (props) => {
 
       <div className='pb-[60px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 min-[2600px]:grid-cols-4 w-full gap-[24px]'>
         {sortedDevices.map((qc, index) => (
-          <StatusCard key={qc.device_id || index} {...qc} onClick={() => handleCardClick(qc)} />
+          <StatusCard key={qc.device_id || index} {...qc} statusLoading={statusLoading} onClick={() => handleCardClick(qc)} />
         ))}
         
         
@@ -162,7 +165,13 @@ export const ServiceStatus = (props) => {
       )}
 
       {modalOpen && (
-        <StatusModal {...modalProps} isModalOpen={modalOpen} setIsModalOpen={setModalOpen} />
+        <StatusModal
+          {...modalProps}
+          devicesWithStatus={devicesWithStatus}
+          statusLoading={statusLoading}
+          isModalOpen={modalOpen}
+          setIsModalOpen={setModalOpen}
+        />
       )}
       
       

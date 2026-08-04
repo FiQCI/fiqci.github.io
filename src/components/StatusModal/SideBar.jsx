@@ -3,6 +3,7 @@ import { DeviceStatus } from './DeviceStatus';
 import { MetricSwitcher } from './MetricSwitcher';
 import { RawDataSwitcher } from './RawDataSwitcher';
 import { getMetricStatistics } from '../../utils/sidebarUtils';
+import { LoadingBlock, ErrorBlock } from '../Loading';
 
 export const SideBar = (props) => {
     const {
@@ -14,6 +15,10 @@ export const SideBar = (props) => {
         calibrationDataAll,
         deviceInfoData,
         devicesWithStatus,
+        statusLoading,
+        calibrationLoading,
+        calibrationError,
+        dataLoading,
         qubitMetricOptions,
         couplerMetricOptions,
         deviceData,
@@ -69,27 +74,34 @@ export const SideBar = (props) => {
 
     return (
         <div className='flex flex-col pb-4 mr-[50px] border-b-2 md:border-b-0 md:border-r-2 border-gray-400 col-span-1'>
-            <DeviceStatus deviceData={deviceData} devicesWithStatus={devicesWithStatus} />
+            <DeviceStatus deviceData={deviceData} devicesWithStatus={devicesWithStatus} statusLoading={statusLoading} />
 
-            {(activeTab === "layout" || activeTab === "graphical") &&
-                <MetricSwitcher
-                    metricsState={metricsState}
-                    updateMetricsState={updateMetricsState}
-                    calibrationData={calibrationData}
-                    qubitMetricOptions={qubitMetricOptions.filter(opt =>
-                        Object.prototype.hasOwnProperty.call(calibrationData ?? {}, opt.value)
-                    )}
-                    couplerMetricOptions={couplerMetricOptions.filter(opt =>
-                        Object.prototype.hasOwnProperty.call(calibrationData ?? {}, opt.value)
-                    )}
-                    qubitInputValue={qubitInputValue}
-                    setQubitInputValue={setQubitInputValue}
-                    couplerInputValue={couplerInputValue}
-                    setCouplerInputValue={setCouplerInputValue}
-                />
-            }
+            {(activeTab === "layout" || activeTab === "graphical") && (
+                calibrationLoading ? (
+                    <LoadingBlock label='Loading metrics…' />
+                ) : calibrationError ? (
+                    <ErrorBlock label='Metrics are currently unavailable.' />
+                ) : (
+                    <MetricSwitcher
+                        metricsState={metricsState}
+                        updateMetricsState={updateMetricsState}
+                        calibrationData={calibrationData}
+                        qubitMetricOptions={qubitMetricOptions.filter(opt =>
+                            Object.prototype.hasOwnProperty.call(calibrationData ?? {}, opt.value)
+                        )}
+                        couplerMetricOptions={couplerMetricOptions.filter(opt =>
+                            Object.prototype.hasOwnProperty.call(calibrationData ?? {}, opt.value)
+                        )}
+                        qubitInputValue={qubitInputValue}
+                        setQubitInputValue={setQubitInputValue}
+                        couplerInputValue={couplerInputValue}
+                        setCouplerInputValue={setCouplerInputValue}
+                    />
+                )
+            )}
             {activeTab === "raw" &&
                 <RawDataSwitcher
+                    dataLoading={dataLoading}
                     viewState={viewState}
                     updateViewState={updateViewState}
                     metricsState={metricsState}

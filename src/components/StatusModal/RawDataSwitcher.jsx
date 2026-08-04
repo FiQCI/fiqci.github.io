@@ -5,7 +5,8 @@ import { getCurrentRawData, copyToClipboard, downloadRawData } from '../../utils
 export const RawDataSwitcher = (props) => {
 
     const { viewState, updateViewState, metricsState, updateMetricsState,
-        calibrationDataAll, deviceInfoData, deviceData, copySuccess, setCopySuccess } = props;
+        calibrationDataAll, deviceInfoData, deviceData, copySuccess, setCopySuccess,
+        dataLoading } = props;
 
     // Copy to clipboard function
     const handleCopyToClipboard = async () => {
@@ -75,6 +76,7 @@ export const RawDataSwitcher = (props) => {
                     <CButton
                         size="sm"
                         onClick={handleCopyToClipboard}
+                        disabled={dataLoading}
                         className={`max-w-[200px] ${copySuccess ? 'bg-[#B9DC9C] text-[#204303]' : ''}`}
                     >
                         {copySuccess ? 'Copied!' : 'Copy'}
@@ -82,6 +84,7 @@ export const RawDataSwitcher = (props) => {
                     <CButton
                         size="sm"
                         className='max-w-[200px]'
+                        disabled={dataLoading}
                         onClick={handleDownloadRawData}
                     >
                         Download

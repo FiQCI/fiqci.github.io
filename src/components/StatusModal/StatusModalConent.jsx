@@ -7,6 +7,7 @@ import { QC_LAYOUTS } from '../QcLayouts/layouts';
 import { Overview } from './StatusOverview';
 import { CalibrationTable } from './CalibrationTable';
 import { SideBar } from './SideBar';
+import { LoadingBlock, ErrorBlock } from '../Loading';
 import {
     CCard, CCardTitle, CCardContent, CCardActions, CButton, CTabs,
     CTab, CTabItems, CTabItem
@@ -18,8 +19,20 @@ import { API_BASE_URL } from '../../config/api';
 
 export const ModalContent = (props) => {
 
-    const { calibrationData: calibrationDataAll, calibrationError } = useCalibration(`${API_BASE_URL}/device/${props.device_id.toLowerCase()}/calibration`)
-    const { deviceInfo: deviceInfoData, infoError } = useDeviceInfo(`${API_BASE_URL}/device/${props.device_id.toLowerCase()}`)
+    const {
+        calibrationData: calibrationDataAll,
+        error: calibrationError,
+        loading: calibrationLoading,
+    } = useCalibration(`${API_BASE_URL}/device/${props.device_id.toLowerCase()}/calibration`)
+    const {
+        deviceInfo: deviceInfoData,
+        error: infoError,
+        loading: infoLoading,
+    } = useDeviceInfo(`${API_BASE_URL}/device/${props.device_id.toLowerCase()}`)
+
+    // The tab bodies mix both sources, so they wait on either fetch.
+    const dataLoading = calibrationLoading || infoLoading;
+    const dataError = calibrationError || infoError;
 
     const [activeTab, setActiveTab] = useState('overview');
 
@@ -48,7 +61,12 @@ export const ModalContent = (props) => {
     };
 
     const calibrationData = calibrationDataAll.metrics
-    const lastCalibrated = new Date(calibrationDataAll.quality_metric_set_end_timestamp)
+    const lastCalibratedDate = new Date(calibrationDataAll.quality_metric_set_end_timestamp)
+    // Guard against "Invalid Date" while the fetch is in flight or when the
+    // endpoint returns no timestamp.
+    const lastCalibrated = Number.isNaN(lastCalibratedDate.getTime())
+        ? null
+        : lastCalibratedDate.toLocaleString()
 
     // Prefer the canonical name from the device info endpoint, but fall back to
     // the device_id (e.g. "vlq") when it's unavailable — getDeviceMetricsConfig
@@ -79,6 +97,10 @@ export const ModalContent = (props) => {
                         calibrationDataAll={calibrationDataAll}
                         deviceInfoData={deviceInfoData}
                         devicesWithStatus={props.devicesWithStatus}
+                        statusLoading={props.statusLoading}
+                        calibrationLoading={calibrationLoading}
+                        calibrationError={calibrationError}
+                        dataLoading={dataLoading}
                         qubitMetricOptions={qubitMetricOptions}
                         couplerMetricOptions={couplerMetricOptions}
                         deviceData={{ ...props }}
@@ -100,15 +122,27 @@ export const ModalContent = (props) => {
 
                         <CTabItems slot="items">
                             <CTabItem value="overview">
-                                <Overview
-                                    deviceInfoData={deviceInfoData}
-                                    device_id={props.device_id}
-                                    calibrationData={calibrationData}
-                                />
+                                {dataLoading ? (
+                                    <LoadingBlock label='Loading calibration data…' />
+                                ) : (
+                                    // Overview reports per-section availability itself, so a
+                                    // failure in one fetch doesn't hide what the other returned.
+                                    <Overview
+                                        deviceInfoData={deviceInfoData}
+                                        device_id={props.device_id}
+                                        calibrationData={calibrationData}
+                                        calibrationError={calibrationError}
+                                        infoError={infoError}
+                                    />
+                                )}
                             </CTabItem>
                             <CTabItem value="layout">
                                 <div className='flex justify-center items-center w-full'>
-                                    {layout ? (
+                                    {calibrationLoading ? (
+                                        <LoadingBlock label='Loading calibration data…' />
+                                    ) : calibrationError ? (
+                                        <ErrorBlock label='Calibration data is currently unavailable.' />
+                                    ) : layout ? (
                                         <QcLayout
                                             layout={layout}
                                             metrics={{
@@ -131,7 +165,11 @@ export const ModalContent = (props) => {
                             </CTabItem>
                             <CTabItem value="raw">
                                 <div className='flex flex-col gap-4 max-h-[60vh] overflow-auto'>
-                                    {viewState.rawDataType.value === 'calibration_data' && viewState.tableView ? (
+                                    {dataLoading ? (
+                                        <LoadingBlock label='Loading raw data…' />
+                                    ) : dataError ? (
+                                        <ErrorBlock label='Raw data is currently unavailable.' />
+                                    ) : viewState.rawDataType.value === 'calibration_data' && viewState.tableView ? (
                                         <CalibrationTable
                                             calibrationData={calibrationData}
                                             qubitSwitch={viewState.qubitSwitch}
@@ -155,7 +193,10 @@ export const ModalContent = (props) => {
             </CCardContent>
             <CCardActions>
                 <div className='flex flex-col sm:flex-row sm:justify-between w-full gap-4'>
-                    <p className='self-start sm:self-center text-[14px] text-on-white'><strong>Last calibrated:</strong> {lastCalibrated.toLocaleString()}</p>
+                    <p className='self-start sm:self-center text-[14px] text-on-white'>
+                        <strong>Last calibrated:</strong>{' '}
+                        {calibrationLoading ? 'Loading…' : lastCalibrated || 'Not available'}
+                    </p>
                     <CButton className="self-end w-min" onClick={() => props.setIsModalOpen(false)} text>Close</CButton>
                 </div>
             </CCardActions>
