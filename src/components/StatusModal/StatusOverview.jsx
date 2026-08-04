@@ -49,8 +49,7 @@ export const Overview = (props) => {
     const deviceName = deviceInfoData?.name || props.device_id || '';
     const { overview } = getDeviceMetricsConfig(deviceName);
 
-    // Distinguishes "the fetch gave us nothing" from "this device doesn't track
-    // that metric" — the former gets a message, the latter is simply omitted.
+    // Failed fetch gets a message; an untracked metric is just omitted.
     const calibrationUnavailable = !!props.calibrationError
         || !calibrationData
         || Object.keys(calibrationData).length === 0;
@@ -85,8 +84,6 @@ export const Overview = (props) => {
         { key: 'max-queue', title: 'Max jobs in queue', value: limitationsData?.max_queue_length },
     ].filter(limitation => limitation.value !== null && limitation.value !== undefined);
 
-    // Each section is included only when it has something to say: either real
-    // values, or a note that the data it depends on couldn't be fetched.
     const sections = [];
 
     if (calibrationUnavailable) {

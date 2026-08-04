@@ -3,8 +3,6 @@ import { useCallback, useEffect, useState } from 'react'
 export const useStatus = (statusUrl)  => {
   const [status, setStatus] = useState([])
   const [error, setError] = useState(null);
-  // Starts true so the first render shows a loading state rather than
-  // reporting every device as offline before the fetch resolves.
   const [loading, setLoading] = useState(true);
 
   const fetchStatus = useCallback(async () => {
