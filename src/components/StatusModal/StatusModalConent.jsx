@@ -30,7 +30,6 @@ export const ModalContent = (props) => {
         loading: infoLoading,
     } = useDeviceInfo(`${API_BASE_URL}/device/${props.device_id.toLowerCase()}`)
 
-    // The tab bodies mix both sources, so they wait on either fetch.
     const dataLoading = calibrationLoading || infoLoading;
     const dataError = calibrationError || infoError;
 
@@ -62,8 +61,6 @@ export const ModalContent = (props) => {
 
     const calibrationData = calibrationDataAll.metrics
     const lastCalibratedDate = new Date(calibrationDataAll.quality_metric_set_end_timestamp)
-    // Guard against "Invalid Date" while the fetch is in flight or when the
-    // endpoint returns no timestamp.
     const lastCalibrated = Number.isNaN(lastCalibratedDate.getTime())
         ? null
         : lastCalibratedDate.toLocaleString()
@@ -122,11 +119,9 @@ export const ModalContent = (props) => {
 
                         <CTabItems slot="items">
                             <CTabItem value="overview">
-                                {dataLoading ? (
+                                {activeTab !== 'overview' ? null : dataLoading ? (
                                     <LoadingBlock label='Loading calibration data…' />
                                 ) : (
-                                    // Overview reports per-section availability itself, so a
-                                    // failure in one fetch doesn't hide what the other returned.
                                     <Overview
                                         deviceInfoData={deviceInfoData}
                                         device_id={props.device_id}
@@ -138,7 +133,7 @@ export const ModalContent = (props) => {
                             </CTabItem>
                             <CTabItem value="layout">
                                 <div className='flex justify-center items-center w-full'>
-                                    {calibrationLoading ? (
+                                    {activeTab !== 'layout' ? null : calibrationLoading ? (
                                         <LoadingBlock label='Loading calibration data…' />
                                     ) : calibrationError ? (
                                         <ErrorBlock label='Calibration data is currently unavailable.' />
@@ -160,12 +155,14 @@ export const ModalContent = (props) => {
                             </CTabItem>
                             <CTabItem value="graphical">
                                 <div className='flex flex-col gap-4'>
-                                    <p className='text-[14px]'>Graphical information is not yet available.</p>
+                                    {activeTab === 'graphical' && (
+                                        <p className='text-[14px]'>Graphical information is not yet available.</p>
+                                    )}
                                 </div>
                             </CTabItem>
                             <CTabItem value="raw">
                                 <div className='flex flex-col gap-4 max-h-[60vh] overflow-auto'>
-                                    {dataLoading ? (
+                                    {activeTab !== 'raw' ? null : dataLoading ? (
                                         <LoadingBlock label='Loading raw data…' />
                                     ) : dataError ? (
                                         <ErrorBlock label='Raw data is currently unavailable.' />
