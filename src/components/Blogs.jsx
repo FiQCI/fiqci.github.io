@@ -5,6 +5,7 @@ import {
     CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
 import { BlogCardComponent } from './BlogCards';
+import { isResourceCall, newestResourceCall } from '../utils/resourceCalls';
 
 const filterStyles = {
     "--_c-checkbox-color": " #004E84",
@@ -177,21 +178,10 @@ const BlogsList = ({ id, title, blogs, paginationOptions, handlePageChange, show
     );
 };
 
-const isResourceCall = blog =>
-    blog.filters?.Type?.split(',').map(type => type.trim()).includes('Resource Call');
-
-const parseDate = date => {
-    const [day, month, year] = (date || '').split('.').map(Number);
-    return new Date(year, month - 1, day).getTime() || 0;
-};
-
 //Keep only the most recent resource call, drop the older ones
 const hideOldCalls = blogs => {
-    const newest = blogs
-        .filter(isResourceCall)
-        .reduce((latest, blog) => (!latest || parseDate(blog.date) >= parseDate(latest.date) ? blog : latest), null);
-
-    return blogs.filter(blog => !isResourceCall(blog) || blog === newest);
+    const newest = newestResourceCall(blogs, blog => blog.filters?.Type);
+    return blogs.filter(blog => !isResourceCall(blog.filters?.Type) || blog === newest);
 };
 
 //Full blogs component
