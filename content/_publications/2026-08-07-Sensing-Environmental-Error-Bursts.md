@@ -176,7 +176,7 @@ Another step, requiring no additional hardware, would be a control run in which 
 
 <a id="notebook"></a>
 
-The notebook used can be accessed <a href="Error_Burst_Detection.ipynb">here</a>.
+The notebook used can be accessed <a href="https://github.com/CSCfi/Quantum/tree/main/Sensing-Environmental-Error-Bursts">here</a>.
 
 ## References <a id="references"></a>
 
