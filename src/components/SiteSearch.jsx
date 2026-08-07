@@ -6,6 +6,7 @@ import {
 } from '@cscfi/csc-ui-react';
 import { prependBaseURL } from '../utils/url';
 import { capitalizeFirstLetter } from "../utils/textUtils";
+import { newestResourceCall } from '../utils/resourceCalls';
 
 const style = {
   "--_c-button-font-size": 14,
@@ -34,8 +35,13 @@ function normalizeQuery(query) {
   return `${exactMatch} ${wildcardMatch}`;
 }
 
+//Lunr multiplies a document's score by its boost, so the open call outranks
+//anything else matching the same terms while still needing to match at all
+const NEWEST_CALL_BOOST = 20;
+
 async function searchContent(query, store) {
   const queryStr = normalizeQuery(query);
+  const newestCall = newestResourceCall(store.blogs || []);
 
   // Lazily load lunr: it is ~30 KB and only needed once a search runs, so it
   // is split into its own async chunk instead of shipping in vendors.js.
@@ -50,7 +56,9 @@ async function searchContent(query, store) {
     this.field('date');
     this.field('link');
 
-    Object.values(store).flat().forEach(doc => this.add(doc));
+    Object.values(store).flat().forEach(doc =>
+      this.add(doc, { boost: doc === newestCall ? NEWEST_CALL_BOOST : 1 })
+    );
   });
 
   const results = idx.search(queryStr);
@@ -88,9 +96,10 @@ async function searchContent(query, store) {
   };
 
   if (results.length === 0) {
-    Object.values(store).flat().forEach(item => {
-      if (item.title.toLowerCase().includes(query.toLowerCase())) addResult(item);
-    });
+    Object.values(store).flat()
+      .filter(item => item.title.toLowerCase().includes(query.toLowerCase()))
+      .sort((a, b) => (b === newestCall) - (a === newestCall)) //keep the open call on top here too
+      .forEach(addResult);
   } else {
     results.forEach(result => {
       const item = findItemByRef(result.ref, store);
