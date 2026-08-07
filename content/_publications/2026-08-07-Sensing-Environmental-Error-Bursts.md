@@ -180,14 +180,14 @@ The notebook used can be accessed <a href="Error_Burst_Detection.ipynb">here</a>
 
 ## References <a id="references"></a>
 
-1. M. McEwen et al., "Resolving Catastrophic Error Bursts from Cosmic Rays in Large Arrays of Superconducting Qubits," Nat. Phys., vol. 18, pp. 107-111, Jan. 2022, doi: 10.1038/s41567-021-01432-8
+1. M. McEwen et al., "Resolving Catastrophic Error Bursts from Cosmic Rays in Large Arrays of Superconducting Qubits," Nat. Phys., vol. 18, pp. 107-111, Jan. 2022, doi: https://doi.org/10.1038/s41567-021-01432-8
 
-2. X. Li et al., "Cosmic-Ray-Induced Correlated Errors in Superconducting Qubit Array," Nat. Commun., vol. 16, no. 4677, May 2025, doi: 10.1038/s41467-025-59778-z
+2. X. Li et al., "Cosmic-Ray-Induced Correlated Errors in Superconducting Qubit Array," Nat. Commun., vol. 16, no. 4677, May 2025, doi: https://doi.org/10.1038/s41467-025-59778-z
 
-3. A. P. Vepsäläinen et al., "Impact of Ionizing Radiation on Superconducting Qubit Coherence," Nature vol. 584, pp. 551-556, Aug. 2020, doi: 10.1038/s41586-020-2619-8
+3. A. P. Vepsäläinen et al., "Impact of Ionizing Radiation on Superconducting Qubit Coherence," Nature vol. 584, pp. 551-556, Aug. 2020, doi: https://doi.org/10.1038/s41586-020-2619-8
 
-4. D. Riste et al., "Millisecond Charge-parity Fluctuations and Induced Decoherence in a Superconducting Transmon Qubit," Nat. Commun., vol. 4, no. 1913, May 2013, doi: 10.1038/ncomms2936
+4. D. Riste et al., "Millisecond Charge-parity Fluctuations and Induced Decoherence in a Superconducting Transmon Qubit," Nat. Commun., vol. 4, no. 1913, May 2013, doi: https://doi.org/10.1038/ncomms2936
 
-5. C. D. Wilen et al., "Correlated Charge Noise and Relaxation Errors in Superconducting Qubits," Nature vol. 594, pp. 369-373, Jun. 2021, doi: 10.1038/s41586-021-03557-5
+5. C. D. Wilen et al., "Correlated Charge Noise and Relaxation Errors in Superconducting Qubits," Nature vol. 594, pp. 369-373, Jun. 2021, doi: https://doi.org/10.1038/s41586-021-03557-5
 
-6. P. M. Harrington et al., "Synchronous Detection of Cosmic Rays and Correlated Errors in Superconducting Qubit Arrays," Nat. Commun., vol. 16, no. 6428, Jul. 2025, doi: 10.1038/s41467-025-61385-x
+6. P. M. Harrington et al., "Synchronous Detection of Cosmic Rays and Correlated Errors in Superconducting Qubit Arrays," Nat. Commun., vol. 16, no. 6428, Jul. 2025, doi: https://doi.org/10.1038/s41467-025-61385-x
