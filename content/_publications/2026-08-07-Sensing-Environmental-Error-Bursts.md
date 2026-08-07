@@ -3,7 +3,7 @@ title: 'Sensing Environmental Error Bursts with Superconducting Quantum Processo
 date: 2026-08-07 #the date of publication as yyyy-mm-dd
 collection: publications #don't change
 header: #thumbnail image for the post
-  teaser: /assets/images/Sensing-Environmental-Bursts/Thumbnail.png #e.g /assets/images/topology/thumbnail.webp
+  teaser: /assets/images/Sensing-Environmental-Bursts/Thumbnail.webp #e.g /assets/images/topology/thumbnail.webp
 published: true
 author: Frida Isokoski #name of the author
 layout: post #don't change
@@ -36,7 +36,7 @@ That disturbance arrives indirectly, and the chain of events between the impact 
 
 These phonons break Cooper pairs and generate quasiparticles when they reach the superconducting layers with energy above twice the gap. A quasiparticle tunnelling across the Josephson junction can then absorb the energy of an excited qubit, producing a decay error, and a large density of them therefore causes correlated decay errors across the device <a href="#references">[1]</a>. The third stage is the decisive one. As phonons spread while the charges do not, a strike at a single point becomes an error affecting every qubit at once.
 
-![Energy Cascade](/assets/images/Sensing-Environmental-Bursts/Energy_Cascade.png)
+![Energy Cascade](/assets/images/Sensing-Environmental-Bursts/Energy_Cascade.webp)
 
 **Figure 1**: The energy cascade from a particle impact to a qubit error. The particle strikes a single point in the substrate, yet the generated phonons spread across the entire chip, which is why the resulting errors affect many qubits at once.
 
@@ -66,7 +66,7 @@ As $T_{1}$ describes the rate at which the qubit loses its energy and relaxes to
 
 Another qubit characteristic beneficial for error burst detection is the qubit dephasing time. Two coherence times, the Ramsey coherence time $T_{2}^*$ and the Hahn-echo time $T_2$, are commonly used to characterise qubit dephasing. Here, we will focus on the former. The Ramsey coherence time characterises how long the qubit preserves its phase information. Phase can be pictured as the position of a hand on a clock face. A qubit placed in an equal superposition of $\ket{0}$ and $\ket{1}$ has its state pointing somewhere around the equator of the Bloch sphere presented in **Figure 2**, and it sweeps around that equator at a steady rate. Dephasing is the loss of any reliable information of where the qubit vector is on the Bloch sphere. As environmental error bursts cause dephasing, they can be detected by a quantum circuit implementing a Ramsey measurement protocol.
 
-![Qubit on the equator of the Bloch Sphere](/assets/images/Sensing-Environmental-Bursts/Bloch_Sphere.png)
+![Qubit on the equator of the Bloch Sphere](/assets/images/Sensing-Environmental-Bursts/Bloch_Sphere.webp)
 
 **Figure 2**: The Bloch sphere presentation of a qubit superposition with phase angle $\phi$
 
@@ -84,7 +84,7 @@ Here, the quantum circuit for sensing environmental error bursts in terms of rel
 
 <a id="SmallerCircuit"></a>
 
-![Quantum circuit for measuring qubit relaxation times](/assets/images/Sensing-Environmental-Bursts/T1_quantum_circuit.png)
+![Quantum circuit for measuring qubit relaxation times](/assets/images/Sensing-Environmental-Bursts/T1_quantum_circuit.webp)
 
 **Figure 3**: All 10 qubits are first initialised to the ground state. In a single shot, there are six measurement rounds. Here, we set the delay time $t_{1}=2\ \mu s$, which is quite small compared to the relaxation times of the selected qubits. As an example, the average of the VTT Q50 qubit relaxation times is around $31 \ \mu s$ on the day of the circuit run.
 
@@ -96,7 +96,7 @@ The extended implementation of the quantum circuit utilised in detecting environ
 
 <a id="RamseyCircuit"></a>
 
-![Quantum circuit with Ramsey qubits](/assets/images/Sensing-Environmental-Bursts/Ramsey_T1_quantum_circuit.png)
+![Quantum circuit with Ramsey qubits](/assets/images/Sensing-Environmental-Bursts/Ramsey_T1_quantum_circuit.webp)
 
 **Figure 4**: The implementation of the 14-qubit quantum circuit used to detect environmental error bursts. Here, $n \in \{0,1,\ldots,9\}$ and $k \in \{10,11,12,13\}$, of which the latter are used for Ramsey-style mapping. Assuming no environmental burst appears, the $R_{y}(\pi /2)$ gate rotates the qubits $q_k$ an angle of $\pi/2$ with respect to the y-axis on the Bloch sphere. The state then evolves the time $t_2$ during which the qubit state rotates around the equator of the Bloch sphere. Finally, the gate $R_{x}(\pi /2)$ rotates the state out of the equatorial plane by an amount that depends on the accumulated phase, converting the phase information into a population difference. Each qubit $q_k$ is then measured as either $\ket{0}$ or $\ket{1}$, with the probabilities of the two outcomes set by the phase acquired during $t_2$.
 
@@ -116,19 +116,19 @@ The environmental error bursts are detected as anomalies in the collected data. 
 
 The data collected from the VLQ shows multiple single bitstrings with high error rate. These are presented in **Figure 5**. As such, these are not directly a hallmark of quasiparticle bursts, for they should additionally lead to long-lasting erroneous behaviour. Furthermore, the affected region should grow: the initial impact is localised, and the quasiparticles then spread outwards from that hot spot to the surrounding qubits <a href="#references">[1]</a>. Note that this spread proceeds on a timescale of a few hundred microseconds to roughly a millisecond <a href="#references">[1]</a>, so at the 1 ms round spacing used here only a coarse spatial gradient can be resolved. In the VLQ data, we identify two events of particular interest. 
 
-![VLQ histogram](/assets/images/Sensing-Environmental-Bursts/VLQ_histogram.png)
+![VLQ histogram](/assets/images/Sensing-Environmental-Bursts/VLQ_histogram.webp)
 
 **Figure 5**: General overview of measured zeros during the VLQ run. The measurement results are ten-bit bitstrings representing the measurement outcomes of all the ten qubits of the quantum circuit. The two candidate events are highlighted in green. 
 
 A candidate event is a shot in which four or more consecutive measurement rounds, ending with the last round of the shot, each show three or more zeros. Individual rounds at this level are common (tens of thousands occur across the run) but consecutive runs of them are not, and the probability model predicts one or two per hundred thousand shots. Further investigation shows that the two candidate events occur in shot numbers 17297 and 65386. These shots show erroneous behaviour lasting for four and three milliseconds respectively. Durations are quoted as the interval spanned rather than the number of rounds, so four consecutive affected rounds correspond to three milliseconds. Since a single shot spans roughly 5.4 ms, any event lasting longer than this would be truncated at the shot boundary. The durations quoted here are therefore lower bounds. **Figure 6** shows the candidate events under a simple probability model.
 
-![Rare-event detection](/assets/images/Sensing-Environmental-Bursts/Final_probabilities_VLQ.png)
+![Rare-event detection](/assets/images/Sensing-Environmental-Bursts/Final_probabilities_VLQ.webp)
 
 **Figure 6**: The shots of interest are highlighted in red. The higher the blue spikes, the rarer the event is under the probability model. The probability values are for single bitstrings with the respective number of zeros.
 
 Under the probability model, it is reasonable to expect roughly two such shots as the candidate events. Therefore, the candidate events do not seem that special. However, this is where the analysis becomes interesting. Counting zeros is not enough as it is expected to find a handful of rounds with an unusual number of zeros in a hundred thousand shots. Nevertheless, what a coincidence cannot easily produce is structure, that is, long-persisting errors clustered on qubits located next to each other on the chip. Therefore, what needs to be determined is whether the errors are random or correlated. The distributions of measured zeros are shown in **Figure 7**.
 
-![Heat map of the qubit error regularity](/assets/images/Sensing-Environmental-Bursts/VLQ_heatmap.png)
+![Heat map of the qubit error regularity](/assets/images/Sensing-Environmental-Bursts/VLQ_heatmap.webp)
 
 **Figure 7**: An illustration of the error distribution on the VLQ QPU. Here, the qubit $q_{0}$ corresponds to the physical qubit $QB1$, $q_1$ to $QB2$ etc. on the hardware.
 
@@ -142,25 +142,25 @@ The Ramsey qubits yield a four-bit bitstring in each measurement round. Each bit
 
 A coordinated disturbance pushes the contributions the same way, driving the sum towards one extreme, so an unusually large or small value flags a shot worth examining. **Figure 8** shows the distribution of Ramsey values. 
 
-![Ramsey values](/assets/images/Sensing-Environmental-Bursts/VTT_Q50_general_Ramsey_curve.png)
+![Ramsey values](/assets/images/Sensing-Environmental-Bursts/VTT_Q50_general_Ramsey_curve.webp)
 
 **Figure 8**: Ramsey values of shots
 
 Applying the same candidate criterion as for the VLQ run, the relaxation time analysis identifies a single candidate event, shot 5610, which is presented in **Figure 9**.
 
-![Probability model for Q50](/assets/images/Sensing-Environmental-Bursts/Final_probabilities_VTT_Q50.png)
+![Probability model for Q50](/assets/images/Sensing-Environmental-Bursts/Final_probabilities_VTT_Q50.webp)
 
 **Figure 9**: The candidate event from VTT Q50 
 
 **Figure 10** shows the erroneous behaviour of qubits.
 
-![Heat map of the qubits on Q50](/assets/images/Sensing-Environmental-Bursts/VTT_Q50_heatmap.png)
+![Heat map of the qubits on Q50](/assets/images/Sensing-Environmental-Bursts/VTT_Q50_heatmap.webp)
 
 **Figure 10**: An illustration of the errors on the relaxation time observing qubits QB3-QB12. The qubit layout matches that of the VTT Q50. 
 
 From the relaxation time observing qubits alone it is difficult to say whether the candidate event is truly an environmental error burst. The error of the qubit QB11 is promising as it lasts for three milliseconds, however, the affected region does not clearly extend to the neighbouring qubits. The Ramsey qubits QB13-QB16 may provide further details. **Figure 11** shows the Ramsey value of the candidate event.
 
-![The Ramsey value of the candidate event](/assets/images/Sensing-Environmental-Bursts/VTT_Q50_Ramsey.png)
+![The Ramsey value of the candidate event](/assets/images/Sensing-Environmental-Bursts/VTT_Q50_Ramsey.webp)
 
 **Figure 11**: The candidate event, shot 5610, in the normal distribution of Ramsey values
 
