@@ -17,7 +17,7 @@ tags:
   - Wire-cutting
 filters:
   Skill level: Advanced # Beginner, Advanced
-  Type: Blog # Blog, Instructions, News
+  Type: Blog # Blog, Instructions, News, Resource Call
   Theme: HPC+QC+AI, Programming, Technical # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 *In the noisy intermediate scale quantum (NISQ) era of quantum computing the main factor limiting practical applications is the number of quality qubits available on a single quantum processing unit (QPU). For realising quantum utility, or even advantage on NISQ and future devices it can be useful to take a large quantum algorithm, cut it into smaller pieces and distribute the pieces on separate QPUs for execution in parallel. This would allow circumventing some of the hardware limitations, especially concerning the number of qubits on NISQ devices. Here, we use real hardware of the Finnish Quantum Computing Infrastructure (FiQCI) and simulations to demonstrate such a method, known as quantum circuit knitting.*

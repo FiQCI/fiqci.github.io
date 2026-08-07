@@ -14,7 +14,7 @@ tags:
   - Earth Observation
 filters:
   Skill level: Advanced # Beginner, Advanced
-  Type: Blog # Blog, Instructions, News
+  Type: Blog # Blog, Instructions, News, Resource Call
   Theme: Algorithm, HPC+QC+AI, Programming # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 

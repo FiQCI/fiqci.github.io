@@ -5,6 +5,7 @@ import {
     CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
 import { BlogCardComponent } from './BlogCards';
+import { isResourceCall, newestResourceCall } from '../utils/resourceCalls';
 
 const filterStyles = {
     "--_c-checkbox-color": " #004E84",
@@ -120,6 +121,8 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
 const BlogsList = ({ id, title, blogs, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => {
     const isInitialLoad = useRef(true);
 
+    
+
     // Scroll to top when pagination changes
     const onPageChange = (event) => {
         handlePageChange(event);
@@ -175,13 +178,19 @@ const BlogsList = ({ id, title, blogs, paginationOptions, handlePageChange, show
     );
 };
 
+//Keep only the most recent resource call, drop the older ones
+const hideOldCalls = blogs => {
+    const newest = newestResourceCall(blogs, blog => blog.filters?.Type);
+    return blogs.filter(blog => !isResourceCall(blog.filters?.Type) || blog === newest);
+};
+
 //Full blogs component
 export const Blogs = () => {
-    const blogs_dict = SITE.publications.filter(blog => blog.hidden != "true")
+    const blogs_dict = hideOldCalls(SITE.publications.filter(blog => blog.hidden != "true"))
     const [isModalOpen, setIsModalOpen] = useState(false); //modal control
     const [filters, setFilters] = useState({
         "Skill level": { "Advanced": false, "Beginner": false },
-        "Type": { "Blog": false, "Instructions": false, "News": false },
+        "Type": { "Blog": false, "Instructions": false, "News": false, "Resource Call": false },
         "Theme": "",
     }); //filter state
 

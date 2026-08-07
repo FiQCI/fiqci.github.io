@@ -15,7 +15,7 @@ tags: #keywords related to the topic of the blog, e.g Helmi, Quantum, etc
   - Quantum sensing
 filters: #choose appropriate filters from the commented options. If multiple separate with a comma
   Skill level: Beginner # Beginner, Advanced
-  Type: Blog # Blog, Instructions, News
+  Type: Blog # Blog, Instructions, News, Resource Call
   Theme: Technical # Technical, Algorithm, Programming, QC+HPC+AI
 ---
 

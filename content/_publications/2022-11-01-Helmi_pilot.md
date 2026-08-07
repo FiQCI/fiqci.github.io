@@ -11,7 +11,7 @@ tags:
   - Helmi
 filters:
   Skill level: Beginner # Beginner, Advanced
-  Type: News # Blog, Instructions, News
+  Type: Resource Call # Blog, Instructions, News, Resource Call
   Theme: Technical # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 

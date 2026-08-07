@@ -17,7 +17,7 @@ tags:
   - GPU
 filters:
   Skill level: Beginner # Beginner, Advanced
-  Type: Blog # Blog, Instructions, News
+  Type: Blog # Blog, Instructions, News, Resource Call
   Theme: Technical, Programming # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 
