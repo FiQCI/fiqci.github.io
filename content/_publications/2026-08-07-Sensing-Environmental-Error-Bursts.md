@@ -17,7 +17,7 @@ tags: #keywords related to the topic of the blog, e.g Helmi, Quantum, etc
   - LUMI-Q VLQ
 filters: #choose appropriate filters from the commented options. If multiple separate with a comma
   Skill level: Beginner # Beginner, Advanced
-  Type: Blog # Blog, Instructions, News
+  Type: Blog # Blog, Instructions, News, Resource Call
   Theme: Technical # Technical, Algorithm, Programming, QC+HPC+AI
 ---
 *Quantum computers are amongst the most sensitive instruments ever built. For quantum computation, this is mostly a problem: the same delicacy that lets a qubit hold quantum information also lets the outside world destroy it. But sensitivity can be turned around. When a cosmic ray or a stray gamma ray strikes a superconducting chip, it does not disturb one qubit, it briefly wrecks all of them at once, in a pattern distinctive enough to be recognised. A quantum processor can therefore be read as a particle detector that happens to be sitting in a dilution refrigerator already.*

@@ -10,7 +10,7 @@ author: Huyen Do
 layout: post
 filters:
   Skill level: Beginner # Beginner, Advanced
-  Type: Instructions # Blog, Instructions, News
+  Type: Instructions # Blog, Instructions, News, Resource Call
   Theme: Programming # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 

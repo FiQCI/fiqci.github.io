@@ -16,7 +16,7 @@ tags: #keywords related to the topic of the blog, e.g Helmi, Quantum, etc
   - Variational algorithm
 filters: #choose appropriate filters from the commented options. If multiple separate with a comma
   Skill level: Beginner # Beginner, Advanced
-  Type: Blog # Blog, Instructions, News
+  Type: Blog # Blog, Instructions, News, Resource Call
   Theme: Technical, Algorithm, Programming, QC+HPC+AI # Technical, Algorithm, Programming, QC+HPC+AI
 ---
 *Simulating electrons is an important but challenging task in condensed matter physics and material science. Simulation of electronic models, such as solving the ground state energy of the Fermi-Hubbard model, is expected to be among the first non-trivial problems to demonstrate quantum advantage on near-term quantum computers. Here, the leading approach to solving this problem, a hybrid quantum-classical algorithm called the Variational Quantum Eigensolver (VQE) is explored. We present results from running the hybrid algorithm using the LUMI supercomputer and the VTT Q50 quantum computer and share benchmarking results on how circuit choice and compiler selection impact performance. In addition, we demonstrate the implementation of error mitigation strategies to improve results.*

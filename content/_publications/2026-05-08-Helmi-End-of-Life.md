@@ -11,7 +11,7 @@ tags:
   - Helmi VTT-Q5
 filters:
   Skill level: Beginner # Beginner, Advanced
-  Type: News # Blog, Instructions, News
+  Type: News # Blog, Instructions, News, Resource Call
   Theme: Technical # Technical, Algorithm, Programming, HPC+QC+AI
 ---
 

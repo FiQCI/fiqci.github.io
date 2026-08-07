@@ -73,6 +73,7 @@ async function searchContent(query, store) {
       blog: 'blogs',
       news: 'blogs',
       instructions: 'blogs',
+      'resource call': 'blogs',
       post: 'blogs',
       event: 'events'
     };
@@ -293,6 +294,7 @@ export const SiteSearch = () => {
     "Event": false,
     "Instructions": false,
     "News": false,
+    "Resource Call": false,
     "General information": false,
   }); //filter state
 
@@ -401,6 +403,7 @@ export const SiteSearch = () => {
         if (filterLower === "general information" && item.type === "page") return true;
         if (filterLower === "instructions" && item.type == "instructions") return true;
         if (filterLower === "news" && item.type == "news") return true;
+        if (filterLower === "resource call" && item.type == "resource call") return true;
 
         return false;
       });

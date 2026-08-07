@@ -3,7 +3,7 @@ permalink: /resource-call
 redirect: true
 sitemap: false
 ---
-{%- assign calls = site.publications | where_exp: "p", "p.title contains 'Open Call'" | sort: "date" -%}
+{%- assign calls = site.publications | where_exp: "p", "p.filters.Type contains 'Resource Call'" | sort: "date" -%}
 {%- assign newest = calls | last -%}
 <!DOCTYPE html>
 <html lang="en">

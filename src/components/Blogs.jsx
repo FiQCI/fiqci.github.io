@@ -120,6 +120,8 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
 const BlogsList = ({ id, title, blogs, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => {
     const isInitialLoad = useRef(true);
 
+    
+
     // Scroll to top when pagination changes
     const onPageChange = (event) => {
         handlePageChange(event);
@@ -175,13 +177,30 @@ const BlogsList = ({ id, title, blogs, paginationOptions, handlePageChange, show
     );
 };
 
+const isResourceCall = blog =>
+    blog.filters?.Type?.split(',').map(type => type.trim()).includes('Resource Call');
+
+const parseDate = date => {
+    const [day, month, year] = (date || '').split('.').map(Number);
+    return new Date(year, month - 1, day).getTime() || 0;
+};
+
+//Keep only the most recent resource call, drop the older ones
+const hideOldCalls = blogs => {
+    const newest = blogs
+        .filter(isResourceCall)
+        .reduce((latest, blog) => (!latest || parseDate(blog.date) >= parseDate(latest.date) ? blog : latest), null);
+
+    return blogs.filter(blog => !isResourceCall(blog) || blog === newest);
+};
+
 //Full blogs component
 export const Blogs = () => {
-    const blogs_dict = SITE.publications.filter(blog => blog.hidden != "true")
+    const blogs_dict = hideOldCalls(SITE.publications.filter(blog => blog.hidden != "true"))
     const [isModalOpen, setIsModalOpen] = useState(false); //modal control
     const [filters, setFilters] = useState({
         "Skill level": { "Advanced": false, "Beginner": false },
-        "Type": { "Blog": false, "Instructions": false, "News": false },
+        "Type": { "Blog": false, "Instructions": false, "News": false, "Resource Call": false },
         "Theme": "",
     }); //filter state
 
