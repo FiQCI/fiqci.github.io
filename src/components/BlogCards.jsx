@@ -3,6 +3,7 @@ import '@cscfi/csc-ui-react/css/theme.css';
 import { CCard, CIcon, CCardContent } from '@cscfi/csc-ui-react';
 import { mdiArrowRight } from '@mdi/js';
 import { prependBaseURL } from '../utils/url';
+import { hideOldCalls } from '../utils/resourceCalls';
 
 export const BlogCardComponent = props => {
     const type = props?.filters?.Type;
@@ -31,7 +32,7 @@ export const BlogCards = () => {
         <div className="min-[2600px]:mx-auto min-[2600px]:max-w-[50vw]">
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              { SITE.publications.slice(-4).reverse().map(blog => <BlogCardComponent {...blog} />) }
+              { hideOldCalls(SITE.publications).slice(-4).reverse().map(blog => <BlogCardComponent {...blog} />) }
             </div>
             <div className="mt-4">
                 <a
