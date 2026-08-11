@@ -5,7 +5,7 @@ import {
     CCardTitle, CCardContent, CCardActions
 } from '@cscfi/csc-ui-react';
 import { BlogCardComponent } from './BlogCards';
-import { isResourceCall, newestResourceCall } from '../utils/resourceCalls';
+import { hideOldCalls } from '../utils/resourceCalls';
 
 const filterStyles = {
     "--_c-checkbox-color": " #004E84",
@@ -176,12 +176,6 @@ const BlogsList = ({ id, title, blogs, paginationOptions, handlePageChange, show
             )}
         </div>
     );
-};
-
-//Keep only the most recent resource call, drop the older ones
-const hideOldCalls = blogs => {
-    const newest = newestResourceCall(blogs, blog => blog.filters?.Type);
-    return blogs.filter(blog => !isResourceCall(blog.filters?.Type) || blog === newest);
 };
 
 //Full blogs component
