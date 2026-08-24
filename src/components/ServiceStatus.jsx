@@ -30,7 +30,7 @@ const StatusCard = (props) => {
           <strong>Service status:</strong>
           {props.statusLoading ? (
             <StatusPillLoading />
-          ) : isOnline ? (
+          ) : (isOnline) ? (
             <div className='text-center text-[#204303] bg-[#B9DC9C] border-[0.5px] border-[#204303] rounded-[100px] w-[88px] h-[25px]'>
               <p className='font-bold text-[14px]'>Online</p>
             </div>
@@ -54,6 +54,13 @@ export const ServiceStatus = (props) => {
     ? qcs
     : qcs.map(device => {
         const deviceStatus = statusList.find(({ name }) => name === device.device_id);
+        
+        if (device.name == "Aalto Q20") { // TEMP offline switch for Aalto Q20 until it is back online
+          return {
+            ...device,
+            health: false,
+          };
+        }
         return {
           ...device,
           health: deviceStatus?.health ?? false,
