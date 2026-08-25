@@ -269,6 +269,9 @@ cookie_consent:
         For estimating the runtime of a quantum job try out the FiQCI QPU resource estimator.
       type: info
       link: "https://fiqci.fi/resource-estimator"
+    - text: |-
+        Aalto Q20 is currently down for maintenance.
+      type: warning
   quantum-computers:
     - name: VTT Q50
       qubits: 53
