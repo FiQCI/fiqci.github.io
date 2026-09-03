@@ -272,6 +272,9 @@ cookie_consent:
     - text: |-
         Aalto Q20 is currently down for maintenance.
       type: warning
+    - text: |-
+        LUMI-Q VLQ will be down for scheduled maintenance from 4th to 25th of September.
+      type: warning
   quantum-computers:
     - name: VTT Q50
       qubits: 53
