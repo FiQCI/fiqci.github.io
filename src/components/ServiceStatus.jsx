@@ -77,8 +77,9 @@ const ToolCarousel = ({ tools }) => {
     <div className='flex flex-col gap-2'>
       <Swiper
         modules={[A11y, Keyboard]}
-        // Padding leaves room for the card shadows (Swiper clips overflow); negative margins keep the cards aligned with the text
-        className='!-mx-5 !px-5 !pt-2 !pb-10 !-mb-8'
+        // Padding leaves room for the card shadows (Swiper clips overflow). The negative side margins stay within the
+        // outlined accordion's 16px content padding so the Swiper doesn't cover its 2px outline.
+        className='!-mx-[14px] !px-5 !pt-2 !pb-10 !-mb-8'
         spaceBetween={24}
         slidesPerView={1}
         breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
@@ -96,7 +97,7 @@ const ToolCarousel = ({ tools }) => {
       </Swiper>
       {!edges.isLocked && (
         // relative z-10 keeps the buttons above the Swiper's shadow padding, which overlaps this row
-        <div className='relative z-10 flex justify-end gap-2'>
+        <div className='relative z-10 flex justify-start gap-2'>
           <CIconButton ghost size='small' path={mdiChevronLeft} aria-label='Previous tools' disabled={edges.isBeginning} onClick={() => swiper?.slidePrev()} />
           <CIconButton ghost size='small' path={mdiChevronRight} aria-label='Next tools' disabled={edges.isEnd} onClick={() => swiper?.slideNext()} />
         </div>
@@ -196,7 +197,7 @@ export const ServiceStatus = (props) => {
           FiQCI provides software to help you get more out of the quantum computers.
         </p>
         {tools.length > 0 && (
-          <CAccordion className='mb-6'>
+          <CAccordion outlined className='mb-6'>
             <CAccordionItem heading={`Software tools`} value="tools">
               <ToolCarousel tools={tools} />
             </CAccordionItem>
