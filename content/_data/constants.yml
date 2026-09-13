@@ -282,6 +282,9 @@ cookie_consent:
     - name: QCut
       description: Quantum circuit-knitting package. Cut large circuits into smaller subcircuits that fit on current devices and reconstruct the result.
       href: https://fiqci.fi/QCut
+    - name: FiQCI examples
+      description: Example notebooks and scripts for running quantum jobs on FiQCI quantum computers through LUMI.
+      href: https://github.com/FiQCI/fiqci-examples
   quantum-computers:
     - name: VTT Q50
       qubits: 53
