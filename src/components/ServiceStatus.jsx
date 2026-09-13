@@ -2,8 +2,9 @@ import React, { useCallback, useMemo, useState } from 'react'
 
 import { useStatus } from '../hooks/useStatus'
 import { useBookings } from '../hooks/useBookings.jsx';
-import { mdiInformation, mdiClose, mdiAlert, mdiRefresh } from '@mdi/js';
-import { CCard, CCardTitle, CCardContent, CIcon, CButton, CSelect } from '@cscfi/csc-ui-react';
+import { mdiInformation, mdiClose, mdiAlert, mdiRefresh, mdiArrowRight, mdiOpenInNew } from '@mdi/js';
+import { CCard, CCardTitle, CCardContent, CIcon, CButton, CSelect, CAccordion, CAccordionItem } from '@cscfi/csc-ui-react';
+import { prependBaseURL, isExternal } from '../utils/url';
 import { StatusModal } from './StatusModal/StatusModal';
 import { BookingModal } from './bookingCalendar.jsx';
 import { API_BASE_URL } from '../config/api.js';
@@ -44,6 +45,22 @@ const StatusCard = (props) => {
     </CCard>
   )
 }
+
+const ToolCard = ({ name, description, href }) => (
+  <a href={prependBaseURL(href)} className='group block h-full'>
+    <CCard className='border-[0.2px] border-gray-100 rounded-none shadow-md group-hover:shadow-xl h-full'>
+      <CCardTitle className='font-bold text-on-white text-[18px]'>
+        <p>{name}</p>
+      </CCardTitle>
+      <CCardContent className='text-on-white flex flex-col justify-between gap-4 text-[14px]'>
+        <p>{description}</p>
+        <span className='text-sky-800 font-bold flex items-center gap-1 group-hover:underline'>
+          Documentation <CIcon path={isExternal(href) ? mdiOpenInNew : mdiArrowRight} />
+        </span>
+      </CCardContent>
+    </CCard>
+  </a>
+)
 
 export const ServiceStatus = (props) => {
   const { status: statusList, loading: statusLoading, refetch: refetchStatus } = useStatus(`${API_BASE_URL}/devices/healthcheck`);
@@ -103,6 +120,7 @@ export const ServiceStatus = (props) => {
   };
   // Support both a single `alert` object and a list of `alerts`.
   const alerts = props.alerts ?? (props.alert ? [props.alert] : []);
+  const tools = props.tools || [];
 
   return (
     <div className="flex gap-6 flex-col sm:flex-col items-stretch text-on-white">
@@ -128,7 +146,7 @@ export const ServiceStatus = (props) => {
         </p>
         <CButton className='w-32' onClick={() => setBookingModalOpen(true)}>View Reservations</CButton>
       </div>
-      
+
       <div className='flex flex-col sm:flex-row gap-4 sm:gap-20'>
         <h2 className='text-on-white'>Devices</h2>
         <CSelect
@@ -158,15 +176,28 @@ export const ServiceStatus = (props) => {
         </CButton>
       </div>
 
-      <div className='pb-[60px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 min-[2600px]:grid-cols-4 w-full gap-[24px]'>
+      <div className='pb-[0px] grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 min-[2600px]:grid-cols-4 w-full gap-[24px]'>
         {sortedDevices.map((qc, index) => (
           <StatusCard key={qc.device_id || index} {...qc} statusLoading={statusLoading} onClick={() => handleCardClick(qc)} />
         ))}
-        
-        
-        
-        
       </div>
+
+      {tools.length > 0 && (
+        <div className='pb-[60px]'>
+          <CAccordion>
+            <CAccordionItem heading="Software tools" value="tools">
+              <p className='text-[16px] pb-4'>
+                FiQCI develops software to help you get more out of the quantum computers.
+              </p>
+              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[24px]'>
+                {tools.map(tool => (
+                  <ToolCard key={tool.name} {...tool} />
+                ))}
+              </div>
+            </CAccordionItem>
+          </CAccordion>
+        </div>
+      )}
       {bookingModalOpen && (
         <BookingModal bookingData={bookingData} name={"Reservations"} isModalOpen={bookingModalOpen} setIsModalOpen={setBookingModalOpen} />
       )}
