@@ -270,6 +270,11 @@ cookie_consent:
       type: info
       link: "https://fiqci.fi/resource-estimator"
     - text: |-
+        Check out the new "Tools" section for FiQCI tools and example notebooks.
+      type: info
+      link: "#tools"
+      
+    - text: |-
         Aalto Q20 is currently down for maintenance.
       type: warning
     - text: |-

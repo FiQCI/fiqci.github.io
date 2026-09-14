@@ -197,8 +197,8 @@ export const ServiceStatus = (props) => {
           FiQCI provides software to help you get more out of the quantum computers.
         </p>
         {tools.length > 0 && (
-          <CAccordion outlined className='mb-6'>
-            <CAccordionItem heading={`Software tools`} value="tools">
+          <CAccordion id="tools" outlined className='mb-6'>
+            <CAccordionItem heading={`Software tools (click to expand)`} value="tools">
               <ToolCarousel tools={tools} />
             </CAccordionItem>
           </CAccordion>
