@@ -50,7 +50,7 @@ const StatusCard = (props) => {
 }
 
 const ToolCard = ({ name, description, href }) => (
-  <a href={prependBaseURL(href)} className='group block h-full'>
+  <a href={prependBaseURL(href)} className='group block h-full' target="_blank" rel="noopener noreferrer">
     <CCard className='border-[0.2px] border-gray-100 rounded-none shadow-md group-hover:shadow-xl h-full'>
       <CCardTitle className='font-bold text-on-white text-[18px]'>
         <p>{name}</p>
@@ -188,11 +188,11 @@ export const ServiceStatus = (props) => {
           VTT devices can at times be reserved. At these times the queue will be paused.
           Reservations can be viewed from this calendar. Note that making reservations through FiQCI is not currently possible.
         </p>
-        <CButton className='w-32' onClick={() => setBookingModalOpen(true)}>View Reservations</CButton>
+        <CButton id="tools" className='w-32' onClick={() => setBookingModalOpen(true)}>View Reservations</CButton>
       </div>
 
       <div className='pt-[24px] flex flex-col gap-6 mb-0 justify-start'>
-        <h2 id="tools" className='text-on-white'>Tools</h2>
+        <h2 className='text-on-white'>Tools</h2>
         <p className='text-[16px] pb-0'>
           FiQCI provides software to help you get more out of the quantum computers.
         </p>
