@@ -192,12 +192,12 @@ export const ServiceStatus = (props) => {
       </div>
 
       <div className='pt-[24px] flex flex-col gap-6 mb-0 justify-start'>
-        <h2 className='text-on-white'>Tools</h2>
+        <h2 id="tools" className='text-on-white'>Tools</h2>
         <p className='text-[16px] pb-0'>
           FiQCI provides software to help you get more out of the quantum computers.
         </p>
         {tools.length > 0 && (
-          <CAccordion id="tools" outlined className='mb-6'>
+          <CAccordion outlined className='mb-6'>
             <CAccordionItem heading={`Software tools (click to expand)`} value="tools">
               <ToolCarousel tools={tools} />
             </CAccordionItem>
