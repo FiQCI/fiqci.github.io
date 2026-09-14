@@ -270,11 +270,26 @@ cookie_consent:
       type: info
       link: "https://fiqci.fi/resource-estimator"
     - text: |-
+        Check out the new "Tools" section for FiQCI tools and example notebooks.
+      type: info
+      link: "#tools"
+      
+    - text: |-
         Aalto Q20 is currently down for maintenance.
       type: warning
     - text: |-
         LUMI-Q VLQ will be down for scheduled maintenance from 4th to 25th of September.
       type: warning
+  tools:
+    - name: FiQCI-EMS
+      description: Error mitigation service. Adds readout error mitigation, dynamical decoupling, Pauli twirling and zero-noise extrapolation to Qiskit workflows on IQM devices.
+      href: https://fiqci.fi/fiqci-ems
+    - name: QCut
+      description: Quantum circuit-knitting package. Cut large circuits into smaller subcircuits that fit on current devices and reconstruct the result.
+      href: https://fiqci.fi/QCut
+    - name: FiQCI examples
+      description: Example notebooks and scripts for running quantum jobs on FiQCI quantum computers through LUMI.
+      href: https://github.com/FiQCI/fiqci-examples
   quantum-computers:
     - name: VTT Q50
       qubits: 53
