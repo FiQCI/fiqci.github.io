@@ -33,7 +33,7 @@ permalink: site.js
     "type": "Event",
     "title": "{{ event_post.title }}",
     "url": "{{ event_post.link | uri_escape }}",
-    "date": "{{ event_post.date | date: '%-d.%-m.%Y' }}",
+    "date": "{{ event_post.date | date: '%Y-%m-%d' }}",
     "content": {{ event_post.content | strip_html | strip_newlines | jsonify }},
     "filters": {
       {%- for category in event_post.filters %}

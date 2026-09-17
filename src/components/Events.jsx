@@ -115,28 +115,19 @@ const FilterModal = ({ isModalOpen, setIsModalOpen, filters, handleFilterChange 
     );
 };
 
+//Scroll a section heading just below the navbar
+const scrollToSection = id => {
+    const section = document.getElementById(id);
+    if (!section) return;
+    const yOffset = -80; // Account for navbar
+    window.scrollTo({
+        top: section.getBoundingClientRect().top + window.pageYOffset + yOffset,
+        behavior: 'smooth'
+    });
+};
+
 //List events in a grid with pagination
 const EventsList = ({ id, title, events, paginationOptions, handlePageChange, showFilters, onOpenDialog }) => {
-    const isInitialLoad = useRef(true);
-    
-    // Scroll to top when pagination changes
-    const onPageChange = (event) => {
-        handlePageChange(event);
-
-        // Skip scrolling on initial load
-        if (isInitialLoad.current) {
-            isInitialLoad.current = false;
-            return;
-        }
-
-        const thisElement = document.getElementById(id);
-        if (thisElement) {
-            const yOffset = -80; // Account for navbar
-            const y = thisElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-    };
-
     return (
         <div id={id}>
             <div className='flex flex-row justify-between'>
@@ -163,7 +154,7 @@ const EventsList = ({ id, title, events, paginationOptions, handlePageChange, sh
                     <CPagination
                         value={paginationOptions}
                         hideDetails
-                        onChangeValue={onPageChange}
+                        onChangeValue={handlePageChange}
                         control
                     />
                 </>
@@ -202,12 +193,22 @@ export const Events = () => {
 
     const [filteredEvents, setFilteredEvents] = useState(events_dict);
 
+    const pageUpcoming = useRef(1);
+    const pagePast = useRef(1);
+    const pendingScroll = useRef(false);
+
     useEffect(() => {
         document.body.classList.add("min-w-fit");
     }, []);
 
     useEffect(() => {
         document.body.style.overflow = isModalOpen ? 'hidden' : 'visible';
+
+        if (!isModalOpen && pendingScroll.current) {
+            pendingScroll.current = false;
+            scrollToSection('upcoming');
+        }
+
         return () => {
             document.body.style.overflow = 'visible';
         };
@@ -254,15 +255,29 @@ export const Events = () => {
         setIsModalOpen(true);
     };
 
-    const handlePageChange = (setOptions) => (event) => {
-        // event.detail.currentPage should be the new page number.
-        setOptions(prev => ({ ...prev, currentPage: event.detail.currentPage }));
+    const handlePageChange = (setOptions, pageRef, id) => (event) => {
+        const nextPage = event.detail.currentPage;
+        const clicked = nextPage !== pageRef.current;
+
+        pageRef.current = nextPage;
+        setOptions(prev => ({ ...prev, currentPage: nextPage }));
+
+        if (clicked) scrollToSection(id);
     };
 
     const handleFilterChange = (newFilters) => {
         setFilters(newFilters);
+
+        pageUpcoming.current = 1;
+        pagePast.current = 1;
         setOptionsUpcoming(prev => ({ ...prev, currentPage: 1 }));
         setOptionsPast(prev => ({ ...prev, currentPage: 1 }));
+
+        if (isModalOpen) {
+            pendingScroll.current = true;
+        } else {
+            scrollToSection('upcoming');
+        }
     };
 
     return (
@@ -277,7 +292,7 @@ export const Events = () => {
                     title='Upcoming events'
                     events={[...filteredEvents.upcoming].reverse()}
                     paginationOptions={optionsUpcoming}
-                    handlePageChange={handlePageChange(setOptionsUpcoming)}
+                    handlePageChange={handlePageChange(setOptionsUpcoming, pageUpcoming, 'upcoming')}
                     showFilters={true}
                     onOpenDialog={onOpenDialog}
                 />
@@ -287,7 +302,7 @@ export const Events = () => {
                     title='Past events'
                     events={[...filteredEvents.past].reverse()}
                     paginationOptions={optionsPast}
-                    handlePageChange={handlePageChange(setOptionsPast)}
+                    handlePageChange={handlePageChange(setOptionsPast, pagePast, 'past')}
                 />
             </div>
             <FilterModal
