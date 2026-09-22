@@ -116,12 +116,6 @@ export const ServiceStatus = (props) => {
     : qcs.map(device => {
       const deviceStatus = statusList.find(({ name }) => name === device.device_id);
 
-      if (device.name == "Aalto Q20") { // TEMP offline switch for Aalto Q20 until it is back online
-        return {
-          ...device,
-          health: false,
-        };
-      }
       return {
         ...device,
         health: deviceStatus?.health ?? false,
