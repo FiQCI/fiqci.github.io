@@ -274,12 +274,6 @@ cookie_consent:
       type: info
       link: "#tools"
       
-    - text: |-
-        Aalto Q20 is currently down for maintenance.
-      type: warning
-    - text: |-
-        LUMI-Q VLQ will be down for scheduled maintenance from 4th to 25th of September.
-      type: warning
   tools:
     - name: FiQCI-EMS
       description: Error mitigation service. Adds readout error mitigation, dynamical decoupling, Pauli twirling and zero-noise extrapolation to Qiskit workflows on IQM devices.
