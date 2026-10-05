@@ -233,7 +233,6 @@ const BookingCalendar = (props) => {
                             clearable
                             value={filter}
                             items={[
-                                { name: 'Q5', value: 'Q5' },
                                 { name: 'Q50', value: 'Q50' },
                                 { name: 'All', value: 'All' },
                             ]}
