@@ -273,6 +273,9 @@ cookie_consent:
         Check out the new "Tools" section for FiQCI tools and example notebooks.
       type: info
       link: "#tools"
+    - text: |-
+        VTT Q50 is currently under maintenance due to cryostat issues. Expected downtime is atleast 2 weeks. Check back here for updates. Apologies for the inconvenience.
+      type: warning
       
   tools:
     - name: FiQCI-EMS
