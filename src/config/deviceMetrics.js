@@ -153,34 +153,6 @@ export const DEVICE_METRICS = {
             { name: 'Move Clifford', value: 'clifford_rb_xy_move_cz_fidelity' },
         ],
     },
-
-    Q5: {
-        overview: {
-            single: {
-                singleGateFidelity: ['prx_rb_drag_gaussian_fidelity'],
-                readoutFidelity: ['measure_ssro_constant_fidelity'],
-                t1: ['t1_time'],
-                t2: ['t2_time'],
-            },
-            coupler: {
-                twoQubitFidelity: ['cz_irb_tgss_fidelity'],
-                cliffordFidelity: ['clifford_rb_xy_cz_fidelity'],
-            },
-        },
-        qubitOptions: [
-            { name: '1->0 Readout Error', value: 'measure_ssro_constant_error_1_to_0' },
-            { name: '0->1 Readout Error', value: 'measure_ssro_constant_error_0_to_1' },
-            { name: 'Readout Fidelity', value: 'measure_ssro_constant_fidelity' },
-            { name: 'T1 Time', value: 't1_time' },
-            { name: 'T2 Time', value: 't2_time' },
-            { name: 'T2 Echo Time', value: 't2_echo_time' },
-            { name: 'PRX Gate Fidelity', value: 'prx_rb_drag_gaussian_fidelity' },
-        ],
-        couplerOptions: [
-            { name: 'CZ Gate Fidelity', value: 'cz_irb_tgss_fidelity' },
-            { name: 'Clifford Gate Fidelity', value: 'clifford_rb_xy_cz_fidelity' },
-        ],
-    },
 };
 
 export const getDeviceMetricsConfig = (deviceName = '') => {

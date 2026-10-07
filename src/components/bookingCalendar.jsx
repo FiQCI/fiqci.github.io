@@ -59,6 +59,26 @@ const groupBookingsByDate = (bookings) => {
     }, {});
 }
 
+// Checks whether every minute of the given day (local time) is covered by the device's bookings
+const isDeviceFullyBooked = (dayBookings, device, day) => {
+    const deviceBookings = dayBookings.filter(b => b.device === device);
+    if (deviceBookings.length === 0) return false;
+    const coveredMinutes = Array(24 * 60).fill(false);
+    deviceBookings.forEach(b => {
+        const bookingStart = parseISO(b.start_time).getTime();
+        const bookingEnd = parseISO(b.end_time).getTime();
+        for (let i = 0; i < 24 * 60; i++) {
+            const minuteStart = new Date(day.getFullYear(), day.getMonth(), day.getDate(), Math.floor(i / 60), i % 60).getTime();
+            // A minute counts as covered if the booking overlaps any part of it, so
+            // few second gaps between consecutive bookings don't leave it uncovered
+            if (bookingStart < minuteStart + 60000 && bookingEnd > minuteStart) {
+                coveredMinutes[i] = true;
+            }
+        }
+    });
+    return coveredMinutes.every(v => v);
+}
+
 const BookingCalendar = (props) => {
     const { bookingData } = props;
     // Set initial selectedDate to today
@@ -213,7 +233,6 @@ const BookingCalendar = (props) => {
                             clearable
                             value={filter}
                             items={[
-                                { name: 'Q5', value: 'Q5' },
                                 { name: 'Q50', value: 'Q50' },
                                 { name: 'All', value: 'All' },
                             ]}
@@ -284,53 +303,11 @@ const BookingCalendar = (props) => {
                         d.setHours(0, 0, 0, 0);
                         // Fully booked check (localtime, per device)
                         const allBookings = bookingsByDate[dateKey] || [];
-                        const deviceList = ["Q5", "Q50"];
-                        let isFullyBooked = false;
-                        if (filter.toLowerCase() === "all") {
-                            // All devices must be fully booked
-                            isFullyBooked = deviceList.every(device => {
-                                const deviceBookings = allBookings.filter(b => b.device === device.toLowerCase());
-                                if (deviceBookings.length === 0) return false;
-                                const dayStart = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0).getTime();
-                                const dayEnd = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 999).getTime();
-                                let coveredMinutes = Array(24 * 60).fill(false);
-                                deviceBookings.forEach(b => {
-                                    const start = parseISO(b.start_time);
-                                    const end = parseISO(b.end_time);
-                                    const bookingStart = Math.max(start.getTime(), dayStart);
-                                    const bookingEnd = Math.min(end.getTime(), dayEnd + 1);
-                                    for (let i = 0; i < 24 * 60; i++) {
-                                        const minuteTime = new Date(d.getFullYear(), d.getMonth(), d.getDate(), Math.floor(i / 60), i % 60).getTime();
-                                        if (minuteTime >= bookingStart && minuteTime < bookingEnd) {
-                                            coveredMinutes[i] = true;
-                                        }
-                                    }
-                                });
-                                return coveredMinutes.every(v => v);
-                            });
-                        } else {
-                            // Only selected device must be fully booked
-                            const device = filter.toLowerCase();
-                            const deviceBookings = allBookings.filter(b => b.device === device);
-                            if (deviceBookings.length > 0) {
-                                const dayStart = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0).getTime();
-                                const dayEnd = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 999).getTime();
-                                let coveredMinutes = Array(24 * 60).fill(false);
-                                deviceBookings.forEach(b => {
-                                    const start = parseISO(b.start_time);
-                                    const end = parseISO(b.end_time);
-                                    const bookingStart = Math.max(start.getTime(), dayStart);
-                                    const bookingEnd = Math.min(end.getTime(), dayEnd + 1);
-                                    for (let i = 0; i < 24 * 60; i++) {
-                                        const minuteTime = new Date(d.getFullYear(), d.getMonth(), d.getDate(), Math.floor(i / 60), i % 60).getTime();
-                                        if (minuteTime >= bookingStart && minuteTime < bookingEnd) {
-                                            coveredMinutes[i] = true;
-                                        }
-                                    }
-                                });
-                                isFullyBooked = coveredMinutes.every(v => v);
-                            }
-                        }
+                        // Only devices that have bookings at all can be fully booked
+                        const deviceList = [...new Set(bookingData.map(b => b.device))];
+                        const isFullyBooked = filter.toLowerCase() === "all"
+                            ? deviceList.length > 0 && deviceList.every(device => isDeviceFullyBooked(allBookings, device, d))
+                            : isDeviceFullyBooked(allBookings, filter.toLowerCase(), d);
                         // For partial reserved, filter bookings by device
                         const filteredBookings = filter.toLowerCase() === "all" ? allBookings : allBookings.filter(b => b.device === filter.toLowerCase());
                         if (isFullyBooked) return 'reserved'; // light red
