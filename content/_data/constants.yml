@@ -274,7 +274,7 @@ cookie_consent:
       type: info
       link: "#tools"
     - text: |-
-        VTT Q50 is currently under maintenance due to cryostat issues. Expected downtime is atleast 2 weeks. Check back here for updates. Apologies for the inconvenience.
+        VTT Q50 will go under maintenance due to cryostat issues in the near future. More information to be provided later. Check back here for updates. Apologies for the inconvenience.
       type: warning
       
   tools:
