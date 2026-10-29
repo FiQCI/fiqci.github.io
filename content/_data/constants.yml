@@ -277,7 +277,7 @@ cookie_consent:
         VTT Q50 will go under maintenance due to cryostat issues in the near future. More information to be provided later. Check back here for updates. Apologies for the inconvenience.
       type: warning
     - text: |-
-        VTT Q50 will be offline on 28th of October for a software update.
+        Aalto Q20 status is currently unreliable and might report online when the device is actually offline. We are working on fixing this issue. Apologies for the inconvenience.
       type: warning
       
   tools:
