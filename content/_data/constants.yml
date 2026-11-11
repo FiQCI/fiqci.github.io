@@ -8,7 +8,7 @@ favicon: assets/images/favicon.webp
 footer_icons: assets/footer-icons
 funder_logos: assets/images/funders
 description: >-
-  Web presence of the Finnish Quantum-Computing Infrastructure. We provide state-of-the-art quantum-computing 
+  Web presence of the Finnish Quantum-Computing Infrastructure. We provide state-of-the-art quantum-computing
   services to Finnish RDI communities.
 excerpt_max_length: 250
 title_separator: " – "
@@ -80,7 +80,7 @@ cookie_consent:
       href: /access/#super
       teaser: /assets/images/FiQCI-banner.webp
       description: |-
-        The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources, 
+        The backbone of the classical HPC resources in FiQCI, and the portal for quantum computing resources,
         is the pan-European EuroHPC LUMI supercomputer.
       links:
         - title: Supercomputer resources
@@ -109,9 +109,6 @@ cookie_consent:
         For estimating the runtime of a quantum job try out the FiQCI QPU resource estimator.
       type: info
       link: "https://fiqci.fi/resource-estimator"
-    - text: |-
-        Access to LUMI-Q VLQ is coming soon!
-      type: info
 
   quantum_resources:
     - name: Aalto Q20
@@ -139,7 +136,7 @@ cookie_consent:
         - link: "https://qx.vtt.fi/docs/devices/q50.html"
           teaser: "Read more about VTT Q50 (VTT website)"
           icon: mdiOpenInNew
-      
+
     - name: LUMI-Q VLQ
       desc: |-
         LUMI-Q VLQ is a superconducting IQM quantum computer with 24 qubits in a star topology. It is operated by IT4I.
@@ -153,7 +150,7 @@ cookie_consent:
         - link: "https://docs.it4i.cz/en/docs/clusters/vlq/introduction"
           teaser: "Read more about LUMI-Q VLQ (IT4I website)"
           icon: mdiOpenInNew
-    
+
     - name: VTT Q5 (Helmi) - End of life
       desc: |-
         VTT Q5 (Helmi) was a superconducting quantum computer with 5 qubits in a star topology. It was operated by VTT, and was co-developed with IQM Quantum Computers. The device was decommissioned in 2026.
@@ -276,7 +273,7 @@ cookie_consent:
     - text: |-
         Aalto Q20 status is currently unreliable and might report online when the device is actually offline. We are working on fixing this issue. Apologies for the inconvenience.
       type: warning
-      
+
   tools:
     - name: FiQCI-EMS
       description: Error mitigation service. Adds readout error mitigation, dynamical decoupling, Pauli twirling and zero-noise extrapolation to Qiskit workflows on IQM devices.
@@ -294,7 +291,7 @@ cookie_consent:
       topology: "Square grid"
       pulse: "True"
       device_id: "Q50"
-    
+
     - name: Aalto Q20
       qubits: 20
       basis: "PRX, CZ"
