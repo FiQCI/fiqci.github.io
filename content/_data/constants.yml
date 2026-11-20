@@ -118,7 +118,7 @@ cookie_consent:
       links:
         - link: "/resource-call"
           teaser: "Apply for access to Aalto Q20"
-        - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
+        - link: "https://docs.csc.fi/computing/quantum-computing/devices/q20"
           teaser: "How to access Aalto Q20, instructions"
           icon: mdiArrowRight
 
@@ -130,7 +130,7 @@ cookie_consent:
       links:
         - link: "/resource-call"
           teaser: "Apply for access to VTT Q50"
-        - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
+        - link: "https://docs.csc.fi/computing/quantum-computing/devices/q50"
           teaser: "How to access VTT Q50, instructions"
           icon: mdiArrowRight
         - link: "https://qx.vtt.fi/docs/devices/q50.html"
@@ -144,7 +144,7 @@ cookie_consent:
       links:
         - link: "/resource-call"
           teaser: "Apply for access to LUMI-Q VLQ"
-        - link: "https://docs.csc.fi/computing/quantum-computing/running-quantum-jobs/"
+        - link: "https://docs.csc.fi/computing/quantum-computing/devices/vlq"
           teaser: "How to access LUMI-Q VLQ, instructions"
           icon: mdiArrowRight
         - link: "https://docs.it4i.cz/en/docs/clusters/vlq/introduction"
